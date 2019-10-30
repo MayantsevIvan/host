@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title> игра Твои Сокровища </title>
+		<script src="pixi.min.js"> </script>
+		<script src="pixi-sound.js"> </script>
+		<script src="pixi-sound.js.map"> </script>
+		<script src="TweenMax.min.js"> </script>
+	</head>
+	<body>
+		<script>	
+			const pixiAppWidth  = 760;
+			const pixiAppHeight = 610;
+			const cw = window.innerWidth  || document.body.clientWidth;
+			const ch = window.innerHeight || document.body.clientHeight;
+
+			let ew = Math.floor(10*cw / pixiAppWidth);
+			let scalew = Math.floor( ew / 2 ) * 0.2;
+			let eh = Math.floor(10*ch / pixiAppHeight);
+			let scaleh = Math.floor( eh / 2 ) * 0.2;
+			let scale = Math.min(scalew,scaleh,3);
+
+			const pixiAppScale  = Math.max(1.0,scale);
+
+		    const pixiApp = new PIXI.Application( {
+		        width  : pixiAppWidth ,// * pixiAppScale,
+				height : pixiAppHeight,// * pixiAppScale,
+				backgroundColor : 0x1099bb,
+				autoResize: true,
+				resolution : window.devicePixelRatio || 1,
+		    } );
+		    document.body.appendChild(pixiApp.view);
+			pixiApp.stage.scale.x = pixiAppScale;
+			pixiApp.stage.scale.y = pixiAppScale;
+
+			let canvas = document.querySelector('canvas');
+		    if ( canvas ) {
+		        canvas.width  = pixiAppWidth  * pixiApp.stage.scale.x;//pixiApp.stage.width;
+		        canvas.height = pixiAppHeight * pixiApp.stage.scale.y;//pixiApp.stage.height;
+
+		        canvas.style.width  = canvas.width  + "px";
+		        canvas.style.height = canvas.height + "px";
+		    }
+		</script>
+		<script src="ImageLoader.js"></script>
+		<script src="Head.js"></script>
+		<script src="CWinds.js"></script>	
+		<script src="Handler.js"></script>  
+		<script src="Langs.js"></script>
+		<script src="Consts.js"></script>
+		<script src="Log.js"></script>
+		<script src="winds/windMenuLevel/menuLevelPoint.js"></script>
+		<script src="BottomPanel.js"></script>
+	    <script src="BackClient.js"></script>
+		<script src="winds/windBeforeLevel/TaskBeforeLevel.js"></script>
+	    <script src="game/Embeds.js"></script>
+	    <script src="game/EndLevelAnimator.js"></script>
+	    <script src="game/FlyPoints.js"></script>
+	    <script src="game/GameHelper.js"></script>
+	    <script src="winds/windgame/ButBonus.js"></script>
+	    <script src="winds/windgame/StepsPanel.js"></script>
+	    <script src="winds/windgame/PointsPanel.js"></script>
+	    <script src="winds/windgame/TaskPanel.js"></script>
+	    <script src="game/JTweenJL.js"></script>
+	    <script src="game/Detonations.js"></script>
+	    <script src="game/CBox.js"></script>
+	    <script src="User.js"></script>
+	    <script src="game/Sounds.js"></script>
+	    <script src="game/GameTypes.js"></script>
+	    <script src="game/Tutorial.js"></script>
+	    <script src="game/JLines.js"></script>
+	    <script src="winds/CWindMenuLevels.js"></script>
+	    <script src="winds/CWindFullScreen.js"></script>
+	    <script src="winds/CWindBuyCoins.js"></script>
+	    <script src="winds/CWindBuyLives.js"></script>
+	    <script src="winds/CWindBuyBooster.js"></script>
+	    <script src="winds/CWindPuzzle.js"></script>
+	    <script src="winds/CWindSmallRating.js"></script>
+	    <script src="winds/CWindBeforeLevel.js"></script>
+	    <script src="winds/CWindEndLevel.js"></script>
+	    <script src="winds/CWindMyScore.js"></script>
+	    <script src="winds/CWindAcBooster.js"></script>
+	    <script src="winds/CWindFrInvited.js"></script>
+	    <script src="winds/CWindAc4.js"></script>
+	    <script src="winds/CWindAc5Steps.js"></script>
+	    <script src="winds/CWindAcFriends.js"></script>
+	    <script src="winds/CWindSmallAcInv.js"></script>
+	    <script src="winds/CWindAcInvToGame.js"></script>
+	    <script src="winds/CWindAction0.js"></script>
+	    <script src="winds/CWindAction1.js"></script>
+	    <script src="winds/CWindDailyBonus.js"></script>
+	    <script src="winds/CWindStepsLeft.js"></script>
+	    <script src="winds/CWindAcInvite.js"></script>
+	    <script src="winds/CWindM.js"></script>
+	    <script src="winds/CWindGame.js"></script>
+	    <script src="winds/CWindMsg.js"></script>
+	    <script src="winds/CWindLoader.js"></script>
+		<script src="Config.js"></script>
+		<script src="SocialClient.js"></script>
+		<script src="main.js"></script>
+	</body>
+</html>
