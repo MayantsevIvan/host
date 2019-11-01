@@ -57,19 +57,26 @@
 //		butPlay.onEL("pointerdown",touchButPlay);
 		butPlay.onEL("pointerdown", Handler.onStartLevelClick);
 		
-		let butMute = Handler.showImgRect( this.group, "butMute.png",318,-285,33,32);
+		let butMute1 = Handler.showImgRect( this.group, "butMute.png",318,-285,33,33);
+		let butMute2 = Handler.showImgRect( this.group, "butMute2.png",318,-285,33,33);
+		butMute2.isVisible = false;
 		let touchButMute = function( evt ) {
 			if ( Sounds.msOn ) {
 				Sounds.Stop();
 //				this._butMelody.gotoAndStop(2);
 				Sounds.msOn = false;
+				butMute1.isVisible = true;
+				butMute2.isVisible = false;
 			} else {
 				Sounds.Play();
 //				this._butMelody.gotoAndStop(1);
+				butMute1.isVisible = false;
+				butMute2.isVisible = true;
 				Sounds.msOn = true;
 			};
 		};
-		butMute.onEL("pointerdown",touchButMute);
+		butMute1.onEL("pointerdown",touchButMute);
+		butMute2.onEL("pointerdown",touchButMute);
 		let butFullScrin = Handler.showImgRect( this.group, "butFullScrin.png",355,-285,31,31);
 		butFullScrin.onEL('pointerdown',function(){ Winds.show( Winds.WIND_FULL_SCREEN ) });
         this.groupNumPoints = Handler.newGroup( this.group );         

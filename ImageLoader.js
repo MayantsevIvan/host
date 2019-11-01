@@ -170,6 +170,7 @@
 		pixiApp.loader.add('boxId.png',                   urlHead+'boxId.png');
 		pixiApp.loader.add('butFullScrin.png',            urlHead+'butFullScrin.png');
 		pixiApp.loader.add('butMute.png',                 urlHead+'butMute.png');
+		pixiApp.loader.add('butMute2.png',                urlHead+'butMute2.png');
 		pixiApp.loader.add('butMyScore.png',              urlHead+'butMyScore.png');
 		pixiApp.loader.add('butPlayWindMenuLevels.png',   urlHead+'butPlayWindMenuLevels.png');
 		pixiApp.loader.add('backgrTimer.png',             urlHead+'backgrTimer.png');
