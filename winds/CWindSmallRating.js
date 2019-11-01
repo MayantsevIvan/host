@@ -98,7 +98,7 @@
 		let optionsAssets = {
 			loadType: 2
 		};
-		for ( let i = 0; i <= Consts.URL_FR_USERS.length-1; i++ ) {
+		for ( let i = 1; i <= Consts.URL_FR_USERS.length-1; i++ ) {
 			addUser( users_fr, Consts.URL_FR_USERS[i], "Соломон"+i, i, i*5 );
 			loader.add( "ui"+i, url, optionsAssets );
 		}

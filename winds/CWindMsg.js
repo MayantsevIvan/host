@@ -26,8 +26,8 @@
 		
 		let cross = Handler.showImgRect( self.mainGroup, "cross.png", 285, -225, 36, 36);
 		cross.onEL("pointertap", onCross);
-		let colorText = [255,234,198];
-		colorShadow = [ 118,54, 7 ];
+//		let colorText = [255,234,198];
+//		let colorShadow = [ 118,54, 7 ];
 		//if  ( params.txt != null ) {
 			let paramsText = {
 				align: 'center',

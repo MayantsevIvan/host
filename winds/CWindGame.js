@@ -67,19 +67,27 @@
 //		let butSkipLevel = Handler.showImgRect(self.mainGroup, "butSkipLevelWindGame.png",-335,240,54,48);
 		let butFoolScrin = Handler.showImgRect(self.mainGroup, "butFoolScrinWindGame.png",352,-246,31,31);
 		
-		self._onButMelodyClick = function(evt=null) {
+		let butMute1 = Handler.showImgRect( self.mainGroup, "butMute.png",353,-213,33,33);
+		let butMute2 = Handler.showImgRect( self.mainGroup, "butMute2.png",353,-213,33,33);
+		butMute2.isVisible = false;
+		let touchButMute = function( evt ) {
 			if ( Sounds.msOn ) {
 				Sounds.Stop();
 //				this._butMelody.gotoAndStop(2);
 				Sounds.msOn = false;
+				butMute1.isVisible = true;
+				butMute2.isVisible = false;
 			} else {
 				Sounds.Play();
 //				this._butMelody.gotoAndStop(1);
+				butMute1.isVisible = false;
+				butMute2.isVisible = true;
 				Sounds.msOn = true;
 			};
 		};
-		self.butMute = Handler.showImgRect(self.mainGroup, "butMuteWindGame.png",353,-213,32,32);
-		self.butMute.onEL('pointertap', self._onButMelodyClick);
+		butMute1.onEL("pointerdown",touchButMute);
+		butMute2.onEL("pointerdown",touchButMute);
+		
 		// GameField
 		
 		self._sprite = Handler.newGroup();
