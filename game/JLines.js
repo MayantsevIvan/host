@@ -7,8 +7,8 @@
 		Handler.remGlass = this._remGlass;
 		Handler.removeAroundStone = function(  fi, fj  ) { self._removeAroundStone(  fi, fj  ); };
 		Handler.fillZeroAlreadyBreakedStone = function() { self._fillZeroAlreadyBreakedStone(); };
-		
-		this._animat = false;		
+
+		this._animat = false;
 		this.tweenTick = 0.2;
 
 		this.gemsContainer = null;
@@ -16,13 +16,13 @@
 		//this.gemsContainer.y = Consts.coordsShiftY;
 		//console.log(this.gemsContainer);
 		this._useMolot;
-		
-		this.cx = 0; 
+
+		this.cx = 0;
 		this.cy = 0;
-		
+
 		this.hidedGems = [];
 		this.bottomHiddedGems = [];
-		
+
 		//let openedGems:Array = [];
 
 		this._gemBooms = [];
@@ -32,9 +32,9 @@
 		this._tryStep;
 		this.deltaSteps;
 		this._maxPoints;
-		
+
 		this.gameFinished;
-		
+
 		this.pole  = [];
 		this.boxes = [];
 		this.box;
@@ -46,18 +46,18 @@
 		this._alreadyBreaked = [];
 		this._bestClickBox = null;
 		this.timerHelpColor;
-		
+
 		this.rndBoxColForHelpTimer;
-		
-		////////////////////////countPoints		
+
+		////////////////////////countPoints
 		Object.defineProperty( this, "countPoints", {
 			get: function(   ) { return this._countPoints; },
-			set: function(val) {    
+			set: function(val) {
 				this._countPoints = val;
 				//let tFrame:uint = (uint(val*100/this._maxPoints) > 100)? 100 : Math.floor(val*100/this._maxPoints);
 				//Handler.mcStarsLine.gotoAndStop(tFrame);
-				
-				
+
+
 				//let selfWindGame:WindGame = Winds.getWind() as WindGame;
 				//if (selfWindGame && selfWindGame.textSteps) selfWindGame.textSteps.text = this._countSteps+'';
 
@@ -66,7 +66,7 @@
 		////////////////////////countSteps
 		Object.defineProperty( this, "countSteps", {
 			get: function(   ) { return this._countSteps; },
-			set: function(val) {    
+			set: function(val) {
 				this._countSteps = val;
 //				if ( val == 5 && Config.NETWORK == 'ok' ) {
 //					Handler.showAct7Steps();
@@ -88,11 +88,11 @@
 			}
 		});//countSteps
 	};
-	
+
 	JLines.prototype.onEL = function( evt, lisener ){
 		this.gemsContainer.onEL(evt, lisener);
 	}
-	
+
 	JLines.prototype.reCreateTable = function( lev ){
 		let lineWeight = [0,0,0,0,0,0,0,0];
 		let countStone = 0;
@@ -103,39 +103,39 @@
 			for ( let i=0; i < this.cx; i++ ) {
 				if ( lev[i+5][j] == Consts.COIN_COLOR ) {
 					lineWeight[i] = 100;
-				} else { 
+				} else {
 					if ( lev[i+5][j] == Consts.IRON_BOX ) {
-						lineWeight[i] += 1;
-					} else { 
+						lineWeight[i] += 3;
+					} else {
 						if ( lev[i+5][j] == Consts.STONE_COLOR ) {
 							countStone ++;
 						if ( countStone % 3 == 0 && levelWithYaschik ) {
-							
+
 						} else {
-							lineWeight[i] += 1;
+							lineWeight[i] += 3;
 						};
-						
-						} else { 
+
+						} else {
 							if ( lev[i+5][j] == Consts.GHOST_BOX ) {
-								lineWeight[i] += 1;
+								lineWeight[i] += 3;
 							} else {
 								if ( lev[i+5][j] == Consts.YASCHIK ) {
 									countYaschik ++;
 									if ( countYaschik % 3 == 0) {
-										
+
 									} else {
 										lineWeight[i] += 1;
 									};
 									levelWithYaschik = true;
-									//(this.gemsContainer.getChildByName('cn'+cv(i)+cv(j)) as CBox).boosterFrz = true;			
+									//(this.gemsContainer.getChildByName('cn'+cv(i)+cv(j)) as CBox).boosterFrz = true;
 								} else {
 									if ( lev[i+5][j] == Consts.GLASS_BOX ) {
-										lineWeight[i] += 1;
+										lineWeight[i] += 3;
 									}  else {
 										if ( lev[i+5][j] == Consts.GLASS_STONE_BOX ) {
-											lineWeight[i] += 2;
+											lineWeight[i] += 6;
 										} else {
-											
+
 										};
 									};
 								};
@@ -160,7 +160,7 @@
 		let countDelGost = 0;
 		let countDelStoun = 0;
 		let countDelYaschiks = 0;
-		
+
 		for ( let i=0; i < this.cx; i++ ) {
 			switch( lev[i+5][numMinStroke] ){
 				case Consts.GLASS_BOX:       countDelGlass += 1;                     break;
@@ -174,13 +174,13 @@
 		console.log("Кол-во стекляшек: "   +countDelGlass+'\n',
 					"Кол-во гостбоксов: "  +countDelGost+'\n',
 					"Кол-во стоунбоксов: " +countDelStoun+'\n',
-					"Кол-во ясчиков: "     +countDelYaschiks+'\n'
+					"Кол-во ящиков: "     +countDelYaschiks+'\n'
 					);
 		for ( let i=0; i < this.cx; i++ ) {
 			lev[i+5].splice( numMinStroke, 1);
 		}
 	};
-	
+
 	JLines.prototype.init = function ( lev ) {
 		try {
 			let self = this;
@@ -190,16 +190,16 @@
 			this.reCreateTable( lev );
 			if ( this.cx > 9 ) {
 				Handler.coordsShiftX = Handler.coordsWidth/2;
-			} else { 
+			} else {
 				if ( this.cx < 9 ) {
 					Handler.coordsShiftX = Handler.coordsWidth;
-				} else { 
+				} else {
 					if (this.cx==9) {
 						Handler.coordsShiftX = Handler.coordsWidth;
 					};
 				};
 			};
-			
+
 			if ( this.cx>10 ) {
 				Handler.coordsWidth  = 45;
 				Handler.coordsHeight = 45;
@@ -208,19 +208,19 @@
 				Handler.coordsHeight = 47;
 			};
 			Consts.w = Consts.coordsWidth;
-			Consts.h = Consts.coordsHeight; //50				
+			Consts.h = Consts.coordsHeight; //50
 			//if (this.cy==9) 		Handler.coordsShiftY = Handler.coordsShiftY0 + Handler.coordsHeight/2;
-			//else if (this.cy!=9) Handler.coordsShiftY = Handler.coordsShiftY0 + Handler.coordsHeight;			
-			
+			//else if (this.cy!=9) Handler.coordsShiftY = Handler.coordsShiftY0 + Handler.coordsHeight;
+
 			this.countSteps 	= lev[2];
 			this.countPoints	= lev[3];
 			Handler.star1Points	= Math.floor(lev[3]);
 			Handler.star2Points	= Math.floor(lev[3]*1.2);
 			Handler.star3Points	= Math.floor(lev[3]*1.4);
-			
+
 			this.deltaSteps = (this.countSteps)? -1: 1;
 			Handler.countEndTime = lev[4];
-			
+
 			this.gameFinished = 0;
 
 			for ( let i=0; i<this.cx; i++) {
@@ -247,25 +247,25 @@
 			let numLevel = parseInt( Head.levelName.substr(1) );//uint
 
 	//		GameTypes.info[numLevel].g6 = 0;
-			
+
 			let withCoin = false;
-			
+
 			//lev[8][4] = CBox.GLASS_STONE_BOX;/**********************************/
 			//lev[9][6] = CBox.GLASS_STONE_BOX;/**********************************/
-			let countGhostBox = 0; 
+			let countGhostBox = 0;
 			let levelWithYaschik = false;
 			let countYaschik = 0;
 			let countStone = 0;
-			if ( GameTypes.info[numLevel].g6 > 0 ) { 
+			if ( GameTypes.info[numLevel].g6 > 0 ) {
 				GameTypes.info[numLevel].g6 = 0;
 			}
-			if ( GameTypes.info[numLevel].g7 > 0 ) { 
+			if ( GameTypes.info[numLevel].g7 > 0 ) {
 				GameTypes.info[numLevel].g7 = 0;
 			}
-			if ( GameTypes.info[numLevel].g8 > 0 ) { 
+			if ( GameTypes.info[numLevel].g8 > 0 ) {
 				GameTypes.info[numLevel].g8 = 0;
 			}
-			if ( GameTypes.info[numLevel].g9 > 0 ) { 
+			if ( GameTypes.info[numLevel].g9 > 0 ) {
 				GameTypes.info[numLevel].g9 = 0;
 			}
 			for ( let i=0; i<this.cx; i++ ) {
@@ -274,11 +274,11 @@
 						this.addNewBox(i,j,Consts.COIN_COLOR);
 						GameTypes.info[numLevel].g7 += 1;
 						withCoin = true;
-					} else { 
+					} else {
 						if ( lev[i+5][j] == Consts.IRON_BOX ) {
 							this.addNewBox(i,j,Consts.IRON_BOX);
 							GameTypes.info[numLevel].g8 += 1;
-						} else { 
+						} else {
 							if ( lev[i+5][j] == Consts.STONE_COLOR ) {
 								countStone ++;
 							if ( countStone % 3 == 0 && levelWithYaschik ) {
@@ -287,8 +287,8 @@
 								this.addNewBox(i,j,Consts.STONE_COLOR);
 								GameTypes.info[numLevel].g8 += 1;
 							};
-							
-							} else { 
+
+							} else {
 								if ( lev[i+5][j] == Consts.GHOST_BOX ) {
 									this.addNewBox(i,j);
 							//		let gost = this.gemsContainer.getChildByName('cn'+this.cv(i)+this.cv(j));
@@ -304,7 +304,7 @@
 											this.addNewBox(i,j,Consts.YASCHIK);
 										};
 										levelWithYaschik = true;
-										//(this.gemsContainer.getChildByName('cn'+cv(i)+cv(j)) as CBox).boosterFrz = true;			
+										//(this.gemsContainer.getChildByName('cn'+cv(i)+cv(j)) as CBox).boosterFrz = true;
 									} else {
 										if ( lev[i+5][j] == Consts.GLASS_BOX ) {
 											this._addGlassCell(i,j);
@@ -324,18 +324,18 @@
 					};
 				};
 			};
-			
+
 			if ( levelWithYaschik ) {
 				this.countSteps += 10;
 			} else {
 				this.countSteps += 3;
 			};
-			
+
 			if ( User.loseCount > 2 ) {
 				//не прошли 3 раза уровень добавляем супер на поле
 				this.countSteps += 15;
 			};
-			
+
 			for ( let i=0;i<this.cx;i++) {
 				for ( let j=0;j<this.cy;j++) {
 					if ( this.hidedGems[i][j] && !this._upperHidedBox(i,j)) {
@@ -356,7 +356,7 @@
 			if (Handler.levelNum == 4) {
 				Tutorial.tutStep5Show();
 			};
-			//(this.gemsContainer.getChildByName('cn002003') as CBox).boosterIron = true;			
+			//(this.gemsContainer.getChildByName('cn002003') as CBox).boosterIron = true;
 			//(this.gemsContainer.getChildByName('cn002003') as CBox).boosterFrz = true;
 			//(this.gemsContainer.getChildByName('cn002005') as CBox).boosterFrz = true;
 			//(this.gemsContainer.getChildByName('cn002007') as CBox).boosterFrz = true;
@@ -364,16 +364,16 @@
 			//(this.gemsContainer.getChildByName('cn004003') as CBox).boosterFrz = true;
 			//(this.gemsContainer.getChildByName('cn004004') as CBox).boosterFrz = true;
 			//(this.gemsContainer.getChildByName('cn004007') as CBox).boosterFrz = true;
-			
+
 			//(this.gemsContainer.getChildByName('cn001001') as CBox).boosterPLine = true;
 			//(this.gemsContainer.getChildByName('cn001009') as CBox).boosterVLine = true;
 			//(this.gemsContainer.getChildByName('cn005008') as CBox).boosterVLine = true;
 
-			
+
 			//_addGlassCell(6,7);
 			//_addGlassCell(6,8);
 
-			
+
 			/*let sprites:Array = [];
 			let noteTxt:String = 'Откройте все золотые клетки!';
 			let tmpSprite1:Sprite = new Embeds.goldBox();
@@ -419,32 +419,32 @@
 					'\n\n', sprites:sprites3});
 			}	*/
 			//Winds.show(Winds.MSG_ZVER,{m:noteTxt, closeAfter5:true, sprites:sprites } );
-			
+
 			//_delFullLines(_afterDeleteGems);
 	//		this.timerHelpColor = new Timer(3000,0);
 	//		this.timerHelpColor.onEL( TimerEvent.TIMER, this._timerHelpTick );
 	//		this.timerHelpColor.start();
-			
+
 			//refrash max count boosterGhost
-			
+
 			GameTypes.info[numLevel].g9 = countGhostBox;
 			if (Handler.countGemsB[9] != null) {
 				Handler.countGemsB[9].ctext.text = '0/'+Math.floor( GameTypes.info[numLevel]['g9'] ) ;
 			};
-			
+
 	//		this.taskPanel.refrashGems(6,0);//init glass in task box
-			
+
 			Handler.windGameSprite.onEL( 'pointerup',   function( evt ) { self._onMouseUpGem(evt);   } );
 			self.gemsContainer    .onEL( "pointerdown", function( evt ) { self._onMouseDownGem(evt); } );
 			self.gemsContainer    .onEL( "pointermove", function( evt ) { self._onMouseMoveGem(evt); } );
-			
+
 			this.timerHelpColor = GameHelper.init();
 			this._fillZeroAlreadyBreakedStone();
 		} catch ( ex ) {
 			 Handler.onErrorCatched(ex);
 		};
 	};
-	
+
 	JLines.prototype.addNewBox = function ( fi, fj, fcolor = -1) {
 		let tmpBox = new CBox();
 		tmpBox.drawRect( fi, fj, this.gemsContainer, fcolor );//
@@ -454,19 +454,19 @@
 //		tmpBox.onEL( 'pointerdown',	this._onMouseDownGem );
 //		tmpBox.onEL( 'pointermove',	this._onMouseMoveGem );
 //		tmpBox.onEL( 'pointerup',	this._onMouseUpGem);
-		
+
 		//tmpBox.buttonMode = true;
 		return tmpBox;
 	};
-	
+
 	Object.defineProperty( this, "_animation2", {
 	    get: function(   ) { return this._animat; },
-	    set: function(val) {    
+	    set: function(val) {
             Handler.txtNotes = this._animat+'_';
 			this._animat = val;
 		}
 	});
-	
+
 	JLines.prototype._onMouseDownGem = function ( evt ) {
 		try {
 			let self = this;
@@ -500,7 +500,7 @@
 						Handler.selBooster = '';
 						cbox.boosterPLine = true;
 						cbox.countBombs = 8;
-						this._afterDelBox(); 
+						this._afterDelBox();
 					};
 				} else {
 					if ( Handler.selBooster == Consts.BMOLOTOK ) {
@@ -513,22 +513,22 @@
 							if (cbox.boosterGhost) this.taskPanel.refrashGems( 9 );//g9
 							this.taskPanel.refrashGems( cbox.color + 1);
 							setTimeout( function(){ self._afterDelBox(); }, 300);
-	/*						setTimeout( function() { 
+	/*						setTimeout( function() {
 														cbox.boosterPLine = false;
 														cbox.removeGem();
 														//
-														self._afterDelBox();  
-													}, 500);*/						
+														self._afterDelBox();
+													}, 500);*/
 						//TweenMax.to(new Sprite(),0.5,{ onComplete:
 						};
 					} else {
 						Handler.gemSel = true;
 						Handler.gemObjectLine = [];
 						Handler.gemLine = [];
-						
-						let i = Handler.coordsXToIndex(cbox.x); 
+
+						let i = Handler.coordsXToIndex(cbox.x);
 						let j = Handler.coordsYToIndex(cbox.y);
-						
+
 						Handler.gemLine.push(this.cv(i)+'_'+this.cv(j));
 						Handler.gemObjectLine.push(cbox);
 	//					cbox.filters = [new GlowFilter(0xffffff)];
@@ -541,15 +541,15 @@
 			 Handler.onErrorCatched(ex);
 		};
 	};
-	
+
 	JLines.prototype._onMouseMoveGem = function ( evt ) {
 		try {
 			if ( this._countSteps <= 0 ) return;
 			if ( !Handler.gemSel ) return;
-			
+
 			if (this._countSteps <= 0) return;
 			if (this._animation2) return;
-			//		if ( BonusMenu.isBonusAnimationPlay ) { return;	};	
+			//		if ( BonusMenu.isBonusAnimationPlay ) { return;	};
 			let gx = Math.floor( evt.data.global.x / pixiApp.stage.scale.x );
 			let gy = Math.floor( evt.data.global.y / pixiApp.stage.scale.y );
 			let tx = gx - Handler.gemsContainerGlobalX - Math.floor(Consts.coordsWidth/2);
@@ -557,10 +557,10 @@
 			//let kittenSize = 60*Handler.scaleOfGemsContainer;
 			let fi = Math.ceil( tx / Consts.coordsWidth );//gorizontal number of cat on game field
 			let fj = Math.ceil( ty / Consts.coordsHeight );//vertical   number of cat on game field
-	
+
 			let cbox = this.getBox( fi, fj );
-			
-			let i = Handler.coordsXToIndex( cbox.x ); 
+
+			let i = Handler.coordsXToIndex( cbox.x );
 			let j = Handler.coordsYToIndex( cbox.y );
 			if (cbox.color != Handler.gemObjectLine[0].color) 	return;//only same color
 			if ( Handler.gemLine.indexOf( this.cv(i)+'_'+this.cv(j) ) < 0 ) {
@@ -576,8 +576,8 @@
 					// under mouse cbox
 					// last selected Handler.gemObjectLine[Handler.gemObjectLine.length-1]
 					// Handler.getBox(fi,fj).color
-						
-					
+
+
 					let reci = Handler.coordsXToIndex(lastSelCBox.x);
 					let recj = Handler.coordsYToIndex(lastSelCBox.y);
 					//let recjs:String = '[]';
@@ -594,9 +594,9 @@
 							if ( fCBox == null) return;
 							if ( fCBox.color != fcolor ) return;
 							if ( recursiveLine != null ) return;
-								
+
 							if ( fcheckedPoint['_'+self.cv(fi)+'_'+self.cv(fj)] != null ) return;
-			
+
 							fcheckedPoint['_'+self.cv(fi)+'_'+self.cv(fj)] = 1;
 							let jpoints = fjpoints;//.slice(0);
 							jpoints.push( [fi,fj] );
@@ -606,11 +606,11 @@
 								for ( let zz = 1; zz < recursiveLine.length; zz++ ) {
 									let zzi = recursiveLine[zz][0];
 									let zzj = recursiveLine[zz][1];
-									let zzcbox = self.getBox( zzi, zzj ); 
+									let zzcbox = self.getBox( zzi, zzj );
 									Handler.gemLine.push( self.cv(zzi)+'_'+self.cv(zzj) );
 									Handler.gemObjectLine.push( zzcbox );
 			//						zzcbox.filters = [new GlowFilter(0xffffff)];
-									
+
 									zzcbox.selected = true;
 								};
 								return;
@@ -642,7 +642,7 @@
 			 Handler.onErrorCatched(ex);
 		};
 	};
-	
+
 	JLines.prototype._onMouseUpGem = function ( evt = null ) {
 		try {
 			let self = this;
@@ -699,20 +699,20 @@
 				};
 			};
 			/*if (Handler.gemLine.length > 4) {
-				let cbi:int = Handler.coordsXToIndex(cbox.x); 
+				let cbi:int = Handler.coordsXToIndex(cbox.x);
 				let cbj:int = Handler.coordsYToIndex(cbox.y);
 				Detonations.detonate5( cbi, cbj, _afterDelBox );
 			} else*/ if (Handler.gemLine.length > 2) {
 				setTimeout( function(){ self._afterDelBox(); } , 151);
 	//			TweenMax.to(new Sprite(),0.1,{onComplete:_afterDelBox});
 			};
-			Handler.gemLine = [];	
+			Handler.gemLine = [];
 			Handler.gemObjectLine = [];
 		} catch ( ex ) {
 			 Handler.onErrorCatched(ex);
 		};
 	};
-	
+
 	JLines.prototype._getBombs = function () {
 		let res = [];
 		for ( let i=0; i< this.cx; i++ ) {
@@ -723,10 +723,9 @@
 		};
 		return res;
 	};
-	
+
 	JLines.prototype._afterDelBox = function() {
 		try {
-			console.log(Winds.getTopWindName());
 		    this._animation2 = true;
 		    this._fillPoleArray();
 		    this._shiftOldBoxes();
@@ -737,7 +736,7 @@
 			 Handler.onErrorCatched(ex);
 		};
 	};
-	
+
 	JLines.prototype._searchAndRemoveCoins = function() {
 		let i, j, coinsSearched = false;
 		let coinsForRemove = [];
@@ -753,36 +752,40 @@
 				};
 			};
 		};
-		
+
 		if ( coinsSearched ) {
 			let searched = function () {
 				try {
 					//self.taskPanel.refrashGems( Consts.COIN_COLOR + 1, coinsForRemove.length );//g7
-					Detonations.removeCoins(coinsForRemove, function() { self._afterDelBox(); }); 
+					Detonations.removeCoins(coinsForRemove, function() { self._afterDelBox(); });
 				} catch ( ex ) {
 					Handler.onErrorCatched(ex);
 				};
 			};
-			setTimeout( searched, 700 );
-//			TweenMax.to(new Sprite(),0.8,{onComplete: 
+			setTimeout( searched, 800 );
+//			TweenMax.to(new Sprite(),0.8,{onComplete:
 		} else {
 
 			let self = this;
-			setTimeout( function(){ self.checkBombs() } , 1100 );
+			//setTimeout( function(){ } , 800 );
+			self.checkBombs();
 //			TweenMax.to(new Sprite(),0.8,{onComplete:this.checkBombs});
 		};
 	};
-	
+
 	JLines.prototype.checkBombs = function() {
 		try {
 			let bombs = this._getBombs();
 			let self = this;
 			if ( bombs.length > 0 ) {
-				for ( let i =0;i<bombs.length; i++ ) {
-					Detonations.detonateBomb( bombs[i][0], bombs[i][1], bombs[i][2]  );
+				let delBomb = function() {
+					for ( let i =0;i<bombs.length; i++ ) {
+						Detonations.detonateBomb( bombs[i][0], bombs[i][1], bombs[i][2]  );
+					}
+					setTimeout( function(){ self._afterDelBox(); }, 1300 );
+					//TweenMax.to(new Sprite(),1.3,{onComplete:this._afterDelBox});
 				}
-				setTimeout( function(){ self._afterDelBox(); }, 1300 );
-				//TweenMax.to(new Sprite(),1.3,{onComplete:this._afterDelBox});
+				setTimeout( delBomb, 1100 );
 			} else {
 				//_refrashField();
 				this._animation2 = false;
@@ -796,18 +799,18 @@
 			 Handler.onErrorCatched(ex);
 		};
 	};
-	
+
 	JLines.prototype._isNeighborBox = function ( fi1, fj1 ) {
 		let lBox = Handler.gemObjectLine[ Handler.gemObjectLine.length-1 ];
-		let fi2 = Handler.coordsXToIndex( lBox.x ); 
+		let fi2 = Handler.coordsXToIndex( lBox.x );
 		let fj2 = Handler.coordsYToIndex( lBox.y );
 		let res = Math.abs(fi1-fi2) < 2 && fj1 == fj2;
 		res = res || Math.abs(fj1-fj2) < 2 && fi1 == fi2;
 		return res;
 	};
-	
+
 	JLines.prototype._remGlass = function( i, j ) {
-		if ( this._glassCells[i][j] == 0 ) return; 
+		if ( this._glassCells[i][j] == 0 ) return;
 
 		let glassCell = Handler.level.getChildByName('gc'+this.cv(i)+'_'+this.cv(j));
 //		Handler.level.removeChild( glassCell );
@@ -815,7 +818,7 @@
 		JTweenJL.to( glassCell );
 		this._glassCells[i][j] = 0;
 	};
-	
+
 	/*let function _onClickBox(evt):void {
 		//Winds.show(Winds.MSG,{m:'click'}); return;
 		if (_animation) return;
@@ -830,7 +833,7 @@
 			let tmpBox:CBox = new CBox();
 			tmpBox.drawRect(0,0,cont,3);
 			tmpBox.boosterPLine = true;
-			
+
 			cont.x = 250; cont.y = -80;
 			sprites[0] = cont;
 			Winds.show(Winds.MSG_ZVER,{m:noteTxt, closeAfter5:true, sprites:sprites } );
@@ -872,7 +875,7 @@
 				else if (this.box.boosterGLine) removeGLine( Math.floor(this.box.name.substr(5,3)) );
 				else if (this.box.boosterVLine) removeVLine( Math.floor(this.box.name.substr(2,3)) );
 				else if (this.box.boosterPLine) removePLine( Math.floor(this.box.name.substr(2,3)),Math.floor(this.box.name.substr(5,3)) );
-			
+
 				this.box.removeGem();
 				_shiftOldBoxes();
 				addNewBoxes();
@@ -881,7 +884,7 @@
 			}
 		}
 	}*/
-	
+
 	JLines.prototype._addBoxes = function( i, j, gcol, callback=null ) {
 		let eq1 = this.pole[i] != null && this.pole[i][j] != null && this.pole[i][j] == gcol;
 		if ( eq1 ) {
@@ -891,14 +894,14 @@
 					this.boxes.push( this.cv(i)+'_'+this.cv(j) );
 					this._addBoxes(i+0,j-1,gcol);
 					this._addBoxes(i+1,j+0,gcol);
-					this._addBoxes(i+0,j+1,gcol); 
+					this._addBoxes(i+0,j+1,gcol);
 					this._addBoxes(i-1,j+0,gcol);
 				};
 			};
 		};
 		if (callback != null) callback();
 	};
-	
+
 	JLines.prototype.hideBoxes = function() {
 		//Tutorial.removeTuts();
 		if ( this.boxes.length < 3 && Handler.selBooster != Handler.BMOLOTOK ) {
@@ -920,10 +923,10 @@
 				if ( !tb.boosterFrz ) this._addGoldCell( fi, fj );
 				if ( tb.boosterGLine && tb.boosterVLine ) {
 					this.removeVGLine( Math.floor(tb.name.substr(2,3)),Math.floor(tb.name.substr(5,3)) );
-				} else { 
+				} else {
 					if (tb.boosterGLine) {
 						this.removeGLine( Math.floor(tb.name.substr(5,3)) );
-					} else { 
+					} else {
 						if (tb.boosterVLine) {
 							removeVLine( Math.floor(tb.name.substr(2,3)) );
 						}else {
@@ -942,7 +945,7 @@
 		this._shiftOldBoxes();
 		this.addNewBoxes();
 	};
-	
+
 	JLines.prototype.removeVGLine = function( fi, fj ) {
 		this._fillZeroAlreadyBreakedStone();
 		let vLights = [];
@@ -954,7 +957,7 @@
 			if ( tmpBox != null && tmpBox.color == Consts.YASCHIK ) continue;
 			if ( tmpBox != null && tmpBox.boosterVLine ) vLights.push( ri );//removeVLine(ri);
 			if ( tmpBox != null && tmpBox.removeGem() ) {
-				this.pole[ri][fj] = -1; 
+				this.pole[ri][fj] = -1;
 				this._addGoldCell(ri,fj);
 				this._removeAroundStone(ri,fj);
 			};
@@ -971,7 +974,7 @@
 			if ( tmpBox != null && tmpBox.color == Consts.YASCHIK ) continue;
 			if ( tmpBox != null && tmpBox.boosterGLine ) gLights.push( rj );//removeGLine(rj);
 			if ( tmpBox != null && tmpBox.removeGem() ) {
-				this.pole[fi][rj] = -1; 
+				this.pole[fi][rj] = -1;
 				this._addGoldCell(fi,rj);
 				this._removeAroundStone(fi,rj);
 			};
@@ -980,7 +983,7 @@
 			this.removeGLine(gLights[ti]);
 		};
 	};
-	
+
 	JLines.prototype.removeGLine = function ( fj ) {
 		let vLights = []; let pLights = [];
 		Detonations.gLineDetonate(fj);
@@ -993,7 +996,7 @@
 			if ( tmpBox != null && tmpBox.boosterPLine ) pLights.push( [ri,fj] );
 			if ( tmpBox != null && tmpBox.boosterVLine ) vLights.push( ri );//removeVLine(ri);
 			if ( tmpBox != null && tmpBox.removeGem() ) {
-				this.pole[ri][fj] = -1; 
+				this.pole[ri][fj] = -1;
 				this._addGoldCell(ri,fj);
 				this._removeAroundStone(ri,fj);
 			};
@@ -1006,7 +1009,7 @@
 		};
 		//if (_tutStep1Num == 41) TweenMax.to(new Sprite(),0.5,{onComplete:_tutStep5Show});
 	};
-	
+
 	JLines.prototype.removeVLine = function ( fi ) {
 		let gLights = []; let pLights = [];
 		Detonations.vLineDetonate(fi);
@@ -1019,7 +1022,7 @@
 			if ( tmpBox != null && tmpBox.boosterPLine ) pLights.push( [ fi, rj ] );
 			if ( tmpBox != null && tmpBox.boosterGLine ) gLights.push( rj );//removeGLine(rj);
 			if ( tmpBox != null && tmpBox.removeGem() ) {
-				this.pole[fi][rj] = -1; 
+				this.pole[fi][rj] = -1;
 				this._addGoldCell( fi, rj );
 				this._removeAroundStone( fi, rj );
 			};
@@ -1031,7 +1034,7 @@
 			this.removePLine(pLights[ti][0],pLights[ti][1]);
 		};
 	};
-	
+
 	JLines.prototype.removePLine = function ( fi, fj ) {
 		let tmpBox = this.getBox( fi, fj );
 //		if ( tmpBox != null ) tmpBox.boosterPLine = false;
@@ -1047,7 +1050,7 @@
 				if ( tmpBox != null && tmpBox.boosterPLine ) pLights.push( [ ri, rj ] );
 				this._alreadyBreaked[ri][rj] = 1;
 				if ( tmpBox != null && tmpBox.removeGem() ) {
-					this.pole[ri][rj] = -1; 
+					this.pole[ri][rj] = -1;
 					this._addGoldCell(ri,rj);
 					this._removeAroundStone(ri,rj);
 				};
@@ -1062,7 +1065,7 @@
 		step( fi-1,fj-1 );
 		step( fi+0,fj+1 );
 		step( fi+0,fj+0 );
-		
+
 		for ( let ti=0; ti<gLights.length; ti++) {
 			this.removeGLine( gLights[ti] );
 		};
@@ -1074,15 +1077,15 @@
 		};
 		//Tutorial.checkShowStep3();
 	};
-	
+
 	JLines.prototype.addLighting = function () {
-		let count = 0; let bgl = false; 
+		let count = 0; let bgl = false;
 		let i; let j;
 		for ( i=0; i<this.cx; i++ ) {//gline
 			count = 0;
 			for ( j=0; j<this.cy; j++ ) {
 				if ( this.pole[i][j] == -2 ) {
-					count++;	
+					count++;
 				} else {
 					count = 0;
 				};
@@ -1101,7 +1104,7 @@
 			};
 			if ( bvl ) break;
 		};
-		
+
 		let fi = parseInt(this.box.name.substr(2,3));//uint
 		let fj = parseInt(this.box.name.substr(5,3));//uint
 		if ( bgl ) {
@@ -1118,7 +1121,7 @@
 			count = 0; let bpl = false;
 			for ( i=0; i<this.cy; i++ ) {//vline
 				for ( j=0;j<this.cx; j++) {
-					if ( this.pole[j][i] == -2 ) count++;	
+					if ( this.pole[j][i] == -2 ) count++;
 					if ( count > 6 ) bpl = true;
 					if ( bpl ) break;
 				};
@@ -1131,9 +1134,9 @@
 			};
 		};
 	};
-	
+
 	JLines.prototype._countHidedUnderBoxOldBox = function ( fi, sj, fj ) {
-		let countHided = 0; 
+		let countHided = 0;
 		sj = ( sj<0 ) ? -1 : sj;
 		for ( let j=sj+1; j<=fj; j++ ) {
 			if ( this.hidedOrGhost( fi, j) ) countHided++;
@@ -1147,9 +1150,9 @@
 		};
 		return countHided;
 	};
-	
+
 	JLines.prototype._countHidedUnderBox= function ( fi, sj, fj ) {
-		let countHided = 0; 
+		let countHided = 0;
 		sj = (sj<0) ? -1 : sj;
 		for (let j=sj+1;j<=fj;j++) {
 			if ( this.hidedOrGhost(fi,j) ) countHided++;
@@ -1166,22 +1169,22 @@
 		}*/
 		return countHided;
 	};
-	
+
 	JLines.prototype._upperHidedBox = function ( fi, fj ) {
-		let res = true; 
+		let res = true;
 		for ( let j =0; j<=fj; j++ ) {
 			if ( !this.hidedOrGhost( fi, j ) )	res = false;
 		};
 		return res;
 	};
-	
+
 	JLines.prototype._shiftOldBoxes = function() {//df df df df
 		for ( let i=0; i<this.cx; i++ ) {
 			let sh = 0;
 			for (let j = (this.cy-1); j>=0; j--) {
 				if ( this.pole[i][j] < 0 ) {
 					sh += 1;
-				} else { 
+				} else {
 					if ( this.pole[i][j] >= 0 ) {
 						if ( !this.hidedOrGhost( i, j ) ) {
 							let tmpBox2 = this.getBox( i, j );
@@ -1195,7 +1198,7 @@
 		};
 		return true;//_removeCoins();
 	};
-	
+
 	JLines.prototype.hidedOrGhost = function ( fi, fj ) {
 		if ( this.hidedGems[fi][fj] ) return true;
 		let tmpBox2 = this.getBox( fi, fj );
@@ -1204,13 +1207,13 @@
 		};
 		return false;
 	};
-	
+
 	JLines.prototype.addNewBoxes = function () {
 		if ( this._clicked ) {
 			this._clicked = false;
 			this.countSteps -= 1;
 		};
-		
+
 		let tj; let sh = 0; let ch = 0;
 		for ( let ti=0; ti<this.cx; ti++) {
 			sh = 0; ch = 0;
@@ -1227,10 +1230,10 @@
 			if ( sh>0 ) {
 				for ( let k=0; k<sh; k++ ) {
 					let shiftHided = 0;
-					for ( let j=this.cy-1; j>=0; j-- ) { 
-						if ( this.getBox( ti, j ) == null && this.hidedOrGhost( ti, j ) != 1 ) {	
-							shiftHided = j; 
-							break 
+					for ( let j=this.cy-1; j>=0; j-- ) {
+						if ( this.getBox( ti, j ) == null && this.hidedOrGhost( ti, j ) != 1 ) {
+							shiftHided = j;
+							break
 						};
 					};
 					let tmpBox3 = this.addNewBox( ti, (-1*k-1) );
@@ -1281,7 +1284,7 @@
 			}
 		}*/
 	};
-	
+
 	JLines.prototype._removeCoins = function () {
 		let bottomCoords = [];
 		let i;
@@ -1304,7 +1307,7 @@
 		};
 		return res;
 	};
-	
+
 	JLines.prototype._needMixing = function () {
 		try {
 			let res = true;
@@ -1326,9 +1329,9 @@
 			 Handler.onErrorCatched(ex);
 		};
 	};
-	
+
 	JLines.prototype._getCountNotGold = function ( farr ) {
-		let res = 0; 
+		let res = 0;
 		for ( let i=0; i<farr.length; i++ ) {
 			let fi = parseInt(farr[i].substr(0,3));//uint
 			let fj = parseInt(farr[i].substr(4,3));//uint
@@ -1336,7 +1339,7 @@
 		};
 		return res;
 	};
-	
+
 	/*let function _bestClick():Array {
 		let res:Array = [];
 		let mg:int = 0;
@@ -1364,10 +1367,10 @@
 		_bestClickBox = getBox(res[0],res[1]);
 		if (_bestClickBox) _bestClickBox.filters = [new GlowFilter(0xdddddd,1,10,10,5)];
 	}*/
-	
+
 	JLines.prototype._mixingGems = function ( fcallback=null ) {
 		let self = this;
-		if (fcallback == null) fcallback = function() { this._animation2 = false; };
+		if (fcallback == null) fcallback = function() { self._animation2 = false; };
 		//_backGem1 = null;
 		//_backGem2 = null;
 		let gems = [];
@@ -1386,8 +1389,8 @@
 						gems.splice( Math.floor(Math.random()*gems.length),0,tg);
 					};
 				};
-				
-			};//for	
+
+			};//for
 		};//for
 		for ( let i=0;i<this.cx;i++) {
 			for ( let j=0;j<this.cy;j++) {
@@ -1396,15 +1399,15 @@
 					eq = [Consts.COIN_COLOR,Consts.STONE_COLOR,Consts.YASCHIK].indexOf( tg.color ) < 0;
 					if (tg != null && eq && !this.hidedGems[i][j]) {
 						tg.name = 'cn'+this.cv(i)+''+this.cv(j);
-						TweenMax.to(tg, 2*this.tweenTick , { x:i*(Handler.coordsWidth), y:j*(Handler.coordsHeight) });
+						TweenMax.to(tg, 2*this.tweenTick , { x: i*(Consts.coordsWidth), y: j*(Consts.coordsHeight) });
 					};
 				};
-			};//for	
+			};//for
 		};//for
 		setTimeout( function() { try { fcallback(); } catch ( ex ) { Handler.onErrorCatched(ex); } }, 3*this.tweenTick*100);
 //		TweenMax.to( new Sprite(), 3*this.tweenTick, { x: 5, onComplete:fcallback } );
 	};
-	
+
 	JLines.prototype._afterSearchCoin = function() {
 		this._fillPoleArray();
 		let bottomCoords = [];
@@ -1426,14 +1429,14 @@
 		this._shiftOldBoxes();
 		this.addNewBoxes();
 	};
-	
+
 	JLines.prototype._fillZeroAlreadyBreakedStone = function () {
 		for ( let i =0; i<this.cx; i++ ) {
 			if ( this._alreadyBreaked[i]==null ) this._alreadyBreaked[i] = [];
 			for ( let j =0; j<this.cy; j++ ) this._alreadyBreaked[i][j] = 0;
 		};
 	};
-	
+
 	JLines.prototype._removeAroundStone = function ( fi, fj ) {
 		let countRemovedStones = 0;
 		let self = this;
@@ -1444,14 +1447,14 @@
 					if ( tmpBox.boosterIron && topBottom == false ) return;
 					self._alreadyBreaked[ri][rj] = 1;
 					if ( tmpBox.removeGem() ) {
-						self.pole[ri][rj] = -1; 
+						self.pole[ri][rj] = -1;
 						countRemovedStones +=1;
 					};
 				} else {
 					if ( tmpBox != null && tmpBox.color == Consts.YASCHIK ) {
 						self._alreadyBreaked[ri][rj] = 1;
 						if ( tmpBox.removeGem() ) {
-							if(self.pole[ri]!=null) if(self.pole[ri][rj]!=null) self.pole[ri][rj] = -1; 
+							if(self.pole[ri]!=null) if(self.pole[ri][rj]!=null) self.pole[ri][rj] = -1;
 						};
 					};
 				};
@@ -1461,11 +1464,11 @@
 		step( fi-1, fj+0, false );
 		step( fi+0, fj-1, true);
 		step( fi+0, fj+1, true);
-		
+
 		setTimeout( function(){ self.taskPanel.refrashGems( Consts.STONE_COLOR + 3, countRemovedStones );} , 500);
 		//TweenMax.to(new Sprite(),0.5,{onComplete:function (){Handler.refrashGems( CBox.STONE_COLOR + 3, countRemovedStones );} });
 	};
-	
+
 	JLines.prototype.checkEndGame = function () {
 		if (this._animation2) return;
 		//_animation2 = false;
@@ -1473,14 +1476,14 @@
 		let glassBoxNeedRemove = GameTypes.info[numLevel].g6 > 0;
 		let stoneBoxNeedRemove = GameTypes.info[numLevel].g8 > 0;
 		let ghostBoxNeedRemove = GameTypes.info[numLevel].g9 > 0;
-		
-		
+
+
 		let gem1NeedRemove = GameTypes.info[numLevel].g1 > 0;
 		let gem2NeedRemove = GameTypes.info[numLevel].g2 > 0;
 		let gem3NeedRemove = GameTypes.info[numLevel].g3 > 0;
 		let gem4NeedRemove = GameTypes.info[numLevel].g4 > 0;
 		let gem5NeedRemove = GameTypes.info[numLevel].g5 > 0;
-		
+
 		this.gameFinished = 1;
 
 		if ( gem1NeedRemove && !this.taskPanel.groupsTasks[1].galka.visible ) this.gameFinished = 0;
@@ -1488,15 +1491,15 @@
 		if ( gem3NeedRemove && !this.taskPanel.groupsTasks[3].galka.visible ) this.gameFinished = 0;
 		if ( gem4NeedRemove && !this.taskPanel.groupsTasks[4].galka.visible ) this.gameFinished = 0;
 		if ( gem5NeedRemove && !this.taskPanel.groupsTasks[5].galka.visible ) this.gameFinished = 0;
-	
+
 		if ( this.gameFinished == 1 ) {
 			for (let i=0; i<this.cx; i++) {
 				for ( let j=0; j<this.cy; j++) {
 					if ( glassBoxNeedRemove && this._glassCells[i][j] ) this.gameFinished = 0;
-											
+
 					if ( this.getBox( i, j ) != null && this.getBox( i, j ).color == Consts.STONE_COLOR && stoneBoxNeedRemove ) 	this.gameFinished = 0;
 					if ( this.getBox( i, j ) != null && this.getBox( i, j ).boosterGhost && ghostBoxNeedRemove ) this.gameFinished = 0;
-					
+
 					//if (this._goldCells[i][j] != 1) 		this.gameFinished = 0;
 					if (this.getBox( i, j ) != null && this.getBox( i, j ).color == Consts.COIN_COLOR ) 	this.gameFinished = 0;
 				};
@@ -1516,7 +1519,7 @@
 					User.loseLevel = Head.levelName;
 					User.loseCount = 1;
 				} else {
-					User.loseCount += 1;	
+					User.loseCount += 1;
 				};
 				if ( User.loseCount > 4 ) {
 					BackClient.ask(BackClient.LOG_ADD,function (r) {}, {l:User.loseLevel,c:User.loseCount} );
@@ -1527,7 +1530,7 @@
 			};
 		};
 	};
-	
+
 	JLines.prototype._addGoldCell =  function ( i, j ) {
 		if ( this._glassCells[i][j] ) {
 			let glassCell = Handler.level.getChildByName('gc'+this.cv(i)+'_'+this.cv(j));
@@ -1543,38 +1546,38 @@
 				goldCell.height = h;//h+3*CBox.sh;
 				goldCell.x = Math.floor(Handler.coordsShiftX + i*(w));//i*(w+CBox.sh)-CBox.sh; CBox.sh/2 === uint
 				goldCell.y = Math.floor(Handler.coordsShiftY + j*(h));//j*(h+CBox.sh)-CBox.sh;
-			
+
 				Handler.level.addChild(goldCell);
 			};
 		};
-		
+
 	};
-	
+
 	JLines.prototype._addGlassCell = function ( i, j ) {
 		let w = Consts.coordsWidth;
 		let h = Consts.coordsHeight;
 		let glassCell = Embeds.glassBox();
-	
+
 		glassCell.name = 'gc'+this.cv(i)+'_'+this.cv(j);
 		glassCell.width  = w;//w+3*CBox.sh;
 		glassCell.height = h;//h+3*CBox.sh;
-		//glassCell.parent = 
+		//glassCell.parent =
 		Handler.level.addChild(glassCell);
-		
+
 		this._glassCells[i][j] = 1;
-		
+
 		let numLevel = parseInt(Head.levelName.substr(1));//uint
 		GameTypes.info[numLevel].g6 += 1;
-		
+
 		glassCell.x = Math.floor( Consts.coordsShiftX + i*w );//i*(w+CBox.sh)-CBox.sh; CBox.sh/2 === uint
-		glassCell.y = Math.floor( Consts.coordsShiftY + j*h );//j*(h+CBox.sh)-CBox.sh;		
+		glassCell.y = Math.floor( Consts.coordsShiftY + j*h );//j*(h+CBox.sh)-CBox.sh;
 	};
-	
+
 	JLines.prototype.getBox = function( i, j ) {
 		let sprite = this.gemsContainer.getChildByName('cn'+this.cv(i)+''+this.cv(j));
 		return sprite == null ? null : sprite.self;
 	};
-	
+
 	JLines.prototype._fillPoleArray = function () {
 		this.pole = [];
 		for ( let i=0; i<this.cx; i++ ) {
@@ -1584,10 +1587,10 @@
 			};
 		};
 	};
-	
+
 	JLines.prototype.cv = function( val ) {
 		if ( val < -9 ) return ''+val;
 		if (  val <  0 ) return val+'.';
 		return (val>9) ? '0'+val : '00'+val;
 	};
-	
+

@@ -75,6 +75,7 @@
 	    			if ( this._boosterPLine ) {
 	    				let bPLBody1 = gemBody.getChildByName('bPLBody');// as Sprite;
 	    				if ( bPLBody1 ) gemBody.removeChild( bPLBody1 );
+						this.selected = val;
 	    			} else {
 	    				let bPLBody = Embeds.lineP();
 	    				bPLBody.name = 'bPLBody';

@@ -87,13 +87,21 @@
 			
 			if (fparent) fparent.addChild(this._sprite);
 			
-			let _shiftY = 30;
+			
 			let self = this;
-			TweenMax.to( self._sprite, 1.2, {  y : self.y0-_shiftY, alpha : 0.4, onComplete : function() { self._destroy(); } } );
+			//TweenMax.to( self._sprite, 1.2, {  y : self.y0-_shiftY, alpha : 0.4, onComplete : function() { self._destroy(); } } );
+			this.tween();
 		} catch ( ex ) {
 			 Handler.onErrorCatched(ex);
 		};
 	};
+	
+	FlyPoints.tween = function() {
+		let self = this;
+		let fpSprite = this._sprite;
+		let _shiftY = 30; 
+		TweenMax.to(  fpSprite, 1.2, {  y : self.y0-_shiftY, alpha : 0.4, onComplete : function() { Handler.destroy(  fpSprite ); } } );
+	}
 	
 	FlyPoints._destroy = function() {
 		try {
