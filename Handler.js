@@ -749,12 +749,12 @@
 		/*for (let i:int=0;i<Head.instance.menuLevels.length;i++) {
 			(Head.instance.menuLevels[i] as MenuLevel).refrashCols();
 		}*/
-		if ( Winds.getTopWindName() == Winds.WIND_SMALL_ACT_INV ) {
+		/*if ( Winds.getTopWindName() == Winds.WIND_SMALL_ACT_INV ) {
 	        Winds.shutdownTopWind(1);
     	}
 		if ( Winds.getTopWindName() == Winds.WIND_ACT_5_STEPS ) {
 	        Winds.shutdownTopWind(1);
-    	}
+    	}*/
 		if ( Winds.getTopWindName() == Winds.WIND_GAME ) {
 			clearTimeout( Handler.timerOpenAcInv );
 	        Winds.shutdownTopWind(1);

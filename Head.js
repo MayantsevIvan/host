@@ -4,7 +4,7 @@
 		let self = this;
 		this.params = fparams;
 
-		Handler.head = Handler.newGroup();
+		Handler.head = Handler.newGroup( Handler.head );
 		this._timerString = '';
 		this.maxEnergy = 6;
 		this.energyTimerCount    = 1200;
@@ -79,7 +79,8 @@
 		butMute2.onEL("pointerdown",touchButMute);
 		let butFullScrin = Handler.showImgRect( this.group, "butFullScrin.png",355,-285,31,31);
 		butFullScrin.onEL('pointerdown',function(){ Winds.show( Winds.WIND_FULL_SCREEN ) });
-        this.groupNumPoints = Handler.newGroup( this.group );         
+        if ( isMobile ) butFullScrin.isVisible = false;
+		this.groupNumPoints = Handler.newGroup( this.group );         
         this.groupNumCoins  = Handler.newGroup( this.group );         
         this.enGroup        = Handler.newGroup( this.group );
 
@@ -181,7 +182,8 @@
 				Head.bonus += Head.energyTimerMaxCount; 
 				Head.energyTimerCount = Head.energyTimerMaxCount;// - (User.ts - User.bonus);
 			} else {
-				Head.energyTimer.stop();
+				//Head.energyTimer.stop();
+				clearInterval( Head.energyTimer );
 			}
 		}
 		Head.timerString = Head.energyTimerCount+'';

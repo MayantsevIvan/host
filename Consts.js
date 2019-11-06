@@ -113,7 +113,11 @@
 	Consts.gemsHeight  = 60;
 	Consts.coordsShiftX = 0;
 //	Consts.coordsShiftX = pixiApp.width/2;
-	Consts.coordsShiftY = 0;
+	if ( isMobile ) { 
+		Consts.coordsShiftY = -38;
+	} else {
+		Consts.coordsShiftY = 0;
+	};
 //	Consts.coordsShiftY = pixiApp.height/2;
 	Consts.TIME_WINDOW_MOVE = 150;
 	Consts.WITHOUT_PARENT = 0;

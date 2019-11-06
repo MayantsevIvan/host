@@ -9,7 +9,10 @@
 				let authKey = "";
 				User.viewer_id = "550923363671";
 				BackClient.init( { auth_key: authKey } );
-
+				Handler.canvas    = Handler.newGroup();
+				Handler.head      = Handler.newGroup();
+				Handler.gWinds    = Handler.newGroup();
+				Handler.gLoading  = Handler.newGroup();
 				let onAuthCallback = function( response ) {
 					try {
 						if ( Winds.getTopWindName() == Winds.WIND_LOADER ) {
@@ -18,16 +21,6 @@
 						User.init( response );//User must inited before Winds.WIND_MENU_LEVELS
 						Winds.show( Winds.WIND_MENU_LEVELS );
 						Head.init( response );
-						//Winds.show( Winds.WIND_ACTION0 );
-						//Winds.show( Winds.WIND_ACT_INVITE );
-						//Winds.show( Winds.WIND_FR_INVITED );
-						//Winds.show( Winds.WIND_ACTION4 );
-						//Winds.show( Winds.WIND_ACT_FRIENDS );
-						
-						
-						console.log(response);
-						//response.db = 1;
-						//response.numBonus = 1;/*фывфафывафафыв*/
 						if (parseInt(response['db'])>0) Winds.show( Winds.WIND_DAILY_BONUS, { num_day: parseInt(response.num_day) } );			
 					} catch (ex) {
 						Handler.onErrorCatched(ex);
