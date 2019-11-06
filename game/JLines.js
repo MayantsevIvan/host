@@ -1,8 +1,9 @@
 
 	"use strict";
 
-	let JLines = function()  {
+	let JLines = function( parent )  {
 		let self = this;
+		self.parent = parent;
 		Handler.getBox = this.getBox;
 		Handler.remGlass = this._remGlass;
 		Handler.removeAroundStone = function(  fi, fj  ) { self._removeAroundStone(  fi, fj  ); };
@@ -74,13 +75,10 @@
 				//let selfWindGame:WindGame = Winds.getWind() as WindGame;
 				//if (selfWindGame && selfWindGame.textSteps) selfWindGame.textSteps.text = this._countSteps+'';
 				if ( Handler.textSteps != null ) Handler.textSteps.text = this._countSteps+'';
-				/*if ( this._countSteps == 5 ) {
-					if ( Winds.getTopWindName() == Winds.WIND_SMALL_ACT_INV ) {
-//						Winds.getWind().shutdown(0);
-						Winds.shutdownTopWind(1);
-					};
-					Winds.show( Winds.WIND_ACT_5_STEPS );
-				};*/
+				if ( this._countSteps == 5 ) {
+					if ( Handler.acSmallInv ) Handler.acSmallInv.shutdown();
+					Actions.show( Actions.WIND_ACT_5_STEPS, self.parent );
+				};
 				if ( this._countSteps <= 0 ) {
 					Winds.show( Winds.WIND_STEPS_LEFT);
 				};
@@ -98,7 +96,7 @@
 		let countStone = 0;
 		let countYaschik = 0;
 		let levelWithYaschik = false;
-		console.log(lev);
+		
 		for ( let j=0; j < 8; j++ ) {
 			for ( let i=0; i < this.cx; i++ ) {
 				if ( lev[i+5][j] == Consts.COIN_COLOR ) {
@@ -187,7 +185,7 @@
 			EndLevelAnimator.animation = false;
 			this.cx = lev[0];
 			this.cy = lev[1];
-			this.reCreateTable( lev );
+			if ( isMobile )this.reCreateTable( lev );
 			if ( this.cx > 9 ) {
 				Handler.coordsShiftX = Handler.coordsWidth/2;
 			} else {
