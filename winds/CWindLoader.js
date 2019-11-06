@@ -26,6 +26,8 @@
 		this.mainGroup = Handler.newGroup();
 		this.mainGroup.x = Handler.contentCenterX;
 		this.mainGroup.y = Handler.contentCenterY;
+		console.log(Handler.contentCenterX);
+		console.log(Handler.contentCenterY);
 		
 		let showContent = function() {
 		    Handler.showImgRect(self.mainGroup, Consts.DIR_WIND_LOADER+"backgrWindGame.png",0,0,760,610);

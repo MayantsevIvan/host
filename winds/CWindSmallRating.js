@@ -80,6 +80,12 @@
 		let arrowUp = Handler.showImgRect(windRGroup,"arrowUp.png",-35,-278,44,26);
 		let arrowDown = Handler.showImgRect(windRGroup,"arrowDown.png",-35,208,44,26);
 		
+		if ( isMobile ) {
+			arrowUp.x   = 0;
+			arrowUp.y   = 208;
+			arrowDown.x = -70;
+		}
+		
 		let users_fr = [];
 		let url;
 		let name;

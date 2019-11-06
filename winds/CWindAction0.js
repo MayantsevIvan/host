@@ -63,14 +63,11 @@
 		return self.mainGroup;
 	};
 	
-	CWindAction0.shutdown = function( fastShutdown ){
-		if ( Winds.shutdown( this.windIndex ) ) {
-			if ( fastShutdown ) {
-				Handler.removeImage(this.mainGroup);
-			} else {
-				Handler.removeWindAfterTransition( this.mainGroup );
-			};
-  		};
-	};
+	CWindAction0.shutdown = function() {
+		if ( this.windIndex != null ) {
+		    Winds.shutdown( this.windIndex )
+		}
+        Handler.removeWindAfterTransition( this.mainGroup );
+    };
 
 	//return CWindAction0;

@@ -42,12 +42,9 @@
 		return self.mainGroup;
 	};
 	
-	CWindFrInvited.shutdown = function( fastShutdown ){
-		if ( Winds.shutdown( this.windIndex ) ) {
-			if ( fastShutdown ) {
-				Handler.removeImage(this.mainGroup);
-			} else {
-				Handler.removeWindAfterTransition( this.mainGroup );
-			};
-  		};
-	};
+	CWindFrInvited.shutdown = function(){
+		if ( this.windIndex != null ) {
+		    Winds.shutdown( this.windIndex )
+		}
+        Handler.removeWindAfterTransition( this.mainGroup );
+    };

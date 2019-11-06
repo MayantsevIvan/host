@@ -10,16 +10,14 @@
 	
 	CWindBeforeLevel.startup = function( params ) {
 		let self = this;
-		self.mainGroup = Handler.newGroup();
+		self.mainGroup = Handler.newGroup( Handler.gWinds );
 		self.mainGroup.x = Handler.contentCenterX;
 		self.mainGroup.y = Handler.contentCenterY;
 		self.mainGroup.sortableChildren = true;
 		self.windGroup = Handler.newGroup(self.mainGroup);
 		Handler.showImgRect(self.windGroup,"backgrWindM.png",0,0,594,624);
 		let cross = Handler.showImgRect(self.windGroup,"cross.png",275,-270,36,36);
-		cross.interactive = true;
-		cross.buttonMode = true;
-		cross.on("pointerdown", function() { self.shutdown() });
+		cross.onEL("pointerdown", function() { self.shutdown() });
 		Handler.showImgRect(self.windGroup,"lableLevel.png",-45,-270,171,38);
 		
 		let levelNumber = params.numLevel == null ? User.ml+1 : params.numLevel;
@@ -108,16 +106,16 @@
 	
 		self.windGroup.x = self.windGroup.x + 85;
 		self.windGroup.y = self.windGroup.y - 15;
+		self.windGroup.toFront();
+		if ( isMobile ) {
+			self.windGroup.y += 42;
+		}
 		//------------------------//
 		//-------WindRating-------//
 		//------------------------//
 		self.windRating = CWindSmallRating.showWindRating();
 		self.mainGroup.addChild(self.windRating);
-		self.windRating.zIndex = 0;
-		self.windGroup.zIndex = 1;
 		TweenMax.to( self.windRating, 2, { x:-250 } );
-		//
-		self.mainGroup.interactive = true;
 		return self.mainGroup;
 	}
 	

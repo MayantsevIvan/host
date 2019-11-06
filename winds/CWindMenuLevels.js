@@ -10,7 +10,7 @@
 		return this;
 	};
 	
-	CWindMenuLevels.showLocation = function( background  ) {
+	CWindMenuLevels.showLocation = function() {
 		let self = this;
 		
 		this.showBakcgr();
@@ -33,8 +33,7 @@
 		            //num   1   2    3     4   5   6  7    8   9  10  11  12  13  14  15  16   17   18  19    20   21   22   23   24  25 26  27  28  29  30  31  32  33  34  35  36  37   38    39   40   41  42   43   44   45    46  47    48   49  50     
 			x         : [-343,-276,-200,-124,-49, 26,102,178,255,339,328,255,177,105, 28,-46,-122,-198,-274,-340,-344,-274,-202,-125,-46,26,102,178,255,330,326,260,180,104, 28,-46,-124,-198,-268,-330,-332,-250,-188,-126, -50,  26, 102, 178, 234,312 ],
 			y         : [ 258, 258, 254, 255,256,256,256,260,250,252,145,165,155,148,155,165, 135, 136, 156, 100,  38,  26,  36,  40, 74,78, 42, 34, 39, 54,-36,-58,-60,-92,-94,-94, -74, -56, -38, -42,-106,-118,-158,-145,-156,-158,-186,-182,-148,-98 ],
-			opened    : [],
-			countStar : [   1,   3,  1,    1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,   1,   1,   1,   1,   1,   1,   1,   1,  1 ]
+			opened    : []		
 		};
 		for ( let i = self.minNumLevel; i <= self.maxLevel; i++ ) {
 			if( i <= self.currentLevel ) {
@@ -48,8 +47,24 @@
 		//относительно объекта menuLevelPoint
 		let xSmallPoint = [ 33, 38, 38, 38, 38, 38, 38, 38, 42,  -5, -38, -38, -35, -38, -36, -40, -38, -38, -40,  -2, 34, 37, 39,  42, 38,  40, 38, 38, 38,  -2, -32, -38, -40, -38, -38, -38, -38, -35, -32,  -3, 38,  35, 32, 38, 38,  35, 38, 30, 38, 38 ];
 		let ySmallPoint = [ -5, -5, -5, -5, -5, -5, -3, -8, -5, -60,   0,  -8,  -7,   2,   3,  -15, -3,   8, -25, -32, -8,  0, -2,  10,  0, -19, -8,  0,  4, -45, -15,  -5, -13,  -5,  -5,   5,   5,   5,  -5, -32, -8, -16,  2, -8, -6, -16,  0, 10, 26, -5 ];
+		if ( isMobile ) {
+			for( let i = 0; i < levelPointData.x.length; i++ ) {
+				if ( [42,31,33,35,44,45,46,47,48].indexOf(i) < 0 ) {
+				    levelPointData.y[i] -= i<10 ? 60 : 45;
+				}
+			}
+            levelPointData.y[42] -= 5; levelPointData.x[42] += 5; ySmallPoint[42] -= 5; 
+            levelPointData.y[35] -= 33;
+            levelPointData.y[33] -= 30;
+            levelPointData.y[31] -= 30;
+            levelPointData.y[44] -= 30;
+            levelPointData.y[45] -= 43; ySmallPoint[45] += 17; xSmallPoint[45] += 5;
+			levelPointData.y[46] += 3;
+			levelPointData.y[47] += 7; levelPointData.x[47] -= 7; 
+			levelPointData.y[48] -= 5; levelPointData.x[48] += 3; ySmallPoint[48] -= 10;
 			
-		
+		}
+
 		for ( let i = self.maxLevel; i >= self.minNumLevel; --i ) {	
 			let withArrow = self.currentLevel == i;
 			
@@ -73,6 +88,7 @@
 	CWindMenuLevels.showBakcgr = function( ) {
 		let self = this;
 		this.numBackgr = (self.numLocation-1)%32+1;
+		let yBackgr = isMobile ? -38 : 0;
 		let nameBackgr = Consts.DIR_BACKGROUNDS + 'mBackgr'+this.numBackgr+'.png';
 		let backToBack = function( img ){
 			console.log('endLoadBackgr');
@@ -83,11 +99,11 @@
 		};
 
 		if ( self.backgr[this.numBackgr] != 0 ) {
-			self.imgBackgr = Handler.showImgRect( self.mainGroup,  nameBackgr, 0, 0, 760, 610 );
+			self.imgBackgr = Handler.showImgRect( self.mainGroup,  nameBackgr, 0, yBackgr, 760, 610 );
 			Handler.toBack(self.imgBackgr);
-		} else {
+ 		} else {
 			//console.log('start load', Consts.DIR_BACKGROUNDS + 'mBackgr'+this.numBackgr+'.png');
-			Handler.loadAndDrawRemoteImage( self.mainGroup, null, nameBackgr, 0, 0, 760, 610, backToBack );
+			Handler.loadAndDrawRemoteImage( self.mainGroup, null, nameBackgr, 0, yBackgr, 760, 610, backToBack );
 			//Handler.showImgRectAfterLoaded( self.mainGroup,  nameBackgr, 0, 0, 760, 610, backToBack )
 		};
 	}
@@ -104,7 +120,7 @@
 	CWindMenuLevels.startup = function( params ) {
 		let self = this;
 		Sounds.Play();
-		self.mainGroup = Handler.newGroup();
+		self.mainGroup = Handler.newGroup( Handler.canvas );
 		self.mainGroup.sortableChildren = true;
 		self.mainGroup.x = Handler.contentCenterX;
 		self.mainGroup.y = Handler.contentCenterY;
@@ -151,11 +167,12 @@
 			}
 		}
 		
-		let arrowLeft = Handler.showImgRect(self.mainGroup, "arrowLeft.png",-370,-35,16,52);
+		let yAr = isMobile ? -80 : -35;
+		let arrowLeft = Handler.showImgRect(self.mainGroup, "arrowLeft.png",-370,yAr,16,52);
 		arrowLeft.interactive = true;
 		arrowLeft.buttonMode = true;
 		arrowLeft.on("pointerdown", onArrowLeft);
-		let arrowRight = Handler.showImgRect(self.mainGroup, "arrowRight.png",370,-35,16,52);
+		let arrowRight = Handler.showImgRect(self.mainGroup, "arrowRight.png",370,yAr,16,52);
 		arrowRight.interactive = true;
 		arrowRight.buttonMode = true;
 		arrowRight.on("pointerdown", onArrowRight);

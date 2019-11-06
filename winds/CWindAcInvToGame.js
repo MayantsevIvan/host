@@ -48,14 +48,11 @@
 		return self.mainGroup;
 	};
 	
-	CWindAcInvToGame.shutdown = function( fastShutdown ){
-		if ( Winds.shutdown( this.windIndex ) ) {
-			if ( fastShutdown ) {
-				Handler.removeImage(this.mainGroup);
-			} else {
-				Handler.removeWindAfterTransition( this.mainGroup );
-			};
-  		};
-	};
+	CWindAcInvToGame.shutdown = function(){
+		if ( this.windIndex != null ) {
+		    Winds.shutdown( this.windIndex )
+		}
+        Handler.removeWindAfterTransition( this.mainGroup );
+    };
 
 	//return CWindAcInvToGame;

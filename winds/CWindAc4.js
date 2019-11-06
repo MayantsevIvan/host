@@ -50,16 +50,14 @@
 		} else {
 			showContent();
 		};
+		return self.mainGroup;
 	}
 	
-	CWindAc4.shutdown = function( fastShutdown ){
-		if ( Winds.shutdown( this.windIndex ) ) {
-			if ( fastShutdown ) {
-				Handler.removeImage(this.mainGroup);
-			} else {
-				Handler.removeWindAfterTransition( this.mainGroup );
-			};
-  		};
-	};
+	CWindAc4.shutdown = function(){
+		if ( this.windIndex != null ) {
+		    Winds.shutdown( this.windIndex )
+		}
+        Handler.removeWindAfterTransition( this.mainGroup );
+    };
 
 	//return CWindAc4;

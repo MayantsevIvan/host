@@ -83,7 +83,7 @@
 		} else {
 			showContent();
 		};
-		ImageLoader.loadAssets(showContent, listOfImages);
+
         return self.mainGroup;         
     };         
 

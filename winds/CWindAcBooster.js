@@ -51,16 +51,14 @@
 		} else {
 			showContent();
 		};
+		return self.mainGroup;
 	}
 	
-	CWindAcBooster.shutdown = function( fastShutdown ){
-		if ( Winds.shutdown( this.windIndex ) ) {
-			if ( fastShutdown ) {
-				Handler.removeImage(this.mainGroup);
-			} else {
-				Handler.removeWindAfterTransition( this.mainGroup );
-			};
-  		};
-	};
+	CWindAcBooster.shutdown = function(){
+		if ( this.windIndex != null ) {
+		    Winds.shutdown( this.windIndex )
+		}
+        Handler.removeWindAfterTransition( this.mainGroup );
+    };
 
 	//return CWindAcBooster;

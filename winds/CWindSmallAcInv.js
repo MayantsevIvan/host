@@ -8,11 +8,17 @@
 		return this;
 	};
 	
-	CWindSmallAcInv.startup = function( params ) {
+	CWindSmallAcInv.startup = function( parent ) {
 		let self = this;
-		self.mainGroup = Handler.newGroup();
-		self.mainGroup.x = 715;
-		self.mainGroup.y = 485;
+		self.mainGroup = Handler.newGroup( parent );
+		
+		if ( isMobile ) {
+			self.mainGroup.x = 335;
+			self.mainGroup.y = 97;
+		} else {
+			self.mainGroup.x = 335;
+			self.mainGroup.y = 180;
+		};
 		let showContent = function() {
 			Handler.showImgRect(self.mainGroup, Consts.WIND_SMALL_ACT_INV + "backgrAcInv.png",0,0,88,245);
 			Handler.showImgRect(self.mainGroup, Consts.WIND_SMALL_ACT_INV + "lableAcInv.png",0,-45,83,131);
@@ -41,16 +47,14 @@
 		} else {
 			showContent();
 		};
+		return self.mainGroup;
 	}
 	
-	CWindSmallAcInv.shutdown = function( fastShutdown ){
-		if ( Winds.shutdown( this.windIndex ) ) {
-			if ( fastShutdown ) {
-				Handler.removeImage(this.mainGroup);
-			} else {
-				Handler.removeWindAfterTransition( this.mainGroup );
-			};
-  		};
-	};
+	CWindSmallAcInv.shutdown = function(){
+		if ( this.windIndex != null ) {
+		    Winds.shutdown( this.windIndex )
+		}
+        Handler.removeWindAfterTransition( this.mainGroup );
+    };
 
 	//return CWindSmallAcInv;

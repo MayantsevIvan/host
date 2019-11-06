@@ -29,7 +29,7 @@
 	CWindGame.startup = function( params ) {
 		params = params || {};
 		let self = this;
-		self.mainGroup = Handler.newGroup();
+		self.mainGroup = Handler.newGroup( Handler.gWinds );
 		self.mainGroup.x = Handler.contentCenterX;
 		self.mainGroup.y = Handler.contentCenterY;
 		
@@ -51,21 +51,23 @@
 		let cross = Handler.showImgRect(self.mainGroup, "crossWindGame.png",358,-285,33,28);
 		
 		let onTouch = function(evt) {
-			if ( Winds.getTopWindName() == Winds.WIND_SMALL_ACT_INV ) {
+			/*if ( Winds.getTopWindName() == Winds.WIND_SMALL_ACT_INV ) {
 	//			Winds.getWind().shutdown(0);
 	            Winds.shutdownTopWind(1);
     		};
 			if ( Winds.getTopWindName() == Winds.WIND_ACT_5_STEPS ) {
 	//			Winds.getWind().shutdown(0);
 	            Winds.shutdownTopWind(1);
-			};
+			};*/
 			clearTimeout( Handler.timerOpenAcInv);
 			self.shutdown();
 		};
 		cross.onEL("pointerdown",onTouch);
 		
 //		let butSkipLevel = Handler.showImgRect(self.mainGroup, "butSkipLevelWindGame.png",-335,240,54,48);
-		let butFoolScrin = Handler.showImgRect(self.mainGroup, "butFoolScrinWindGame.png",352,-246,31,31);
+		let butFullScrin = Handler.showImgRect(self.mainGroup, "butFoolScrinWindGame.png",352,-246,31,31);
+		if ( isMobile ) butFullScrin.isVisible = false;
+		butFullScrin.onEL('pointerdown',function(){ Winds.show( Winds.WIND_FULL_SCREEN ) });
 		
 		let butMute1 = Handler.showImgRect( self.mainGroup, "butMute.png",353,-213,33,33);
 		let butMute2 = Handler.showImgRect( self.mainGroup, "butMute2.png",353,-213,33,33);
@@ -107,7 +109,7 @@
 		Handler.windGameSprite = self._sprite;
 		Handler.lights = Handler.newGroup();
 		Handler.level  = Handler.newGroup();		
-		Handler.jlines = new JLines();
+		Handler.jlines = new JLines( self.mainGroup );
 		Handler.jlines.gemsContainer = Handler.newGroup();
 		
 		Handler.fmask  = Handler.newGroup();
@@ -207,7 +209,7 @@
 //		Handler.gemsContainerGlobalX = self.mainGroup.x + Consts.coordsShiftX;
 //		Handler.gemsContainerGlobalY = self.mainGroup.y + Consts.coordsShiftY;
 		Handler.gemsContainerGlobalX = self.mainGroup.x - shiftXgame;
-		Handler.gemsContainerGlobalY = self.mainGroup.y - shiftYgame;
+		Handler.gemsContainerGlobalY = isMobile ? self.mainGroup.y - shiftYgame - 38 : self.mainGroup.y - shiftYgame;
 		
 		self._sprite.x -= shiftXgame;
 		self._sprite.y -= shiftYgame;
@@ -224,8 +226,10 @@
 		};
 		
 		let showSmallAc = function() {
-			Winds.show( Winds.WIND_SMALL_ACT_INV );
+			Handler.acSmallInv = Actions.show( Actions.WIND_SMALL_ACT_INV, self.mainGroup );
+			console.log(" self.mainGroup",  self.mainGroup);
 		}
+		console.log(" self.mainGroup",  self.mainGroup);
 		Handler.timerOpenAcInv = setTimeout( showSmallAc, 7000 );
 		self.mainGroup.interactive = true;
 	};

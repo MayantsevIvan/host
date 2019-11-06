@@ -17,7 +17,7 @@
 	
 	CWindEndLevel.startup = function( params ) {
 		let self = this;
-		self.mainGroup = Handler.newGroup();
+		self.mainGroup = Handler.newGroup( Handler.gWinds );
 		self.mainGroup.x = Handler.contentCenterX;
 		self.mainGroup.y = Handler.contentCenterY;
 	
@@ -93,7 +93,7 @@
 		Handler.showImgRect(self.mWind,"lablePointsEndLevel.png",120,60,83,18);
 		Handler.showImgRect(self.mWind,"lableIgnots.png",130,110,107,18);
 		
-		Handler.showImgRect(self.mWind,"backgrButContinueEndLevel.png",0,210,243,70);
+		let backgrButContinue = Handler.showImgRect(self.mWind,"backgrButContinueEndLevel.png",0,210,243,70);
 		
 		
 		let pointerDownButContinue = function( evt ) {
@@ -131,7 +131,7 @@
 		}
 		checkBox.on('pointerdown', onCheckBox );
 		let marker = Handler.showImgRect(self.mWind,"marker.png",-35,255,30,24);
-		Handler.showImgRect(self.mWind,"lableTellFr.png",75,262,195,16);
+		let lableTellFr = Handler.showImgRect(self.mWind,"lableTellFr.png",75,262,195,16);
 		
 		Handler.showImgRect(self.pWind,"backgrEndLevelWindP.png",0,0,383,447);
 		Handler.showImgRect(self.pWind,"lableGetPrize.png",108,155,163,98);
@@ -140,17 +140,24 @@
 
 		Handler.showImgRect(self.pWind,"backgrPuzzleElem.png",108,-27,102,102);
 		Handler.showImgRect(self.pWind,"lablePuzzleNewElem.png",108,-147,136,125);
-		self.pWind.zIndex = 0;
 		self.pWind.x = 182;
+		self.mWind.toFront();
 		//------------------------//
 		//-------WindReting-------//
 		//------------------------//
+		
+		if ( isMobile ) { 
+			self.mWind.y += 28;
+			self.pWind.y += 28;
+			butContinue.y       -= 40;
+			backgrButContinue.y -= 40;
+			checkBox.y          -= 35;
+			marker.y            -= 35;
+			lableTellFr.y       -= 35;
+		}
 		self.windReting = CWindSmallRating.showWindRating();
 		self.mainGroup.addChild(self.windReting);
-		self.windReting.zIndex = 0;
-		self.mWind.zIndex = 1;
 		TweenMax.to( self.windReting, 2, { x:-250 } );
-		
 		return self.mainGroup;
 	}
 	
