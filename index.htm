@@ -30,14 +30,15 @@
 			console.log("window.innerWidth",window.innerWidth);
 			console.log("document.body.clientWidth",document.body.clientWidth);
 			console.log("cw",cw,ch);
+			console.log("ver 1.0");
 			
 			let ew = Math.floor(10*cw / pixiAppWidth);
 			let scalew = Math.floor( ew / 2 ) * 0.2;
 			let eh = Math.floor(10*ch / pixiAppHeight);
 			let scaleh = Math.floor( eh / 2 ) * 0.2;
 			let scale = Math.min(scalew,scaleh,3);
-			let windOfScreen = Math.floor( window.innerWidth/2 - visibleWidth/2 );
-			//let windOfScreen = Math.floor( window.innerWidth/2 - pixiAppWidth/2 );
+			//let windOfScreen = Math.floor( window.innerWidth/2 - visibleWidth/2 );
+			let windOfScreen = Math.floor( window.innerWidth/2 - pixiAppWidth/2 );
 			
 			const pixiAppScale  = Math.max(1.0,scale);
 		    const pixiApp = new PIXI.Application({
