@@ -1,33 +1,40 @@
 ﻿<!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8">
 		<title> игра Твои Сокровища </title>
+		<meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<script src="pixi.min.js"> </script>
 		<script src="pixi-sound.js"> </script>
-		<script src="pixi-sound.js.map"> </script>
 		<script src="TweenMax.min.js"> </script>
 		<style>
 		    html,head,body {
 			    padding: 0px;
 			    margin: 0px;
+				overflow: none;
 			}
 		</style>
 	</head>
 	<body>
 		<script>
 			let isMobile = true;
+			
 			let pixiAppWidth  = 760;
 			let pixiAppHeight = 610;
-			const cw = window.innerWidth  || document.body.clientWidth;
+			if ( isMobile ) pixiAppHeight = 1000;
+			let visibleWidth = 500;
+			
+ 			const cw = window.innerWidth  || document.body.clientWidth;
 			const ch = window.innerHeight || document.body.clientHeight;
-
+			
 			let ew = Math.floor(10*cw / pixiAppWidth);
 			let scalew = Math.floor( ew / 2 ) * 0.2;
 			let eh = Math.floor(10*ch / pixiAppHeight);
 			let scaleh = Math.floor( eh / 2 ) * 0.2;
 			let scale = Math.min(scalew,scaleh,3);
-
+			let windOfScreen = Math.floor( visibleWidth/2 - window.innerWidth/2  );
+			//let windOfScreen = Math.floor( window.innerWidth/2 - pixiAppWidth/2 );
+			
 			const pixiAppScale  = Math.max(1.0,scale);
 		    const pixiApp = new PIXI.Application({
 		        width  : pixiAppWidth,//  * pixiAppScale,
@@ -37,15 +44,27 @@
 				resolution : window.devicePixelRatio || 1,
 		    });
 		    document.body.appendChild(pixiApp.view);
-
+			
+			
 			let canvas = document.querySelector('canvas');
 			if ( isMobile ) {
-			    let pixiMobAppScale  = window.innerHeight/pixiAppHeight*1.16;
+			    //let pixiMobAppScale  = Math.min( window.innerWidth/pixiAppWidth, window.innerHeight/pixiAppHeight*1.16);
+			    // let pixiMobAppScale  = window.innerWidth/pixiAppWidth*1.5;
+			    pixiApp.stage.x = windOfScreen;
+			    let pixiMobAppScale  = window.innerWidth/visibleWidth;
+				
+			    // let pixiMobAppScale  = window.innerWidth/pixiAppWidth;
 			    //pixiApp.stage.scale.x = pixiMobAppScale;
 			    //pixiApp.stage.scale.y = pixiMobAppScale;
 		        if ( canvas ) {
-		            canvas.style.width  = pixiAppWidth  * pixiMobAppScale + "px";
+					//canvas.width  = pixiAppWidth * pixiMobAppScale;//pixiApp.stage.width;
+					//canvas.height = pixiAppHeight * pixiMobAppScale;
+		            //canvas.style.width  = pixiAppWidth  * pixiMobAppScale + "px";
+		            //canvas.style.height = pixiAppHeight * pixiMobAppScale + "px";		            
+					canvas.style.width  = pixiAppWidth  * pixiMobAppScale + "px";
 		            canvas.style.height = pixiAppHeight * pixiMobAppScale + "px";
+					
+					
 		        }
 			} else {
 			    pixiApp.stage.scale.x = pixiAppScale;
@@ -57,7 +76,7 @@
 					canvas.style.height = canvas.height + "px";
 		        }
             }
-			
+			console.log( window.innerWidth, pixiAppWidth );
 
 		</script>
 		<script src="ImageLoader.js"></script>
