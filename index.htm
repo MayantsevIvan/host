@@ -27,6 +27,8 @@
  			const cw = window.innerWidth  || document.body.clientWidth;
 			const ch = window.innerHeight || document.body.clientHeight;
 			
+			console.log("cw",cw,ch);
+			
 			let ew = Math.floor(10*cw / pixiAppWidth);
 			let scalew = Math.floor( ew / 2 ) * 0.2;
 			let eh = Math.floor(10*ch / pixiAppHeight);
@@ -51,7 +53,7 @@
 			    //let pixiMobAppScale  = Math.min( window.innerWidth/pixiAppWidth, window.innerHeight/pixiAppHeight*1.16);
 			   // let pixiMobAppScale  = window.innerWidth/pixiAppWidth*1.5;
 			   pixiApp.stage.x = windOfScreen;
-			   let pixiMobAppScale  = window.innerWidth/visibleWidth;
+			   let pixiMobAppScale  = window.innerWidth/pixiAppWidth;
 				
 			   // let pixiMobAppScale  = window.innerWidth/pixiAppWidth;
 			    //pixiApp.stage.scale.x = pixiMobAppScale;
