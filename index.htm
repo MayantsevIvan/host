@@ -22,11 +22,13 @@
 			let pixiAppWidth  = 760;
 			let pixiAppHeight = 610;
 			if ( isMobile ) pixiAppHeight = 1000;
-			let visibleWidth = 258;
+			let visibleWidth = 500;
 			
  			const cw = window.innerWidth  || document.body.clientWidth;
 			const ch = window.innerHeight || document.body.clientHeight;
 			
+			console.log("window.innerWidth",window.innerWidth);
+			console.log("document.body.clientWidth",document.body.clientWidth);
 			console.log("cw",cw,ch);
 			
 			let ew = Math.floor(10*cw / pixiAppWidth);
