@@ -35,8 +35,8 @@
 			let eh = Math.floor(10*ch / pixiAppHeight);
 			let scaleh = Math.floor( eh / 2 ) * 0.2;
 			let scale = Math.min(scalew,scaleh,3);
-			let windOfScreen = Math.floor( visibleWidth/2 - window.innerWidth/2  );
-			//let windOfScreen = Math.floor( window.innerWidth/2 - pixiAppWidth/2 );
+			//let windOfScreen = Math.floor( visibleWidth/2 - window.innerWidth/2  );
+			let windOfScreen = Math.floor( window.innerWidth/2 - pixiAppWidth/2 );
 			
 			const pixiAppScale  = Math.max(1.0,scale);
 		    const pixiApp = new PIXI.Application({
@@ -54,7 +54,8 @@
 			    //let pixiMobAppScale  = Math.min( window.innerWidth/pixiAppWidth, window.innerHeight/pixiAppHeight*1.16);
 			    // let pixiMobAppScale  = window.innerWidth/pixiAppWidth*1.5;
 			    pixiApp.stage.x = windOfScreen;
-			    let pixiMobAppScale  = window.innerWidth/visibleWidth;
+			   // let pixiMobAppScale  = window.innerWidth/visibleWidth;
+			    let pixiMobAppScale  = window.innerWidth/pixiAppWidth;
 				
 			    // let pixiMobAppScale  = window.innerWidth/pixiAppWidth;
 			    //pixiApp.stage.scale.x = pixiMobAppScale;
