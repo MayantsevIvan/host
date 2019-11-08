@@ -22,7 +22,7 @@
 			let pixiAppWidth  = 760;
 			let pixiAppHeight = 610;
 			if ( isMobile ) pixiAppHeight = 1000;
-			let visibleWidth = 500;
+			let visibleWidth = 600;
 			
  			const cw = window.innerWidth  || document.body.clientWidth;
 			const ch = window.innerHeight || document.body.clientHeight;
@@ -53,7 +53,7 @@
 			    //let pixiMobAppScale  = Math.min( window.innerWidth/pixiAppWidth, window.innerHeight/pixiAppHeight*1.16);
 			   // let pixiMobAppScale  = window.innerWidth/pixiAppWidth*1.5;
 			   pixiApp.stage.x = windOfScreen;
-			   let pixiMobAppScale  = window.innerWidth/pixiAppWidth;
+			   let pixiMobAppScale  = window.innerWidth/visibleWidth;
 				
 			   // let pixiMobAppScale  = window.innerWidth/pixiAppWidth;
 			    //pixiApp.stage.scale.x = pixiMobAppScale;
