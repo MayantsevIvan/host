@@ -121,16 +121,16 @@
 
 			if ( windGroup != null ) {
 	//			Handler.loadingStart();
-				if ( isMobile ) windGroup.y -= 45;
+//				if ( isMobile ) windGroup.y -= 45;
 				const rx = windGroup.x;
 				const ry = windGroup.y;
 				self.wind.BACK_RECT_NO_INTERACTIVE = Handler.showRect( windGroup, rx-Handler.contentWidth/2, ry-Handler.contentHeight, Handler.contentWidth, 2*Handler.contentHeight, '0x6E3232' );
 				self.wind.BACK_RECT_NO_INTERACTIVE.alpha = 0.3;
 				self.wind.BACK_RECT_NO_INTERACTIVE.interactive = true;
 				self.wind.BACK_RECT_NO_INTERACTIVE.toBack();
-				if ( isMobile ) {
-					self.wind.BACK_RECT_NO_INTERACTIVE.y += 45;
-				};
+//				if ( isMobile ) {
+//					self.wind.BACK_RECT_NO_INTERACTIVE.y += 45;
+//				};
 				//Handler.setWindScale( windGroup );
 				self.wind.main_Group_Of_The_Window = windGroup;
 				let oldy = windGroup.y;
