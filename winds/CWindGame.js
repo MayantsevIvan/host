@@ -207,7 +207,7 @@
 		let shGrSpriteX = 58;
 		let shGrSpriteY = 20;
 		
-		if ( isMobile ) shGrSpriteX = 60;
+		if ( isMobile ) shGrSpriteX = 40;
 		let shiftXgame = self._sprite.width/2  - shGrSpriteX;
 		let shiftYgame = self._sprite.height/2 - shGrSpriteY;
 //		Handler.gemsContainerGlobalX = self.mainGroup.x + Consts.coordsShiftX;
