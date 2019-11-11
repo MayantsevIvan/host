@@ -204,20 +204,11 @@
 		Handler.jlines.gemsContainer.x = Consts.coordsShiftX;
 		Handler.jlines.gemsContainer.y = Consts.coordsShiftY;
 		
-		let shGrSpriteX = 58;
-		let shGrSpriteY = 20;
+		let shiftXgame = self._sprite.width/2  - 58;
+		let shiftYgame = self._sprite.height/2 - 20;
 		
-		if ( isMobile ) {
-			shGrSpriteX = 78;
-			shGrSpriteY = 10;
-		}
-		
-		let shiftXgame = self._sprite.width/2 - shGrSpriteX;
-		let shiftYgame = self._sprite.height/2 - shGrSpriteY;
 //		Handler.gemsContainerGlobalX = self.mainGroup.x + Consts.coordsShiftX;
-//		Handler.gemsContainerGlobalY = self.mainGroup.y + Consts.coordsShiftY;//
-//		Handler.gemsContainerGlobalX = shiftXgame;
-//		Handler.gemsContainerGlobalY = shiftYgame;
+//		Handler.gemsContainerGlobalY = self.mainGroup.y + Consts.coordsShiftY;
 		Handler.gemsContainerGlobalX = self.mainGroup.x - shiftXgame;
 		Handler.gemsContainerGlobalY = isMobile ? self.mainGroup.y - shiftYgame : self.mainGroup.y - shiftYgame;
 		
