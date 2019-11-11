@@ -92,75 +92,54 @@
 	}
 
 	JLines.prototype.reCreateTable = function( lev ){
-		let lineWeight = [0,0,0,0,0,0,0,0];
+		let lineWeight = [];
+		for ( let i = 0; i < this.cx; i++ ) { 
+			lineWeight[i] = 0; 
+		}
 		let countStone = 0;
 		let countYaschik = 0;
 		let levelWithYaschik = false;
+		console.log(this.cx, this.cy);
 		
-		for ( let j=0; j < 8; j++ ) {
-			for ( let i=0; i < this.cx; i++ ) {
-				if ( lev[i+5][j] == Consts.COIN_COLOR ) {
-					lineWeight[i] = 100;
-				} else {
-					if ( lev[i+5][j] == Consts.IRON_BOX ) {
-						lineWeight[i] += 3;
-					} else {
-						if ( lev[i+5][j] == Consts.STONE_COLOR ) {
-							countStone ++;
-						if ( countStone % 3 == 0 && levelWithYaschik ) {
+		for ( let i=0; i < this.cx; i++ ) {
+			for ( let j=0; j < this.cy; j++ ) {
+				switch ( lev[i+5][j] ) {
+					case Consts.COIN_COLOR        : lineWeight[i] = 100; break;
+					case Consts.IRON_BOX          : lineWeight[i] += 3;  break;
+					case Consts.STONE_COLOR: 
+					    countStone ++;
+					    if ( countStone % 3 != 0 || !levelWithYaschik ) lineWeight[i] += 3;
+				    break;
+					case Consts.GHOST_BOX        : lineWeight[i] += 3; break;
+					case Consts.YASCHIK   : 
+					    countYaschik ++;
+					    if ( countYaschik % 3 != 0 ) lineWeight[i] += 1;
+					    levelWithYaschik = true;
+					break;
+					case Consts.GLASS_BOX       : lineWeight[i] += 3; break;
+					case Consts.GLASS_STONE_BOX : lineWeight[i] += 6; break;
+				}
 
-						} else {
-							lineWeight[i] += 3;
-						};
-
-						} else {
-							if ( lev[i+5][j] == Consts.GHOST_BOX ) {
-								lineWeight[i] += 3;
-							} else {
-								if ( lev[i+5][j] == Consts.YASCHIK ) {
-									countYaschik ++;
-									if ( countYaschik % 3 == 0) {
-
-									} else {
-										lineWeight[i] += 1;
-									};
-									levelWithYaschik = true;
-									//(this.gemsContainer.getChildByName('cn'+cv(i)+cv(j)) as CBox).boosterFrz = true;
-								} else {
-									if ( lev[i+5][j] == Consts.GLASS_BOX ) {
-										lineWeight[i] += 3;
-									}  else {
-										if ( lev[i+5][j] == Consts.GLASS_STONE_BOX ) {
-											lineWeight[i] += 6;
-										} else {
-
-										};
-									};
-								};
-							};
-						};
-					};
-				};
-			};
-		};
+			}
+		}
 
 		let numMinStroke = 0;
+		let currentSize = 200;
 		for( let i = 0; i < lineWeight.length; i++ ) {
-			if ( lineWeight[i] < lineWeight[i-1] && lineWeight[i] != lineWeight[numMinStroke] ) {
+			if ( currentSize > lineWeight[i] ) {
+				currentSize = lineWeight[i];
 				numMinStroke = i;
 			}
 		};
-		console.log(numMinStroke);
-		console.log(lineWeight);
-		this.cy -= 1;
+		this.cx -= 1;
 
 		let countDelGlass = 0;
 		let countDelGost = 0;
 		let countDelStoun = 0;
 		let countDelYaschiks = 0;
 
-		for ( let i=0; i < this.cx; i++ ) {
-			switch( lev[i+5][numMinStroke] ){
+		for ( let i=0; i < this.cy; i++ ) {
+			switch( lev[numMinStroke+5][i] ){
 				case Consts.GLASS_BOX:       countDelGlass += 1;                     break;
 				case Consts.GLASS_STONE_BOX: countDelStoun += 1; countDelGlass += 1; break;
 				case Consts.STONE_COLOR:     countDelStoun += 1;                     break;
@@ -174,9 +153,8 @@
 					"Кол-во стоунбоксов: " +countDelStoun+'\n',
 					"Кол-во ящиков: "     +countDelYaschiks+'\n'
 					);
-		for ( let i=0; i < this.cx; i++ ) {
-			lev[i+5].splice( numMinStroke, 1);
-		}
+
+		lev.splice( numMinStroke+5, 1 );
 	};
 
 	JLines.prototype.init = function ( lev ) {
@@ -185,7 +163,7 @@
 			EndLevelAnimator.animation = false;
 			this.cx = lev[0];
 			this.cy = lev[1];
-			if ( isMobile )this.reCreateTable( lev );
+			if ( isMobile && this.cx == 11 )this.reCreateTable( lev );
 			if ( this.cx > 9 ) {
 				Handler.coordsShiftX = Handler.coordsWidth/2;
 			} else {
@@ -433,6 +411,7 @@
 	//		this.taskPanel.refrashGems(6,0);//init glass in task box
 
 			Handler.windGameSprite.onEL( 'pointerup',   function( evt ) { self._onMouseUpGem(evt);   } );
+			Handler.windGameSprite.onEL( 'pointerout',  function( evt ) { self._onMouseUpGem(evt);   } );
 			self.gemsContainer    .onEL( "pointerdown", function( evt ) { self._onMouseDownGem(evt); } );
 			self.gemsContainer    .onEL( "pointermove", function( evt ) { self._onMouseMoveGem(evt); } );
 
@@ -557,7 +536,8 @@
 			let fj = Math.ceil( ty / Consts.coordsHeight );//vertical   number of cat on game field
 
 			let cbox = this.getBox( fi, fj );
-
+			if ( cbox == null ) return;
+			
 			let i = Handler.coordsXToIndex( cbox.x );
 			let j = Handler.coordsYToIndex( cbox.y );
 			if (cbox.color != Handler.gemObjectLine[0].color) 	return;//only same color
