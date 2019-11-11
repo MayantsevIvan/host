@@ -208,12 +208,12 @@
 		let shGrSpriteY = 20;
 		
 		if ( isMobile ) {
-			shGrSpriteX = 72;
-			shGrSpriteY = -10;
+			shGrSpriteX = 75;
+			shGrSpriteY = 0;
 		}
 		
-		let shiftXgame = -self._sprite.width/2 + shGrSpriteX;
-		let shiftYgame = -self._sprite.height/2 + shGrSpriteY;
+		let shiftXgame = self._sprite.width/2 - shGrSpriteX;
+		let shiftYgame = self._sprite.height/2 - shGrSpriteY;
 //		Handler.gemsContainerGlobalX = self.mainGroup.x + Consts.coordsShiftX;
 //		Handler.gemsContainerGlobalY = self.mainGroup.y + Consts.coordsShiftY;//
 		Handler.gemsContainerGlobalX = shiftXgame;
@@ -221,8 +221,8 @@
 //		Handler.gemsContainerGlobalX = self.mainGroup.x - shiftXgame;
 //		Handler.gemsContainerGlobalY = isMobile ? self.mainGroup.y - shiftYgame : self.mainGroup.y - shiftYgame;
 		
-		self._sprite.x = shiftXgame;
-		self._sprite.y = shiftYgame;
+		self._sprite.x -= shiftXgame;
+		self._sprite.y -= shiftYgame;
 
 		//Bonuses
 		if ( Handler.butBonuses )
