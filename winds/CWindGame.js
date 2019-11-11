@@ -208,8 +208,8 @@
 		let shGrSpriteY = 20;
 		
 		if ( isMobile ) {
-			shGrSpriteX = 78;
-			shGrSpriteY = 0;
+			shGrSpriteX = 72;
+			shGrSpriteY = -10;
 		}
 		
 		let shiftXgame = -self._sprite.width/2 + shGrSpriteX;
