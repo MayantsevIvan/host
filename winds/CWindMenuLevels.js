@@ -47,23 +47,23 @@
 		//относительно объекта menuLevelPoint
 		let xSmallPoint = [ 33, 38, 38, 38, 38, 38, 38, 38, 42,  -5, -38, -38, -35, -38, -36, -40, -38, -38, -40,  -2, 34, 37, 39,  42, 38,  40, 38, 38, 38,  -2, -32, -38, -40, -38, -38, -38, -38, -35, -32,  -3, 38,  35, 32, 38, 38,  35, 38, 30, 38, 38 ];
 		let ySmallPoint = [ -5, -5, -5, -5, -5, -5, -3, -8, -5, -60,   0,  -8,  -7,   2,   3,  -15, -3,   8, -25, -32, -8,  0, -2,  10,  0, -19, -8,  0,  4, -45, -15,  -5, -13,  -5,  -5,   5,   5,   5,  -5, -32, -8, -16,  2, -8, -6, -16,  0, 10, 26, -5 ];
-		if ( isMobile ) {
-			for( let i = 0; i < levelPointData.x.length; i++ ) {
-				if ( [42,31,33,35,44,45,46,47,48].indexOf(i) < 0 ) {
-				    levelPointData.y[i] -= i<10 ? 60 : 45;
-				}
-			}
-            levelPointData.y[42] -= 5; levelPointData.x[42] += 5; ySmallPoint[42] -= 5; 
-            levelPointData.y[35] -= 33;
-            levelPointData.y[33] -= 30;
-            levelPointData.y[31] -= 30;
-            levelPointData.y[44] -= 30;
-            levelPointData.y[45] -= 43; ySmallPoint[45] += 17; xSmallPoint[45] += 5;
-			levelPointData.y[46] += 3;
-			levelPointData.y[47] += 7; levelPointData.x[47] -= 7; 
-			levelPointData.y[48] -= 5; levelPointData.x[48] += 3; ySmallPoint[48] -= 10;
-			
-		}
+		//if ( isMobile ) {
+		//	for( let i = 0; i < levelPointData.x.length; i++ ) {
+		//		if ( [42,31,33,35,44,45,46,47,48].indexOf(i) < 0 ) {
+		//		    levelPointData.y[i] -= i<10 ? 60 : 45;
+		//		}
+		//	}
+        //    levelPointData.y[42] -= 5; levelPointData.x[42] += 5; ySmallPoint[42] -= 5; 
+        //    levelPointData.y[35] -= 33;
+        //    levelPointData.y[33] -= 30;
+        //    levelPointData.y[31] -= 30;
+        //    levelPointData.y[44] -= 30;
+        //    levelPointData.y[45] -= 43; ySmallPoint[45] += 17; xSmallPoint[45] += 5;
+		//	levelPointData.y[46] += 3;
+		//	levelPointData.y[47] += 7; levelPointData.x[47] -= 7; 
+		//	levelPointData.y[48] -= 5; levelPointData.x[48] += 3; ySmallPoint[48] -= 10;
+		//	
+		//}
 
 		for ( let i = self.maxLevel; i >= self.minNumLevel; --i ) {	
 			let withArrow = self.currentLevel == i;
@@ -88,7 +88,7 @@
 	CWindMenuLevels.showBakcgr = function( ) {
 		let self = this;
 		this.numBackgr = (self.numLocation-1)%32+1;
-		let yBackgr = isMobile ? -38 : 0;
+	//	let yBackgr = isMobile ? -38 : 0;
 		let nameBackgr = Consts.DIR_BACKGROUNDS + 'mBackgr'+this.numBackgr+'.png';
 		let backToBack = function( img ){
 			console.log('endLoadBackgr');
@@ -99,11 +99,11 @@
 		};
 
 		if ( self.backgr[this.numBackgr] != 0 ) {
-			self.imgBackgr = Handler.showImgRect( self.mainGroup,  nameBackgr, 0, yBackgr, 760, 610 );
+			self.imgBackgr = Handler.showImgRect( self.mainGroup,  nameBackgr, 0, 0, 760, 610 );
 			Handler.toBack(self.imgBackgr);
  		} else {
 			//console.log('start load', Consts.DIR_BACKGROUNDS + 'mBackgr'+this.numBackgr+'.png');
-			Handler.loadAndDrawRemoteImage( self.mainGroup, null, nameBackgr, 0, yBackgr, 760, 610, backToBack );
+			Handler.loadAndDrawRemoteImage( self.mainGroup, null, nameBackgr, 0, 0, 760, 610, backToBack );
 			//Handler.showImgRectAfterLoaded( self.mainGroup,  nameBackgr, 0, 0, 760, 610, backToBack )
 		};
 	}
