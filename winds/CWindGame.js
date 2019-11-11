@@ -106,7 +106,8 @@
 					     [0,0,0,0,0,0,0,0,0],
 					     [0,0,0,0,0,0,0,0,0]
 					 ];*/
-		Handler.windGameSprite = self._sprite;
+		//Handler.windGameSprite = self._sprite;
+		Handler.windGameSprite = self.mainGroup;
 		Handler.lights = Handler.newGroup();
 		Handler.level  = Handler.newGroup();		
 		Handler.jlines = new JLines( self.mainGroup );
@@ -203,13 +204,16 @@
 		Handler.jlines.gemsContainer.x = Consts.coordsShiftX;
 		Handler.jlines.gemsContainer.y = Consts.coordsShiftY;
 		
-		let shiftXgame = self._sprite.width/2  - 58;
-		let shiftYgame = self._sprite.height/2 - 20;
+		let shGrspriteX = 58;
+		let shGrspriteY = 20;
 		
+		if ( isMobile ) shGrspriteX = 29;
+		let shiftXgame = self._sprite.width/2  - shGrspriteX;
+		let shiftYgame = self._sprite.height/2 - shGrspriteY;
 //		Handler.gemsContainerGlobalX = self.mainGroup.x + Consts.coordsShiftX;
 //		Handler.gemsContainerGlobalY = self.mainGroup.y + Consts.coordsShiftY;
 		Handler.gemsContainerGlobalX = self.mainGroup.x - shiftXgame;
-		Handler.gemsContainerGlobalY = isMobile ? self.mainGroup.y - shiftYgame - 38 : self.mainGroup.y - shiftYgame;
+		Handler.gemsContainerGlobalY = isMobile ? self.mainGroup.y - shiftYgame : self.mainGroup.y - shiftYgame;
 		
 		self._sprite.x -= shiftXgame;
 		self._sprite.y -= shiftYgame;
@@ -227,9 +231,7 @@
 		
 		let showSmallAc = function() {
 			Handler.acSmallInv = Actions.show( Actions.WIND_SMALL_ACT_INV, self.mainGroup );
-			console.log(" self.mainGroup",  self.mainGroup);
 		}
-		console.log(" self.mainGroup",  self.mainGroup);
 		Handler.timerOpenAcInv = setTimeout( showSmallAc, 7000 );
 		self.mainGroup.interactive = true;
 	};
