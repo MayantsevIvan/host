@@ -30,7 +30,7 @@
 			console.log("window.innerWidth",window.innerWidth);
 			console.log("document.body.clientWidth",document.body.clientWidth);
 			console.log("cw",cw,ch);
-			console.log("ver 1.0");
+			console.log("ver 1.2");
 			
 			let ew = Math.floor(10*cw / pixiAppWidth);
 			let scalew = Math.floor( ew / 2 ) * 0.2;
@@ -38,8 +38,8 @@
 			let scaleh = Math.floor( eh / 2 ) * 0.2;
 			let scale = Math.min(scalew,scaleh,3);
 			//let windOfScreen = Math.floor( window.innerWidth/2 - visibleWidth/2 );
-			let windOfScreen = Math.floor( window.innerWidth/2 - pixiAppWidth/2 );
 			
+			//console.log(windOfScreen);
 			const pixiAppScale  = Math.max(1.0,scale);
 		    const pixiApp = new PIXI.Application({
 		        width  : pixiAppWidth,//  * pixiAppScale,
@@ -53,23 +53,31 @@
 			
 			let canvas = document.querySelector('canvas');
 			if ( isMobile ) {
-			    //let pixiMobAppScale  = Math.min( window.innerWidth/pixiAppWidth, window.innerHeight/pixiAppHeight*1.16);
-			   // let pixiMobAppScale  = window.innerWidth/pixiAppWidth*1.5;
-			   pixiApp.stage.x = windOfScreen;
-			   let pixiMobAppScale  = window.innerWidth/visibleWidth;
+				pixiAppScale = window.innerWidth/visibleWidth/2;
+			    pixiApp.renderer.resize( pixiAppWidth  * pixiAppScale, pixiAppHeight * pixiAppScale );
+			    pixiApp.stage.scale.x = pixiAppScale;
+			    pixiApp.stage.scale.y = pixiApp.stage.scale.x;
+				let windOfScreen = Math.floor( window.innerWidth - visibleWidth );
+				pixiApp.stage.x = windOfScreen;
 				
-			   // let pixiMobAppScale  = window.innerWidth/pixiAppWidth;
+				//let pixiMobAppScale  = Math.min( window.innerWidth/pixiAppWidth, window.innerHeight/pixiAppHeight*1.16);
+			    // let pixiMobAppScale  = window.innerWidth/pixiAppWidth*1.5;
+			    // 
+			    //let pixiMobAppScale  = window.innerWidth/pixiAppWidth;
+				//console.log(pixiMobAppScale);
+				
+			    // let pixiMobAppScale  = window.innerWidth/pixiAppWidth;
 			    //pixiApp.stage.scale.x = pixiMobAppScale;
 			    //pixiApp.stage.scale.y = pixiMobAppScale;
-		        if ( canvas ) {
+		        /*if ( canvas ) {
 					//canvas.width  = pixiAppWidth * pixiMobAppScale;//pixiApp.stage.width;
 					//canvas.height = pixiAppHeight * pixiMobAppScale;
           
-					//canvas.style.width  = pixiAppWidth  * pixiMobAppScale + "px";
-		            //canvas.style.height = pixiAppHeight * pixiMobAppScale + "px";
+					canvas.style.width  = pixiAppWidth  * pixiMobAppScale + "px";
+		            canvas.style.height = pixiAppHeight * pixiMobAppScale + "px";
 					
 					
-		        }
+		        }*/
 			} else {
 			    pixiApp.stage.scale.x = pixiAppScale;
 			    pixiApp.stage.scale.y = pixiAppScale;
