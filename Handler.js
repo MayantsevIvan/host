@@ -14,10 +14,12 @@
 	};
 	
 	Object.defineProperty( Handler, "contentCenterX", {
-		get:function(){ return pixiApp.screen.width / 2; }
+		//get:function(){ return pixiApp.screen.width / 2; }
+		get:function(){ return pixiAppWidth / 2; }
 	});
 	Object.defineProperty( Handler, "contentCenterY", {
-		get:function(){ return pixiApp.screen.height / 2; }
+		//get:function(){ return pixiApp.screen.height / 2; }
+		get:function(){ return pixiAppHeight / 2; }
 	});
 	Handler.coordsShiftX = -270;
 	Handler.coordsShiftY = -280;
@@ -30,10 +32,10 @@
 		get:function(){ return 4; }
 	});
 	Object.defineProperty( Handler, "contentWidth", {
-		get:function(){ return pixiApp.screen.width; }
+		get:function(){ return pixiAppWidth; }
 	});
 	Object.defineProperty( Handler, "contentHeight", {
-		get:function(){ return pixiApp.screen.height; }
+		get:function(){ return pixiAppHeight; }
 	});
 
 //	Handler.levelNum = parseInt(Head.levelName.substr(1));
