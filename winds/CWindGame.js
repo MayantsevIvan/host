@@ -204,17 +204,24 @@
 		Handler.jlines.gemsContainer.x = Consts.coordsShiftX;
 		Handler.jlines.gemsContainer.y = Consts.coordsShiftY;
 		
-		console.log("VERSION 1.6");
+		console.log("VERSION 1.7");
 		let shiftXgame = isMobile ? self._sprite.width/2 - 32 : self._sprite.width/2  - 58;
-		let shiftYgame = isMobile ? self._sprite.width/2 - 40 : self._sprite.height/2 - 20;
+		let shiftYgame = isMobile ? self._sprite.height/2 - 35 : self._sprite.height/2 - 20;
 		
-//		Handler.gemsContainerGlobalX = self.mainGroup.x + Consts.coordsShiftX;
-//		Handler.gemsContainerGlobalY = self.mainGroup.y + Consts.coordsShiftY;
+		console.log("windOfScreen",windOfScreen);
+		//Handler.gemsContainerGlobalX = -self._sprite.width/2 + 58;
+		//Handler.gemsContainerGlobalY = -self._sprite.height/2 + 20;
 		Handler.gemsContainerGlobalX = self.mainGroup.x - shiftXgame - windOfScreen - Consts.coordsWidth/2;
-		Handler.gemsContainerGlobalY = self.mainGroup.y - shiftYgame + windOfScreen + Consts.coordsWidth/2;
+		Handler.gemsContainerGlobalY = self.mainGroup.y - shiftYgame;
 		
-		self._sprite.x -= shiftXgame;
-		self._sprite.y -= shiftYgame;
+		self._sprite.x =  -shiftXgame;
+		self._sprite.y =  -shiftYgame;
+
+		console.log("self._sprite",self._sprite.x,self._sprite.y);
+		console.log("Handler.gemsContainerGlobalX",Handler.gemsContainerGlobalX);
+		console.log("Handler.gemsContainerGlobalY",Handler.gemsContainerGlobalY);
+//		console.log("self._sprite",self._sprite.x,self._sprite.y);
+//		console.log("self._sprite",self._sprite.x,self._sprite.y);
 
 		//Bonuses
 		if ( Handler.butBonuses )
