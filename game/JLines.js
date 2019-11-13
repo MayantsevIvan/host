@@ -450,8 +450,10 @@
 			if (this._countSteps <= 0) return;
 			if (this._animation2) return;
 			
-			let gx = Math.floor( evt.data.global.x / pixiApp.stage.scale.x );
+			let gx = Math.floor( evt.data.global.x / pixiApp.stage.scale.x ) + windOfScreen + 32;
+			//let gx = Math.floor( evt.data.global.x / pixiApp.stage.scale.x );
 			let gy = Math.floor( evt.data.global.y / pixiApp.stage.scale.y );
+			//let gy = Math.floor( evt.data.global.y / pixiApp.stage.scale.y );
 			console.log(pixiApp.stage.scale.x);
 			let tx = gx - Handler.gemsContainerGlobalX - Math.floor(Consts.coordsWidth/2);
 			let ty = gy - Handler.gemsContainerGlobalY - Math.floor(Consts.coordsHeight/2);
@@ -529,7 +531,7 @@
 			if (this._countSteps <= 0) return;
 			if (this._animation2) return;
 			//		if ( BonusMenu.isBonusAnimationPlay ) { return;	};
-			let gx = Math.floor( evt.data.global.x / pixiApp.stage.scale.x );
+			let gx = Math.floor( evt.data.global.x / pixiApp.stage.scale.x ) + windOfScreen + 32;
 			let gy = Math.floor( evt.data.global.y / pixiApp.stage.scale.y );
 			let tx = gx - Handler.gemsContainerGlobalX - Math.floor(Consts.coordsWidth/2);
 			let ty = gy - Handler.gemsContainerGlobalY - Math.floor(Consts.coordsHeight/2);
