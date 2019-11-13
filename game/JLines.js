@@ -163,7 +163,7 @@
 			EndLevelAnimator.animation = false;
 			this.cx = lev[0];
 			this.cy = lev[1];
-			if ( isMobile && this.cx == 11 )this.reCreateTable( lev );
+			if ( isMobile && this.cx == 11 ) this.reCreateTable( lev );
 			if ( this.cx > 9 ) {
 				Handler.coordsShiftX = Handler.coordsWidth/2;
 			} else {
@@ -449,15 +449,15 @@
 			let self = this;
 			if (this._countSteps <= 0) return;
 			if (this._animation2) return;
-			console.log(evt.data.global.x,evt.data.global.y);
-			console.log(this.gemsContainer.x,this.gemsContainer.y);
+//			console.log(evt.data.global.x,evt.data.global.y);
+//			console.log(this.gemsContainer.x,this.gemsContainer.y);
 			
 			
 			let gx = Math.floor( evt.data.global.x / pixiApp.stage.scale.x );
 			//let gx = Math.floor( evt.data.global.x / pixiApp.stage.scale.x );
 			let gy = Math.floor( evt.data.global.y / pixiApp.stage.scale.y );
 			//let gy = Math.floor( evt.data.global.y / pixiApp.stage.scale.y );
-			console.log(pixiApp.stage.scale.x);
+//			console.log(pixiApp.stage.scale.x);
 			let tx = gx - Handler.gemsContainerGlobalX - Math.floor(Consts.coordsWidth/2);
 			let ty = gy - Handler.gemsContainerGlobalY - Math.floor(Consts.coordsHeight/2);
 			
@@ -465,10 +465,10 @@
 	//		let kittenSize = 60*Handler.scaleOfGemsContainer;
 			let fi = Math.ceil( tx / Consts.coordsWidth );//gorizontal number of cat on game field
 			let fj = Math.ceil( ty / Consts.coordsHeight );//vertical   number of cat on game field
-			console.log( gx, gy );
-			console.log( tx, ty );
-			console.log( fi, fj );
-			return;
+//			console.log( 'gx, gy ', gx, gy );
+//			console.log( 'tx, ty ', tx, ty );
+//			console.log( 'fi, fj ', fi, fj );
+
 			let cbox = this.getBox(fi,fj);
 			if ( cbox.color == Consts.STONE_COLOR ) return;
 			if ( cbox.color == Consts.IRON_BOX ) return;
