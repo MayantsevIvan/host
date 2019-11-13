@@ -211,7 +211,7 @@
 //		Handler.gemsContainerGlobalX = self.mainGroup.x + Consts.coordsShiftX;
 //		Handler.gemsContainerGlobalY = self.mainGroup.y + Consts.coordsShiftY;
 		Handler.gemsContainerGlobalX = self.mainGroup.x - shiftXgame - windOfScreen - Consts.coordsWidth/2;
-		Handler.gemsContainerGlobalY = self.mainGroup.y - shiftYgame - Consts.coordsWidth/2;
+		Handler.gemsContainerGlobalY = self.mainGroup.y - shiftYgame + Consts.coordsWidth/2;
 		
 		self._sprite.x -= shiftXgame;
 		self._sprite.y -= shiftYgame;
