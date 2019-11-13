@@ -413,7 +413,7 @@
 		//--------------------Embeds-------------------
 		//------------------------------------------------------------
 		let urlEnbeds = ImageLoader.baseUrl + "/embeds/";
-		let urlGems = ImageLoader.baseUrl+'/gemsAnim/'
+		let urlGems = ImageLoader.baseUrl+'/gemsAnimMobile/'
 		for( let i = 1; i <= 5; i++ ) {
 			for (let j = 1; j<=16;j++) {
 				pixiApp.loader.add( 'gem'+i+'_a'+j+'.png',    urlGems+'gem'+i+'_a'+j+'.png' );
