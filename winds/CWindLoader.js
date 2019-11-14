@@ -26,19 +26,19 @@
 		this.mainGroup = Handler.newGroup();
 		this.mainGroup.x = Handler.contentCenterX;
 		this.mainGroup.y = Handler.contentCenterY;
-		console.log(Handler.contentCenterX);
-		console.log(Handler.contentCenterY);
-		
+	
 		let showContent = function() {
-		    Handler.showImgRect(self.mainGroup, Consts.DIR_WIND_LOADER+"backgrWindGame.png",0,0,760,610);
-		    self.scaled = Handler.showImgRect( self.mainGroup, Consts.DIR_WIND_LOADER+"lineLoad.png",18,59,230,15);
+		    let backgr = Handler.showImgRect(self.mainGroup, Consts.DIR_WIND_LOADER+"backgrWindGame.png",0,0,760,610);
+			let bakcgrScaleMobile = pixiApp.screen.height / backgr.height;
+			backgr.scale.x = bakcgrScaleMobile;
+			backgr.scale.y = bakcgrScaleMobile;
+
+			self.scaled = Handler.showImgRect( self.mainGroup, Consts.DIR_WIND_LOADER+"lineLoad.png",18,59,230,15);
 		    self.scaled.mask = Handler.showRect( self.mainGroup, -212,59,230,16 );
 		    Handler.showImgRect(self.mainGroup, Consts.DIR_WIND_LOADER+"lineLoadRamk.png",18,59,237,23);
 		    Handler.showRoundedRect( self.mainGroup, -170, 100, 368, 118, '0xFFFF99', 5, 1, '0xA5744E' );
 		    Handler.showImgRect( self.mainGroup,Consts.DIR_WIND_LOADER+"lableLoad.png", 14, 159, 313,63);
 		    self.countLoad = 0;
-		    
-		    
 		    ImageLoader.loadGo(params.onAssetsLoaded);
 		    pixiApp.loader.onProgress.add(function(e) { self.countLoad = pixiApp.loader.progress });
 		};

@@ -38,6 +38,10 @@
 //		Head.menuLevel.hide();
 //
 		let backgr = Handler.showImgRect(this.mainGroup, Consts.DIR_WIND_LOADER+"backgrWindGame.png",0,0,760,610);
+		let bakcgrScaleMobile = pixiApp.screen.height / backgr.height;
+		backgr.scale.x = bakcgrScaleMobile;
+		backgr.scale.y = bakcgrScaleMobile;
+		
 		let numLevel = parseInt(Head.levelName.substr(1));
 		Handler.levelNum = numLevel;
 		Handler.showImgRect(self.mainGroup, "panelLevelWindGame.png",-320,-288,103,23);
