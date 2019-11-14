@@ -163,7 +163,7 @@
 			EndLevelAnimator.animation = false;
 			this.cx = lev[0];
 			this.cy = lev[1];
-			if ( isMobile && this.cx == 11 ) this.reCreateTable( lev );
+			if ( isMobile && this.cx == 11 ) this.reCreateTable( lev ); this.reCreateTable( lev );
 			if ( this.cx > 9 ) {
 				Handler.coordsShiftX = Handler.coordsWidth/2;
 			} else {

@@ -38,7 +38,8 @@
 		return gem;
 	};
 	
-	Embeds.lineP = function(){ return Embeds.body('lightGemBon', 60, 60); };
+	let sideLineP = isMobile ? 30 : 60;
+	Embeds.lineP = function(){ return Embeds.body('lightGemBon', sideLineP, sideLineP); };
 	
 	Embeds.font0 = function(){ return Embeds.body('owf0'); };	
 	Embeds.font1 = function(){ return Embeds.body('owf1'); };
