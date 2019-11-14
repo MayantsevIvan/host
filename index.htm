@@ -47,18 +47,18 @@
 		    });
 		    document.body.appendChild(pixiApp.view);
 			
-			const graphics = new PIXI.Graphics();
-            graphics.beginFill(0xFF3300);
-            graphics.drawRect(0, 0, pixiAppWidth, pixiAppHeight);
-            graphics.endFill();
-            pixiApp.stage.addChild( graphics );
-
-			const graphics1 = new PIXI.Graphics();
-            graphics1.beginFill(0x33FF00);
-            graphics1.drawRect(0, 0, visibleWidth, pixiAppHeight);
-            graphics1.endFill();
-			graphics1.x = (pixiAppWidth - visibleWidth)/2
-            pixiApp.stage.addChild( graphics1 );
+			//const graphics = new PIXI.Graphics();
+            //graphics.beginFill(0xFF3300);
+            //graphics.drawRect(0, 0, pixiAppWidth, pixiAppHeight);
+            //graphics.endFill();
+            //pixiApp.stage.addChild( graphics );
+			//
+			//const graphics1 = new PIXI.Graphics();
+            //graphics1.beginFill(0x33FF00);
+            //graphics1.drawRect(0, 0, visibleWidth, pixiAppHeight);
+            //graphics1.endFill();
+			//graphics1.x = (pixiAppWidth - visibleWidth)/2
+            //pixiApp.stage.addChild( graphics1 );
 
 			let windOfScreen = 0;
 			let canvas = document.querySelector('canvas');
