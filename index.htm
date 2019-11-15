@@ -21,7 +21,7 @@
 			
 			let pixiAppWidth  = 760;
 			let pixiAppHeight = 610;
-			if ( isMobile ) pixiAppHeight = 1000;
+			//if ( isMobile ) pixiAppHeight = window.innerHeight;
 			let visibleWidth = 450;
 			
  			const cw = window.innerWidth  || document.body.clientWidth;
@@ -47,18 +47,18 @@
 		    });
 		    document.body.appendChild(pixiApp.view);
 			
-			//const graphics = new PIXI.Graphics();
-            //graphics.beginFill(0xFF3300);
-            //graphics.drawRect(0, 0, pixiAppWidth, pixiAppHeight);
-            //graphics.endFill();
-            //pixiApp.stage.addChild( graphics );
-			//
-			//const graphics1 = new PIXI.Graphics();
-            //graphics1.beginFill(0x33FF00);
-            //graphics1.drawRect(0, 0, visibleWidth, pixiAppHeight);
-            //graphics1.endFill();
-			//graphics1.x = (pixiAppWidth - visibleWidth)/2
-            //pixiApp.stage.addChild( graphics1 );
+			const graphics = new PIXI.Graphics();
+            graphics.beginFill(0xFF3300);
+            graphics.drawRect(0, 0, pixiAppWidth, pixiAppHeight);
+            graphics.endFill();
+            pixiApp.stage.addChild( graphics );
+			
+			const graphics1 = new PIXI.Graphics();
+            graphics1.beginFill(0x33FF00);
+            graphics1.drawRect(0, 0, visibleWidth, pixiAppHeight);
+            graphics1.endFill();
+			graphics1.x = (pixiAppWidth - visibleWidth)/2;
+            pixiApp.stage.addChild( graphics1 );
 
 			let windOfScreen = 0;
 			let canvas = document.querySelector('canvas');
@@ -66,9 +66,10 @@
 				//let pixiAppScaleMobile = window.innerWidth/pixiAppWidth;
 				//let pixiAppScaleMobile = cw/pixiAppWidth;
 				let pixiAppScaleMobile = cw/visibleWidth;
-
+				console.log("graphics1",graphics1.height);
 			    //pixiApp.renderer.resize( pixiAppWidth  * pixiAppScaleMobile, pixiAppHeight * pixiAppScaleMobile );
-			    pixiApp.renderer.resize( pixiAppWidth  * pixiAppScaleMobile, ch );
+			   // pixiApp.renderer.resize( pixiAppWidth  * pixiAppScaleMobile, ch );
+			    pixiApp.renderer.resize( cw, ch );
 			    
 				pixiApp.stage.scale.x = pixiAppScaleMobile;
 			    pixiApp.stage.scale.y = pixiApp.stage.scale.x;
@@ -110,6 +111,7 @@
 			console.log( "pixiApp.screen.height", pixiApp.screen.height );
 			
 		</script>
+		
 		<script src="ImageLoader.js"></script>
 		<script src="Head.js"></script>
 		<script src="CWinds.js"></script>	
@@ -167,5 +169,6 @@
 		<script src="Config.js"></script>
 		<script src="SocialClient.js"></script>
 		<script src="main.js"></script>
+		
 	</body>
 </html>
