@@ -107,18 +107,13 @@
 	Consts.TOP_ALL         = 2;
 	Consts.TOP_MONEYS      = 3;
 	Consts.numLives        = 3;
-	Consts.coordsWidth   = 50;
-	Consts.coordsHeight  = 50;
-	Consts.gemsWidth  = 60;
-	Consts.gemsHeight  = 60;
+	Consts.coordsWidth    = 50;
+	Consts.coordsHeight   = 50;
+	Consts.gemsWidth      = 60;
+	Consts.gemsHeight     = 60;
 	Consts.coordsShiftX = 0;
-//	Consts.coordsShiftX = pixiApp.width/2;
-	if ( isMobile ) { 
-		Consts.coordsShiftY = -38;
-	} else {
-		Consts.coordsShiftY = 0;
-	};
-//	Consts.coordsShiftY = pixiApp.height/2;
+	Consts.coordsShiftY = 0;
+
 	Consts.TIME_WINDOW_MOVE = 150;
 	Consts.WITHOUT_PARENT = 0;
 	
