@@ -221,6 +221,7 @@
 		
 		self._sprite.x =  -shiftXgame;
 		self._sprite.y =  -shiftYgame;
+		console.log("-shiftYgame",-shiftYgame);
 		if ( isMobile ) {
 		    let shiftOfScreen = ( pixiAppWidth - visibleWidth ) / 2;
 		    let shiftOfScreenY = shScreenY - 250;
