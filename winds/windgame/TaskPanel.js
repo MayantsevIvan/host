@@ -6,6 +6,7 @@
 	TaskPanel.init = function( parentGroup ){
 		try {
 			//нужно написать от уровня в хете gameObjType;
+			let self = this;
 			this.parent = parentGroup;
 			this.group = Handler.newGroup( this.parent );
 			this.numLevel = Math.floor( Head.levelName.substr(1) );
@@ -13,7 +14,7 @@
 			this.countTasks = [];
 			this.countVisibleTask = 0;
 			this.currentCountTask = [null,0,0,0,0,0,0,0,0,0];
-			//заполнение массива зааний.
+			//заполнение массива заданий.
 			for( let i = 9; i >= 1; --i ){
 				if ( this.gt['g'+i] ) {
 					this.countTasks[i] = this.gt['g'+i];
@@ -23,38 +24,61 @@
 				};
 			};
 			
-			this.backgrTasks = Handler.showImg( this.group, "panelTasks"+this.countVisibleTask+"WindGame.png",-322,-75);
+			let xBackgrTasks = isMobile ?      0 : -322;
+			let yBackgrTasks = isMobile ?   -376 :  -75;
+			console.log(this.countVisibleTask);
+			this.backgrTasks = Handler.showImg( this.group, "panelTasks"+this.countVisibleTask+"WindGame.png",xBackgrTasks,yBackgrTasks);
 			this.backgrTasks.width = this.backgrTasks.width/2;
 			this.backgrTasks.height = this.backgrTasks.height/2;
 			this.backgrTasks.anchor.set ( 0.5, 0 );
+			if (isMobile) this.backgrTasks.angle = 90; this.backgrTasks.anchor.set ( 0, 0.5 );
+			
 			this.groupsTasks = [];
-			let yObjTask = -47;
-			if ( this.countVisibleTask > 5 ) yObjTask = -50;
+			let shYGrTask = -47;
+			let xObjTask = isMobile ? 17 : 28;
+			let xGalka = isMobile ? -10 : 0;
+			if ( this.countVisibleTask > 5 ) shYGrTask = -50;
 			for( let i = 1; i < this.countTasks.length; i++ ){
 				if( this.countTasks[i] != 0 ) {
 					this.groupsTasks[i] = Handler.newGroup( this.group );
-					Handler.showImgRect( this.groupsTasks[i], "taskBackgrWindGame.png", -325, yObjTask,65,36);
+					Handler.showImgRect( this.groupsTasks[i], "taskBackgrWindGame.png", 0, 0,65,36);
 					let k = i == 9 ? 5 : 0;
-					let imgObjTask = Handler.showImg(this.groupsTasks[i], "objTask"+ (i-k) +"WindGame.png", -295, yObjTask-1);
+					let imgObjTask = Handler.showImg(this.groupsTasks[i], "objTask"+ (i-k) +"WindGame.png", xObjTask, -1);
 					if ( i == 9 ){
 						TweenMax.to( imgObjTask, 0.7, { alpha: 0.5, yoyo: true, repeat: -1, ease: Power0.easeNone });
 					};
 					imgObjTask.width = imgObjTask.width/2;
 					imgObjTask.height = imgObjTask.height/2;
 					//кол-во заданий
-					
-					this.groupsTasks[i].sl = Handler.showImgRect( this.groupsTasks[i], 'bySl.png', -332, yObjTask-2, 8, 16 );
-					this.groupsTasks[i].taskNum = Handler.showNumber( "by", this.groupsTasks[i].sl.x+7, yObjTask-2, this.countTasks[i], 13, 16, this.groupsTasks[i], '', 5 );
-					this.showNumber( i, 0 );
-					
-					this.groupsTasks[i].galka = Handler.showImgRect( this.groupsTasks[i], 'markerWindGame.png', -330, yObjTask-2, 39, 31 );
+					if (isMobile){
+						this.showNumberMobile( i, this.countTasks[i] );
+					} else {
+						this.groupsTasks[i].sl = Handler.showImgRect( this.groupsTasks[i], 'bySl.png', -11, -2, 8, 16 );
+						this.groupsTasks[i].taskNum = Handler.showNumber( "by", this.groupsTasks[i].sl.x+7, -2, this.countTasks[i], 13, 16, this.groupsTasks[i], '', 5 );
+						this.showNumber( i, 0 );
+					}
+					this.groupsTasks[i].galka = Handler.showImgRect( this.groupsTasks[i], 'markerWindGame.png', xGalka, -2, 39, 31 );
 					this.groupsTasks[i].galka.isVisible = false; 
-					
-					yObjTask += this.groupsTasks[i].height+3;
+	
+					this.groupsTasks[i].x = -325;
+					this.groupsTasks[i].y =  shYGrTask;
+					shYGrTask += + this.groupsTasks[i].height+3; 
 				} else {
 					this.groupsTasks[i] = null;
 				};            
 			};
+			if ( isMobile ) {
+				let xMobileTask = [ -105,-105, -30, -30,  45,  45, 120, 120, 195, 195];
+				let yMobileTask = [ -337,-296,-337,-296,-337,-296,-337,-296,-337,-296];
+				let k = 0;
+				for ( let i = 0; i <= 9; i++ ) {
+					if (this.groupsTasks[i] != null) {
+						self.groupsTasks[i].x = xMobileTask[k];
+						self.groupsTasks[i].y = yMobileTask[k];
+						k++;
+					}
+				}
+			}
 			return this;
 		} catch ( ex ) {
 			 Handler.onErrorCatched(ex);
@@ -72,18 +96,50 @@
 		return this;
 	};
 	
+	TaskPanel.showNumberMobile = function( numTask, count ) {
+		if ( this.groupsTasks[numTask].currentCountTask ) {
+			this.groupsTasks[numTask].currentCountTask.text = count;
+		} else {
+			let style = { parent: this.groupsTasks[numTask], 
+						  x:-15, 
+						  y:-15, 
+						  text: count };
+			style.fontSize = 22;
+			style.color = 0x5c2101;
+			style.stroke = 0xeffeab;
+			style.strokeThickness = 4;
+			this.groupsTasks[numTask].currentCountTask = Handler.newText(style);  //JSJump????
+			this.groupsTasks[numTask].currentCountTask.anchor.set(0.5,0);
+		};
+		return this;
+	};
+	
 	TaskPanel.refrashGems = function( num, count=1 ) {
 		try {
-			if ( !num && num < 0 || num > 9 ) return;
-			if ( parseInt(this.gt['g'+num]) == 0 ) return;		
-			if ( this.countTasks[num] != 0) {
-				this.currentCountTask[num] += count;//1
-				this.showNumber( num, this.currentCountTask[num] );
-				if ( this.currentCountTask[num] >= this.countTasks[num] ) {
-					this.groupsTasks[ num ].sl.isVisible = false;
-					this.groupsTasks[num].currentCountTask.isVisible = false;
-					this.groupsTasks[num].taskNum.isVisible = false;
-					this.groupsTasks[num].galka.isVisible = true;
+			if ( this.groupsTasks[num] ) {
+				if ( !num && num < 0 || num > 9 ) return;
+				if ( parseInt(this.gt['g'+num]) == 0 ) return;		
+				//1
+				if ( isMobile ) {
+					if ( this.countTasks[num] >= 0 ) {
+						this.countTasks[num] -= count;
+						this.showNumberMobile( num, this.countTasks[num] );
+						if ( this.countTasks[num] == 0 ) {
+							this.groupsTasks[num].currentCountTask.visible = false;
+							this.groupsTasks[num].galka.isVisible = true;
+						}
+					};
+				} else {
+					this.currentCountTask[num] += count;
+					if ( this.countTasks[num] != 0) {
+							this.showNumber( num, this.currentCountTask[num] );
+						if ( this.currentCountTask[num] >= this.countTasks[num] ) {
+							this.groupsTasks[ num ].sl.isVisible = false;
+							this.groupsTasks[num].currentCountTask.isVisible = false;
+							this.groupsTasks[num].taskNum.isVisible = false;
+							this.groupsTasks[num].galka.isVisible = true;
+						};
+					};
 				};
 			};
 		} catch ( ex ) {
