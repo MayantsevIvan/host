@@ -453,6 +453,7 @@
 			console.log("gemsContainer",this.gemsContainer.x,this.gemsContainer.y);
 			
 			console.log("shScreenY",shScreenY);
+			console.log("gemsContainer x,y",this.gemsContainer.x,this.gemsContainer.y);
 			let gx = Math.floor( evt.data.global.x / pixiApp.stage.scale.x );
 			//let gx = Math.floor( evt.data.global.x / pixiApp.stage.scale.x );
 			let gy = Math.floor( evt.data.global.y / pixiApp.stage.scale.y );
