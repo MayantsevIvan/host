@@ -120,17 +120,14 @@
 		Handler.fmask  = Handler.newGroup();
 		Handler.lmask  = Handler.newGroup();
 		
-		Handler.jlines.stepsPanel  = StepsPanel. init( self.mainGroup, params.lev[2] );
+		Handler.jlines.stepsPanel  = StepsPanel.init( self.mainGroup, params.lev[2] ); 
 		Handler.jlines.pointsPanel = PointsPanel.init( self.mainGroup, params.lev[3] );
-		
 		Handler.jlines.init(params.lev);//(1) eto vishe ftorogo
 		Handler.jlines.taskPanel = TaskPanel.init( self.mainGroup );
 		
 		Handler.lights.x = Consts.coordsShiftX;
 		Handler.lights.y = Consts.coordsShiftY;
-		
-		
-		
+
 		let cx = Consts.coordsShiftX;
 		let cy = Consts.coordsShiftY;
 		let cw = Consts.coordsWidth;
@@ -208,9 +205,13 @@
 		Handler.jlines.gemsContainer.x = Consts.coordsShiftX;
 		Handler.jlines.gemsContainer.y = Consts.coordsShiftY;
 		
-		let shiftXgame = isMobile ? self._sprite.width/2 - 32 : self._sprite.width/2  - 58;
-		let shiftYgame = isMobile ? self._sprite.height/2 - 0 : self._sprite.height/2 - 20;
 		
+		let shiftXgame = isMobile ? self._sprite.width/2 - 32 : self._sprite.width/2  - 58;
+		let shiftYgame = isMobile ? self._sprite.height/2 - 40 : self._sprite.height/2 - 20;
+		
+		
+		console.log(  );
+		//Сдвиг решает!!!!!!!!!!!!!!!!!!!!!!!
 //		console.log("windOfScreen",windOfScreen);
 		//Handler.gemsContainerGlobalX = -self._sprite.width/2 + 58;
 		//Handler.gemsContainerGlobalY = -self._sprite.height/2 + 20;
@@ -222,8 +223,9 @@
 		self._sprite.y =  -shiftYgame;
 		if ( isMobile ) {
 		    let shiftOfScreen = ( pixiAppWidth - visibleWidth ) / 2;
-            Handler.gemsContainerGlobalX = self.mainGroup.x + self._sprite.x + Handler.jlines.gemsContainer.x-shiftOfScreen;
-            Handler.gemsContainerGlobalY = self.mainGroup.y + self._sprite.y + Handler.jlines.gemsContainer.y;
+		    let shiftOfScreenY = shScreenY - 250;
+            Handler.gemsContainerGlobalX = self.mainGroup.x + self._sprite.x + Handler.jlines.gemsContainer.x - shiftOfScreen;
+            Handler.gemsContainerGlobalY = self.mainGroup.y + self._sprite.y + Math.floor(shScreenY / pixiAppScaleMobile);
         }
 //		console.log("self.mainGroup.x",self.mainGroup.x);
 //		console.log("self._sprite.x",self._sprite.x);
@@ -237,11 +239,14 @@
 		if ( Handler.butBonuses )
             for( const b of Handler.butBonuses )
                 b.destroy();
-
+		let i = 0;
         Handler.butBonuses = [];
+		
         for ( let i = 0; i<3; i++ ) {
+			let xButBon = isMobile ? 20+i*80 : 342; 
+			let yButBon = isMobile ?         327 :-172+i*72; 
 			let bname = Consts.BONUSES_NAMES[i];
-		    Handler.butBonuses[i] = new ButBonus(self.mainGroup, 342, -172+i*72, bname );
+		    Handler.butBonuses[i] = new ButBonus(self.mainGroup, xButBon, yButBon, bname );
 		};
 		
 		let showSmallAc = function() {
