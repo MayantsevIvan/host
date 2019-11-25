@@ -6,14 +6,17 @@
 	TaskBeforeLevel.show = function( parent, numLevel ){
 		this.group = Handler.newGroup( parent );
 		this.gt = GameTypes.info[numLevel];
-
 		let numberTask = [];
 		let countTasksGems = [];
 		if ( this.gt['sc'] ) { numberTask[0] = this.gt['sc']*100 };
 		
 		for( let i = 1; i <= 9; i++ ){
 			if ( i > 0 && i <= 5 ){
-				countTasksGems[i-1] = this.gt['g'+i] == null ? 0 : this.gt['g'+i];
+				if ( isMobile) {
+					countTasksGems[i-1] = Handler.mobileTask[i] == (null) ? 0 : Handler.mobileTask[i];
+				} else {
+					countTasksGems[i-1] = this.gt['g'+i] == ( null ) ? 0 : this.gt['g'+i];
+				};
 				numberTask[1] = countTasksGems;
 			};
 			if ( this.gt['g'+i] != 0 && i == 9 ) numberTask[1][5] = this.gt['g'+i] == null ? 0 : this.gt['g'+i];
