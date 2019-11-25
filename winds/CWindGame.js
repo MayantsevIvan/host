@@ -81,13 +81,13 @@
 				Sounds.Stop();
 //				this._butMelody.gotoAndStop(2);
 				Sounds.msOn = false;
-				butMute1.isVisible = true;
-				butMute2.isVisible = false;
+				butMute1.isVisible = false;
+				butMute2.isVisible = true;
 			} else {
 				Sounds.Play();
 //				this._butMelody.gotoAndStop(1);
-				butMute1.isVisible = false;
-				butMute2.isVisible = true;
+				butMute1.isVisible = true;
+				butMute2.isVisible = false;
 				Sounds.msOn = true;
 			};
 		};
@@ -209,12 +209,6 @@
 		let shiftXgame = isMobile ? self._sprite.width/2 - 32 : self._sprite.width/2  - 58;
 		let shiftYgame = isMobile ? self._sprite.height/2 - 40 : self._sprite.height/2 - 20;
 		
-		
-		console.log(  );
-		//Сдвиг решает!!!!!!!!!!!!!!!!!!!!!!!
-//		console.log("windOfScreen",windOfScreen);
-		//Handler.gemsContainerGlobalX = -self._sprite.width/2 + 58;
-		//Handler.gemsContainerGlobalY = -self._sprite.height/2 + 20;
 		Handler.gemsContainerGlobalX = self.mainGroup.x - shiftXgame;
 		Handler.gemsContainerGlobalY = self.mainGroup.y - shiftYgame;
 		
