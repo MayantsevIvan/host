@@ -122,22 +122,27 @@
 
 			}
 		}
-
-		let numMinStroke = 0;
-		let currentSize = 200;
-		for( let i = 0; i < lineWeight.length; i++ ) {
-			if ( currentSize > lineWeight[i] ) {
-				currentSize = lineWeight[i];
-				numMinStroke = i;
-			}
+		
+		for ( let i = 0; i < this.cx-9; i++) {
+			let numMinStroke = 0;
+			let currentSize = 200;
+			for( let i = 0; i < lineWeight.length; i++ ) {
+				if ( currentSize > lineWeight[i] ) {
+					currentSize = lineWeight[i];
+					numMinStroke = i;
+				}
+			};
+			this.cx -= 1;
+			lev.splice( numMinStroke+5, 1 );
+			lineWeight.splice( numMinStroke, 1 );
 		};
-		this.cx -= 1;
-
+		
+		/*
 		let countDelGlass = 0;
 		let countDelGost = 0;
 		let countDelStoun = 0;
 		let countDelYaschiks = 0;
-
+		
 		for ( let i=0; i < this.cy; i++ ) {
 			switch( lev[numMinStroke+5][i] ){
 				case Consts.GLASS_BOX:       countDelGlass += 1;                     break;
@@ -153,8 +158,7 @@
 					"Кол-во стоунбоксов: " +countDelStoun+'\n',
 					"Кол-во ящиков: "     +countDelYaschiks+'\n'
 					);
-
-		lev.splice( numMinStroke+5, 1 );
+		*/
 	};
 
 	JLines.prototype.init = function ( lev ) {
@@ -163,7 +167,8 @@
 			EndLevelAnimator.animation = false;
 			this.cx = lev[0];
 			this.cy = lev[1];
-			if ( isMobile && this.cx == 11 ) this.reCreateTable( lev ); this.reCreateTable( lev );
+			console.log('lev',lev);
+			if ( isMobile && this.cx >= 10 ) this.reCreateTable( lev );
 			if ( this.cx > 9 ) {
 				Handler.coordsShiftX = Handler.coordsWidth/2;
 			} else {
@@ -450,8 +455,6 @@
 			if (this._countSteps <= 0) return;
 			if (this._animation2) return;
 			console.log("evt",evt.data.global.x,evt.data.global.y);
-			console.log("gemsContainer",this.gemsContainer.x,this.gemsContainer.y);
-			
 			console.log("shScreenY",shScreenY);
 			console.log("gemsContainer x,y",this.gemsContainer.x,this.gemsContainer.y);
 			let gx = Math.floor( evt.data.global.x / pixiApp.stage.scale.x );
@@ -1469,11 +1472,11 @@
 		let ghostBoxNeedRemove = GameTypes.info[numLevel].g9 > 0;
 
 
-		let gem1NeedRemove = GameTypes.info[numLevel].g1 > 0;
-		let gem2NeedRemove = GameTypes.info[numLevel].g2 > 0;
-		let gem3NeedRemove = GameTypes.info[numLevel].g3 > 0;
-		let gem4NeedRemove = GameTypes.info[numLevel].g4 > 0;
-		let gem5NeedRemove = GameTypes.info[numLevel].g5 > 0;
+		let gem1NeedRemove = isMobile ? Handler.mobileTask[1] > 0 : GameTypes.info[numLevel].g1 > 0;
+		let gem2NeedRemove = isMobile ? Handler.mobileTask[2] > 0 : GameTypes.info[numLevel].g2 > 0;
+		let gem3NeedRemove = isMobile ? Handler.mobileTask[3] > 0 : GameTypes.info[numLevel].g3 > 0;
+		let gem4NeedRemove = isMobile ? Handler.mobileTask[4] > 0 : GameTypes.info[numLevel].g4 > 0;
+		let gem5NeedRemove = isMobile ? Handler.mobileTask[5] > 0 : GameTypes.info[numLevel].g5 > 0;
 
 		this.gameFinished = 1;
 
