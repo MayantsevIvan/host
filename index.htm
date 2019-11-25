@@ -27,8 +27,8 @@
 			let pixiAppScaleMobile = 0;
  			const cw = window.innerWidth  || document.body.clientWidth;
 			const ch = window.innerHeight || document.body.clientHeight;
-			console.log("cw ch",cw,ch);
-			alert("ver 1.11");
+			//console.log("cw ch",cw,ch);
+			console.log("VER 1.12");
 			//let pixiAppScaleMobile = window.innerWidth/pixiAppWidth;
 			
 		
@@ -62,9 +62,11 @@
             graphics1.endFill();
 			graphics1.x = (pixiAppWidth - visibleWidth)/2;
             pixiApp.stage.addChild( graphics1 );
-		
+			
+			
 			let shScreenX = 0;
 			let shScreenY = 0;
+			let plansh = false;
 			let canvas = document.querySelector('canvas');
 			if ( isMobile ) {
 				//let pixiAppScaleMobile = window.innerWidth/pixiAppWidth;
@@ -74,21 +76,21 @@
 				//console.log("graphics1",graphics1.height);
 			    //pixiApp.renderer.resize( pixiAppWidth  * pixiAppScaleMobile, pixiAppHeight * pixiAppScaleMobile );
 			    pixiApp.renderer.resize( pixiAppWidth  * pixiAppScaleMobile, ch );
-	
+		
 				pixiApp.stage.scale.x = pixiAppScaleMobile;
 			    pixiApp.stage.scale.y = pixiApp.stage.scale.x;
 				if ( cw / visibleWidth > ch / visibleHeight ) {
-					visibleWidth = cw * visibleHeight / ch;
+					visibleWidth = Math.floor( cw * visibleHeight / ch );
+					plansh = true;
 				};
 				shScreenX = Math.floor(( pixiAppWidth - visibleWidth ) * pixiAppScaleMobile/2);
-				console.log('visibleWidth',visibleWidth);
-				console.log('pixiApp.width',(cw - visibleWidth)/2);
+				//console.log('visibleWidth',visibleWidth);
+				//console.log('pixiApp.width',(cw - visibleWidth)/2);
 				pixiApp.stage.x = -shScreenX;
 				shScreenY = Math.floor((ch - pixiApp.stage.height)/2);
 				pixiApp.stage.y = shScreenY;
-				
-				console.log('pixiAppScaleMobile',pixiAppScaleMobile);
-				console.log(pixiApp.stage.height);
+				//console.log('pixiAppScaleMobile',pixiAppScaleMobile);
+				//console.log(pixiApp.stage.height);
 				
 				//let pixiMobAppScale  = Math.min( window.innerWidth/pixiAppWidth, window.innerHeight/pixiAppHeight*1.16);
 			    // let pixiMobAppScale  = window.innerWidth/pixiAppWidth*1.5;
@@ -118,8 +120,8 @@
 					canvas.style.height = canvas.height + "px";
 		        }
             }
-			console.log( "pixiApp.screen.width", pixiApp.screen.width );
-			console.log( "pixiApp.screen.height", pixiApp.screen.height );
+			//console.log( "pixiApp.screen.width", pixiApp.screen.width );
+			//console.log( "pixiApp.screen.height", pixiApp.screen.height );
 			
 		</script>
 		
