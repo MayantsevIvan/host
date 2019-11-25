@@ -11,7 +11,7 @@
 	CWindEndLevel.showPoints = function() {
 		this.minCP += 1;
 		if ( this.imgP ) this.imgP.destroy();
-		this.imgP = Handler.showText(this.mWind, this.minCP, 0, 60, this.textParams);
+		this.imgP = Handler.showText(this.mWind, this.minCP, this.xNumPoints, this.yNumPoints, this.textParams);
 		if ( this.minCP == this.points ) clearInterval( this.timerPoints );
 	};
 	
@@ -47,28 +47,34 @@
 		TweenMax.to( luch1, 10, { angle:  360, ease: Power0.easeNone, repeat: -1 } );
 		TweenMax.to( luch2, 10, { angle: -360, ease: Power0.easeNone, repeat: -1 } );
 		
-		Handler.showImgRect(self.mWind,"lableWinEndLevel.png",0,-175,348,90);
+		let lableWin = Handler.showImgRect(self.mWind,"lableWinEndLevel.png",0,-175,348,90);
 		
 		let countStar = params.stars;
 		let xStartStar = -133;
 		let showStar = true;
-		
+		let shYBackgrStar = isMobile ? -57 : -45;// isMobile shElems
 		for( let i = 1; i <= 3; i++ ) { 	
 			let numStar = i;
 			if ( i == 3 ) { numStar = 1; };
-			let backgrStar = Handler.showImg(self.mWind,"backgrStarRt"+numStar+".png",xStartStar,-45);
+			let backgrStar = Handler.showImg(self.mWind,"backgrStarRt"+numStar+".png",xStartStar,shYBackgrStar);
 			backgrStar.width = backgrStar.width/2;
 			backgrStar.height = backgrStar.height/2;
 			if ( i <= countStar ) {
-				let starRt = Handler.showImg(self.mWind,'starRt'+numStar+'.png',xStartStar,-45);
+				let starRt = Handler.showImg(self.mWind,'starRt'+numStar+'.png',xStartStar,shYBackgrStar);
 				starRt.width  = starRt.width/2;
 				starRt.height = starRt.height/2;
 			}
 			xStartStar = xStartStar + 130;
 		}
 		
-		Handler.showImgRect(self.mWind,"fieldPoint.png",-15,60,157,46);
-		Handler.showImgRect(self.mWind,"fieldIgnots.png",-15,110,158,34);
+		let xFieldPoint = isMobile ? -95 : -15;
+		let yFieldPoint = isMobile ?  60 : 60;
+		
+		let xFieldIgnots = isMobile ? 90 : -15;
+		let yFieldIgnots = isMobile ?  60 : 110;
+		
+		Handler.showImgRect(self.mWind,"fieldPoint.png",xFieldPoint,yFieldPoint,157,46);
+		Handler.showImgRect(self.mWind,"fieldIgnots.png",xFieldIgnots,yFieldIgnots,158,34);
 		
 		this.points = params.points;
 		this.minCP = 0;
@@ -86,12 +92,20 @@
 			lineJoin: 'round',
 			strokeThickness: 3,
 		};
+		
+		self.xNumPoints = isMobile ? -83 : 0;
+		self.yNumPoints = isMobile ?  60 : 60;
 		this.timerPoints = setInterval( function(){ self.showPoints() }, 10 );
 		
-		let imgI = Handler.showText(self.mWind,this.ingnots, 0, 110, this.textParams);
-		//imgI.x = Math.floor( imgI.x - imgI.width/2 );
-		Handler.showImgRect(self.mWind,"lablePointsEndLevel.png",120,60,83,18);
-		Handler.showImgRect(self.mWind,"lableIgnots.png",130,110,107,18);
+		let xNumIgnots = isMobile ?  110 : 0;
+		let yNumIgnots = isMobile ?   59 : 110;
+		let imgI = Handler.showText(self.mWind,1/*this.ingnots*/, xNumIgnots, yNumIgnots, this.textParams);
+		imgI.x = Math.floor( imgI.x - imgI.width/2 );
+		
+		if ( !isMobile ) {
+			Handler.showImgRect(self.mWind,"lablePointsEndLevel.png",120,60,83,18);
+			Handler.showImgRect(self.mWind,"lableIgnots.png",130,110,107,18);
+		}
 		
 		let backgrButContinue = Handler.showImgRect(self.mWind,"backgrButContinueEndLevel.png",0,210,243,70);
 		
@@ -132,32 +146,51 @@
 		checkBox.on('pointerdown', onCheckBox );
 		let marker = Handler.showImgRect(self.mWind,"marker.png",-35,255,30,24);
 		let lableTellFr = Handler.showImgRect(self.mWind,"lableTellFr.png",75,262,195,16);
-		
-		Handler.showImgRect(self.pWind,"backgrEndLevelWindP.png",0,0,383,447);
-		Handler.showImgRect(self.pWind,"lableGetPrize.png",108,155,163,98);
-		
-		let butShowPuzzle = Handler.showImgRect(self.pWind,"butShowPuzzle.png",108,60,140,59);
+		if ( isMobile ) { 
 
-		Handler.showImgRect(self.pWind,"backgrPuzzleElem.png",108,-27,102,102);
-		Handler.showImgRect(self.pWind,"lablePuzzleNewElem.png",108,-147,136,125);
-		self.pWind.x = 182;
-		self.mWind.toFront();
+		} else {
+			Handler.showImgRect(self.pWind,"backgrEndLevelWindP.png",0,0,383,447);
+			Handler.showImgRect(self.pWind,"lableGetPrize.png",108,155,163,98);
+		
+			let butShowPuzzle = Handler.showImgRect(self.pWind,"butShowPuzzle.png",108,60,140,59);
+
+			Handler.showImgRect(self.pWind,"backgrPuzzleElem.png",108,-27,102,102);
+			Handler.showImgRect(self.pWind,"lablePuzzleNewElem.png",108,-147,136,125);
+			self.pWind.x = 182;
+			self.mWind.toFront();
+		}; 
 		//------------------------//
 		//-------WindReting-------//
 		//------------------------//
 		
+		let showRating = function( evt ) {
+			if ( !Handler.visibleRt ) {
+				self.windRating = CWindSmallRating.showWindRating();
+				self.windRating.x = self.windRating.width/2 + visibleWidth/2;
+				self.windRating.y += 4;
+				let shRtX = self.windRating.x - 200;
+				Handler.toFront( self.windRating );
+				self.mainGroup.addChild(self.windRating);
+				TweenMax.to( self.windRating, 2, { x: shRtX } );
+			};
+		};
+		
 		if ( isMobile ) { 
-			self.mWind.y += 28;
-			self.pWind.y += 28;
-			butContinue.y       -= 40;
-			backgrButContinue.y -= 40;
-			checkBox.y          -= 35;
-			marker.y            -= 35;
-			lableTellFr.y       -= 35;
+			lableWin.y -= 12;
+			luch1.y -= 12;
+			luch2.y -= 12;
+			backgrButContinue.y -= 80;
+			butContinue.y -= 80;
+			let butShowRating = Handler.showImgRect(self.mWind,"butPlay.png",-100,210,242,65);
+			butShowRating.onEL("pointertap",showRating);
+			
+		} else {
+			self.windReting = CWindSmallRating.showWindRating();
+			self.mainGroup.addChild(self.windReting);
+			TweenMax.to( self.windReting, 2, { x:-250 } );
 		}
-		self.windReting = CWindSmallRating.showWindRating();
-		self.mainGroup.addChild(self.windReting);
-		TweenMax.to( self.windReting, 2, { x:-250 } );
+		
+		
 		return self.mainGroup;
 	}
 	

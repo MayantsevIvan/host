@@ -67,6 +67,7 @@
 				butBuy.onEL("pointerup", pointerUpButBuy);
 				yLine += line.height+2;
 			}
+			self.mainGroup.scale.set(0.68,0.68);
 		}
 		if ( Handler.windsWithLoadedImages[ Winds.WIND_BUY_COINS ] == null ) {
 			Handler.windsWithLoadedImages[ Winds.WIND_BUY_COINS ] = 1;

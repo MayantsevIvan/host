@@ -96,11 +96,12 @@
 			self.imgBackgr = img;
 			Handler.toBack(img);
 			//if ( self.loadingGr ) self.loadingGr.removeSelf();
-			let bakcgrScaleMobile = pixiApp.screen.height * 0.7 / img.height;
+			let bakcgrScaleMobile = pixiApp.screen.height / img.height;
 			
 			img.scale.x = bakcgrScaleMobile;
 			img.scale.y = bakcgrScaleMobile;
-			
+			//img.width *= 0.5;
+			//img.height *= 0.5;
 			/*const graphics1 = new PIXI.Graphics();
             graphics1.beginFill(0x0000AA);
             graphics1.drawRect(0, 0, 760, 610);
@@ -114,20 +115,21 @@
 			graphics1.y -= graphics1.height/2;*/
 			//console.log( "graphics1.width", graphics1.width );
 			//console.log( "graphics1.height", graphics1.height );	
+			console.log( "bakcgrScaleMobile", bakcgrScaleMobile );	
 			console.log( "pixiApp.screen.width", pixiApp.screen.width );
+			console.log( "img.width",             img.width );
+			console.log( "img.height",            img.height );	
 			console.log( "pixiApp.screen.height", pixiApp.screen.height );	
 			console.log( "pixiApp.stage.width", pixiApp.stage.width );
-			console.log( "pixiApp.stage.height", pixiApp.stage.height );	
-			console.log( "pixiApp.stage.height", pixiApp.stage.height );	
-			console.log( "pixiApp.stage.height", pixiApp.stage.height );	
+			console.log( "pixiApp.stage.height", pixiApp.stage.height );		
 		};
 
 		if ( self.backgr[this.numBackgr] != 0 ) {
 			self.imgBackgr = Handler.showImgRect( self.mainGroup,  nameBackgr, 0, 0, 760, 610 );
 			Handler.toBack(self.imgBackgr);
-			/*let bakcgrScaleMobile = pixiApp.screen.height / img.width;
-			img.scale.x = bakcgrScaleMobile;
-			img.scale.y = bakcgrScaleMobile;*/
+			let bakcgrScaleMobile = pixiApp.screen.height / self.imgBackgr.width;
+			self.imgBackgr.scale.x = bakcgrScaleMobile;
+			self.imgBackgr.scale.y = bakcgrScaleMobile;
  		} else {
 			//console.log('start load', Consts.DIR_BACKGROUNDS + 'mBackgr'+this.numBackgr+'.png');
 			Handler.loadAndDrawRemoteImage( self.mainGroup, null, nameBackgr, 0, 0, 760, 610, backToBack );
@@ -195,7 +197,8 @@
 		}
 		
 		let yAr = isMobile ? -80 : -35;
-		let arrowLeft = Handler.showImgRect(self.mainGroup, "arrowLeft.png",-370,yAr,16,52);
+		let xArLeft = isMobile ? 50 : -370;
+		let arrowLeft = Handler.showImgRect(self.mainGroup, "arrowLeft.png",xArLeft,yAr,16,52);
 		arrowLeft.interactive = true;
 		arrowLeft.buttonMode = true;
 		arrowLeft.on("pointerdown", onArrowLeft);
@@ -203,6 +206,11 @@
 		arrowRight.interactive = true;
 		arrowRight.buttonMode = true;
 		arrowRight.on("pointerdown", onArrowRight);
+		
+		let moveMenuLevel = function ( evt ) {
+			//console.log(evt);
+		};
+		if (isMobile) self.mainGroup.onEL('pointermove',moveMenuLevel);
 	}
 	
 	CWindMenuLevels.newObject = function(){
