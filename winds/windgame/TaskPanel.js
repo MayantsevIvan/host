@@ -7,6 +7,7 @@
 		try {
 			//нужно написать от уровня в хете gameObjType;
 			let self = this;
+			this.numLevel
 			this.parent = parentGroup;
 			this.group = Handler.newGroup( this.parent );
 			this.numLevel = Math.floor( Head.levelName.substr(1) );
@@ -16,7 +17,14 @@
 			this.currentCountTask = [null,0,0,0,0,0,0,0,0,0];
 			//заполнение массива заданий.
 			for( let i = 9; i >= 1; --i ){
-				if ( this.gt['g'+i] ) {
+				if ( isMobile && i <= 5 && i >= 1 ){
+					if ( Handler.mobileTask[i] ) {
+						this.countTasks[i] = Handler.mobileTask[i];
+						this.countVisibleTask++;
+					}  else {
+						this.countTasks[i] = 0;
+					};
+				} else if ( this.gt['g'+i] ) {
 					this.countTasks[i] = this.gt['g'+i];
 					this.countVisibleTask++;
 				} else {
@@ -24,19 +32,20 @@
 				};
 			};
 			
-			let xBackgrTasks = isMobile ?      0 : -322;
+			console.log('this.countTasks',this.countTasks);
+			let xBackgrTasks = isMobile ?   -200 : -322;
 			let yBackgrTasks = isMobile ?   -376 :  -75;
-			console.log(this.countVisibleTask);
+			
 			this.backgrTasks = Handler.showImg( this.group, "panelTasks"+this.countVisibleTask+"WindGame.png",xBackgrTasks,yBackgrTasks);
 			this.backgrTasks.width = this.backgrTasks.width/2;
 			this.backgrTasks.height = this.backgrTasks.height/2;
 			this.backgrTasks.anchor.set ( 0.5, 0 );
-			if (isMobile) this.backgrTasks.angle = 90; this.backgrTasks.anchor.set ( 0, 0.5 );
+			if (isMobile) { this.backgrTasks.angle = 90; this.backgrTasks.anchor.set ( 0, 1 ) };
 			
 			this.groupsTasks = [];
 			let shYGrTask = -47;
 			let xObjTask = isMobile ? 17 : 28;
-			let xGalka = isMobile ? -10 : 0;
+			let xGalka = isMobile ? -10 : -7;
 			if ( this.countVisibleTask > 5 ) shYGrTask = -50;
 			for( let i = 1; i < this.countTasks.length; i++ ){
 				if( this.countTasks[i] != 0 ) {
@@ -68,8 +77,8 @@
 				};            
 			};
 			if ( isMobile ) {
-				let xMobileTask = [ -105,-105, -30, -30,  45,  45, 120, 120, 195, 195];
-				let yMobileTask = [ -337,-296,-337,-296,-337,-296,-337,-296,-337,-296];
+				let xMobileTask = [ -156,-156, -81, -81, -6, -6, 120];
+				let yMobileTask = [ -337,-296,-337,-296,-337,-296,-337];
 				let k = 0;
 				for ( let i = 0; i <= 9; i++ ) {
 					if (this.groupsTasks[i] != null) {
@@ -79,6 +88,7 @@
 					}
 				}
 			}
+			console.log('groupsTasks',this.groupsTasks);
 			return this;
 		} catch ( ex ) {
 			 Handler.onErrorCatched(ex);
@@ -121,7 +131,7 @@
 				if ( parseInt(this.gt['g'+num]) == 0 ) return;		
 				//1
 				if ( isMobile ) {
-					if ( this.countTasks[num] >= 0 ) {
+					if ( this.countTasks[num] > 0 ) {
 						this.countTasks[num] -= count;
 						this.showNumberMobile( num, this.countTasks[num] );
 						if ( this.countTasks[num] == 0 ) {

@@ -9,13 +9,9 @@
 		this.countSteps = countSteps;
  		this.back = Handler.showImgRect( this.group, "panelStepsWindGame.png", -315,-112,116,52 ); 
 		
-		this.group.x =  -315;
-		this.group.y =  -112;
-		
-		if ( isMobile ){
-			this.group.x =  190;
-			this.group.y =  437;
-		}
+		this.group.x = isMobile ? 190 : -315;
+		this.group.y = isMobile ? 437 : -112;
+
 		
 		
         this.showNumber();

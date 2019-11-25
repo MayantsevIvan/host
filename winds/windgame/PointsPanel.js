@@ -30,41 +30,42 @@
 		this.maxPoints	    = Math.floor( pointsFor1Star*1.4 );
 		
 	    this.group = Handler.newGroup( parentGroup );
- 		this.back = Handler.showImgRect( this.group, "panelPointWindGame.png", -320, -205, 103, 123 );
+		this.group.x = isMobile ?  150 : -320;
+		this.group.y = isMobile ? -334 : -205;
+ 		this.back = Handler.showImgRect( this.group, "panelPointWindGame.png", 0, 0, 103, 123 );
 		
-		this.scaled = Handler.showImgRect( this.group, "linePointWindGame.png", -357, -205, 19, 112 ); 
-		this.scaled.mask = Handler.showRect( this.group, -357, -94, 20, 112 );
+		this.scaled = Handler.showImgRect( this.group, "linePointWindGame.png", -37, 0, 19, 112 ); 
+		this.scaled.mask = Handler.showRect( this.group, -36, 112, 21, 112 );
 
-		this.star3 = Handler.showImgRect( this.group, "starPointWindGame.png", -335, -250, 23, 23 );
-		this.star2 = Handler.showImgRect( this.group, "starPointWindGame.png", -335, -230, 23, 23 );
-		this.star1 = Handler.showImgRect( this.group, "starPointWindGame.png", -335, -210, 23, 23 );
+		this.star3 = Handler.showImgRect( this.group, "starPointWindGame.png", -15, -46, 23, 23 );
+		this.star2 = Handler.showImgRect( this.group, "starPointWindGame.png", -15, -27, 23, 23 );
+		this.star1 = Handler.showImgRect( this.group, "starPointWindGame.png", -15, -6, 23, 23 );
 		
 		let textnumPointStarParams1 = {
 			fontWeight: 'bold',
 			fontSize: 14,
 			parent: this.group,
 			text : "- "+Math.floor(pointsFor1Star*1.4),
-			x : -318,
-			y : -260
+			x : 0,
+			y : -55
 		};
 		let textnumPointStarParams2 = {
 			fontWeight: 'bold',
 			fontSize: 14,
 			parent: this.group,
 			text : "- "+Math.floor(pointsFor1Star*1.2),
-			x : -318,
-			y : -240
+			x : 0,
+			y : -36
 		};
 		let textnumPointStarParams3 = {
 			fontWeight: 'bold',
 			fontSize: 14,
 			parent: this.group,
 			text : "- "+pointsFor1Star,
-			x : -318,
-			y : -220
+			x : 0,
+			y : -15
 		};
-		
-		
+
 		Handler.newText( textnumPointStarParams1 );
 		Handler.newText( textnumPointStarParams2 );
 		Handler.newText( textnumPointStarParams3 );
