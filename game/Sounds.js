@@ -7,7 +7,7 @@
 	Sounds.baseURL = 'sounds/';
 	Sounds.msOn = true;
 	
-	Sounds.playBody = function( key, fname ) {
+	Sounds.playBody = function( key, fname, loop ) {
         let self = this;
 		if ( this.soundsCache[key] ) {
 			this.soundsCache[key].play();
@@ -21,14 +21,15 @@
 	            	    self.soundsCache[key] = sound;
                         sound.play();
 					}
-                }
+                },
+				loop: loop
 			});
 
 		};
 	}
 
 	Sounds.Play = function() {
-		this.playBody( 'happyday', 'happyday.mp3' );
+		this.playBody( 'happyday', 'happyday.mp3', true );
 		Sounds.msOn = true;
 	};//Play
 	
