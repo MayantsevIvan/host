@@ -4,7 +4,7 @@
 		let self = this;
 		this.params = fparams;
 
-		Handler.head = Handler.newGroup( Handler.head );
+		//Handler.head = Handler.newGroup(  );
 		this._timerString = '';
 		this.maxEnergy = 6;
 		this.energyTimerCount    = 1200;
@@ -22,7 +22,7 @@
 
 		//(_sprite.getChildByName('hidedBut') as Sprite).addEventListener( MouseEvent.CLICK, _showUID );
         this.group = Handler.head;//Handler.newGroup();
-        this.group.translate(Handler.contentCenterX,Handler.contentCenterY); 
+        this.group.translate(Handler.contentCenterX, Handler.contentCenterY); 
         
 //   как пример     this.timerBack = Handler.showImgRect( this.group, Consts.DIR_HEAD+"fonTimer.png", 4,96,123,38 );         
         this.timerBack = Handler.showImgRect( this.group, "backgrTimer.png", -285,-260,100,33 );         
@@ -65,13 +65,13 @@
 				Sounds.Stop();
 //				this._butMelody.gotoAndStop(2);
 				Sounds.msOn = false;
-				butMute1.isVisible = true;
-				butMute2.isVisible = false;
+				butMute1.isVisible = false;
+				butMute2.isVisible = true;
 			} else {
 				Sounds.Play();
 //				this._butMelody.gotoAndStop(1);
-				butMute1.isVisible = false;
-				butMute2.isVisible = true;
+				butMute1.isVisible = true;
+				butMute2.isVisible = false;
 				Sounds.msOn = true;
 			};
 		};
