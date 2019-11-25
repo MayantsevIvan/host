@@ -1,7 +1,7 @@
 	
 	ImageLoader = {};
 	
-	ImageLoader.baseUrl = "imagesTiny";
+	ImageLoader.baseUrl = isMobile ? "imagesTinyHalf" : "imagesTiny";
 	ImageLoader.loadAssets = function( onAssetsLoaded, listOfImages ) {
         let self = this;
 		
@@ -413,17 +413,17 @@
 		//--------------------Embeds-------------------
 		//------------------------------------------------------------
 		let urlEnbeds = ImageLoader.baseUrl + "/embeds/";
-		let urlGems = ImageLoader.baseUrl+'/gemsAnimMobile/'
+		let urlGems = isMobile ? '/gemsAnimMobile/' : '/gemsAnim/';
 		for( let i = 1; i <= 5; i++ ) {
 			for (let j = 1; j<=16;j++) {
-				pixiApp.loader.add( 'gem'+i+'_a'+j+'.png',    urlGems+'gem'+i+'_a'+j+'.png' );
+				pixiApp.loader.add( 'gem'+i+'_a'+j+'.png', ImageLoader.baseUrl + urlGems+'gem'+i+'_a'+j+'.png' );
 			};
 		};
-		pixiApp.loader.add( 'gem1.png',       urlGems+'gem1.png' );
-		pixiApp.loader.add( 'gem2.png',       urlGems+'gem2.png' );
-		pixiApp.loader.add( 'gem3.png',       urlGems+'gem3.png' );
-		pixiApp.loader.add( 'gem4.png',       urlGems+'gem4.png' );
-		pixiApp.loader.add( 'gem5.png',       urlGems+'gem5.png' );
+		pixiApp.loader.add( 'gem1.png',       ImageLoader.baseUrl + urlGems+'gem1.png' );
+		pixiApp.loader.add( 'gem2.png',       ImageLoader.baseUrl + urlGems+'gem2.png' );
+		pixiApp.loader.add( 'gem3.png',       ImageLoader.baseUrl + urlGems+'gem3.png' );
+		pixiApp.loader.add( 'gem4.png',       ImageLoader.baseUrl + urlGems+'gem4.png' );
+		pixiApp.loader.add( 'gem5.png',       ImageLoader.baseUrl + urlGems+'gem5.png' );
 		pixiApp.loader.add( 'glassBox.png',   urlEnbeds+'glassBox.png' );
 		pixiApp.loader.add( 'stone0.png',     urlEnbeds+'stone0.png' );
 		pixiApp.loader.add( 'stone1.png',     urlEnbeds+'stone1.png' );
