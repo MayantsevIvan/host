@@ -72,11 +72,19 @@
 	CWindSmallRating.showWindRating = function() {
 		let self = this;
 		let loader = new PIXI.Loader();
-		
+		Handler.visibleRt = true;
 		let windRGroup = Handler.newGroup();
+		windRGroup.interactive = true;
 		windRGroup.sortableChildren = true;
 		Handler.showImgRect(windRGroup,"backgrWindR.png",0,0,300,578);
-		
+		if ( isMobile ) {
+			let touchCross = function() {
+				windRGroup.removeSelf();
+				Handler.visibleRt = false;
+			}
+			let cross = Handler.showImgRect(windRGroup,"cross.png",32,-285,36,36);
+			cross.onEL('pointertap',touchCross);
+		}
 		let arrowUp = Handler.showImgRect(windRGroup,"arrowUp.png",-35,-278,44,26);
 		let arrowDown = Handler.showImgRect(windRGroup,"arrowDown.png",-35,208,44,26);
 		
