@@ -13,6 +13,18 @@
 				Handler.head      = Handler.newGroup();
 				Handler.gWinds    = Handler.newGroup();
 				Handler.gLoading  = Handler.newGroup();
+				
+				if ( isMobile != null && isMobile ) {
+					const graphics = new PIXI.Graphics();
+					graphics.lineStyle(2, 0x0000ff, 1);
+					graphics.beginFill(0xDE3249,0);
+					graphics.drawRect( ( pixiAppWidth - visibleWidth0 ) / 2, ( pixiAppHeight - visibleHeight0 ) / 2, visibleWidth0, visibleHeight0 );
+					graphics.endFill();
+					console.log('pixiApp.stage.',pixiApp.stage.x,pixiApp.stage.y);
+					console.log('shScreenX',shScreenX*1+(1-pixiAppScaleMobile));
+					pixiApp.stage.addChild(graphics);
+				}
+				
 				let onAuthCallback = function( response ) {
 					try {
 						if ( Winds.getTopWindName() == Winds.WIND_LOADER ) {
