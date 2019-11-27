@@ -40,8 +40,10 @@
 				yTask += 39;
 				Handler.showImgRect(this.group,"markerTask.png",-240,yTask,24,24);
 				lable = Handler.showImg(this.group,"lableTask"+(i+1)+".png",-210,yTask);
-				lable.width = lable.width/2;
-				lable.height = lable.height/2;
+				if ( !isMobile ) {
+					lable.width /= 2;
+					lable.height /= 2;
+				};
 				lable.x += lable.width/2;
 				//lable.y += lable.height/2;
 			}
@@ -61,8 +63,10 @@
 								numGem = 4; 
 							}
 							let objTask = Handler.showImg(objTaskGr,"objTask"+numGem+".png",xObjTask+18,yTask-1);
-							objTask.width /= 2;
-							objTask.height /= 2;
+							if ( !isMobile ) {
+								objTask.width /= 2;
+								objTask.height /= 2;
+							};
 							let numObjTaskImg = Handler.showNumber('by', xObjTask-1, yTask-2,numberTask[1][j],13,16, objTaskGr,'',2);
 							numObjTaskImg.x -= Math.floor( numObjTaskImg.width/2 );
 							if ( j == 5 ) {
