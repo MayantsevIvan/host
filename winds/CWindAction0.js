@@ -34,8 +34,10 @@
 		let xBon = -165;
 		for ( let i = 1; i <=  4; i++ ) {			
 			let bon = Handler.showImg(self.mainGroup,"bon"+i+"AcSale.png",xBon,-60);
-			bon.width = bon.width/2;
-			bon.height = bon.height/2;
+			if ( !isMobile ) {
+				bon.width /= 2;
+				bon.height /= 2;
+			};
 			xBon = xBon + bon.width + 30;				
 		};
 		Handler.showImgRect(self.mainGroup,"lableBuyAcSale.png",0,20,440,33);

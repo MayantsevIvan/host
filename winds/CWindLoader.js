@@ -32,7 +32,10 @@
 			let bakcgrScaleMobile = pixiApp.screen.height / backgr.height;
 			backgr.scale.x = bakcgrScaleMobile;
 			backgr.scale.y = bakcgrScaleMobile;
-
+			
+			console.log( Handler.contentCenterX );
+			console.log( Handler.contentCenterY );
+			
 			self.scaled = Handler.showImgRect( self.mainGroup, Consts.DIR_WIND_LOADER+"lineLoad.png",18,59,230,15);
 		    self.scaled.mask = Handler.showRect( self.mainGroup, -212,59,230,16 );
 		    Handler.showImgRect(self.mainGroup, Consts.DIR_WIND_LOADER+"lineLoadRamk.png",18,59,237,23);

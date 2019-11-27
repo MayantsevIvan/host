@@ -46,8 +46,10 @@
 				let yBons = [ -15, 28, 28, 85,  85 ];
 				for ( let i = 0; i <= 4; i++ ) {
 					let bon = Handler.showImg( self.mainGroup,Consts.DIR_AC_FRIEDS + "bon"+( i + 1) +"AcFriends.png",xBons[i],yBons[i] );
-					bon.width = bon.width/2;
-					bon.height = bon.height/2;
+					if ( !isMobile ) {
+						bon.width  /= 2;
+						bon.height /= 2;
+					};
 				};
 				
 			};

@@ -61,8 +61,10 @@
 			backgrStar.height = backgrStar.height/2;
 			if ( i <= countStar ) {
 				let starRt = Handler.showImg(self.mWind,'starRt'+numStar+'.png',xStartStar,shYBackgrStar);
-				starRt.width  = starRt.width/2;
-				starRt.height = starRt.height/2;
+				if ( !isMobile ) {
+					starRt.width  /= 2;
+					starRt.height /= 2;
+				};
 			}
 			xStartStar = xStartStar + 130;
 		}
@@ -99,7 +101,7 @@
 		
 		let xNumIgnots = isMobile ?  110 : 0;
 		let yNumIgnots = isMobile ?   59 : 110;
-		let imgI = Handler.showText(self.mWind,1/*this.ingnots*/, xNumIgnots, yNumIgnots, this.textParams);
+		let imgI = Handler.showText(self.mWind, this.ingnots, xNumIgnots, yNumIgnots, this.textParams);
 		imgI.x = Math.floor( imgI.x - imgI.width/2 );
 		
 		if ( !isMobile ) {

@@ -57,8 +57,10 @@
 			for ( let i = 1; i <= 6; i++ ) {
 				let line = Handler.showImg(self.mainGroup,Consts.DIR_BUY_COINS+"line"+i+".png",0,yLine);
 				line.anchor.set(0.5,0);
-				line.width  /= 2;
-				line.height /= 2;
+				if ( !isMobile ) { 
+					line.width  /= 2;
+					line.height /= 2;
+				};
 				let yBut = i == 1 ? yLine + line.height/2 : yLine + line.height/2 - 2;
 
 				let butBuy = Handler.showImgRect(self.mainGroup,Consts.DIR_BUY_COINS+"butBuy.png",218, yBut,162,48);
