@@ -37,8 +37,10 @@
 			let yBackgrTasks = isMobile ?   -376 :  -75;
 			
 			this.backgrTasks = Handler.showImg( this.group, "panelTasks"+this.countVisibleTask+"WindGame.png",xBackgrTasks,yBackgrTasks);
-			this.backgrTasks.width = this.backgrTasks.width/2;
-			this.backgrTasks.height = this.backgrTasks.height/2;
+			if ( !isMobile ) {
+				this.backgrTasks.width = this.backgrTasks.width/2;
+				this.backgrTasks.height = this.backgrTasks.height/2;
+			}
 			this.backgrTasks.anchor.set ( 0.5, 0 );
 			if (isMobile) { this.backgrTasks.angle = 90; this.backgrTasks.anchor.set ( 0, 1 ) };
 			
@@ -56,8 +58,10 @@
 					if ( i == 9 ){
 						TweenMax.to( imgObjTask, 0.7, { alpha: 0.5, yoyo: true, repeat: -1, ease: Power0.easeNone });
 					};
-					imgObjTask.width = imgObjTask.width/2;
-					imgObjTask.height = imgObjTask.height/2;
+					if ( !isMobile ) {
+						imgObjTask.width = imgObjTask.width/2;
+						imgObjTask.height = imgObjTask.height/2;
+					}
 					//кол-во заданий
 					if (isMobile){
 						this.showNumberMobile( i, this.countTasks[i] );

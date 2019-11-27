@@ -16,8 +16,10 @@
 
 
 		this.image = Handler.showImg( parent, 'bonus/'+name+".png", fx, fy );
-		this.image.width /= 2;
-		this.image.height  /= 2;
+		if ( !isMobile ) {
+			this.image.width /= 2;
+			this.image.height  /= 2;
+		};
 
 		
 		this.count = User[name];
@@ -30,11 +32,11 @@
         let self = this;
       
         if ( this.count > 0 ) {
-            let style = { parent: self.image, x:8, y:7, text: self.count };
-			style.fontSize = 34;
+            let style = { parent: self.image, x: isMobile ? -13 : 8, y: isMobile ? -13 : 7, text: self.count };
+			style.fontSize = isMobile ? 17 : 34;
 			style.color = 0xEB4800;
 			style.stroke = 0xffffff;
-			style.strokeThickness = 6;
+			style.strokeThickness = isMobile ? 3 : 6;
             this.txtCount = Handler.newText(style);  //JSJump????
 			this.image.addChild(this.txtCount);
             this.txtCount.x -= Math.floor( this.txtCount.width/2 - this.image.width/2);			
