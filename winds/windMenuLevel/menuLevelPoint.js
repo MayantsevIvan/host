@@ -19,17 +19,6 @@
 		return self;	
 	};
    
-	menuLevelPoint.prototype.touchLevel = function(evt) {
-		let self = this;
-		if ( self.numLevel <= 4 ){
-			Head.levelName = '0'+self.numLevel;
-			Handler.levelNum = self.numLevel;
-			Winds.show(Winds.WIND_GAME, { numLevel: self.numLevel });
-		} else {
-			Winds.show(Winds.WIND_BEFORE_LEVEL, { numLevel: self.numLevel });
-		};
-	};
-   
 	menuLevelPoint.prototype.Show = function() {
 		let self = this;
 	
@@ -37,6 +26,10 @@
 			Handler.showImgRect( self.group, "disBackgrBoxLevel.png",0,0,45,42 );
 			Handler.showImgRect( self.group, "castle.png",0,-10,22,25 );
 			Handler.showImgRect( self.group, 'pointNextLevelClose.png', self.xSmallPoint, self.ySmallPoint, 12,10);
+			if ( self.arrow ) {
+				let imgArrow = Handler.showImgRect( self.group,"arrowLastYourLevel.png",0,-55,45,42 );
+				TweenMax.to( imgArrow, 0.7, { y: -40, ease: Power0.easeNone, repeat: -1, yoyo: true });
+			}
 		} else {
 			Handler.showImgRect( self.group, "enBackgrBoxLevel.png", 0,0, 45,42);
 			Handler.showImgRect( self.group, 'pointNextLevel.png', self.xSmallPoint, self.ySmallPoint, 12,10);
@@ -56,7 +49,7 @@
 				};
 			};
 			//self.group.onEL('pointerup', function() { self.touchLevel() });
-			self.group.onEL('pointerup',  Handler.onStartLevelClick );
+			self.group.onEL('pointertap',  Handler.onStartLevelClick );
 		}
 		
 		let numLevelImg = Handler.showNumber( "swb", 4, 10, self.numLevel, 9, 13, self.group, '', 1 );
