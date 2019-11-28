@@ -16,10 +16,17 @@
 		self.mainGroup.x = Handler.contentCenterX;
 		self.mainGroup.y = Handler.contentCenterY;
 		let showContent = function() {
-			Handler.showImgRect(self.mainGroup,Consts.DIR_BUY_COINS+"backgrBuyCoins.png",0,0,662,539);
-			let cross = Handler.showImgRect(self.mainGroup,"cross.png",310,-224,36,36);
-			cross.interactive = true;
-			cross.buttonMode = true;
+			let nameBackgr = "backgrBuyCoins";
+			let wBackgr = 662;
+			let hBackgr = 539;
+			if ( isMobile ) {
+				nameBackgr += "Mob";
+				wBackgr = 575;
+			    hBackgr = 544;
+			};
+			Handler.showImgRect(self.mainGroup,Consts.DIR_BUY_COINS+nameBackgr+".png",0,0,wBackgr,hBackgr);
+			let xCross = isMobile ? 266 : 310;
+			let cross = Handler.showImgRect(self.mainGroup,"cross.png",xCross,-224,36,36);
 			cross.onEL("pointerdown",function() {self.shutdown()});
 			
 			let numGroup = Handler.newGroup();
@@ -54,36 +61,56 @@
 			};
 
 			let yLine = -187;
+			let terminationLineName = isMobile ? "Mob.png" : ".png";
+			let nameBut = isMobile ? "butBuyMob.png" : "butBuy.png";
+			let wBut    = isMobile ? 143 : 162;
+			let xBut    = isMobile ? 190 : 218;
 			for ( let i = 1; i <= 6; i++ ) {
-				let line = Handler.showImg(self.mainGroup,Consts.DIR_BUY_COINS+"line"+i+".png",0,yLine);
+				let line = Handler.showImg(self.mainGroup,Consts.DIR_BUY_COINS+"line"+i+terminationLineName,0,yLine);
 				line.anchor.set(0.5,0);
 				if ( !isMobile ) { 
 					line.width  /= 2;
 					line.height /= 2;
 				};
 				let yBut = i == 1 ? yLine + line.height/2 : yLine + line.height/2 - 2;
-
-				let butBuy = Handler.showImgRect(self.mainGroup,Consts.DIR_BUY_COINS+"butBuy.png",218, yBut,162,48);
+			
+				let butBuy = Handler.showImgRect(self.mainGroup,Consts.DIR_BUY_COINS + nameBut, xBut, yBut,wBut,48);
 				butBuy.name = "but"+i;
 				butBuy.onEL("pointerdown", pointerDownButBuy);
 				butBuy.onEL("pointerup", pointerUpButBuy);
 				yLine += line.height+2;
 			}
-			self.mainGroup.scale.set(0.68,0.68);
+			self.mainGroup.scale.set(0.80,0.80);
 		}
 		if ( Handler.windsWithLoadedImages[ Winds.WIND_BUY_COINS ] == null ) {
 			Handler.windsWithLoadedImages[ Winds.WIND_BUY_COINS ] = 1;
-			let listOfImages = [
-				"winds/buyCoins/backgrBuyCoins.png",
-				"winds/buyCoins/butBuy.png",
-				"winds/buyCoins/lableBuyIgnots.png",
-				"winds/buyCoins/line1.png",
-				"winds/buyCoins/line2.png",
-				"winds/buyCoins/line3.png",
-				"winds/buyCoins/line4.png",
-				"winds/buyCoins/line5.png",
-				"winds/buyCoins/line6.png",
-			];
+			let listOfImages = [];
+			if ( isMobile ) { 
+				listOfImages = [ 
+				    "winds/buyCoins/backgrBuyCoinsMob.png",
+				    "winds/buyCoins/butBuyMob.png",
+				    "winds/buyCoins/lableBuyIgnots.png",
+				    "winds/buyCoins/line1Mob.png",
+				    "winds/buyCoins/line2Mob.png",
+				    "winds/buyCoins/line3Mob.png",
+				    "winds/buyCoins/line4Mob.png",
+				    "winds/buyCoins/line5Mob.png",
+				    "winds/buyCoins/line6Mob.png",
+				];
+			} else {
+				listOfImages = [ 
+				    "winds/buyCoins/backgrBuyCoins.png",
+				    "winds/buyCoins/butBuy.png",
+				    "winds/buyCoins/lableBuyIgnots.png",
+				    "winds/buyCoins/line1.png",
+				    "winds/buyCoins/line2.png",
+				    "winds/buyCoins/line3.png",
+				    "winds/buyCoins/line4.png",
+				    "winds/buyCoins/line5.png",
+				    "winds/buyCoins/line6.png",
+				];
+			};
+			
 			ImageLoader.loadAssets(showContent, listOfImages);
 		} else {
 			showContent();

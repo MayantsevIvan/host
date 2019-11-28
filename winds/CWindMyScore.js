@@ -26,7 +26,8 @@
 			
 
 			Handler.showImgRect(self.mainGroup,Consts.DIR_MY_SCORE + 'backgrMyScore.png',0,0,662,482);
-			let cross = Handler.showImgRect(self.mainGroup,'cross.png',308,-222,36,36);
+			let xCross = isMobile ? 0 : 308;
+			let cross = Handler.showImgRect(self.mainGroup,'cross.png',xCross,-222,36,36);
 			cross.onEL("pointerdown",function() { self.shutdown(); });
 			
 			Handler.showImgRect(self.mainGroup,Consts.DIR_MY_SCORE + 'lableAllRt.png',-150,-210,167,23);
@@ -36,6 +37,12 @@
 			self.myRateShowingStarted = false;
 			self._MY_RATE  = 1;
 			self._VIP_RATE = 2;
+			
+			if ( isMobile ) { 
+				self.mainGroup.x = self.mainGroup.width/2 + visibleWidth/2;
+				let shRtX = self.mainGroup.x - 400;
+				TweenMax.to( self.mainGroup, 0.8, { x: shRtX } );
+			};
 			
 			self.showMyRating();
 		};
@@ -145,7 +152,7 @@
 		let imgSize = 98;
         let backroundUser = Handler.showImgRect( fgroup, Consts.DIR_MY_SCORE  + "backgrUserWindMyScore.png", rx, ry, 164,104,false);         
 
-        let backgroundImgUser = Handler.showRect( fgroup, rx,ry,imgSize,imgSize,[212/255,126/255,68/255], 1 );         
+        let backgroundImgUser = Handler.showRect( fgroup, rx,ry,imgSize-3,imgSize-3,[212/255,126/255,68/255], 1 );         
         let imgUserGroup = Handler.newGroup( fgroup );
 		
         let onImageLoaded = function( loadedImage ) {

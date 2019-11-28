@@ -14,10 +14,12 @@
 		self.mainGroup.x = Handler.contentCenterX;
 		self.mainGroup.y = Handler.contentCenterY;
 		let showContent = function() {
-			self.backgr = Handler.showWindBackround( -300, -160, 600, 321, Consts.DIR_STEPS_LEFT + "angleStepsLeft.png", Consts.DIR_STEPS_LEFT + "sideStepsLeft.png",Handler.colorLuaToHex( [240,236,182] , false) )
+			let widthBackgr = isMobile ? 450 : 600;
+			let xBackgr = isMobile ? -225 : -300;
+			self.backgr = Handler.showWindBackround( xBackgr, -160, widthBackgr, 321, Consts.DIR_STEPS_LEFT + "angleStepsLeft.png", Consts.DIR_STEPS_LEFT + "sideStepsLeft.png",Handler.colorLuaToHex( [240,236,182] , false) )
 			self.mainGroup.addChild(self.backgr);
-			
-			let cross = Handler.showImgRect(self.mainGroup, Consts.DIR_STEPS_LEFT + "crossStepsLeft.png",270,-135, 31,26);
+			let xCross = isMobile ? 195 : 270;
+			let cross = Handler.showImgRect(self.mainGroup, Consts.DIR_STEPS_LEFT + "crossStepsLeft.png",xCross,-135, 31,26);
 			let onTouch = function(evt) {
 				self.shutdown(1);
 				if ( Winds.getTopWindName() == Winds.WIND_SMALL_ACT_INV ) {
