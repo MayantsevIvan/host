@@ -6,6 +6,7 @@
 	Handler.selBooster = 0;
 	Handler.windsWithLoadedImages = [];
 	Handler.catchError = null;
+	Handler.visibleRt = false;//reting befo or end level
 	Handler.onErrorCatched = function(err){
 		alert( err.message );
 		alert( err.stack );
@@ -507,28 +508,40 @@
 		}
 		return true;
 	}
-	
-	Handler.removeWindAfterTransition = function( img ) {
-		console.log( img );
+	Handler.removeWindAfterTransition = function( img, toRight=false ) {
+        if ( img != null ) {
+            let remimg = function() { img . removeSelf(); };
+			let newx = toRight ? pixiApp.screen.width : img.x;
+			let newy = toRight ? img.y : pixiApp.screen.height;
+			
+
+            let removeImg = function() {
+                Handler.pcall( remimg );
+                img = null;
+            };
+
+            Handler.transition_to( img, { time:Consts.TIME_WINDOW_MOVE, x:newx, y:newy, alpha:0.2, onComplete:removeImg } );
+        };
+    };
+	/*
+	Handler.removeWindAfterTransition = function( img, toRight=false ) {
 		if( img != null ) {
-			let remimg = function() { 
-				img.destroy();
-			}
-			let newy = pixiApp.height+200;
-			console.log( newy );
+			let newx = toRight ? pixiApp.width+400 : img.x;
+			let newy = toRight ? img.y : pixiApp.height+200;
+ 
 			let removeImg = function(){
-				try {//pcall( remimg );
-					remimg();
+				try {
+					img . removeSelf();
 					img = null;
 				} catch ( ex ) {
 					Handler.onErrorCatched(ex);
 				};
 			}
-			TweenMax.to( img, Consts.TIME_WINDOW_MOVE, { y:newy, alpha: 0.3, onComplete: removeImg } );
+			TweenMax.to( img, Consts.TIME_WINDOW_MOVE, { x:newx, y:newy, alpha: 0.2, onComplete: removeImg } );
 			//transition.to( img, { time=Consts.TIME_WINDOW_MOVE, y=newy, alpha=0.3, onComplete=removeImg } );
 			//transition.to( img, { time=300, y=newy, alpha=0.3, onComplete=removeImg } );
 		}
-	}
+	}*/
 	
 	/*Handler.setMaskOnPhoto = function( iparent, myImage, photoWidth, photoHeight ) {
 		myImage.x += myImage.width/2;
@@ -816,21 +829,6 @@
 		TweenMax.to( obj, time, params );
 	};
 	
-	Handler.removeWindAfterTransition = function( img ) {
-        let self = this;
-        if ( img != null ) {
-            let remimg = function() { img . removeSelf(); };
-            let newy = pixiApp.screen.height;
-            let removeImg = function() {
-                Handler.pcall( remimg );
-//                JSJump.pcall( remimg );
-                img = null;
-            };
-
-            Handler.transition_to( img, { time:Consts.TIME_WINDOW_MOVE, y:newy, alpha:0.2, onComplete:removeImg } );
-        };
-    };
-	
 	Handler.toNumber = function( val ) {
         return Number( val.replace(',', '.') );
     };
@@ -1036,4 +1034,3 @@
 			  Handler.butBonuses[num].count = User[ names[num] ];
 	    }
 	}
-	
