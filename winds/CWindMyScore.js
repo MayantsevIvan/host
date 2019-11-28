@@ -41,8 +41,8 @@
 			if ( isMobile ) { 
 				//self.mainGroup.x = self.mainGroup.width/2 + visibleWidth/2;
 				self.mainGroup.x = Handler.contentCenterX + visibleWidth/2 + backgr.width/2;
-				let shRtX = self.mainGroup.x - 400;
-				//TweenMax.to( self.mainGroup, 0.8, { x: shRtX } );
+				let shRtX = self.mainGroup.x - 350;
+				TweenMax.to( self.mainGroup, 0.8, { x: shRtX } );
 				console.log('self.mainGroup.x',self.mainGroup.x);
 				console.log('self.mainGroup.width/2',self.mainGroup.width/2);
 				console.log('visibleWidth/2',visibleWidth/2);
