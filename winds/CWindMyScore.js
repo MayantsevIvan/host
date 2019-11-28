@@ -40,8 +40,8 @@
 			
 			if ( isMobile ) { 
 				self.mainGroup.x = self.mainGroup.width/2 + visibleWidth/2;
-				let shRtX = self.mainGroup.x - 400;
-				TweenMax.to( self.mainGroup, 0.8, { x: shRtX } );
+				//let shRtX = self.mainGroup.x - 400;
+				//TweenMax.to( self.mainGroup, 0.8, { x: shRtX } );
 			};
 			
 			self.showMyRating();
