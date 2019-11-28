@@ -96,12 +96,10 @@
 			self.imgBackgr = img;
 			Handler.toBack(img);
 			//if ( self.loadingGr ) self.loadingGr.removeSelf();
-			let bakcgrScaleMobile = pixiApp.screen.height / img.height;
+			let bakcgrScaleMobile = pixiApp.screen.height / img.height / pixiAppScaleMobile;;
 			
 			img.scale.x = bakcgrScaleMobile;
 			img.scale.y = bakcgrScaleMobile;
-			//img.width *= 0.5;
-			//img.height *= 0.5;
 			/*const graphics1 = new PIXI.Graphics();
             graphics1.beginFill(0x0000AA);
             graphics1.drawRect(0, 0, 760, 610);
@@ -113,15 +111,7 @@
 			graphics1.scale.y = bakcgrScaleMobile;
 			graphics1.x -= graphics1.width/2;
 			graphics1.y -= graphics1.height/2;*/
-			//console.log( "graphics1.width", graphics1.width );
-			//console.log( "graphics1.height", graphics1.height );	
-			console.log( "bakcgrScaleMobile", bakcgrScaleMobile );	
-			console.log( "pixiApp.screen.width", pixiApp.screen.width );
-			console.log( "img.width",             img.width );
-			console.log( "img.height",            img.height );	
-			console.log( "pixiApp.screen.height", pixiApp.screen.height );	
-			console.log( "pixiApp.stage.width", pixiApp.stage.width );
-			console.log( "pixiApp.stage.height", pixiApp.stage.height );		
+;		
 		};
 
 		if ( self.backgr[this.numBackgr] != 0 ) {
