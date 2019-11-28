@@ -39,7 +39,8 @@
 			self._VIP_RATE = 2;
 			
 			if ( isMobile ) { 
-				self.mainGroup.x = self.mainGroup.width/2 + visibleWidth/2;
+				//self.mainGroup.x = self.mainGroup.width/2 + visibleWidth/2;
+				self.mainGroup.x = 0;
 				//let shRtX = self.mainGroup.x - 400;
 				//TweenMax.to( self.mainGroup, 0.8, { x: shRtX } );
 				console.log('self.mainGroup.x',self.mainGroup.x);
