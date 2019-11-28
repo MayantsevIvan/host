@@ -40,15 +40,10 @@
 			
 			if ( isMobile ) { 
 				//self.mainGroup.x = self.mainGroup.width/2 + visibleWidth/2;
-				self.mainGroup.x = Handler.contentCenterX + visibleWidth/2 + backgr.width/2;
-				let shRtX = self.mainGroup.x - 350;
-				TweenMax.to( self.mainGroup, 0.8, { x: shRtX } );
-				console.log('self.mainGroup.x',self.mainGroup.x);
-				console.log('self.mainGroup.width/2',self.mainGroup.width/2);
-				console.log('visibleWidth/2',visibleWidth/2);
-				console.log('Handler.contentCenterX + visibleWidth/2',Handler.contentCenterX + visibleWidth/2);
+				self.mainGroup.x = Handler.contentCenterX + visibleWidth/2 + backgr.width/2+100;
+				let shRtX = self.mainGroup.x - 450;
+				TweenMax.to( self.mainGroup, Consts.TIME_WINDOW_MOVE/1000, { x: shRtX } );
 			};
-			
 			self.showMyRating();
 		};
 		
@@ -69,7 +64,7 @@
 			//"winds/myScore/photoModel.png"
 		
 		//ImageLoader.loadAssets(showContent, listOfImages);
-		
+		self.mainGroup.noTween = true;
 		return self.mainGroup;
 	};
 	
@@ -122,7 +117,6 @@
 		
 		let ftop = ( typeRate == self._MY_RATE ) ? self._topAll : self._topVip;
 
-
 		let places = Object.keys(ftop);
 		//let places = [];
 		//for ( s in ftop ) {
@@ -156,8 +150,9 @@
     CWindMyScore.showUserCard = function( fgroup, rx, ry, uid, userPic, userPlace, userScore, userName ) {
 		let imgSize = 98;
         let backroundUser = Handler.showImgRect( fgroup, Consts.DIR_MY_SCORE  + "backgrUserWindMyScore.png", rx, ry, 164,104,false);         
-
-        let backgroundImgUser = Handler.showRect( fgroup, rx,ry,imgSize-3,imgSize-3,[212/255,126/255,68/255], 1 );         
+		
+	//  let colorBackgrUserImg = Handler.colorLuaToHex([212/255,126/255,68/255]);
+    //  let backgroundImgUser = Handler.showRect( fgroup, rx,ry,imgSize+3,imgSize+3, colorBackgrUserImg, 1 );         
         let imgUserGroup = Handler.newGroup( fgroup );
 		
         let onImageLoaded = function( loadedImage ) {
@@ -195,7 +190,7 @@
 			if ( fastShutdown ) {
 				Handler.removeImage(this.mainGroup);
 			} else {
-				Handler.removeWindAfterTransition( this.mainGroup );
+				Handler.removeWindAfterTransition( this.mainGroup, true );
 			};
   		};
 	};
