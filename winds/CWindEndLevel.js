@@ -9,8 +9,9 @@
     };
 	
 	CWindEndLevel.showPoints = function() {
-		this.minCP += 1;
+		this.minCP += 9;
 		if ( this.imgP ) this.imgP.destroy();
+		if ( this.minCP >= this.points ) this.minCP = this.points;
 		this.imgP = Handler.showText(this.mWind, this.minCP, this.xNumPoints, this.yNumPoints, this.textParams);
 		if ( this.minCP == this.points ) clearInterval( this.timerPoints );
 	};
@@ -57,8 +58,10 @@
 			let numStar = i;
 			if ( i == 3 ) { numStar = 1; };
 			let backgrStar = Handler.showImg(self.mWind,"backgrStarRt"+numStar+".png",xStartStar,shYBackgrStar);
-			backgrStar.width = backgrStar.width/2;
-			backgrStar.height = backgrStar.height/2;
+			if ( !isMobile) {
+				backgrStar.width  /= 2;
+				backgrStar.height /= 2;
+			};
 			if ( i <= countStar ) {
 				let starRt = Handler.showImg(self.mWind,'starRt'+numStar+'.png',xStartStar,shYBackgrStar);
 				if ( !isMobile ) {
@@ -80,9 +83,7 @@
 		
 		this.points = params.points;
 		this.minCP = 0;
-		
-			
-		
+
 		this.ingnots = params.coins;
 		
 		this.textParams = {
@@ -173,7 +174,7 @@
 				let shRtX = self.windRating.x - 200;
 				Handler.toFront( self.windRating );
 				self.mainGroup.addChild(self.windRating);
-				TweenMax.to( self.windRating, 2, { x: shRtX } );
+				TweenMax.to( self.windRating, 0.8, { x: shRtX } );
 			};
 		};
 		
