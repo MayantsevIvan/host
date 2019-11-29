@@ -247,7 +247,9 @@
 		let showSmallAc = function() {
 			Handler.acSmallInv = Actions.show( Actions.WIND_SMALL_ACT_INV, self.mainGroup );
 		}
-		Handler.timerOpenAcInv = setTimeout( showSmallAc, 7000 );
+		if ( !isMobile ) {
+			Handler.timerOpenAcInv = setTimeout( showSmallAc, 7000 );
+		};
 		self.mainGroup.interactive = true;
 	};
 	
