@@ -36,26 +36,42 @@
 		let idImg =  Handler.showImgRect( this.group, "boxId.png", -363, -290,31,31 );   
 		idImg.onEL( 'pointerdown', function() { Winds.show( Winds.WIND_MSG, { params: self.params } ) } );
 // 		this.fonPoints = Handler.showImgRect( this.group, "fonPoint.png", -81,-22,162,42, false );  панели очков нет       
-        this.fonCoins  = Handler.showImgRect( this.group, "panelMoney.png", -110, -280,165,34, false );         
-        this.fonEnergy = Handler.showImgRect( this.group, "panelLives.png", -285, -280,166,43, false );         
-    
+        
+		let xFonCoins  = isMobile ? 32 : -100;
+		let xFonEnergy  = isMobile ? -140 : -280;
+		let yFonCoins  = isMobile ? -visibleHeight/2 + 30 : -280;//19 height/2
+		this.fonCoins  = Handler.showImgRect( this.group, "panelMoney.png", xFonCoins, yFonCoins,165,34, false );         
+        this.fonEnergy = Handler.showImgRect( this.group, "panelLives.png", xFonEnergy, yFonCoins,166,43, false );         
+		
+		/*const graphics1 = new PIXI.Graphics();
+        graphics1.beginFill(0x0000AA);
+        graphics1.drawRect(120, -visibleHeight/2 + 25, 100, 100);
+        graphics1.endFill();
+		this.group.addChild(graphics1);*/
+	
 	    this.fonCoins .onEL( "pointerdown", function(){ Winds.show( Winds.WIND_BUY_COINS  ) } );         
         this.fonEnergy.onEL( "pointerdown", function(){ Winds.show( Winds.WIND_BUY_LIVES ) } );   
 		
-		let butMyScore = Handler.showImgRect( this.group, "butMyScore.png", 60, -278, 159, 47 );
+		let wButMyScore = isMobile ? 100 : 159;
+		let xButMyScore = isMobile ? 172 : 60;
+		let yButMyScore = isMobile ? yFonCoins : -278;
+		
+		let butMyScore = Handler.showImgRect( this.group, "butMyScore.png", xButMyScore, yButMyScore, wButMyScore, 47 );
 		let touchButMyScore = function( evt ) {
 			Winds.show( Winds.WIND_MY_SCORE );
 		//	Winds.show( Winds.WIND_M, { text: 'Пусть закончаться камни бесконечности!' } );
 		};
 		butMyScore.onEL( "pointerdown",touchButMyScore );
 		
+		
 		let butPlay = Handler.showImgRect( this.group, "butPlayWindMenuLevels.png",220,-275,149,46);
 		butPlay.name = 'buttonFastStart';
 		let touchButPlay = function( evt ) {
 			//Winds.show( Winds.WIND_BEFORE_LEVEL );
 		};
-//		butPlay.onEL("pointerdown",touchButPlay);
+	//		butPlay.onEL("pointerdown",touchButPlay);
 		butPlay.onEL("pointerdown", Handler.onStartLevelClick);
+		if ( isMobile ) butPlay.isVisible = false;
 		
 		let butMute1 = Handler.showImgRect( this.group, "butMute.png",318,-285,33,33);
 		let butMute2 = Handler.showImgRect( this.group, "butMute2.png",318,-285,33,33);
@@ -133,14 +149,14 @@
         Head.groupNumPoints.x = Math.floor( Head.groupNumPoints.width/2 );
     }; */        
     Head.showCoins = function() {
-        Handler.removeGroupChilds( Head.groupNumCoins );         
-        Handler.showNumber( "wg", 0, -280, User.coins, 13,18, Head.groupNumCoins, '',3 );         
-        Head.groupNumCoins.x = - 95 - Math.floor( Head.groupNumCoins.width/2 );         
+        Handler.removeGroupChilds( Head.groupNumCoins );
+        Handler.showNumber( "wg", 0, this.fonCoins.y, User.coins, 13,18, Head.groupNumCoins, '',3 );         
+        Head.groupNumCoins.x = ( this.fonCoins.x + 15 ) - Math.floor( Head.groupNumCoins.width/2 );         
     };
     Head.showEnergy = function() {
         Handler.removeGroupChilds( Head.enGroup );         
-        Handler.showNumber( "wg", 0, -280, Head.energy, 13,18, Head.enGroup, '',3 );         
-        Head.enGroup.x = -265 - Math.floor( Head.enGroup.width/2 );         
+        Handler.showNumber( "wg", 0, this.fonEnergy.y, Head.energy, 13,18, Head.enGroup, '',3 );         
+        Head.enGroup.x = ( this.fonEnergy.x + 20 ) - Math.floor( Head.groupNumCoins.width/2 );        
     };
 	
 	Object.defineProperty( Head, "timerString", {
