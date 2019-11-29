@@ -25,9 +25,10 @@
 			    hBackgr = 544;
 			};
 			Handler.showImgRect(self.mainGroup,Consts.DIR_BUY_LIVES+nameBackgr+".png",0,0,wBackgr,hBackgr);
-			let xCross = isMobile ? 266 : 310;
+			let xCross = isMobile ? 262 : 310;
 			let cross = Handler.showImgRect(self.mainGroup,"cross.png",xCross,-230,36,36);
 			cross.onEL("pointerdown",function() {self.shutdown()});
+			cross.scale.set(1.2,1.2);
 			let countLives = Head.energy;
 			let countLivesImg = Handler.showNumber('wb',27,-242,countLives,15,22,self.mainGroup,'',0);
 			countLivesImg.x -= countLivesImg.width/2;

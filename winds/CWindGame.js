@@ -38,7 +38,8 @@
 //		Head.menuLevel.hide();
 //
 		let backgr = Handler.showImgRect(this.mainGroup, Consts.DIR_WIND_LOADER+"backgrWindGame.png",0,0,760,610);
-		let bakcgrScaleMobile = pixiApp.screen.height / backgr.height / pixiAppScaleMobile;
+		//let bakcgrScaleMobile = pixiApp.screen.height / backgr.height / pixiAppScaleMobile;
+		let bakcgrScaleMobile = visibleHeight / pixiAppHeight;;
 		backgr.scale.x = bakcgrScaleMobile;
 		backgr.scale.y = bakcgrScaleMobile;
 		

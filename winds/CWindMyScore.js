@@ -40,6 +40,7 @@
 			
 			if ( isMobile ) { 
 				//self.mainGroup.x = self.mainGroup.width/2 + visibleWidth/2;
+				self.mainGroup.scale.set(1.2,1.2);
 				self.mainGroup.x = Handler.contentCenterX + visibleWidth/2 + backgr.width/2+100;
 				let shRtX = self.mainGroup.x - 450;
 				TweenMax.to( self.mainGroup, Consts.TIME_WINDOW_MOVE/1000, { x: shRtX } );

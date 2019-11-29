@@ -96,10 +96,11 @@
 			self.imgBackgr = img;
 			Handler.toBack(img);
 			//if ( self.loadingGr ) self.loadingGr.removeSelf();
-			let bakcgrScaleMobile = pixiApp.screen.height / img.height / pixiAppScaleMobile;;
+			//let bakcgrScaleMobile = pixiApp.screen.height / img.height / pixiAppScaleMobile;
+			//let bakcgrScaleMobile = visibleHeight / img.height;
 			
-			img.scale.x = bakcgrScaleMobile;
-			img.scale.y = bakcgrScaleMobile;
+			//img.scale.x = bakcgrScaleMobile;
+			//img.scale.y = bakcgrScaleMobile;
 			/*const graphics1 = new PIXI.Graphics();
             graphics1.beginFill(0x0000AA);
             graphics1.drawRect(0, 0, 760, 610);
@@ -117,9 +118,9 @@
 		if ( self.backgr[this.numBackgr] != 0 ) {
 			self.imgBackgr = Handler.showImgRect( self.mainGroup,  nameBackgr, 0, 0, 760, 610 );
 			Handler.toBack(self.imgBackgr);
-			let bakcgrScaleMobile = pixiApp.screen.height / self.imgBackgr.width;
-			self.imgBackgr.scale.x = bakcgrScaleMobile;
-			self.imgBackgr.scale.y = bakcgrScaleMobile;
+			//let bakcgrScaleMobile = pixiApp.screen.height / self.imgBackgr.width;
+			//self.imgBackgr.scale.x = bakcgrScaleMobile;
+			//self.imgBackgr.scale.y = bakcgrScaleMobile;
  		} else {
 			//console.log('start load', Consts.DIR_BACKGROUNDS + 'mBackgr'+this.numBackgr+'.png');
 			Handler.loadAndDrawRemoteImage( self.mainGroup, null, nameBackgr, 0, 0, 760, 610, backToBack );
@@ -149,7 +150,7 @@
 		this.showLocation();
 		
 		
-		/*this.arBackgrName = [];
+		/*this.	 = [];
 		this.arBackgr = [];
 		
 		
@@ -198,9 +199,18 @@
 		arrowRight.on("pointerdown", onArrowRight);
 		
 		let moveMenuLevel = function ( evt ) {
-			//console.log(evt);
+			let gx = Math.floor( evt.data.global.x / pixiApp.stage.scale.x );
+			let gy = Math.floor( evt.data.global.y / pixiApp.stage.scale.y );
+			//pixiApp.stage.x;
+			console.log("gx,gy",gx,gy);
 		};
-		if (isMobile) self.mainGroup.onEL('pointermove',moveMenuLevel);
+
+		if (isMobile) { 
+			let scaleScreen = visibleHeight / pixiAppHeight;
+			self.mainGroup.scale.x = scaleScreen;
+			self.mainGroup.scale.y = scaleScreen;
+			self.mainGroup.onEL('pointermove',moveMenuLevel);
+		};
 	}
 	
 	CWindMenuLevels.newObject = function(){

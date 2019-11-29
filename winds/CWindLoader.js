@@ -29,9 +29,10 @@
 	
 		let showContent = function() {
 		    let backgr = Handler.showImgRect(self.mainGroup, Consts.DIR_WIND_LOADER+"backgrWindGame.png",0,0,760,610);
-			let bakcgrScaleMobile = pixiApp.screen.height / backgr.height / pixiAppScaleMobile;
-			console.log("pixiApp.screen.height",pixiApp.screen.height);
-			console.log("pixiApp.screen.height / backgr.height",pixiApp.screen.height / backgr.height);
+			//let bakcgrScaleMobile = pixiApp.screen.height / backgr.height / pixiAppScaleMobile;
+			//console.log("pixiApp.screen.height",pixiApp.screen.height);
+			//console.log("pixiApp.screen.height / backgr.height",pixiApp.screen.height / backgr.height);
+			let bakcgrScaleMobile = visibleHeight / pixiAppHeight;
 			backgr.scale.set(bakcgrScaleMobile,bakcgrScaleMobile);
 			
 			self.scaled = Handler.showImgRect( self.mainGroup, Consts.DIR_WIND_LOADER+"lineLoad.png",18,59,230,15);
