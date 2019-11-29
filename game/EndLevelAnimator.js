@@ -56,9 +56,7 @@
 					time = 3000;
 				}; 
 				
-				Handler.jlines.stepsPanel.countSteps = 0;
-				Handler.jlines.stepsPanel.showNumber();
-
+				Handler.jlines.countSteps = 0;
 				setTimeout( function(){ try { self.animation = false; self.callback(); } catch( ex ) { Handler.onErrorCatched(ex); } },  time );
 				//TweenLite.to(new Sprite(),time,{onComplete:function (){EndLevelAnimator.animation = false;callback();}});
 			};

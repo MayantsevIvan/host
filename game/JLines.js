@@ -69,6 +69,7 @@
 			get: function(   ) { return this._countSteps; },
 			set: function(val) {
 				this._countSteps = val;
+				this.stepsPanel.showNumber(this._countSteps);
 //				if ( val == 5 && Config.NETWORK == 'ok' ) {
 //					Handler.showAct7Steps();
 //				};
@@ -79,10 +80,9 @@
 					if ( Handler.acSmallInv ) Handler.acSmallInv.shutdown();
 					Actions.show( Actions.WIND_ACT_5_STEPS, self.parent );
 				};
-				if ( this._countSteps <= 0 ) {
+				if ( this._countSteps <= 0 && this.gameFinished != 1 ) {
 					Winds.show( Winds.WIND_STEPS_LEFT);
 				};
-				this.stepsPanel.showNumber(this.countSteps);
 			}
 		});//countSteps
 	};
@@ -454,9 +454,9 @@
 			let self = this;
 			if (this._countSteps <= 0) return;
 			if (this._animation2) return;
-			console.log("evt",evt.data.global.x,evt.data.global.y);
-			console.log("shScreenY",shScreenY);
-			console.log("gemsContainer x,y",this.gemsContainer.x,this.gemsContainer.y);
+//			console.log("evt",evt.data.global.x,evt.data.global.y);
+//			console.log("shScreenY",shScreenY);
+//			console.log("gemsContainer x,y",this.gemsContainer.x,this.gemsContainer.y);
 			let gx = Math.floor( evt.data.global.x / pixiApp.stage.scale.x );
 			//let gx = Math.floor( evt.data.global.x / pixiApp.stage.scale.x );
 			let gy = Math.floor( evt.data.global.y / pixiApp.stage.scale.y );
@@ -469,9 +469,9 @@
 	//		let kittenSize = 60*Handler.scaleOfGemsContainer;
 			let fi = Math.ceil( tx / Consts.coordsWidth );//gorizontal number of cat on game field
 			let fj = Math.ceil( ty / Consts.coordsHeight );//vertical   number of cat on game field
-			console.log( 'gx, gy ', gx, gy );
-			console.log( 'tx, ty ', tx, ty );
-			console.log( 'fi, fj ', fi, fj );
+//			console.log( 'gx, gy ', gx, gy );
+//			console.log( 'tx, ty ', tx, ty );
+//			console.log( 'fi, fj ', fi, fj );
 
 			let cbox = this.getBox(fi,fj);
 			if ( cbox == null ) return;
@@ -727,7 +727,7 @@
 		    this._fillZeroAlreadyBreakedStone();
 		    this._searchAndRemoveCoins();
 		} catch ( ex ) {
-			 Handler.onErrorCatched(ex);
+			Handler.onErrorCatched(ex);
 		};
 	};
 
@@ -1205,7 +1205,7 @@
 	JLines.prototype.addNewBoxes = function () {
 		if ( this._clicked ) {
 			this._clicked = false;
-			this.countSteps -= 1;
+			this.countSteps -= 1;/*метка*/
 		};
 
 		let tj; let sh = 0; let ch = 0;
@@ -1509,6 +1509,7 @@
 			Handler.onEndLevel();
 		} else {
 			if ( this._countSteps <= 0 ) {
+				//this.countSteps = 0;
 				if ( User.loseLevel != Head.levelName ) {
 					User.loseLevel = Head.levelName;
 					User.loseCount = 1;
