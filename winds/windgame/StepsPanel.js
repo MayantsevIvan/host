@@ -20,6 +20,7 @@
 	
     StepsPanel.showNumber = function( countSteps ) {
 	    this.countSteps = countSteps || this.countSteps;
+		if ( countSteps == 0 ) this.countSteps = 0;
 		Handler.destroy( this.gNumSteps );
 
         this.gNumSteps = Handler.newGroup( this.group );         

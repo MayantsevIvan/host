@@ -27,12 +27,11 @@
 		return this;
     }; 
     ButBonus.prototype.showNumber = function( ) {
+		let self = this;
 		if ( this.txtCount ) Handler.destroy( this.txtCount );
 		if ( this.plus ) Handler.destroy( this.plus );
-        let self = this;
-      
         if ( this.count > 0 ) {
-            let style = { parent: self.image, x: isMobile ? -13 : 8, y: isMobile ? -13 : 7, text: self.count };
+            let style = { parent: self.image, x: isMobile ? -15 : 8, y: isMobile ? -15 : 7, text: self.count };
 			style.fontSize = isMobile ? 17 : 34;
 			style.color = 0xEB4800;
 			style.stroke = 0xffffff;
@@ -42,7 +41,11 @@
             this.txtCount.x -= Math.floor( this.txtCount.width/2 - this.image.width/2);			
             this.txtCount.y -= Math.floor( this.txtCount.height/2 - this.image.height/2);			
 		} else {
-			this.plus = Handler.showImgRect( self.image, "bonus/plus.png", self.image.width/2, self.image.height/2+4, 44, 44 );
+			let wPlus = isMobile ? 23 : 44;
+			let hPlus = isMobile ? 23 : 44;
+			let xPlus = isMobile ? 17 : self.image.width/2;
+			let yPlus = isMobile ? 15 : self.image.height/2+4;
+			this.plus = Handler.showImgRect( self.image, "bonus/plus.png", xPlus, yPlus, wPlus, hPlus );
 			this.plus.name = 'plus';
 		}
 		return this;
