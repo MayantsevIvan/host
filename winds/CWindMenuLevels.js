@@ -198,19 +198,40 @@
 		arrowRight.buttonMode = true;
 		arrowRight.on("pointerdown", onArrowRight);
 		
+		let touchMenuLevel = function ( evt ) {
+			let gx = Math.floor( evt.data.global.x / pixiApp.stage.scale.x );
+			self.pointTouchStart = gx;
+		};
+		
+		self.scaleScreen = visibleHeight / pixiAppHeight;
+		//let maxRight = Math.floor(( Handler.contentCenterX + visibleWidth/2));//сдвиг поля
+		let maxRight = Math.floor(( Handler.contentCenterX + (self.mainGroup.width/2 - visibleWidth/2) ) );//сдвиг поля
+		let maxLeft  = Math.floor(( Handler.contentCenterX - (self.mainGroup.width/2 - visibleWidth/2) ) );
+		
+		console.log("Handler.contentCenterX",Handler.contentCenterX);
+		console.log("visibleWidth",visibleWidth/2);
+		console.log("maxRight", maxRight);
+		console.log("maxLeft",  maxLeft);
+		console.log("self.scaleScreen",  self.scaleScreen);
 		let moveMenuLevel = function ( evt ) {
 			let gx = Math.floor( evt.data.global.x / pixiApp.stage.scale.x );
-			let gy = Math.floor( evt.data.global.y / pixiApp.stage.scale.y );
-			//pixiApp.stage.x;
-			console.log("gx,gy",gx,gy);
+			
+			if ( self.pointTouchStart ) {
+				let shMenuLevel = 0;
+				if ( self.mainGroup.x + gx - self.pointTouchStart <=  maxRight &&  self.mainGroup.x + gx - self.pointTouchStart >=  maxLeft ) {
+					self.mainGroup.x += gx - self.pointTouchStart;
+				};
+				self.pointTouchStart = gx;
+			};
+			console.log("self.mainGroup.x",self.mainGroup.x);
 		};
-
+		
 		if (isMobile) { 
-			let scaleScreen = visibleHeight / pixiAppHeight;
-			self.mainGroup.scale.x = scaleScreen;
-			self.mainGroup.scale.y = scaleScreen;
+			//self.mainGroup.scale.x = self.scaleScreen;
+			//self.mainGroup.scale.y = self.scaleScreen;
 			self.mainGroup.onEL('pointermove',moveMenuLevel);
-		};
+			self.mainGroup.onEL('pointerdown',touchMenuLevel);
+		}; 
 	}
 	
 	CWindMenuLevels.newObject = function(){
