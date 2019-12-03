@@ -72,7 +72,7 @@
 		let butPlay = null;
 		let backgrButPlay = null;
 		let truePlay = User.energy > 0;
-		if ( truePlay == true ) {
+		if ( truePlay == false ) {
 			let backgrButContinue = Handler.showImgRect(self.windGroup,"backgrButContinue.png",0,195,468,200);
 			backgrButContinue.scale.set(0.96);
 			let butContinue = Handler.showImgRect(self.windGroup,"butContinue.png",2,208,401,76);
@@ -150,7 +150,7 @@
 		};
 		
 		if ( isMobile ) {
-			if ( !truePlay ) {
+			if ( truePlay ) {
 				butPlay.y = 165; 
 				backgrButPlay.y = 173;
 				let butShowRating = Handler.showImgRect(self.windGroup,"butPlay.png",0,250,242,65);
