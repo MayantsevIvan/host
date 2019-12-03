@@ -196,24 +196,17 @@
 			}
 		}
 		
-		let yAr = isMobile ? 0 : -35;
+		let yAr = -35;
 		let xAr = 370;
 		let arrowLeft = Handler.showImgRect(self.mainGroup, "arrowLeft.png",-xAr,yAr,16,52);
-		arrowLeft.interactive = true;
-		arrowLeft.buttonMode = true;
-		arrowLeft.on("pointerdown", onArrowLeft);
+		arrowLeft.onEL("pointerdown", onArrowLeft);
 		let arrowRight = Handler.showImgRect(self.mainGroup, "arrowRight.png",xAr,yAr,16,52);
-		arrowRight.interactive = true;
-		arrowRight.buttonMode = true;
-		arrowRight.on("pointerdown", onArrowRight);
+		arrowRight.onEL("pointerdown", onArrowRight);
 		
 		let touchMenuLevel = function ( evt ) {
 			let gx = Math.floor( evt.data.global.x / pixiApp.stage.scale.x );
 			self.pointTouchStart = gx;
 		};
-		
-
-		
 		
 		self.scaleScreen = visibleHeight / pixiAppHeight;
 		
@@ -222,23 +215,15 @@
 				
 		self.maxRight  = Math.floor(( Handler.contentCenterX-visibleWidth/2+pixiAppWidth*self.scaleScreen/2) );//сдвиг поля
 		self.maxLeft   = Math.floor(( Handler.contentCenterX+visibleWidth/2-pixiAppWidth*self.scaleScreen/2) );
-		
-		console.log("Handler.contentCenterX",Handler.contentCenterX);
-		console.log("visibleWidth",visibleWidth/2);
-		//console.log("maxRight", self.maxRight );
-		//console.log("maxLeft",  self.maxLeft );
-		console.log("self.scaleScreen",  self.scaleScreen);
+
 		let moveMenuLevel = function ( evt ) {
 			let gx = Math.floor( evt.data.global.x / pixiApp.stage.scale.x );
-			
 			let newx = gx - self.pointTouchStart;
 			//if ( self.mainGroup.x + newx < self.maxRight          &&     self.mainGroup.x + newx > self.maxLeft ) {
 			if ( self.mainGroup.x + newx <= self.maxRight && self.mainGroup.x + newx >= self.maxLeft ) {
 				self.mainGroup.x += newx;
 			};
 			self.pointTouchStart = gx;
-			
-			console.log("self.mainGroup.x",self.mainGroup.x);
 		};
 		
 		if (isMobile) { 
