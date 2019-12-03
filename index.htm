@@ -30,7 +30,7 @@
  			const cw = window.innerWidth  || document.body.clientWidth;
 			const ch = window.innerHeight || document.body.clientHeight;
 
-			alert("VER 1.22");
+			alert("VER 1.23");
 			let ew = Math.floor(10*cw / pixiAppWidth);
 			let scalew = Math.floor( ew / 2 ) * 0.2;
 			let eh = Math.floor(10*ch / pixiAppHeight);
@@ -65,7 +65,6 @@
 			
 			let shScreenX = 0;
 			let shScreenY = 0;
-			let plansh = false;
 			let canvas = document.querySelector('canvas');
 			if ( isMobile ) {
 				//let pixiAppScaleMobile = window.innerWidth/pixiAppWidth;
@@ -80,7 +79,6 @@
 			    pixiApp.stage.scale.y = pixiApp.stage.scale.x;
 				if ( cw / visibleWidth > ch / visibleHeight ) {
 					visibleWidth = Math.floor( cw * visibleHeight / ch );
-					plansh = true;
 				};
 				shScreenX = Math.floor(( pixiAppWidth - visibleWidth ) * pixiAppScaleMobile/2);
 				//console.log('visibleWidth',visibleWidth);
