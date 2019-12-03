@@ -196,13 +196,13 @@
 			}
 		}
 		
-		let yAr = isMobile ? -80 : -35;
-		let xArLeft = isMobile ? 50 : -370;
-		let arrowLeft = Handler.showImgRect(self.mainGroup, "arrowLeft.png",xArLeft,yAr,16,52);
+		let yAr = isMobile ? 0 : -35;
+		let xAr = 370;
+		let arrowLeft = Handler.showImgRect(self.mainGroup, "arrowLeft.png",-xAr,yAr,16,52);
 		arrowLeft.interactive = true;
 		arrowLeft.buttonMode = true;
 		arrowLeft.on("pointerdown", onArrowLeft);
-		let arrowRight = Handler.showImgRect(self.mainGroup, "arrowRight.png",370,yAr,16,52);
+		let arrowRight = Handler.showImgRect(self.mainGroup, "arrowRight.png",xAr,yAr,16,52);
 		arrowRight.interactive = true;
 		arrowRight.buttonMode = true;
 		arrowRight.on("pointerdown", onArrowRight);
