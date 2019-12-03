@@ -89,4 +89,9 @@
 				}
 			}
 		};
+		if ( isMobile && scale ) {
+			this.group.scale.set(1.16);
+			this.group.x += 38;
+			this.group.y += 30;
+		}
 	};
