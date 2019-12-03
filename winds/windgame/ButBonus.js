@@ -5,6 +5,7 @@
 		this.type = type;
 		this.parent = parent;
 		this.name = name;
+		this._scale = 0;
 		this._count = 0;
         Object.defineProperty( this, "count", {
 	        get: function(   ) { return this._count; },		 
@@ -21,6 +22,13 @@
 			this.image.height  /= 2;
 		};
 
+		Object.defineProperty( this, "scale", {
+	        get: function(   ) { return this._scale; },		 
+	        set: function(val) {
+	    	    this._scale = val;  
+	    	    this.image.scale.set(this._scale);
+	    	}
+	    });
 		
 		this.count = User[name];
 		this.image.onEL( "pointerdown", function(evt){ self.onClick(evt); } );
