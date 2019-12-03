@@ -123,7 +123,7 @@
 			}
 		}
 		
-		for ( let i = 0; i < this.cx-9; i++) {
+		for ( let i = 0; i <= this.cx-9; i++) {
 			let numMinStroke = 0;
 			let currentSize = 200;
 			for( let i = 0; i < lineWeight.length; i++ ) {
@@ -167,7 +167,7 @@
 			EndLevelAnimator.animation = false;
 			this.cx = lev[0];
 			this.cy = lev[1];
-			console.log('lev',lev);
+			//console.log('lev',lev);
 			if ( isMobile && this.cx >= 10 ) this.reCreateTable( lev );
 			if ( this.cx > 9 ) {
 				Handler.coordsShiftX = Handler.coordsWidth/2;
