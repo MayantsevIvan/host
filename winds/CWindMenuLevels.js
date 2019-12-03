@@ -64,10 +64,10 @@
 		//	levelPointData.y[48] -= 5; levelPointData.x[48] += 3; ySmallPoint[48] -= 10;
 		//	
 		//}
-
+		let xCurrentLevel = 0;
 		for ( let i = self.maxLevel; i >= self.minNumLevel; --i ) {	
 			let withArrow = self.currentLevel == i;
-			
+			if ( withArrow ) xCurrentLevel = levelPointData.x[k];
 			mlPoints[i] = new menuLevelPoint( 	self.manyLevesGroup, 
 												levelPointData.x[k], 
 												levelPointData.y[k],
@@ -83,7 +83,16 @@
 		}
 	//	Handler.toFront(self.loadingGr);
 		//Handler.toBack( self.background );
-	}
+		if ( isMobile ) {
+			if ( self.mainGroup.x - xCurrentLevel <= self.maxRight && self.mainGroup.x - xCurrentLevel >= self.maxLeft ) {
+				self.mainGroup.x -= xCurrentLevel;
+			} else if ( self.mainGroup.x - xCurrentLevel <= self.maxRight ) {
+				self.mainGroup.x = self.maxLeft;
+			} else if ( self.mainGroup.x - xCurrentLevel >= self.maxLeft ) {
+				self.mainGroup.x = self.maxRight;
+			};
+		};
+	}   
 	
 	CWindMenuLevels.showBakcgr = function( ) {
 		let self = this;
@@ -147,7 +156,7 @@
 		//self.numLocation = 1;
 		this.initStats();
 		this.backgr = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];	
-		this.showLocation();
+		
 		
 		
 		/*this.	 = [];
@@ -203,35 +212,58 @@
 			self.pointTouchStart = gx;
 		};
 		
+
+		
+		
 		self.scaleScreen = visibleHeight / pixiAppHeight;
-		//let maxRight = Math.floor(( Handler.contentCenterX + visibleWidth/2));//сдвиг поля
-		let maxRight = Math.floor(( Handler.contentCenterX + (self.mainGroup.width/2 - visibleWidth/2) ) );//сдвиг поля
-		let maxLeft  = Math.floor(( Handler.contentCenterX - (self.mainGroup.width/2 - visibleWidth/2) ) );
+		
+		//self.maxRight  = Math.floor(( Handler.contentCenterX*self.scaleScreen + (Handler.contentCenterX - visibleWidth/2)) );//сдвиг поля
+		//self.maxLeft   = Math.floor(( Handler.contentCenterX/self.scaleScreen - (Handler.contentCenterX - visibleWidth/2)) );
+				
+		self.maxRight  = Math.floor(( Handler.contentCenterX-visibleWidth/2+pixiAppWidth*self.scaleScreen/2) );//сдвиг поля
+		self.maxLeft   = Math.floor(( Handler.contentCenterX+visibleWidth/2-pixiAppWidth*self.scaleScreen/2) );
 		
 		console.log("Handler.contentCenterX",Handler.contentCenterX);
 		console.log("visibleWidth",visibleWidth/2);
-		console.log("maxRight", maxRight);
-		console.log("maxLeft",  maxLeft);
+		//console.log("maxRight", self.maxRight );
+		//console.log("maxLeft",  self.maxLeft );
 		console.log("self.scaleScreen",  self.scaleScreen);
 		let moveMenuLevel = function ( evt ) {
 			let gx = Math.floor( evt.data.global.x / pixiApp.stage.scale.x );
 			
-			if ( self.pointTouchStart ) {
-				let shMenuLevel = 0;
-				if ( self.mainGroup.x + gx - self.pointTouchStart <=  maxRight &&  self.mainGroup.x + gx - self.pointTouchStart >=  maxLeft ) {
-					self.mainGroup.x += gx - self.pointTouchStart;
-				};
-				self.pointTouchStart = gx;
+			let newx = gx - self.pointTouchStart;
+			//if ( self.mainGroup.x + newx < self.maxRight          &&     self.mainGroup.x + newx > self.maxLeft ) {
+			if ( self.mainGroup.x + newx <= self.maxRight && self.mainGroup.x + newx >= self.maxLeft ) {
+				self.mainGroup.x += newx;
 			};
+			self.pointTouchStart = gx;
+			
 			console.log("self.mainGroup.x",self.mainGroup.x);
 		};
 		
 		if (isMobile) { 
-			//self.mainGroup.scale.x = self.scaleScreen;
-			//self.mainGroup.scale.y = self.scaleScreen;
+			self.mainGroup.scale.x = self.scaleScreen;
+			self.mainGroup.scale.y = self.scaleScreen;
 			self.mainGroup.onEL('pointermove',moveMenuLevel);
 			self.mainGroup.onEL('pointerdown',touchMenuLevel);
-		}; 
+		};
+		this.showLocation();
+		//let wg = Math.floor(visibleWidth/2);
+		//let hg = Math.floor(visibleHeight/2);
+		//let graphics = new PIXI.Graphics();
+		//graphics.lineStyle(2, 0xffff00, 1);
+		//graphics.beginFill(0xDE3249,0);
+		////graphics.drawRect( Handler.contentCenterX, Handler.contentCenterY, wg, hg );
+		////graphics.drawRect( Handler.contentCenterX-wg, Handler.contentCenterY, wg, hg );
+		//graphics.drawRect( self.mainGroup.x-pixiAppWidth/2, self.mainGroup.y, pixiAppWidth, self.mainGroup.height );
+		//graphics.endFill();
+		//Handler.canvas.addChild(graphics);
+		////pixiApp.stage.scale.set(0.5,0.5);
+		////pixiApp.stage.x += 500;
+		////Handler.contentCenterX-wg
+		////Handler.contentCenterX+wg
+		//	self.mainGroup.x <=  Handler.contentCenterX-wg+pixiAppWidth/2
+		//	self.mainGroup.x >= Handler.contentCenterX+wg-pixiAppWidth/2
 	}
 	
 	CWindMenuLevels.newObject = function(){
