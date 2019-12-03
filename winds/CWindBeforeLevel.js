@@ -16,29 +16,44 @@
 		self.mainGroup.y = Handler.contentCenterY;
 		self.mainGroup.sortableChildren = true;
 		self.windGroup = Handler.newGroup(self.mainGroup);
-		Handler.showImgRect(self.windGroup,"backgrWindM.png",0,0,594,624);
-		let xCross = 275;
-		let shCross = visibleWidth/2 + 8;
 		
-		if ( isMobile && shCross < xCross ) {
+		let backgrWindM = Handler.showImgRect(self.windGroup,"backgrWindM.png",0,0,594,624);
+		//let sc = visibleWidth0/backgrWindM.width;
+		//if ( isMobile ) backgrWindM.scale.set( visibleWidth0/backgrWindM.width );
+		//console.log('sc',sc);
+		console.log('visibleWidth0',visibleWidth0);
+		console.log('visibleWidth',visibleWidth);
+		let xCross =  275;
+		let yCross = -270;
+		let shCross = visibleWidth/2 + 8;
+		/*if ( isMobile && shCross < xCross ) {
 			xCross =  shCross;
-		}
-		let cross = Handler.showImgRect(self.windGroup,"cross.png",xCross,-270,36,36);
+		}*/
+		let cross = Handler.showImgRect(self.windGroup,"cross.png",xCross,yCross,36,36);
 		let touchCross = function(evt) {
 			self.shutdown();
 		}
 		cross.onEL("pointerdown", touchCross );
-		Handler.showImgRect(self.windGroup,"lableLevel.png",-45,-270,171,38);
+		
+		let yLableLevel = -270;
+		Handler.showImgRect(self.windGroup,"lableLevel.png",-45,yLableLevel,171,38);
 		
 		let levelNumber = params.numLevel == null ? User.ml+1 : params.numLevel;
 		Head.levelName = 'l'+Handler.cv( levelNumber );
-		let levelImg = Handler.showNumber('w',110,-270,levelNumber,20,28,self.windGroup,'',0);
+		let levelImg = Handler.showNumber('w',110, yLableLevel,levelNumber,20,28,self.windGroup,'',0);
 		levelImg.x -= Math.floor(levelImg.width/2);
-		Handler.showImgRect(self.windGroup,"lableBuyBons.png",0,-230,351,31);
-		Handler.showImgRect(self.windGroup,"lableBuyBons.png",0,-230,351,31);
-		Handler.showImgRect(self.windGroup,"backgrBons.png",0,-180,494,72);
-		Handler.showImgRect(self.windGroup,"lableTasks.png",0,-130,105,25);
-		Handler.showImgRect(self.windGroup,"backgrTasks.png",0,-7,551,216);
+		
+		let yLableBuyBonus = -230;
+		Handler.showImgRect(self.windGroup,"lableBuyBons.png",0,yLableBuyBonus,351,31);
+		let yBackgrBons = -180;
+		let backgrBon = Handler.showImgRect(self.windGroup,"backgrBons.png",0,yBackgrBons,494,72);
+		backgrBon.scale.set(1.1);
+		let yLableTasks = isMobile ? -125 : -130;
+		let lableTasks = Handler.showImgRect(self.windGroup,"lableTasks.png",0,yLableTasks,105,25);
+		if ( isMobile ) lableTasks.scale.set(1.18);
+		let yBackgrTasks = isMobile ? -5 : -7;
+		let backgrTasks = Handler.showImgRect(self.windGroup,"backgrTasks.png",0,yBackgrTasks,551,216);
+		if ( isMobile ) backgrTasks.scale.set(0.98);
 		
 		let pointerDownButPlay = function ( evt ) {
 			let but = evt.target;
@@ -57,8 +72,9 @@
 		let butPlay = null;
 		let backgrButPlay = null;
 		let truePlay = User.energy > 0;
-		if ( truePlay == false ) {
-			Handler.showImgRect(self.windGroup,"backgrButContinue.png",0,195,468,200);
+		if ( truePlay == true ) {
+			let backgrButContinue = Handler.showImgRect(self.windGroup,"backgrButContinue.png",0,195,468,200);
+			backgrButContinue.scale.set(0.96);
 			let butContinue = Handler.showImgRect(self.windGroup,"butContinue.png",2,208,401,76);
 		} else {
 			backgrButPlay = Handler.showImgRect(self.windGroup,"backgrButPlay.png",0,193,242,68);
@@ -77,9 +93,10 @@
         for ( let i = 0; i < 6; i++ ) {
 			if ( i > 1 && i < 5 ) {
 				let bname = Consts.BONUSES_NAMES[i-2];
-				Handler.butBonuses[i-2] = new ButBonus(self.windGroup, -208 + i*83, -178, bname, 1 );
+				Handler.butBonuses[i-2] = new ButBonus(self.windGroup, -208 + i*83, yBackgrBons + 2, bname, 1 );
+				if ( isMobile ) Handler.butBonuses[i-2].scale = 1.1;
 			} else {
-				Handler.showImgRect(self.windGroup,"disbon"+i+".png",-208+i*83,-180,63,69);
+				Handler.showImgRect(self.windGroup,"disbon"+i+".png",-208+i*83,yBackgrBons,63,69);
 			};
 		};
 		
@@ -105,6 +122,7 @@
 				Handler.mobileTask[mobileTaskIndex[num]] += 1;
 			};
 		};
+
 		TaskBeforeLevel.show( self.windGroup, levelNumber );
 	
 		self.windGroup.x += 85;
@@ -113,7 +131,7 @@
 		if ( isMobile ) {
 			self.windGroup.y += 42;
 			self.windGroup.x -= 82;
-			self.windGroup.scale.set(0.88,0.88);
+			self.windGroup.scale.set(visibleWidth/self.windGroup.width);
 			console.log('self.windGroup.x',self.windGroup.x);
 		}
 		//------------------------//
@@ -127,14 +145,14 @@
 				let shRtX = self.windRating.x - 200;
 				Handler.toFront( self.windRating );
 				self.mainGroup.addChild(self.windRating);
-				TweenMax.to( self.windRating, 2, { x: shRtX } );
+				TweenMax.to( self.windRating, 0.8, { x: shRtX } );
 			};
 		};
 		
 		if ( isMobile ) {
-			if ( truePlay ) {
-				butPlay.y = 155; 
-				backgrButPlay.y = 163;
+			if ( !truePlay ) {
+				butPlay.y = 165; 
+				backgrButPlay.y = 173;
 				let butShowRating = Handler.showImgRect(self.windGroup,"butPlay.png",0,250,242,65);
 				butShowRating.onEL("pointertap",showRating);
 			}
