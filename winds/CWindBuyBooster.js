@@ -16,23 +16,27 @@
         self.mainGroup = Handler.newGroup( Handler.gWinds );         
         self.mainGroup.x = Handler.contentCenterX;         
         self.mainGroup.y = Handler.contentCenterY;         
-		let showContent = function() {	
-			self.backgr = Handler.showWindBackround( -294, -149, 588,299, Consts.DIR_BUY_BOOSTER + "angleWindBuyBooster.png", Consts.DIR_BUY_BOOSTER + "sideWindBuyBooster.png", '0xF0ECB6' );
+		let showContent = function() {
+			let wBackgr = isMobile ? visibleWidth0 : 588;
+			let xBackgr = isMobile ? -225 : -294;
+			self.backgr = Handler.showWindBackround( xBackgr, -149, wBackgr, 299, Consts.DIR_BUY_BOOSTER + "angleWindBuyBooster.png", Consts.DIR_BUY_BOOSTER + "sideWindBuyBooster.png", '0xF0ECB6' );
 			self.mainGroup.addChild( self.backgr );
-			
-			let cross = Handler.showImgRect( self.mainGroup,Consts.DIR_BUY_BOOSTER + "crossWindBuyBooster.png", 264, -119, 33, 28 );
+			let xCross = isMobile ? 190 : 264;
+			let cross = Handler.showImgRect( self.mainGroup,Consts.DIR_BUY_BOOSTER + "crossWindBuyBooster.png", xCross, -119, 33, 28 );
 			cross.onEL("pointerdown", function(){ self.shutdown() } ); 
 	//STARS ON BACKGROUND
-			let starArray = {};         
-			let starCX = [ -225, -120, -190, -225, -120, 120, 225, 190, 120, 225 ];         
-			let starCY = [   70,   20,  -30,  -90,  -60,  20,  70, -30, -60, -90 ];  
+			if ( !isMobile ) {
+				let starArray = {};         
+				let starCX = [ -225, -120, -190, -225, -120, 120, 225, 190, 120, 225 ];         
+				let starCY = [   70,   20,  -30,  -90,  -60,  20,  70, -30, -60, -90 ];  
 
-			for ( let i = 0; i<starCX.length; i++ ) {
-				starArray[i] = Handler.showImgRect( self.mainGroup, "star.png", starCX[i], starCY[i], 38, 37);         
-				Handler.transition_to( starArray[i], { angle:90, time: Consts.TIME_ROT_START, repeat: 18, yoyo: true  } );         
+				for ( let i = 0; i<starCX.length; i++ ) {
+					starArray[i] = Handler.showImgRect( self.mainGroup, "star.png", starCX[i], starCY[i], 38, 37);         
+					Handler.transition_to( starArray[i], { angle:90, time: Consts.TIME_ROT_START, repeat: 18, yoyo: true  } );         
+				};
 			};
-			let backgrAnim = Handler.showImgRect(self.mainGroup,Consts.DIR_BUY_BOOSTER + "animBackgr.png",0,-20,124,153);         
 	//LIGHTNING
+			let backgrAnim = Handler.showImgRect(self.mainGroup,Consts.DIR_BUY_BOOSTER + "animBackgr.png",0,-20,124,153);         
 			let luch1 = Handler.showImgRect( self.mainGroup, "luch.png", backgrAnim.x,backgrAnim.y,160,160 );         
 			let luch2 = Handler.showImgRect( self.mainGroup, "luch.png", backgrAnim.x,backgrAnim.y,160,160 ); 
 			luch1.alpha = 0.4;
