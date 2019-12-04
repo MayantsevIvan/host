@@ -298,20 +298,20 @@
 		//------------------------------------------------------------
 		//--------------------CWindAcSale-------------------
 		//------------------------------------------------------------
-		let urlAcSale = ImageLoader.baseUrl+"/winds/acSale/";
-		//pixiApp.loader.add( '',       urlAcFriends+'' );
-		pixiApp.loader.add( 'backgrAcSale.png',       urlAcSale+'backgrAcSale.png' );
-		pixiApp.loader.add( 'backgrBonAcSale.png',       urlAcSale+'backgrBonAcSale.png' );
-		pixiApp.loader.add( 'bon1AcSale.png',       urlAcSale+'bon1AcSale.png' );
-		pixiApp.loader.add( 'bon2AcSale.png',       urlAcSale+'bon2AcSale.png' );
-		pixiApp.loader.add( 'bon3AcSale.png',       urlAcSale+'bon3AcSale.png' );
-		pixiApp.loader.add( 'bon4AcSale.png',       urlAcSale+'bon4AcSale.png' );
-		pixiApp.loader.add( 'butBuyAcSale.png',       urlAcSale+'butBuyAcSale.png' );
-		pixiApp.loader.add( 'lable9bonAcSale.png',       urlAcSale+'lable9bonAcSale.png' );
-		pixiApp.loader.add( 'lableBonAcSale.png',       urlAcSale+'lableBonAcSale.png' );
-		pixiApp.loader.add( 'lableBuyAcSale.png',       urlAcSale+'lableBuyAcSale.png' );
-		//------------------------------------------------------------
-		//--------------------CWindAcSale1-------------------
+//		let urlAcSale = ImageLoader.baseUrl+"/winds/acSale/";
+//		//pixiApp.loader.add( '',       urlAcFriends+'' );
+//		pixiApp.loader.add( 'backgrAcSale.png',       urlAcSale+'backgrAcSale.png' );
+//		pixiApp.loader.add( 'backgrBonAcSale.png',       urlAcSale+'backgrBonAcSale.png' );
+//		pixiApp.loader.add( 'bon1AcSale.png',       urlAcSale+'bon1AcSale.png' );
+//		pixiApp.loader.add( 'bon2AcSale.png',       urlAcSale+'bon2AcSale.png' );
+//		pixiApp.loader.add( 'bon3AcSale.png',       urlAcSale+'bon3AcSale.png' );
+//		pixiApp.loader.add( 'bon4AcSale.png',       urlAcSale+'bon4AcSale.png' );
+//		pixiApp.loader.add( 'butBuyAcSale.png',       urlAcSale+'butBuyAcSale.png' );
+//		pixiApp.loader.add( 'lable9bonAcSale.png',       urlAcSale+'lable9bonAcSale.png' );
+//		pixiApp.loader.add( 'lableBonAcSale.png',       urlAcSale+'lableBonAcSale.png' );
+//		pixiApp.loader.add( 'lableBuyAcSale.png',       urlAcSale+'lableBuyAcSale.png' );
+//		//------------------------------------------------------------
+//		//--------------------CWindAcSale1-------------------
 		//------------------------------------------------------------
 //		let urlAcSale1 = ImageLoader.baseUrl+"/winds/acSale1/";
 //		//pixiApp.loader.add( '',       urlAcFriends+'' );
