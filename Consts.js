@@ -20,7 +20,7 @@
 	Consts.DIR_AC5STEPS                      = baseDir + "/winds/ac5Steps/";
 	Consts.DIR_AC_INV_GAME                   = baseDir + "/winds/acInvInGame/";
 	Consts.DIR_AC_SALE1                      = baseDir + "/winds/acSale1/";
-	Consts.DIR_AC_SALE                       = baseDir + "/winds/acSale/";
+	Consts.DIR_ACTION0                       = baseDir + "/winds/acSale/";
 	Consts.DIR_AC_INV_TO_GAME                = baseDir + "/winds/acInvToGame/";
 	Consts.DIR_AC_FRIEDS                     = baseDir + "/winds/acFriends/";
 	Consts.DIR_AC_BOOSTER                    = baseDir + "/winds/acBooster/";
