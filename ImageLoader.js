@@ -327,21 +327,40 @@
 		//--------------------CWindDailyBonus-------------------
 		//------------------------------------------------------------
 		let urlDailyBonus = ImageLoader.baseUrl+"/winds/dailyBonus/";
-		pixiApp.loader.add( 'backgrBonDailyBonus.png',       urlDailyBonus+'backgrBonDailyBonus.png' );
-		pixiApp.loader.add( 'backgrDailyBonus.png',       urlDailyBonus+'backgrDailyBonus.png' );
-		pixiApp.loader.add( 'checkBoxDailyBonus.png',       urlDailyBonus+'checkBoxDailyBonus.png' );
-		pixiApp.loader.add( 'disBon1DailyBonus.png',       urlDailyBonus+'disBon1DailyBonus.png' );
-		pixiApp.loader.add( 'disBon2DailyBonus.png',       urlDailyBonus+'disBon2DailyBonus.png' );
-		pixiApp.loader.add( 'disBon3DailyBonus.png',       urlDailyBonus+'disBon3DailyBonus.png' );	
-		pixiApp.loader.add( 'enBon1DailyBonus.png',       urlDailyBonus+'enBon1DailyBonus.png' );	
-		pixiApp.loader.add( 'enBon2DailyBonus.png',       urlDailyBonus+'enBon2DailyBonus.png' );	
-		pixiApp.loader.add( 'enBon3DailyBonus.png',       urlDailyBonus+'enBon3DailyBonus.png' );	
-		pixiApp.loader.add( 'lableDailyBonus.png',       urlDailyBonus+'lableDailyBonus.png' );	
-		pixiApp.loader.add( 'lableDay1DailyBonus.png',       urlDailyBonus+'lableDay1DailyBonus.png' );	
-		pixiApp.loader.add( 'lableDay2DailyBonus.png',       urlDailyBonus+'lableDay2DailyBonus.png' );	
-		pixiApp.loader.add( 'lableDay3DailyBonus.png',       urlDailyBonus+'lableDay3DailyBonus.png' );	
-		pixiApp.loader.add( 'lableTellFrDailyBonus.png',       urlDailyBonus+'lableTellFrDailyBonus.png' );		
-		pixiApp.loader.add( 'markerDailyBonus.png',       urlDailyBonus+'markerDailyBonus.png' );	
+		if ( isMobile ) { 
+			pixiApp.loader.add( 'markerDailyBonus.png',       urlDailyBonus+'markerDailyBonus.png' );
+			pixiApp.loader.add( 'lableTellFrDailyBonusMob.png',       urlDailyBonus+'lableTellFrDailyBonusMob.png' );
+			pixiApp.loader.add( 'lableDay3DailyBonusMob.png',       urlDailyBonus+'lableDay3DailyBonusMob.png' );
+			pixiApp.loader.add( 'lableDay2DailyBonusMob.png',       urlDailyBonus+'lableDay2DailyBonusMob.png' );
+			pixiApp.loader.add( 'lableDay1DailyBonusMob.png',       urlDailyBonus+'lableDay1DailyBonusMob.png' );
+			pixiApp.loader.add( 'lableDailyBonusMob.png',       urlDailyBonus+'lableDailyBonusMob.png' );	
+			pixiApp.loader.add( 'lableComeInEvrDay.png',       urlDailyBonus+'lableComeInEvrDay.png' );	
+			pixiApp.loader.add( 'lableBon3MobDailyBonus.png',       urlDailyBonus+'lableBon3MobDailyBonus.png' );	
+			pixiApp.loader.add( 'lableBon2MobDailyBonus.png',       urlDailyBonus+'lableBon2MobDailyBonus.png' );	
+			pixiApp.loader.add( 'lableBon1MobDailyBonus.png',       urlDailyBonus+'lableBon1MobDailyBonus.png' );	
+			pixiApp.loader.add( 'enBon3DailyBonusMob.png',       urlDailyBonus+'enBon3DailyBonusMob.png' );	
+			pixiApp.loader.add( 'enBon2DailyBonusMob.png',       urlDailyBonus+'enBon2DailyBonusMob.png' );	
+			pixiApp.loader.add( 'enBon1DailyBonusMob.png',       urlDailyBonus+'enBon1DailyBonusMob.png' );	
+			pixiApp.loader.add( 'checkBoxDailyBonus.png',       urlDailyBonus+'checkBoxDailyBonus.png' );		
+			pixiApp.loader.add( 'backgrDailyBonusMob.png',       urlDailyBonus+'backgrDailyBonusMob.png' );
+			pixiApp.loader.add( 'backgrBonDailyBonusMob.png',       urlDailyBonus+'backgrBonDailyBonusMob.png' );
+		} else {
+			pixiApp.loader.add( 'backgrBonDailyBonus.png',       urlDailyBonus+'backgrBonDailyBonus.png' );
+			pixiApp.loader.add( 'backgrDailyBonus.png',       urlDailyBonus+'backgrDailyBonus.png' );
+			pixiApp.loader.add( 'checkBoxDailyBonus.png',       urlDailyBonus+'checkBoxDailyBonus.png' );
+			pixiApp.loader.add( 'disBon1DailyBonus.png',       urlDailyBonus+'disBon1DailyBonus.png' );
+			pixiApp.loader.add( 'disBon2DailyBonus.png',       urlDailyBonus+'disBon2DailyBonus.png' );
+			pixiApp.loader.add( 'disBon3DailyBonus.png',       urlDailyBonus+'disBon3DailyBonus.png' );	
+			pixiApp.loader.add( 'enBon1DailyBonus.png',       urlDailyBonus+'enBon1DailyBonus.png' );	
+			pixiApp.loader.add( 'enBon2DailyBonus.png',       urlDailyBonus+'enBon2DailyBonus.png' );	
+			pixiApp.loader.add( 'enBon3DailyBonus.png',       urlDailyBonus+'enBon3DailyBonus.png' );	
+			pixiApp.loader.add( 'lableDailyBonus.png',       urlDailyBonus+'lableDailyBonus.png' );	
+			pixiApp.loader.add( 'lableDay1DailyBonus.png',       urlDailyBonus+'lableDay1DailyBonus.png' );	
+			pixiApp.loader.add( 'lableDay2DailyBonus.png',       urlDailyBonus+'lableDay2DailyBonus.png' );	
+			pixiApp.loader.add( 'lableDay3DailyBonus.png',       urlDailyBonus+'lableDay3DailyBonus.png' );	
+			pixiApp.loader.add( 'lableTellFrDailyBonus.png',       urlDailyBonus+'lableTellFrDailyBonus.png' );		
+			pixiApp.loader.add( 'markerDailyBonus.png',       urlDailyBonus+'markerDailyBonus.png' );
+		};			
 		//------------------------------------------------------------
 		//--------------------CWindStepsLeft-------------------
 		//------------------------------------------------------------
