@@ -217,6 +217,7 @@
 		self.maxLeft   = Math.floor(( Handler.contentCenterX+visibleWidth/2-pixiAppWidth*self.scaleScreen/2) );
 
 		let moveMenuLevel = function ( evt ) {
+			if ( Winds.getTopWindName() != Winds.WIND_MENU_LEVELS ) return;
 			let gx = Math.floor( evt.data.global.x / pixiApp.stage.scale.x );
 			let newx = gx - self.pointTouchStart;
 			//if ( self.mainGroup.x + newx < self.maxRight          &&     self.mainGroup.x + newx > self.maxLeft ) {
