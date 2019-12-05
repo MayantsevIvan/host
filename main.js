@@ -32,9 +32,10 @@
 						}
 						User.init( response );//User must inited before Winds.WIND_MENU_LEVELS
 						Winds.show( Winds.WIND_MENU_LEVELS );
-						Winds.show( Winds.WIND_FR_INVITED );
-						Winds.show( Winds.WIND_ACTION0 );
-						//Winds.show( Winds.WIND_DAILY_BONUS );
+						//Winds.show( Winds.WIND_FR_INVITED );
+						//Winds.show( Winds.WIND_ACTION0 );
+						//Winds.show( Winds.WIND_ACTION1 );
+						Winds.show( Winds.WIND_DAILY_BONUS, { num_day: 1 } );
 						//Winds.show( Winds.WIND_STEPS_LEFT );
 						Head.init( response );
 						if (parseInt(response['db'])>0) Winds.show( Winds.WIND_DAILY_BONUS, { num_day: parseInt(response.num_day) } );			
