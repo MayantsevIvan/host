@@ -1,7 +1,9 @@
 	
 	ImageLoader = {};
+	ImageLoader.urlTiny = "imagesTiny";
+	ImageLoader.urlTinyHalf = "imagesTinyHalf";
+	ImageLoader.baseUrl = isMobile ? ImageLoader.urlTinyHalf : ImageLoader.urlTiny;
 	
-	ImageLoader.baseUrl = isMobile ? "imagesTinyHalf" : "imagesTiny";
 	ImageLoader.loadAssets = function( onAssetsLoaded, listOfImages ) {
         let self = this;
 		
@@ -18,18 +20,18 @@
 		pixiApp.loader.on('onLoad', onProgress);
 		//load all fonts;
 		for ( let i = 0; i <= 9; i++ ){
-			pixiApp.loader.add('wb'+i+'.png',  ImageLoader.baseUrl+'/fonts/wb'+i+'.png');
-			pixiApp.loader.add('w'+i+'.png',   ImageLoader.baseUrl+'/fonts/w'+i+'.png');
-			pixiApp.loader.add('ry'+i+'.png',  ImageLoader.baseUrl+'/fonts/ry'+i+'.png');
-			pixiApp.loader.add('by'+i+'.png',  ImageLoader.baseUrl+'/fonts/by'+i+'.png');
-			pixiApp.loader.add('wr'+i+'.png',  ImageLoader.baseUrl+'/fonts/wr'+i+'.png');
-			pixiApp.loader.add('wg'+i+'.png',  ImageLoader.baseUrl+'/fonts/wg'+i+'.png');
-			pixiApp.loader.add('swb'+i+'.png', ImageLoader.baseUrl+'/fonts/swb'+i+'.png');
-			pixiApp.loader.add('yb'+i+'.png', ImageLoader.baseUrl+'/fonts/yb'+i+'.png');
-			pixiApp.loader.add('bby'+i+'.png', ImageLoader.baseUrl+'/fonts/bby'+i+'.png');
-			pixiApp.loader.add('ow'+i+'.png', ImageLoader.baseUrl+'/fonts/ow'+i+'.png');
-			pixiApp.loader.add('o'+i+'.png', ImageLoader.baseUrl+'/fonts/o'+i+'.png');
-			pixiApp.loader.add('owf'+i+'.png', ImageLoader.baseUrl+'/fonts/owf'+i+'.png');
+			pixiApp.loader.add('wb'  +i+'.png',   ImageLoader.baseUrl+'/fonts/wb'+i+'.png');
+			pixiApp.loader.add('w'   +i+'.png',   ImageLoader.baseUrl+'/fonts/w'+i+'.png');
+			pixiApp.loader.add('ry'  +i+'.png',   ImageLoader.baseUrl+'/fonts/ry'+i+'.png');
+			pixiApp.loader.add('by'  +i+'.png',   ImageLoader.baseUrl+'/fonts/by'+i+'.png');
+			pixiApp.loader.add('wr'  +i+'.png',   ImageLoader.baseUrl+'/fonts/wr'+i+'.png');
+			pixiApp.loader.add('wg'  +i+'.png',   ImageLoader.baseUrl+'/fonts/wg'+i+'.png');
+			pixiApp.loader.add('swb' +i+'.png',   ImageLoader.baseUrl+'/fonts/swb'+i+'.png');
+			pixiApp.loader.add('yb'  +i+'.png',   ImageLoader.baseUrl+'/fonts/yb'+i+'.png');
+			pixiApp.loader.add('bby' +i+'.png',   ImageLoader.baseUrl+'/fonts/bby'+i+'.png');
+			pixiApp.loader.add('ow'  +i+'.png',   ImageLoader.baseUrl+'/fonts/ow'+i+'.png');
+			pixiApp.loader.add('o'   +i+'.png',   ImageLoader.baseUrl+'/fonts/o'+i+'.png');
+			pixiApp.loader.add('owf' +i+'.png',   ImageLoader.urlTiny+'/fonts/owf'+i+'.png');
 		};
 		pixiApp.loader.add('bySl.png',  ImageLoader.baseUrl+'/fonts/bySl.png');
 		pixiApp.loader.add('owfX.png',  ImageLoader.baseUrl+'/fonts/owfX.png');
