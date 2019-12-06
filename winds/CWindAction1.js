@@ -26,7 +26,7 @@
 			let onCross = function(evt) {
 				self.shutdown();
 			}
-			cross.on("pointertap",onCross);
+			cross.onEL("pointertap",onCross);
 			//title
 			let nameTitle = isMobile ? "lableAcSale1Mob.png" : "lableAcSale1.png";
 			let wTitle = isMobile ?  418 :  580; 
