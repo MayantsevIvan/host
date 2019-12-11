@@ -47,7 +47,7 @@
 		//level
 		let yTitle = isMobile ? -335 : -255;
 		Handler.showImgRect(self.mWind,"lableLevel.png",-60, yTitle,171,38);
-		let levelNumber = 1//parseInt(Head.levelName.substr(1));;
+		let levelNumber = parseInt(Head.levelName.substr(1));;
 		let levelImg = Handler.showNumber('w',95, yTitle,levelNumber,20,28,self.mWind,'',0);
 		levelImg.x -= Math.floor(levelImg.width/2);
 		//star
@@ -112,7 +112,7 @@
 		self.xNumPoints = isMobile ? -83 : 0;
 		self.yNumPoints = isMobile ?  10 : 60;
 		this.timerPoints = setInterval( function(){ self.showPoints() }, 10 );
-		this.ingnots = 1;
+		
 		let xNumIgnots = isMobile ?  110 :  12;
 		let yNumIgnots = isMobile ?    9 : 109;
 		let imgI = Handler.showText(self.mWind, this.ingnots, xNumIgnots, yNumIgnots, this.textParams);
