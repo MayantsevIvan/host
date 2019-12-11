@@ -35,7 +35,7 @@
 		this.butGold = Handler.showImgRect(this.mainGroup, "butGold.png",0,25,443,60);
 		Handler.showImgRect(this.mainGroup, "lableMidline.png",0,100,367,66);
 		Handler.showImgRect(this.mainGroup, "butInviteWindFrInvited.png",0,165,443,61);
-		Handler.showImgRect(this.mainGroup, "lableTellFrDailyBonus.png",195,220,196,17);
+		Handler.showImgRect(this.mainGroup, "lableTellFrInvited.png",195,220,196,17);
 		Handler.showImgRect(this.mainGroup, "checkBoxDailyBonus.png",85,216,19,19);
 		Handler.showImgRect(this.mainGroup, "markerDailyBonus.png",87,216,29,23);
 		this.mainGroup.scale.set(visibleWidth0/this.mainGroup.width);
