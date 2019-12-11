@@ -150,7 +150,7 @@
 
     CWindMyScore.showUserCard = function( fgroup, rx, ry, uid, userPic, userPlace, userScore, userName ) {
 		let imgSize = 98;
-        let backroundUser = Handler.showImgRect( fgroup, Consts.DIR_MY_SCORE  + "backgrUserWindMyScore.png", rx, ry, 164,104,false);         
+        let backroundUser = Handler.showImgRect( fgroup, Consts.DIR_MY_SCORE  + "backgrUserWindMyScore.png", rx, ry, 164,104 );         
 		
 	//  let colorBackgrUserImg = Handler.colorLuaToHex([212/255,126/255,68/255]);
     //  let backgroundImgUser = Handler.showRect( fgroup, rx,ry,imgSize+3,imgSize+3, colorBackgrUserImg, 1 );         

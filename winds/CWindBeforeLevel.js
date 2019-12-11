@@ -47,7 +47,7 @@
 		Handler.showImgRect(self.windGroup,"lableBuyBons.png",0,yLableBuyBonus,351,31);
 		let yBackgrBons = -180;
 		let backgrBon = Handler.showImgRect(self.windGroup,"backgrBons.png",0,yBackgrBons,494,72);
-		backgrBon.scale.set(1.1);
+		if ( isMobile ) backgrBon.scale.set(1.1);
 		let yLableTasks = isMobile ? -125 : -130;
 		let lableTasks = Handler.showImgRect(self.windGroup,"lableTasks.png",0,yLableTasks,105,25);
 		if ( isMobile ) lableTasks.scale.set(1.18);

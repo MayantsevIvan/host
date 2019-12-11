@@ -28,7 +28,7 @@
 			let xCross = isMobile ? 262 : 310;
 			let cross = Handler.showImgRect(self.mainGroup,"cross.png",xCross,-224,36,36);
 			cross.onEL("pointerdown",function() {self.shutdown()});
-			cross.scale.set(1.2,1.2);
+			if ( isMobile ) cross.scale.set(1.2,1.2);
 			let numGroup = Handler.newGroup();
 			self.mainGroup.addChild(numGroup);
 			

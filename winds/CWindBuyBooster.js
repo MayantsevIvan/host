@@ -67,7 +67,7 @@
 
 			//Handler.showImgRect( self.mainGroup, Consts.DIR_BUY_BOOSTER+params.nameBon+".png", xBon[numBonus], -25, wBon[numBonus], hBon[numBonus] );         
 			Handler.showImgRect( self.mainGroup, Consts.DIR_BUY_BOOSTER + params.nameBon+".png", -8, -25, 154, 155 );         
-			Handler.showImgRect( self.mainGroup, Consts.DIR_BUY_BOOSTER + "price"+numBonus+".png", 70, 102, 48, 36, false );         
+			Handler.showImgRect( self.mainGroup, Consts.DIR_BUY_BOOSTER + "price"+numBonus+".png", 70, 102, 48, 36 );         
 		};
 		
 		if ( Handler.windsWithLoadedImages[ Winds.WIND_BUY_BOOSTER ] == null ) {
