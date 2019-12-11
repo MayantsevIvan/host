@@ -34,14 +34,14 @@
     
 	
 		let idImg =  Handler.showImgRect( this.group, "boxId.png", -363, -290,31,31 );   
-		idImg.onEL( 'pointerdown', function() { Winds.show( Winds.WIND_MSG, { params: self.params } ) } );
+		idImg.onEL( 'pointerdown', function() { Winds.show( Winds.WIND_MSG, { text: Langs.NUMBER_USER + User.viewer_id } ) } );
 // 		this.fonPoints = Handler.showImgRect( this.group, "fonPoint.png", -81,-22,162,42, false );  панели очков нет       
         
-		let xFonCoins  = isMobile ? 32 : -100;
-		let xFonEnergy  = isMobile ? -140 : -280;
+		let xFonCoins  = isMobile ?    32 : -110;
+		let xFonEnergy  = isMobile ? -140 : -290;
 		let yFonCoins  = isMobile ? -visibleHeight/2 + 30 : -280;//19 height/2
-		this.fonCoins  = Handler.showImgRect( this.group, "panelMoney.png", xFonCoins, yFonCoins,165,34, false );         
-        this.fonEnergy = Handler.showImgRect( this.group, "panelLives.png", xFonEnergy, yFonCoins,166,43, false );         
+		this.fonCoins  = Handler.showImgRect( this.group, "panelMoney.png", xFonCoins, yFonCoins,165,34 );         
+        this.fonEnergy = Handler.showImgRect( this.group, "panelLives.png", xFonEnergy, yFonCoins,166,43 );         
 		
 		/*const graphics1 = new PIXI.Graphics();
         graphics1.beginFill(0x0000AA);
@@ -155,7 +155,7 @@
     };
     Head.showEnergy = function() {
         Handler.removeGroupChilds( Head.enGroup );         
-        Handler.showNumber( "wg", 0, this.fonEnergy.y, Head.energy, 13,18, Head.enGroup, '',3 );         
+        Handler.showNumber( "wg", 0, this.fonEnergy.y, User.energy, 13,18, Head.enGroup, '',3 );         
         Head.enGroup.x = ( this.fonEnergy.x + 20 ) - Math.floor( Head.groupNumCoins.width/2 );        
     };
 	

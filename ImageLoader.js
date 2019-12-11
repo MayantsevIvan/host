@@ -31,7 +31,7 @@
 			pixiApp.loader.add('bby' +i+'.png',   ImageLoader.baseUrl+'/fonts/bby'+i+'.png');
 			pixiApp.loader.add('ow'  +i+'.png',   ImageLoader.baseUrl+'/fonts/ow'+i+'.png');
 			pixiApp.loader.add('o'   +i+'.png',   ImageLoader.baseUrl+'/fonts/o'+i+'.png');
-			pixiApp.loader.add('owf' +i+'.png',   ImageLoader.urlTiny+'/fonts/owf'+i+'.png');
+			pixiApp.loader.add('owf' +i+'.png',   ImageLoader.urlTiny+'/fonts/owf'+i+'.png');//везде 2ной размер
 		};
 		pixiApp.loader.add('bySl.png',  ImageLoader.baseUrl+'/fonts/bySl.png');
 		pixiApp.loader.add('owfX.png',  ImageLoader.baseUrl+'/fonts/owfX.png');
@@ -73,7 +73,17 @@
 		//----------------------------------------------------
 		//-----------CWindPuzzle------------------------------
 		//----------------------------------------------------
-//		let urlWindPuzzle = ImageLoader.baseUrl+"/winds/puzzle";
+		//let urlWindPuzzle = ImageLoader.baseUrl+"/winds/puzzle";
+		//pixiApp.loader.add('angle1.png',   urlWindPuzzle+'/angle1.png');
+		//pixiApp.loader.add('angle2.png',   urlWindPuzzle+'/angle2.png');
+		//pixiApp.loader.add('angle3.png',   urlWindPuzzle+'/angle3.png');
+		//pixiApp.loader.add('angle4.png',   urlWindPuzzle+'/angle4.png');
+		//pixiApp.loader.add('centre.png',   urlWindPuzzle+'/centre.png');
+		//pixiApp.loader.add('side1.png',    urlWindPuzzle+'/side1.png');
+		//pixiApp.loader.add('side2.png',    urlWindPuzzle+'/side2.png');
+		//pixiApp.loader.add('side3.png',    urlWindPuzzle+'/side3.png');
+		//pixiApp.loader.add('side4.png',    urlWindPuzzle+'/side4.png');
+		
 //		pixiApp.loader.add('mWindPuzzleAngle.png',   urlWindPuzzle+'/mWindPuzzleAngle.png');
 //		pixiApp.loader.add('mWindPuzzleSide.png',    urlWindPuzzle+'/mWindPuzzleSide.png');
 //		pixiApp.loader.add('windImgPuzzleAngle.png', urlWindPuzzle+'/windImgPuzzleAngle.png');
@@ -135,23 +145,34 @@
 		pixiApp.loader.add('starRt1.png',                   urlWindEndLevel+'starRt1.png');	
 		pixiApp.loader.add('starRt2.png',                   urlWindEndLevel+'starRt2.png');						
 		pixiApp.loader.add('marker.png',                    urlWindEndLevel+'marker.png');				
-		pixiApp.loader.add('lableWindEndLevel.png',         urlWindEndLevel+'lableWindEndLevel.png');	
-		pixiApp.loader.add('lableTellFr.png',               urlWindEndLevel+'lableTellFr.png');	
-		pixiApp.loader.add('lablePuzzleNewElem.png',        urlWindEndLevel+'lablePuzzleNewElem.png');	
+		pixiApp.loader.add('lableWindEndLevel.png',         urlWindEndLevel+'lableWindEndLevel.png');				
 		pixiApp.loader.add('lablePointsEndLevel.png',       urlWindEndLevel+'lablePointsEndLevel.png');	
 		pixiApp.loader.add('lableWinEndLevel.png',          urlWindEndLevel+'lableWinEndLevel.png');	
 		pixiApp.loader.add('lableIgnots.png',               urlWindEndLevel+'lableIgnots.png');	
-		pixiApp.loader.add('lableGetPrize.png',             urlWindEndLevel+'lableGetPrize.png');	
 		pixiApp.loader.add('fieldPoint.png',                urlWindEndLevel+'fieldPoint.png');	
 		pixiApp.loader.add('fieldIgnots.png',               urlWindEndLevel+'fieldIgnots.png');		
-		pixiApp.loader.add('checkBox.png',                  urlWindEndLevel+'checkBox.png');	
-		pixiApp.loader.add('butShowPuzzle.png',             urlWindEndLevel+'butShowPuzzle.png');	
-		pixiApp.loader.add('butContinueEndLevel.png',       urlWindEndLevel+'butContinueEndLevel.png');	
+		pixiApp.loader.add('checkBox.png',                  urlWindEndLevel+'checkBox.png');		
 		pixiApp.loader.add('backgrStarRt2.png',             urlWindEndLevel+'backgrStarRt2.png');
 		pixiApp.loader.add('backgrStarRt1.png',             urlWindEndLevel+'backgrStarRt1.png');
 		pixiApp.loader.add('backgrPuzzleElem.png',          urlWindEndLevel+'backgrPuzzleElem.png');
 		pixiApp.loader.add('backgrEndLevelWindP.png',       urlWindEndLevel+'backgrEndLevelWindP.png');
-		pixiApp.loader.add('backgrEndLevelWindM.png',       urlWindEndLevel+'backgrEndLevelWindM.png');
+		if ( isMobile ) {
+			pixiApp.loader.add('backgrEndLevelWindMMob.png',   urlWindEndLevel+'backgrEndLevelWindMMob.png');
+			pixiApp.loader.add('headEndLevel.png',             urlWindEndLevel+'headEndLevel.png');
+			pixiApp.loader.add('lableTellFrEndLevelMob.png',   urlWindEndLevel+'lableTellFrEndLevelMob.png');	
+			pixiApp.loader.add('butShowRatingEndLevelMob.png', urlWindEndLevel+'butShowRatingEndLevelMob.png');
+			pixiApp.loader.add('butShowPuzzleMob.png',         urlWindEndLevel+'butShowPuzzleMob.png');
+			pixiApp.loader.add('lablePuzzleNewElemMob.png',    urlWindEndLevel+'lablePuzzleNewElemMob.png');
+			pixiApp.loader.add('lableGetPrizeMob.png',         urlWindEndLevel+'lableGetPrizeMob.png');			
+			pixiApp.loader.add('butContinueEndLevelMob.png',   urlWindEndLevel+'butContinueEndLevelMob.png');
+		} else {
+			pixiApp.loader.add('backgrEndLevelWindM.png', urlWindEndLevel+'backgrEndLevelWindM.png');
+			pixiApp.loader.add('lableTellFrEndLevel.png', urlWindEndLevel+'lableTellFrEndLevel.png');
+			pixiApp.loader.add('lablePuzzleNewElem.png',  urlWindEndLevel+'lablePuzzleNewElem.png');
+			pixiApp.loader.add('lableGetPrize.png',       urlWindEndLevel+'lableGetPrize.png');
+			pixiApp.loader.add('butShowPuzzle.png',       urlWindEndLevel+'butShowPuzzle.png');
+			pixiApp.loader.add('butContinueEndLevel.png', urlWindEndLevel+'butContinueEndLevel.png');			
+		};
 		//----------------------------------------------------
 		//---------------CWindBuyLives------------------------
 		//----------------------------------------------------
@@ -421,6 +442,7 @@
 		let urlWindMsg = ImageLoader.baseUrl+"/winds/message/";
 		pixiApp.loader.add( 'couldWindMessage.png',       urlWindMsg+'couldWindMessage.png' );
 		pixiApp.loader.add( 'backgrWindMessage.png',       urlWindMsg+'backgrWindMessage.png' );//------------------------------------------------------------
+		pixiApp.loader.add( 'buttonClose.png',       urlWindMsg+'buttonClose.png' );//------------------------------------------------------------
 		//--------------------CWindFullScreen-------------------
 		//------------------------------------------------------------
 //		let urlFullScreen = ImageLoader.baseUrl+"/winds/fullScreen/";
