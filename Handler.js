@@ -370,6 +370,7 @@
 	};
 	Handler.decBooster = function( name ) {
 		if (this.curB != null && this.curB.parent != null) this.curB.parent.removeChild(this.curB);
+		if( Handler.panelBonus ) Handler.panelBonus.destroy();
 	//	Handler.jlines.countSteps -= 1;
 	//	Handler.jlines.stepsPanel.showNumber();
 		if (Consts.BONUSES_NAMES.indexOf(name) == -1) return;
@@ -1222,3 +1223,26 @@
 	Handler.count = function(arr) {
         return arr.length;
     };
+	
+	Handler.setMobiletask = function( levelNumber ) {
+		Handler.mobileTask = [];
+		let mobileTaskIndex = [];
+		for (  let i = 1; i <= 5; i++ ) {
+			if ( GameTypes.info[levelNumber]['g'+i] != null ) {
+				Handler.mobileTask[i] = GameTypes.info[levelNumber]['g'+i];
+				mobileTaskIndex.push(i);
+			}
+		}
+		
+		let rndInxDelGem = Math.floor(Math.random() * mobileTaskIndex.length);
+		let rndDelGem = mobileTaskIndex[rndInxDelGem];
+		let countDistributedGems = GameTypes.info[levelNumber]['g'+rndDelGem];
+		Handler.mobileTask[rndDelGem] = 0;
+		mobileTaskIndex.splice(rndInxDelGem,1);
+
+		for( let i = 0; i <countDistributedGems; i++ ) {
+			let num = i % mobileTaskIndex.length;
+			//console.log("mobileTaskIndex",mobileTaskIndex[num]);
+			Handler.mobileTask[mobileTaskIndex[num]] += 1;
+		};
+	};

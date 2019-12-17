@@ -114,7 +114,6 @@
 		pixiApp.loader.add('butContinue.png',          urlWindBeforeLevel+'butContinue.png');
 		pixiApp.loader.add('butGivGift.png',           urlWindBeforeLevel+'butGivGift.png');
 		pixiApp.loader.add('butInviteFr.png',          urlWindBeforeLevel+'butInviteFr.png');
-		pixiApp.loader.add('butPlay.png',              urlWindBeforeLevel+'butPlay.png');
 		pixiApp.loader.add('disbon0.png',              urlWindBeforeLevel+'disbon0.png');
 		pixiApp.loader.add('disbon1.png',              urlWindBeforeLevel+'disbon1.png');
 		pixiApp.loader.add('disbon5.png',              urlWindBeforeLevel+'disbon5.png');
@@ -137,6 +136,11 @@
 		pixiApp.loader.add('objTask8.png',             urlWindBeforeLevel+'objTask8.png');
 		pixiApp.loader.add('plusBon.png',              urlWindBeforeLevel+'plusBon.png');
 		pixiApp.loader.add('starPoints.png',           urlWindBeforeLevel+'starPoints.png');
+		if ( isMobile ) {
+			pixiApp.loader.add('butPlayMob.png',       urlWindBeforeLevel+'butPlayMob.png');
+		} else {
+			pixiApp.loader.add('butPlay.png',          urlWindBeforeLevel+'butPlay.png');
+		};
 		//----------------------------------------------------
 		//---------------CWindEndLevel------------------------
 		//----------------------------------------------------
@@ -156,6 +160,7 @@
 		pixiApp.loader.add('backgrStarRt1.png',             urlWindEndLevel+'backgrStarRt1.png');
 		pixiApp.loader.add('backgrPuzzleElem.png',          urlWindEndLevel+'backgrPuzzleElem.png');
 		pixiApp.loader.add('backgrEndLevelWindP.png',       urlWindEndLevel+'backgrEndLevelWindP.png');
+		pixiApp.loader.add('butContinueEndLevelMob.png',   urlWindEndLevel+'butContinueEndLevelMob.png');
 		if ( isMobile ) {
 			pixiApp.loader.add('backgrEndLevelWindMMob.png',   urlWindEndLevel+'backgrEndLevelWindMMob.png');
 			pixiApp.loader.add('headEndLevel.png',             urlWindEndLevel+'headEndLevel.png');
@@ -164,14 +169,13 @@
 			pixiApp.loader.add('butShowPuzzleMob.png',         urlWindEndLevel+'butShowPuzzleMob.png');
 			pixiApp.loader.add('lablePuzzleNewElemMob.png',    urlWindEndLevel+'lablePuzzleNewElemMob.png');
 			pixiApp.loader.add('lableGetPrizeMob.png',         urlWindEndLevel+'lableGetPrizeMob.png');			
-			pixiApp.loader.add('butContinueEndLevelMob.png',   urlWindEndLevel+'butContinueEndLevelMob.png');
 		} else {
 			pixiApp.loader.add('backgrEndLevelWindM.png', urlWindEndLevel+'backgrEndLevelWindM.png');
 			pixiApp.loader.add('lableTellFrEndLevel.png', urlWindEndLevel+'lableTellFrEndLevel.png');
 			pixiApp.loader.add('lablePuzzleNewElem.png',  urlWindEndLevel+'lablePuzzleNewElem.png');
 			pixiApp.loader.add('lableGetPrize.png',       urlWindEndLevel+'lableGetPrize.png');
-			pixiApp.loader.add('butShowPuzzle.png',       urlWindEndLevel+'butShowPuzzle.png');
-			pixiApp.loader.add('butContinueEndLevel.png', urlWindEndLevel+'butContinueEndLevel.png');			
+			pixiApp.loader.add('butShowPuzzle.png',       urlWindEndLevel+'butShowPuzzle.png');	
+			pixiApp.loader.add('butContinueEndLevel.png', urlWindEndLevel+'butContinueEndLevel.png');
 		};
 		//----------------------------------------------------
 		//---------------CWindBuyLives------------------------
@@ -221,17 +225,19 @@
 		//------------------------------------------------------------
 		//-----------------CBottomPanel-----------------------
 		//------------------------------------------------------------
-		let urlBottomPanel = ImageLoader.baseUrl+"/bottomPanel/";
-		pixiApp.loader.add('buttDoubleLeft.png',       urlBottomPanel+'buttDoubleLeft.png');
-		pixiApp.loader.add('buttDoubleRight.png',      urlBottomPanel+'buttDoubleRight.png');
-		pixiApp.loader.add('buttLeftBottomPanel.png',  urlBottomPanel+'buttLeftBottomPanel.png');
-		pixiApp.loader.add('buttRightBottomPanel.png', urlBottomPanel+'buttRightBottomPanel.png');
-		pixiApp.loader.add('fonInviteUser.png',        urlBottomPanel+'fonInviteUser.png');
-		pixiApp.loader.add('fonUsersBottomPanel.png',  urlBottomPanel+'fonUsersBottomPanel.png');
-		pixiApp.loader.add('mask1.jpg',                urlBottomPanel+'mask1.jpg');
-		pixiApp.loader.add('tabFriend.png',            urlBottomPanel+'tabFriend.png');
-		pixiApp.loader.add('tabRating.png',            urlBottomPanel+'tabRating.png');
-		pixiApp.loader.add('tabRatingMoney.png',       urlBottomPanel+'tabRatingMoney.png');
+		if ( !isMobile ) {
+			let urlBottomPanel = ImageLoader.baseUrl+"/bottomPanel/";
+			pixiApp.loader.add('buttDoubleLeft.png',       urlBottomPanel+'buttDoubleLeft.png');
+			pixiApp.loader.add('buttDoubleRight.png',      urlBottomPanel+'buttDoubleRight.png');
+			pixiApp.loader.add('buttLeftBottomPanel.png',  urlBottomPanel+'buttLeftBottomPanel.png');
+			pixiApp.loader.add('buttRightBottomPanel.png', urlBottomPanel+'buttRightBottomPanel.png');
+			pixiApp.loader.add('fonInviteUser.png',        urlBottomPanel+'fonInviteUser.png');
+			pixiApp.loader.add('fonUsersBottomPanel.png',  urlBottomPanel+'fonUsersBottomPanel.png');
+			pixiApp.loader.add('mask1.jpg',                urlBottomPanel+'mask1.jpg');
+			pixiApp.loader.add('tabFriend.png',            urlBottomPanel+'tabFriend.png');
+			pixiApp.loader.add('tabRating.png',            urlBottomPanel+'tabRating.png');
+			pixiApp.loader.add('tabRatingMoney.png',       urlBottomPanel+'tabRatingMoney.png');
+		};
 		//------------------------------------------------------------
 		//-----------------CWindMyScore----------------------
 		//------------------------------------------------------------
@@ -399,44 +405,72 @@
 		//--------------------CWindAcInvite-------------------
 		//------------------------------------------------------------
 		let urlAcInvite = ImageLoader.baseUrl+"/winds/acInvite/";
-		pixiApp.loader.add( 'backgrAcInvite.png',       urlAcInvite+'backgrAcInvite.png' );
-		pixiApp.loader.add( 'backgrAcLable.png',       urlAcInvite+'backgrAcLable.png' );
-		pixiApp.loader.add( 'backgrButAcInvite.png',       urlAcInvite+'backgrButAcInvite.png' );
-		pixiApp.loader.add( 'lableInviteFrAcInvite.png',       urlAcInvite+'lableInviteFrAcInvite.png' );
-		pixiApp.loader.add( 'lableGameAllAcInvite.png',       urlAcInvite+'lableGameAllAcInvite.png' );
-		pixiApp.loader.add( 'lableBonAcInvite.png',       urlAcInvite+'lableBonAcInvite.png' );
-		pixiApp.loader.add( 'butInviteAcInvite.png',       urlAcInvite+'butInviteAcInvite.png' );
-		pixiApp.loader.add( 'bonAcInvite.png',       urlAcInvite+'bonAcInvite.png' );
+		pixiApp.loader.add( 'bonAcInvite.png',            urlAcInvite+'bonAcInvite.png' );
+		if ( isMobile ) {
+			pixiApp.loader.add( 'backgrAcInviteMob.png',         urlAcInvite+'backgrAcInviteMob.png' );
+			pixiApp.loader.add( 'backgrAcLableMob.png',          urlAcInvite+'backgrAcLableMob.png' );
+			pixiApp.loader.add( 'backgrButAcInviteMob.png',      urlAcInvite+'backgrButAcInviteMob.png' );
+			pixiApp.loader.add( 'lableInviteFrAcInviteMob.png',  urlAcInvite+'lableInviteFrAcInviteMob.png' );
+			pixiApp.loader.add( 'lableGameAllAcInviteMob.png',   urlAcInvite+'lableGameAllAcInviteMob.png' );
+			pixiApp.loader.add( 'lableBonAcInviteMob.png',       urlAcInvite+'lableBonAcInviteMob.png' );
+			pixiApp.loader.add( 'butInviteAcInviteMob.png',      urlAcInvite+'butInviteAcInviteMob.png' );
+		} else {
+			pixiApp.loader.add( 'backgrAcInvite.png',         urlAcInvite+'backgrAcInvite.png' );
+			pixiApp.loader.add( 'backgrAcLable.png',          urlAcInvite+'backgrAcLable.png' );
+			pixiApp.loader.add( 'backgrButAcInvite.png',      urlAcInvite+'backgrButAcInvite.png' );
+			pixiApp.loader.add( 'lableInviteFrAcInvite.png',  urlAcInvite+'lableInviteFrAcInvite.png' );
+			pixiApp.loader.add( 'lableGameAllAcInvite.png',   urlAcInvite+'lableGameAllAcInvite.png' );
+			pixiApp.loader.add( 'lableBonAcInvite.png',       urlAcInvite+'lableBonAcInvite.png' );
+			pixiApp.loader.add( 'butInviteAcInvite.png',      urlAcInvite+'butInviteAcInvite.png' );
+		}
 		//------------------------------------------------------------
 		//--------------------CWindGame-------------------
 		//------------------------------------------------------------
 		let urlWindGame = ImageLoader.baseUrl+"/winds/game/";
-		pixiApp.loader.add( 'taskBackgrWindGame.png',       urlWindGame+'taskBackgrWindGame.png' );
-		pixiApp.loader.add( 'starPointWindGame.png',       urlWindGame+'starPointWindGame.png' );
-		pixiApp.loader.add( 'bonus/plus.png',       urlWindGame+'bonus/plus.png' );
-		for (let i = 1; i <= 7; i++) {
-			pixiApp.loader.add( 'panelTasks'+i+'WindGame.png',       urlWindGame+ 'panelTasks'+i+'WindGame.png' );
-		};
+		pixiApp.loader.add( 'taskBackgrWindGame.png',  urlWindGame+'taskBackgrWindGame.png' );
+		pixiApp.loader.add( 'bonus/plus.png',          urlWindGame+'bonus/plus.png' );
+		
 		for (let i = 1; i <= 8; i++) {
-			pixiApp.loader.add( 'objTask'+i+'WindGame.png',       urlWindGame+'objTask'+i+'WindGame.png' );
+			pixiApp.loader.add( 'objTask'+i+'WindGame.png', urlWindGame+'objTask'+i+'WindGame.png' );
 		};
-		pixiApp.loader.add( 'panelStepsWindGame.png',       urlWindGame+'panelStepsWindGame.png' );
-		pixiApp.loader.add( 'panelPointWindGame.png',       urlWindGame+'panelPointWindGame.png' );
-		pixiApp.loader.add( 'panelLevelWindGame.png',       urlWindGame+'panelLevelWindGame.png' );
-		pixiApp.loader.add( 'maskUpWindGame.png',       urlWindGame+'maskUpWindGame.png' );
-		pixiApp.loader.add( 'markerWindGame.png',       urlWindGame+'markerWindGame.png' );
-		pixiApp.loader.add( 'linePointWindGame.png',       urlWindGame+'linePointWindGame.png' );
-		pixiApp.loader.add( 'crossWindGame.png',       urlWindGame+'crossWindGame.png' );
-		pixiApp.loader.add( 'butSkipLevelWindGame.png',       urlWindGame+'butSkipLevelWindGame.png' );
-		pixiApp.loader.add( 'bonus/bMT.png',       urlWindGame+'bonus/bMT.png' );
-		pixiApp.loader.add( 'bonus/bMX.png',       urlWindGame+'bonus/bMX.png' );
-		pixiApp.loader.add( 'bonus/bPL.png',       urlWindGame+'bonus/bPL.png' );
-//		pixiApp.loader.add( 'backgrWindGame.png',       urlWindGame+'backgrWindGame.png' );
-		pixiApp.loader.add( 'butFoolScrinWindGame.png',       urlWindGame+'butFoolScrinWindGame.png' );
-		pixiApp.loader.add( 'butMuteWindGame.png',       urlWindGame+'butMuteWindGame.png' );
-		pixiApp.loader.add( 'bonus/curBMT.png',       urlWindGame+'bonus/curBMT.png');
-		pixiApp.loader.add( 'bonus/curBMX.png',       urlWindGame+'bonus/curBMX.png');
-		pixiApp.loader.add( 'bonus/curBPL.png',       urlWindGame+'bonus/curBPL.png');
+		pixiApp.loader.add( 'panelLevelWindGame.png',    urlWindGame+'panelLevelWindGame.png' );
+	//	pixiApp.loader.add( 'maskUpWindGame.png',        urlWindGame+'maskUpWindGame.png' );
+		pixiApp.loader.add( 'markerWindGame.png',        urlWindGame+'markerWindGame.png' );
+		pixiApp.loader.add( 'linePointWindGame.png',     urlWindGame+'linePointWindGame.png' );
+		//pixiApp.loader.add( 'butSkipLevelWindGame.png',  urlWindGame+'butSkipLevelWindGame.png' );
+		pixiApp.loader.add( 'bMT.png',             urlWindGame+'bonus/bMT.png' );
+		pixiApp.loader.add( 'bMX.png',             urlWindGame+'bonus/bMX.png' );
+		pixiApp.loader.add( 'bPL.png',             urlWindGame+'bonus/bPL.png' );
+//		pixiApp.loader.add( 'backgrWindGame.png',        urlWindGame+'backgrWindGame.png' );
+		//pixiApp.loader.add( 'butFoolScrinWindGame.png',  urlWindGame+'butFoolScrinWindGame.png' );
+		//pixiApp.loader.add( 'butMuteWindGame.png',       urlWindGame+'butMuteWindGame.png' );
+		pixiApp.loader.add( 'curBMT.png',          urlWindGame+'bonus/curBMT.png');
+		pixiApp.loader.add( 'curBMX.png',          urlWindGame+'bonus/curBMX.png');
+		pixiApp.loader.add( 'curBPL.png',          urlWindGame+'bonus/curBPL.png');
+		if ( isMobile ) {
+			pixiApp.loader.add( 'taskPanelMob.png',                urlWindGame+'taskPanelMob.png' );
+			pixiApp.loader.add( 'starPointEnWindGameMob.png',      urlWindGame+'starPointEnWindGameMob.png' );
+			pixiApp.loader.add( 'starPointDisWindGameMob.png',     urlWindGame+'starPointDisWindGameMob.png' );
+			pixiApp.loader.add( 'linePointWindGameMob.png',        urlWindGame+'linePointWindGameMob.png' );
+			pixiApp.loader.add( 'linePointWindGameScaleMob.png',   urlWindGame+'linePointWindGameScaleMob.png' );
+			pixiApp.loader.add( 'panelStepsWindGameMob.png',       urlWindGame+'panelStepsWindGameMob.png' );
+			pixiApp.loader.add( 'crossWindGameMob.png',            urlWindGame+'crossWindGameMob.png' );
+			pixiApp.loader.add( 'butMuteDisWindGameMob.png',       urlWindGame+'butMuteDisWindGameMob.png' );
+			pixiApp.loader.add( 'butMuteEnWindGameMob.png',        urlWindGame+'butMuteEnWindGameMob.png' );
+			pixiApp.loader.add( 'butSetings.png',                  urlWindGame+'butSetings.png' );
+			pixiApp.loader.add( 'setingsPanel.png',                urlWindGame+'setingsPanel.png' );
+			pixiApp.loader.add( 'crossBonMob.png',                 urlWindGame+'bonus/'+'crossBonMob.png' );
+			pixiApp.loader.add( 'panelHelpUseBonMob.png',          urlWindGame+'bonus/'+'panelHelpUseBonMob.png' );
+		} else {
+			pixiApp.loader.add( 'panelStepsWindGame.png',          urlWindGame+'panelStepsWindGame.png' );
+			pixiApp.loader.add( 'crossWindGame.png',               urlWindGame+'crossWindGame.png' );
+			pixiApp.loader.add( 'starPointWindGame.png',           urlWindGame+'starPointWindGame.png' );
+			pixiApp.loader.add( 'panelPointWindGame.png',          urlWindGame+'panelPointWindGame.png' );
+			for (let i = 1; i <= 7; i++) {
+				pixiApp.loader.add( 'panelTasks'+i+'WindGame.png', urlWindGame+ 'panelTasks'+i+'WindGame.png' );
+			};
+		};
+		
 		//------------------------------------------------------------
 		//--------------------CWindMsg-------------------
 		//------------------------------------------------------------

@@ -25,16 +25,21 @@
         this.group.translate(Handler.contentCenterX, Handler.contentCenterY); 
         
 //   как пример     this.timerBack = Handler.showImgRect( this.group, Consts.DIR_HEAD+"fonTimer.png", 4,96,123,38 );         
-        this.timerBack = Handler.showImgRect( this.group, "backgrTimer.png", -285,-260,100,33 );         
+        let xTimer =isMobile ? -135 : -285;
+        let yTimer =isMobile ? -310 : -260;
+		this.timerBack = Handler.showImgRect( this.group, "backgrTimer.png", xTimer, yTimer, 100, 33 );         
         this.timerBack.isVisible = true;
-
-        let tp = { parent: this.group, text:"", color:0xFFFFFF, fontSize:14, width:100, x:-320, y:-264 };         
+		
+		let xTp = isMobile ? -170 : -320;
+		let yTp = isMobile ? -314 : -264;
+        let tp = { parent: this.group, text:"", color:0xFFFFFF, fontSize:14, width:100, x: xTp, y: yTp };         
         this.timerText = Handler.newText(tp);
-        this.timerText.isVisible = true;
+        this.timerText.visible = true;
     
-	
-		let idImg =  Handler.showImgRect( this.group, "boxId.png", -363, -290,31,31 );   
-		idImg.onEL( 'pointerdown', function() { Winds.show( Winds.WIND_MSG, { text: Langs.NUMBER_USER + User.viewer_id } ) } );
+		if ( !isMobile ) {
+			let idImg =  Handler.showImgRect( this.group, "boxId.png", -363, -290,31,31 );   
+			idImg.onEL( 'pointerdown', function() { Winds.show( Winds.WIND_MSG, { text: Langs.NUMBER_USER + User.viewer_id } ) } );
+		};
 // 		this.fonPoints = Handler.showImgRect( this.group, "fonPoint.png", -81,-22,162,42, false );  панели очков нет       
         
 		let xFonCoins  = isMobile ?    32 : -110;
@@ -71,10 +76,14 @@
 		};
 	//		butPlay.onEL("pointerdown",touchButPlay);
 		butPlay.onEL("pointerdown", Handler.onStartLevelClick);
-		if ( isMobile ) butPlay.isVisible = false;
-		
-		let butMute1 = Handler.showImgRect( this.group, "butMute.png",318,-285,33,33);
-		let butMute2 = Handler.showImgRect( this.group, "butMute2.png",318,-285,33,33);
+		if( isMobile ) butPlay.isVisible = false;
+	
+		let xButMute = isMobile ? 205 :  318;
+		let yButMute = isMobile ? 340 : -285;
+		let butMute1 = Handler.showImgRect( this.group, "butMute.png",  xButMute, yButMute, 33,33);
+		if ( isMobile ) butMute1.scale.set(-1);
+		let butMute2 = Handler.showImgRect( this.group, "butMute2.png", xButMute, yButMute, 33,33);
+		if ( isMobile ) butMute2.scale.set(-1);
 		butMute2.isVisible = false;
 		let touchButMute = function( evt ) {
 			if ( Sounds.msOn ) {
@@ -96,7 +105,7 @@
 		let butFullScrin = Handler.showImgRect( this.group, "butFullScrin.png",355,-285,31,31);
 		butFullScrin.onEL('pointerdown',function(){ Winds.show( Winds.WIND_FULL_SCREEN ) });
         if ( isMobile ) butFullScrin.isVisible = false;
-		this.groupNumPoints = Handler.newGroup( this.group );         
+		//this.groupNumPoints = Handler.newGroup( this.group );         
         this.groupNumCoins  = Handler.newGroup( this.group );         
         this.enGroup        = Handler.newGroup( this.group );
 
@@ -139,7 +148,7 @@
 	Object.defineProperty( Head, "bonus", {
 		get: function(   ) { return User.bonus; },		 
 		set: function(val) { 
-		    User.bonus =  val; 
+		    User.bonus = val; 
 			Head.startBonusTimer();
 		}
 	});
@@ -156,7 +165,7 @@
     Head.showEnergy = function() {
         Handler.removeGroupChilds( Head.enGroup );         
         Handler.showNumber( "wg", 0, this.fonEnergy.y, User.energy, 13,18, Head.enGroup, '',3 );         
-        Head.enGroup.x = ( this.fonEnergy.x + 20 ) - Math.floor( Head.groupNumCoins.width/2 );        
+        Head.enGroup.x = ( this.fonEnergy.x + 16 ) - Math.floor( Head.enGroup.width/2 );        
     };
 	
 	Object.defineProperty( Head, "timerString", {
@@ -164,13 +173,14 @@
 		set: function(val) {
 			if ( Handler.isValidInteger( val ) ) {
 				if ( val == 0 ) {
-					Head.timerText.isVisible = false;
+					Head.timerText.visible = false;
 					Head.timerBack.visible   = false;
 			    } else {
 					let m = Math.floor( val / 60 );
 			    	let s = val - m*60;
 					Head._timerString = '+ 1 в '+Handler.cv(m) + ':' +  Handler.cv(s);
 			    	Head.timerText.text = Head._timerString;
+					Head.timerText.visible = true;
 			    	Head.timerBack.visible = true;
 			    }
             }
@@ -179,6 +189,7 @@
 	
 	Head.startBonusTimer = function () {
 		if ( Head.energy >= Head.maxEnergy ) {
+			Head.timerText.visible = false;
 			Head.timerBack.visible = false;
 			if ( Head.energyTimer != null ) clearInterval( Head.energyTimer );
 		} else {

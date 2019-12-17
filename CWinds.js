@@ -125,7 +125,7 @@
 				const rx = windGroup.x;
 				const ry = windGroup.y;
 				self.wind.BACK_RECT_NO_INTERACTIVE = Handler.showRect( windGroup, rx-Handler.contentWidth/2, ry-Handler.contentHeight, Handler.contentWidth*2, Handler.contentHeight*2, '0x6E3232' );
-				self.wind.BACK_RECT_NO_INTERACTIVE.alpha = 0.5;
+				self.wind.BACK_RECT_NO_INTERACTIVE.alpha = 0.1;
 				if ( self.wind.shXMainGrIsMobile == null ) self.wind.shXMainGrIsMobile = 0;
 				self.wind.BACK_RECT_NO_INTERACTIVE.x -= self.wind.shXMainGrIsMobile;
 				self.wind.BACK_RECT_NO_INTERACTIVE.interactive = true;
@@ -133,7 +133,7 @@
 				if ( isMobile ) {
 					//self.wind.BACK_RECT_NO_INTERACTIVE.x += Math.floor( Handler.contentWidth/2 );
 					self.wind.BACK_RECT_NO_INTERACTIVE.y = Math.floor( Handler.contentHeight/2 );
-					console.log("self.wind.BACK_RECT_NO_INTERACTIVE.x,self.wind.BACK_RECT_NO_INTERACTIVE.y",self.wind.BACK_RECT_NO_INTERACTIVE.x,self.wind.BACK_RECT_NO_INTERACTIVE.y);
+					//console.log("self.wind.BACK_RECT_NO_INTERACTIVE.x,self.wind.BACK_RECT_NO_INTERACTIVE.y",self.wind.BACK_RECT_NO_INTERACTIVE.x,self.wind.BACK_RECT_NO_INTERACTIVE.y);
 				};
 				//Handler.setWindScale( windGroup );
 				self.wind.main_Group_Of_The_Window = windGroup;
