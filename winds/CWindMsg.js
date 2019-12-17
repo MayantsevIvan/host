@@ -17,17 +17,20 @@
 		self.mainGroup.x = Handler.contentCenterX;
 		self.mainGroup.y = Handler.contentCenterY;
 
-		Handler.showImgRect(self.mainGroup, "backgrWindMessage.png",0,0,612,495);
-		Handler.showImgRect(self.mainGroup, "couldWindMessage.png",0,-40,527,347);
-		
+		let backgr = Handler.showImgRect(self.mainGroup, "backgrWindMessage.png",0,0,612,495);
+		let scBackgr = visibleWidth0/backgr.width;
+		backgr.scale.set( scBackgr );
+		let could  = Handler.showImgRect(self.mainGroup, "couldWindMessage.png",0,-40,527,347);
+		could.scale.set( scBackgr );
 		let onCross = function(evt){
 			self.shutdown();
 		};
-		
-		let cross = Handler.showImgRect( self.mainGroup, "cross.png", 285, -225, 36, 36);
+		let xCross = isMobile ?  210 :  285;
+		let yCross = isMobile ? -165 : -255;
+		let cross = Handler.showImgRect( self.mainGroup, "cross.png", xCross, yCross, 36, 36);
 		cross.onEL("pointertap", onCross);
-		let butClose = Handler.showImgRect( self.mainGroup, 'buttonClose.png', 0, 185, 157, 48);
-		butClose.onEL("pointertap", onCross);
+		//let butClose = Handler.showImgRect( self.mainGroup, 'buttonClose.png', 0, 185, 157, 48);
+		//butClose.onEL("pointertap", onCross);
 		
 //		let colorText = [255,234,198];
 //		let colorShadow = [ 118,54, 7 ];
@@ -60,7 +63,25 @@
 			//Handler.showText(self.mainGroup,  params.text, 0, -80 , paramsText);
 			let text = Handler.newText( paramsText );
 			text.anchor.set(0.5,0.5);
+			text.scale.set( 0.40 );
 		}
+		
+		if ( params.butName != null ) {
+			let button = null;
+			if ( params.butName == 'Пригласить' ) {
+				button = Handler.showImgRect( self.mainGroup, Consts.DIR_WINDS+"butInvite.png", 0, 90, 176, 68 );
+			} else {
+                button = Handler.showImg( self.mainGroup, Consts.DIR_MSG + params.butName+".png", 0, 90 );
+            }
+            if ( params.showBoy != null ) {
+                button.x = 50;
+            };
+
+            button.onEL( "pointerdown", function() {
+			    if ( params.butCallback != null ) params.butCallback();
+			    if ( Winds.getTopWindName() == Winds.WIND_MSG )self.shutdown();
+			} );
+        };
 		return self.mainGroup;
 	};
 	

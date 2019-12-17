@@ -24,12 +24,15 @@
 				loader.add( "r"+i, Consts.URL_FR_USERS[i], optionsAssets );
 			};
 			
-
+			
 			let backgr = Handler.showImgRect(self.mainGroup,Consts.DIR_MY_SCORE + 'backgrMyScore.png',0,0,662,482);
 			let xCross = isMobile ? 0 : 308;
 			let cross = Handler.showImgRect(self.mainGroup,'cross.png',xCross,-222,36,36);
 			cross.onEL("pointerdown",function() { self.shutdown(); });
-			
+			if ( isMobile ) {
+				let idImg =  Handler.showImgRect( self.mainGroup, "boxId.png", -295, -205, 31,31 );   
+				idImg.onEL( 'pointerdown', function() { Winds.show( Winds.WIND_MSG, { text: Langs.NUMBER_USER + User.viewer_id } ) } );
+			};
 			Handler.showImgRect(self.mainGroup,Consts.DIR_MY_SCORE + 'lableAllRt.png',-150,-210,167,23);
 			Handler.showImgRect(self.mainGroup,Consts.DIR_MY_SCORE + 'lableVipRt.png',150,-210,129,21);
 			Handler.showImgRect(self.mainGroup,Consts.DIR_MY_SCORE + 'soon.png',150,10,163,417);	

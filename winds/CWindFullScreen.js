@@ -20,12 +20,10 @@
         
 		let showContent = function() {
 			Handler.showImgRect( self.mainGroup, Consts.DIR_FULL_SCREEN + "backgrFullScreen.png",   0,  0, 662, 518 );
-			       
-			let cross = Handler.showImgRect(self.mainGroup,"cross.png",311,-237,36,36 );//cross         
+			
+			let cross = Handler.showImgRect(self.mainGroup,"cross.png", 311, -237, 36, 36 );//cross         
 			cross.onEL("pointerdown", function() { self.shutdown() } );
-
-		
-				
+			
 			Handler.showImgRect( self.mainGroup, Consts.DIR_FULL_SCREEN + "titleFullScreen.png",    0,  -209, 386, 40 );    
 			Handler.showImgRect( self.mainGroup, Consts.DIR_FULL_SCREEN + "labelBack.png",          0, -69, 422,106 );     
 			Handler.showImgRect( self.mainGroup, Consts.DIR_FULL_SCREEN + "labelFullScreen.png",    0, -69, 288, 78 );

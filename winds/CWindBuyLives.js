@@ -24,11 +24,11 @@
 				wBackgr = 575;
 			    hBackgr = 544;
 			};
-			Handler.showImgRect(self.mainGroup,Consts.DIR_BUY_LIVES+nameBackgr+".png",0,0,wBackgr,hBackgr);
-			let xCross = isMobile ? 262 : 310;
+			self.backgr = Handler.showImgRect(self.mainGroup,Consts.DIR_BUY_LIVES+nameBackgr+".png",0,0,wBackgr,hBackgr);
+			let xCross = isMobile ? 272 : 310;
 			let cross = Handler.showImgRect(self.mainGroup,"cross.png",xCross,-230,36,36);
 			cross.onEL("pointerdown",function() {self.shutdown()});
-			if ( isMobile ) cross.scale.set(1.2,1.2);
+			//if ( isMobile ) cross.scale.set(1.2,1.2);
 			let countLives = Head.energy;
 			let countLivesImg = Handler.showNumber('wb',27,-242,countLives,15,22,self.mainGroup,'',0);
 			countLivesImg.x -= countLivesImg.width/2;
@@ -83,7 +83,8 @@
 				butBuy.onEL("pointerup", pointerUpButBuy);
 				yLine += line.height + 2;
 			}
-			self.mainGroup.scale.set(0.80,0.80);
+			//self.mainGroup.scale.set(0.80,0.80);
+			if ( isMobile ) self.mainGroup.scale.set(visibleWidth/self.backgr.width);
 		};
 		
 		if ( Handler.windsWithLoadedImages[ Winds.WIND_BUY_LIVES ] == null ) {

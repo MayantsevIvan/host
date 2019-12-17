@@ -33,85 +33,18 @@
 		self.mainGroup.x = Handler.contentCenterX;
 		self.mainGroup.y = Handler.contentCenterY;
 		
-		//Sounds.Play();
-//		Head.menuLevel.visible = false;
-//		Head.menuLevel.hide();
-//
 		let backgr = Handler.showImgRect(this.mainGroup, Consts.DIR_WIND_LOADER+"backgrWindGame.png",0,0,760,610);
-		//let bakcgrScaleMobile = pixiApp.screen.height / backgr.height / pixiAppScaleMobile;
 		let bakcgrScaleMobile = visibleHeight / pixiAppHeight;;
 		backgr.scale.x = bakcgrScaleMobile;
 		backgr.scale.y = bakcgrScaleMobile;
 		
 		let numLevel = parseInt(Head.levelName.substr(1));
 		Handler.levelNum = numLevel;
-		Handler.showImgRect(self.mainGroup, "panelLevelWindGame.png",-320,-288,103,23);
-		let textNumLevelParams = {
-			fontFamily: 'Arial',
-			fontWeight: 'bold',
-			fontSize: 16,
-			fill: '#FFFFFF'
+		if ( Handler.mobileTask == null ) {
+			Handler.setMobiletask( numLevel );
 		};
-		Handler.showText(self.mainGroup,numLevel,-300,-288,  textNumLevelParams);
-		let cross = Handler.showImgRect(self.mainGroup, "crossWindGame.png",358,-285,33,28);
-		
-		let onTouch = function(evt) {
-			/*if ( Winds.getTopWindName() == Winds.WIND_SMALL_ACT_INV ) {
-	//			Winds.getWind().shutdown(0);
-	            Winds.shutdownTopWind(1);
-    		};
-			if ( Winds.getTopWindName() == Winds.WIND_ACT_5_STEPS ) {
-	//			Winds.getWind().shutdown(0);
-	            Winds.shutdownTopWind(1);
-			};*/
-			clearTimeout( Handler.timerOpenAcInv);
-			self.shutdown();
-		};
-		cross.onEL("pointerdown",onTouch);
-		
-//		let butSkipLevel = Handler.showImgRect(self.mainGroup, "butSkipLevelWindGame.png",-335,240,54,48);
-		let butFullScrin = Handler.showImgRect(self.mainGroup, "butFoolScrinWindGame.png",352,-246,31,31);
-		if ( isMobile ) butFullScrin.isVisible = false;
-		butFullScrin.onEL('pointerdown',function(){ Winds.show( Winds.WIND_FULL_SCREEN ) });
-		
-		let butMute1 = Handler.showImgRect( self.mainGroup, "butMute.png",353,-213,33,33);
-		let butMute2 = Handler.showImgRect( self.mainGroup, "butMute2.png",353,-213,33,33);
-		butMute2.isVisible = false;
-		let touchButMute = function( evt ) {
-			if ( Sounds.msOn ) {
-				Sounds.Stop();
-//				this._butMelody.gotoAndStop(2);
-				Sounds.msOn = false;
-				butMute1.isVisible = false;
-				butMute2.isVisible = true;
-			} else {
-				Sounds.Play();
-//				this._butMelody.gotoAndStop(1);
-				butMute1.isVisible = true;
-				butMute2.isVisible = false;
-				Sounds.msOn = true;
-			};
-		};
-		butMute1.onEL("pointerdown",touchButMute);
-		butMute2.onEL("pointerdown",touchButMute);
-		
-		// GameField
-		
+		//gameField
 		self._sprite = Handler.newGroup();
-		/*params.lev =  [ 9,11,7, 1248 ,0, 
-					     [6,8,8,0,0,0,0,6,0],
-					     [0,0,0,5,5,5,0,0,0],
-					     [0,0,0,9,9,9,0,0,0],
-					     [0,0,0,0,0,0,0,0,0],
-					     [0,0,0,0,7,7,7,0,0],
-					     [0,0,0,0,2,2,2,0,0],
-					     [0,0,0,0,2,2,2,0,0],
-					     [0,0,0,0,0,0,0,0,0],
-					     [0,0,0,0,0,0,0,0,0],
-					     [0,0,0,0,0,0,0,0,0],
-					     [0,0,0,0,0,0,0,0,0]
-					 ];*/
-		//Handler.windGameSprite = self._sprite;
 		Handler.windGameSprite = self.mainGroup;
 		Handler.lights = Handler.newGroup();
 		Handler.level  = Handler.newGroup();		
@@ -122,10 +55,14 @@
 		Handler.lmask  = Handler.newGroup();
 		
 		Handler.jlines.stepsPanel  = StepsPanel.init( self.mainGroup, params.lev[2] ); 
-		Handler.jlines.pointsPanel = PointsPanel.init( self.mainGroup, params.lev[3] );
+		
 		Handler.jlines.init(params.lev);//(1) eto vishe ftorogo
 		Handler.jlines.taskPanel = TaskPanel.init( self.mainGroup );
-		
+		Handler.jlines.pointsPanel = PointsPanel.init( self.mainGroup, params.lev[3] );
+		if ( isMobile ) {
+			Handler.jlines.taskPanel.group.toFront();
+			Handler.jlines.pointsPanel.group.toFront();
+		}
 		Handler.lights.x = Consts.coordsShiftX;
 		Handler.lights.y = Consts.coordsShiftY;
 
@@ -223,13 +160,6 @@
             Handler.gemsContainerGlobalX = self.mainGroup.x + self._sprite.x + Handler.jlines.gemsContainer.x - shiftOfScreen;
             Handler.gemsContainerGlobalY = self.mainGroup.y + self._sprite.y + Math.floor(shScreenY / pixiAppScaleMobile);
         }
-//		console.log("self.mainGroup.x",self.mainGroup.x);
-//		console.log("self._sprite.x",self._sprite.x);
-//		console.log("Handler.jlines.gemsContainer.x",Handler.jlines.gemsContainer.x);
-//		console.log("Handler.gemsContainerGlobalX",Handler.gemsContainerGlobalX);
-//		console.log("Handler.gemsContainerGlobalY",Handler.gemsContainerGlobalY);
-//		console.log("self._sprite",self._sprite.x,self._sprite.y);
-//		console.log("self._sprite",self._sprite.x,self._sprite.y);
 
 		//Bonuses
 		if ( Handler.butBonuses )
@@ -239,8 +169,8 @@
         Handler.butBonuses = [];
 		
         for ( let i = 0; i<3; i++ ) {
-			let xButBon = isMobile ? 20+i*80 : 342; 
-			let yButBon = isMobile ?         327 :-172+i*72; 
+			let xButBon = isMobile ? -20+i*74 : 342; 
+			let yButBon = isMobile ?      327 : -172+i*72; 
 			let bname = Consts.BONUSES_NAMES[i];
 		    Handler.butBonuses[i] = new ButBonus(self.mainGroup, xButBon, yButBon, bname );
 		};
@@ -251,7 +181,101 @@
 		if ( !isMobile ) {
 			Handler.timerOpenAcInv = setTimeout( showSmallAc, 7000 );
 		};
+		
+		//crossTouch
+		
+		
+		let touchButMute = function( ) {
+			if ( Sounds.msOn ) {
+				Sounds.Stop();
+				Sounds.msOn = false;
+				self.butMuneEnWindGame.isVisible = false;
+				self.butMuneDisWindGame.isVisible = true;
+			} else {
+				Sounds.Play();
+				self.butMuneEnWindGame.isVisible = true;
+				self.butMuneDisWindGame.isVisible = false;
+				Sounds.msOn = true;
+			};
+		};
+		
+		self.openedPanelSettings = false;
+		self.touchButSettings = function () {
+			if ( !self.openedPanelSettings ) {
+				self.openedPanelSettings = true;
+				TweenMax.to( self.butsPanel, 0.35, { y: -54 } );
+			} else {
+				self.openedPanelSettings = false;
+				TweenMax.to( self.butsPanel, 0.35, { y: 25 } );
+			};
+		};
+		
+		let windClose = function() {
+			if ( Winds.getTopWindName() == Winds.WIND_MSG ) {
+				Winds.getWind().shutdown( Winds.WIND_MSG );
+				//Winds.shutdownTopWind(1);
+			};
+			/*if ( Winds.getTopWindName() == Winds.WIND_ACT_5_STEPS ) {
+				Winds.getWind().shutdown(0);
+				Winds.shutdownTopWind(1);
+			};*/
+			clearTimeout( Handler.timerOpenAcInv);
+			self.shutdown();
+		};
+		
+		if ( isMobile ) {
+			self.settingsPanel = Handler.newGroup(self.mainGroup);
+			//butSetings
+			self.butSetings = Handler.showImgRect( self.settingsPanel, "butSetings.png", 0, 0, 46, 46 );
+			self.butSetings.onEL( 'pointertap', self.touchButSettings );
+			//butPanelSetings
+			self.butsPanel = Handler.newGroup( self.settingsPanel );
+			self.butPanelBackgr     = Handler.showImgRect( self.butsPanel, "setingsPanel.png",          0, 0, 42, 96 );
+			//cross
+			self.butCross = Handler.showImgRect( self.butsPanel, "crossWindGameMob.png",      0, -26, 30, 32 );
+			let touchCross = function () {
+				if( self.settingsPanel ) self.touchButSettings(); 
+				Winds.show( Winds.WIND_MSG, { text: Langs.CLOSE_LEVEL, butName: "buttonClose", butCallback: windClose } );
+			}
+			self.butCross.onEL("pointerdown", touchCross );
+			//butMute
+			self.butMuneEnWindGame  = Handler.showImgRect( self.butsPanel, "butMuteEnWindGameMob.png",  0, 10, 30, 32 );
+			self.butMuneDisWindGame = Handler.showImgRect( self.butsPanel, "butMuteDisWindGameMob.png", 0, 10, 30, 32 );
+			self.butMuneEnWindGame .onEL("pointertap", touchButMute);
+			self.butMuneDisWindGame.onEL("pointertap", touchButMute);
+			self.butMuneDisWindGame.isVisible = false;
+			
+			self.butsPanel.y = 25;
+			self.butsPanel.toBack();
+			self.butsPanel.mask = Handler.showRect( self.settingsPanel, 0, -54, 42, 96 );
+			
+			self.settingsPanel.x = 194;
+			self.settingsPanel.y = 327;
+		} else {	
+			self.cross = Handler.showImgRect(self.mainGroup, "crossWindGame.png",358,-285,33,28);
+			self.cross.onEL("pointerdown",windClose);
+			
+			self.butMuneEnWindGame  = Handler.showImgRect( self.mainGroup, "butMute.png",  353, -213, 33, 33 );
+			self.butMuneDisWindGame = Handler.showImgRect( self.mainGroup, "butMute2.png", 353, -213, 33, 33 );
+			self.butMuneEnWindGame .onEL("pointertap", touchButMute);
+			self.butMuneDisWindGame.onEL("pointertap", touchButMute);
+			self.butMuneDisWindGame.isVisible = false;
+			
+			self.butFullScrin = Handler.showImgRect(self.mainGroup, "butFullScrin.png",352,-246,31,31);
+			self.butFullScrin.onEL('pointerdown',function(){ Winds.show( Winds.WIND_FULL_SCREEN ) });
+			
+			Handler.showImgRect(self.mainGroup, "panelLevelWindGame.png",-320,-288,103,23);
+			let textNumLevelParams = {
+				fontFamily: 'Arial',
+				fontWeight: 'bold',
+				fontSize: 16,
+				fill: '#FFFFFF'
+			};
+			Handler.showText(self.mainGroup,numLevel,-300,-288,  textNumLevelParams);
+		}
+
 		self.mainGroup.interactive = true;
+		Handler.winGameGr = self.mainGroup;
 	};
 	
 	CWindGame.shutdown = function( fastShutdown ){

@@ -74,11 +74,14 @@
 		let truePlay = User.energy > 0;
 		if ( truePlay == false ) {
 			let backgrButContinue = Handler.showImgRect(self.windGroup,"backgrButContinue.png",0,195,468,200);
-			backgrButContinue.scale.set(0.96);
+			if ( isMobile ) backgrButContinue.scale.set(0.96);
 			let butContinue = Handler.showImgRect(self.windGroup,"butContinue.png",2,208,401,76);
 		} else {
-			backgrButPlay = Handler.showImgRect(self.windGroup,"backgrButPlay.png",0,193,242,68);
-			butPlay = Handler.showImgRect(self.windGroup,"butPlay.png",0,185,242,65);
+			if ( !isMobile ) backgrButPlay = Handler.showImgRect(self.windGroup,"backgrButPlay.png",0,193,242,68);
+			let nameButPlay = isMobile ? "butPlayMob.png" : "butPlay.png";
+			let wButPlay    = isMobile ? 190 : 242;
+			let hButPlay    = isMobile ?  62 :  65;
+			butPlay = Handler.showImgRect(self.windGroup, nameButPlay,0,185,wButPlay,hButPlay);
 			butPlay.name = 'l'+Handler.cv(levelNumber);
 			butPlay.onEL('pointerdown', pointerDownButPlay);
 			//butPlay.onEL('pointerup', pointerUpButPlay);
@@ -101,26 +104,7 @@
 		};
 		
 		if ( isMobile ) {
-			Handler.mobileTask = [];
-			let mobileTaskIndex = [];
-			for (  let i = 1; i <= 5; i++ ) {
-				if ( GameTypes.info[levelNumber]['g'+i] != null ) {
-					Handler.mobileTask[i] = GameTypes.info[levelNumber]['g'+i];
-					mobileTaskIndex.push(i);
-				}
-			}
-			
-			let rndInxDelGem = Math.floor(Math.random() * mobileTaskIndex.length);
-			let rndDelGem = mobileTaskIndex[rndInxDelGem];
-			let countDistributedGems = GameTypes.info[levelNumber]['g'+rndDelGem];
-			Handler.mobileTask[rndDelGem] = 0;
-			mobileTaskIndex.splice(rndInxDelGem,1);
-
-			for( let i = 0; i <countDistributedGems; i++ ) {
-				let num = i % mobileTaskIndex.length;
-				//console.log("mobileTaskIndex",mobileTaskIndex[num]);
-				Handler.mobileTask[mobileTaskIndex[num]] += 1;
-			};
+			Handler.setMobiletask( levelNumber );
 		};
 
 		TaskBeforeLevel.show( self.windGroup, levelNumber );
@@ -152,8 +136,8 @@
 		if ( isMobile ) {
 			if ( truePlay ) {
 				butPlay.y = 165; 
-				backgrButPlay.y = 173;
-				let butShowRating = Handler.showImgRect(self.windGroup,"butPlay.png",0,250,242,65);
+				//backgrButPlay.y = 173;
+				let butShowRating = Handler.showImgRect(self.windGroup,"butShowRatingEndLevelMob.png",0,250,145,62);
 				butShowRating.onEL("pointertap",showRating);
 			}
 		} else {
