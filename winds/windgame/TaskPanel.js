@@ -5,7 +5,6 @@
 	
 	TaskPanel.init = function( parentGroup ){
 		try {
-			//нужно написать от уровня в хете gameObjType;
 			let self = this;
 			this.numLevel
 			this.parent = parentGroup;
@@ -33,16 +32,17 @@
 			};
 			
 			console.log('this.countTasks',this.countTasks);
-			let xBackgrTasks = isMobile ?   -200 : -322;
-			let yBackgrTasks = isMobile ?   -376 :  -75;
+			let xBackgrTasks = isMobile ?      0 : -322;
+			let yBackgrTasks = isMobile ?   -312 :  -75;
 			
-			this.backgrTasks = Handler.showImg( this.group, "panelTasks"+this.countVisibleTask+"WindGame.png",xBackgrTasks,yBackgrTasks);
+			let nameBackgr = isMobile ? "taskPanelMob.png" : "panelTasks"+this.countVisibleTask+"WindGame.png";
+			this.backgrTasks = Handler.showImg( this.group, nameBackgr, xBackgrTasks, yBackgrTasks );
 			if ( !isMobile ) {
 				this.backgrTasks.width = this.backgrTasks.width/2;
 				this.backgrTasks.height = this.backgrTasks.height/2;
-			}
-			this.backgrTasks.anchor.set ( 0.5, 0 );
-			if (isMobile) { this.backgrTasks.angle = 90; this.backgrTasks.anchor.set ( 0, 1 ) };
+				this.backgrTasks.anchor.set ( 0.5, 0 );
+			};
+			//if (isMobile) { this.backgrTasks.angle = 90; this.backgrTasks.anchor.set ( 0, 1 ) };
 			
 			this.groupsTasks = [];
 			let shYGrTask = -47;
@@ -75,19 +75,21 @@
 	
 					this.groupsTasks[i].x = -325;
 					this.groupsTasks[i].y =  shYGrTask;
-					shYGrTask += + this.groupsTasks[i].height+3; 
+					shYGrTask += this.groupsTasks[i].height+3; 
 				} else {
 					this.groupsTasks[i] = null;
 				};            
 			};
 			if ( isMobile ) {
-				let xMobileTask = [ -156,-156, -81, -81, -6, -6, 120];
-				let yMobileTask = [ -337,-296,-337,-296,-337,-296,-337];
+				
+				//let xMobileTask = [ -156,-156, -81, -81, -6, -6, 120];
+				//let yMobileTask = [ -337,-296,-337,-296,-337,-296,-337];
 				let k = 0;
 				for ( let i = 0; i <= 9; i++ ) {
 					if (this.groupsTasks[i] != null) {
-						self.groupsTasks[i].x = xMobileTask[k];
-						self.groupsTasks[i].y = yMobileTask[k];
+						let xMobileTask = 150 + 70*k;
+						self.groupsTasks[i].x += xMobileTask;
+						self.groupsTasks[i].y = -326;
 						k++;
 					}
 				}

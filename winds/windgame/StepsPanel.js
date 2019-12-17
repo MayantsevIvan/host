@@ -7,13 +7,15 @@
 
 	    this.group = Handler.newGroup( parentGroup );
 		this.countSteps = countSteps;
- 		this.back = Handler.showImgRect( this.group, "panelStepsWindGame.png", -315,-112,116,52 ); 
-		
-		this.group.x = isMobile ? 190 : -315;
-		this.group.y = isMobile ? 437 : -112;
+ 		
+		if ( isMobile ) {
+			this.back = Handler.showImgRect( this.group, "panelStepsWindGameMob.png", 0, 0, 163, 49 ); 
+		} else {
+			this.back = Handler.showImgRect( this.group, "panelStepsWindGame.png", 0, 0, 116, 52 ); 
+		};
+		this.group.x = isMobile ? -138 : -630;
+		this.group.y = isMobile ?  328 : -224;
 
-		
-		
         this.showNumber();
 		return this;
     };    
@@ -22,9 +24,10 @@
 	    this.countSteps = countSteps || this.countSteps;
 		if ( countSteps == 0 ) this.countSteps = 0;
 		Handler.destroy( this.gNumSteps );
-
+		let xSteps = isMobile ? 55 : 30;
+		let ySteps = isMobile ?  0 : 3;
         this.gNumSteps = Handler.newGroup( this.group );         
-        Handler.showNumber( "o", this.back.x+30, this.back.y+3, this.countSteps, 17, 23, this.gNumSteps, '', 2 );
+        Handler.showNumber( "o", xSteps, ySteps, this.countSteps, 17, 23, this.gNumSteps, '', 2 );
 		this.gNumSteps.x = -Math.floor( this.gNumSteps.width/2 );
 		
 		return this;

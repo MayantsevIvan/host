@@ -16,7 +16,7 @@
 	    });//count
 
 
-		this.image = Handler.showImg( parent, 'bonus/'+name+".png", fx, fy );
+		this.image = Handler.showImg( parent, name+".png", fx, fy );
 		if ( !isMobile ) {
 			this.image.width /= 2;
 			this.image.height  /= 2;
@@ -74,20 +74,24 @@
 		}
 	};
     ButBonus.prototype.initCursor = function(evt) {
-		console.log("curB"+this.name.substr(1));
-		Handler.curB = Embeds["curB"+this.name.substr(1)]();
-		
-		Handler.curB.name = this.name;
-		Handler.curB.anchor.set(0,0);
-		Handler.curB.position.x = Math.floor( evt.data.global.x / pixiApp.stage.scale.x );
-		Handler.curB.position.y = Math.floor( evt.data.global.y / pixiApp.stage.scale.y );
-		
-		pixiApp.stage.addChild( Handler.curB );
-        pixiApp.stage.interactive = true;
+		if ( isMobile ) {
+			Handler.panelBonus = PanelUseBonus.show( { parent: this.parent, nameBon: this.name } );
+		} else {
+			Handler.curB = Embeds["curB"+this.name.substr(1)]();
+			Handler.curB.name = this.name;
+			Handler.curB.anchor.set(0,0);
+			Handler.curB.position.x = Math.floor( evt.data.global.x / pixiApp.stage.scale.x );
+			Handler.curB.position.y = Math.floor( evt.data.global.y / pixiApp.stage.scale.y );
+			pixiApp.stage.addChild( Handler.curB );
+		};
+		pixiApp.stage.interactive = "true";
 		pixiApp.stage.on( "pointermove", Handler.curMove );
 	};    
 	ButBonus.prototype.hideCursor = function() {
-        if ( Handler.curB != null ) {
+		if ( Handler.panelBonus ) {
+			Handler.panelBonus.destroy();
+		}
+		if ( Handler.curB != null ) {
 			Handler.curB.destroy();
 			Handler.curB = null;
 		}
