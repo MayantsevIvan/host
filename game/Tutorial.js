@@ -45,7 +45,7 @@
 						if (ts3) Handler.lights.removeChild(ts3);
 						this._tutStep1Num = 32;
 						let self = this;
-						setTimeout(function() { self.tutStep32Show(); }, 2000);
+						//setTimeout(function() { self.tutStep32Show(); }, 2000);
 	//					TweenMax.to(new Sprite(),2,{onComplete:});
 					}  else {
 						if (this._tutStep1Num == 32) {
@@ -159,17 +159,18 @@
 					};
 					movePointer();
 				};
-				Handler.showImgRect( tutStep1, Consts.DIR_TUTORIAL + 'lableTutorialStep1.png', 210, 350, 396, 209 );
+				Handler.showImgRect( tutStep1, Consts.DIR_TUTORIAL + 'lableTutorialStep1Mob.png', 198, 325, 437, 139 );
 				showAnim( Handler.lights, 150, 150 );
-
-				self.animGr.onEL('pointerover', function() { self.animGr.isVisible = false; });
+				
+				if ( !isMobile ) self.animGr.interactive = true;
+				self.animGr.on('pointerover', function() { self.animGr.isVisible = false; });
 				tutStep1.on('pointerover', function() { self.animGr.isVisible = true; });
 			};
 			
 			if ( self.loadedSteps[ 0 ] == null ) {
 				 self.loadedSteps[ 0 ] = 1;
 					let listOfImages = [
-						"tutorial/lableTutorialStep1.png"
+						"tutorial/lableTutorialStep1Mob.png"
 					];
 					ImageLoader.loadAssets(showContent, listOfImages);
 			} else {
@@ -223,8 +224,8 @@
 				tutStep2.drawPolygon(points);
 				tutStep2.endFill();
 				tutStep2.name = 'tutStep12';
-				Handler.showImgRect( tutStep2, Consts.DIR_TUTORIAL + 'lableTutorialStep2.png', 200, 175, 411, 150 );
-				Handler.showImgRect( tutStep2,  'butNext.png', 200, 325, 166, 60 );
+				Handler.showImgRect( tutStep2, Consts.DIR_TUTORIAL + 'lableTutorialStep2Mob.png', 200, 175, 366, 250 );
+				Handler.showImgRect( tutStep2, 'butContinueEndLevelMob.png', 200, 400, 191, 62 );
 				
 				//tutStep2.addChild(  );
 				Handler.lights.addChild(tutStep2);
@@ -234,7 +235,7 @@
 			if ( self.loadedSteps[ 1 ] == null ) {
 				 self.loadedSteps[ 1 ] = 1;
 					let listOfImages = [
-						"tutorial/lableTutorialStep2.png"
+						"tutorial/lableTutorialStep2Mob.png"
 					];
 					ImageLoader.loadAssets(showContent, listOfImages);
 			} else {
@@ -295,7 +296,7 @@
 				Handler.lights.addChild(tutStep3);
 				
 				self._tutStep1Num = 3;
-				Handler.showImgRect( tutStep3, Consts.DIR_TUTORIAL + 'lableTutorialStep3.png', 200, 340, 385, 103 );
+				Handler.showImgRect( tutStep3, Consts.DIR_TUTORIAL + 'lableTutorialStep3Mob.png', 198, 300, 440, 92 );
 				let ar1;
 				let ar2;
 				let ar3;
@@ -338,13 +339,14 @@
 					movePointer();
 				};
 				showAnim( Handler.lights,150,150);
-				self.animGr.onEL('pointerover', function() { self.animGr.isVisible = false; });
+				if ( !isMobile ) self.animGr.interactive = true;
+				self.animGr.on('pointerover', function() { self.animGr.isVisible = false; });
 				tutStep3.on('pointerover', function() { self.animGr.isVisible = true; });
 			};
 			if ( self.loadedSteps[ 2 ] == null ) {
 				 self.loadedSteps[ 2 ] = 1;
 					let listOfImages = [
-						"tutorial/lableTutorialStep3.png"
+						"tutorial/lableTutorialStep3Mob.png"
 					];
 					ImageLoader.loadAssets(showContent, listOfImages);
 			} else {
@@ -359,7 +361,7 @@
 			 Handler.onErrorCatched(ex);
 		};
 	};
-	Tutorial.tutStep32Show = function () {
+	/*Tutorial.tutStep32Show = function () {
 		try { 
 			let self = this;
 			let showContent = function() {
@@ -401,7 +403,7 @@
 		} catch ( ex ) {
 			 Handler.onErrorCatched(ex);
 		};
-	}
+	}*/
 	Tutorial.tutStep42Show = function () {
 		try { 
 			let self = this;
@@ -419,8 +421,8 @@
 				tutStep4.beginFill( 0x000000, 0.35 );
 				tutStep4.drawPolygon(points);
 				tutStep4.endFill();
-				Handler.showImgRect( tutStep4,  Consts.DIR_TUTORIAL + 'lableTutorialStep42.png', 200, 150, 408, 201 );
-				Handler.showImgRect( tutStep4,  'butNext.png', 200, 325, 166, 60 );
+				Handler.showImgRect( tutStep4,  Consts.DIR_TUTORIAL + 'lableTutorialStep42Mob.png', 200, 150, 443, 272 );
+				Handler.showImgRect( tutStep4,  'butContinueEndLevelMob.png', 200, 400, 191, 62 );
 				tutStep4.name = 'tutStep42';
 				Handler.lights.addChild(tutStep4);
 				self._tutStep1Num = 42;
@@ -429,7 +431,7 @@
 			if ( self.loadedSteps[ 4 ] == null ) {
 				 self.loadedSteps[ 4 ] = 1;
 					let listOfImages = [
-						"tutorial/lableTutorialStep42.png"
+						"tutorial/lableTutorialStep42Mob.png"
 					];
 					ImageLoader.loadAssets(showContent, listOfImages);
 			} else {
@@ -509,14 +511,15 @@
 				};
 				showAnim( Handler.lights, 50, 150);
 				self._tutStep1Num = 4;
-				Handler.showImgRect(tutStep4, Consts.DIR_TUTORIAL + 'lableTutorialStep4.png', 200, 330, 411, 96);
-				self.animGr.onEL('pointerover', function() { self.animGr.isVisible = false; });
+				Handler.showImgRect(tutStep4, Consts.DIR_TUTORIAL + 'lableTutorialStep4Mob.png', 200, 310, 362, 134);
+				if ( !isMobile ) self.animGr.interactive = true;
+				self.animGr.on('pointerover', function() { self.animGr.isVisible = false; });
 				tutStep4.on('pointerover', function() { self.animGr.isVisible = true; });
 			};
 			if ( self.loadedSteps[ 5 ] == null ) {
 				 self.loadedSteps[ 5 ] = 1;
 					let listOfImages = [
-						"tutorial/lableTutorialStep4.png",
+						"tutorial/lableTutorialStep4Mob.png",
 					];
 					ImageLoader.loadAssets(showContent, listOfImages);
 			} else {
@@ -557,9 +560,9 @@
 				self._tutStep1Num = 5;
 				tutStep5.on('pointertap', function(){ self.removeTuts() });
 				
-				Handler.showImgRect(tutStep5, Consts.DIR_TUTORIAL + 'lableTopTutorialStep5.png',  185,60, 363,133);
-				Handler.showImgRect(tutStep5, Consts.DIR_TUTORIAL + 'lableDownTutorialStep5.png', 175,375, 375,97);
-				Handler.showImgRect(tutStep5, 'butNext.png',                300,450, 166,60);
+				Handler.showImgRect(tutStep5, Consts.DIR_TUTORIAL + 'lableTopTutorialStep5Mob.png',  185,60, 373,111);
+				Handler.showImgRect(tutStep5, Consts.DIR_TUTORIAL + 'lableDownTutorialStep5Mob.png', 175,368, 384,76);
+				Handler.showImgRect(tutStep5, 'butContinueEndLevelMob.png', 300, 440, 191, 62 );
 				
 			};
 			if ( self.loadedSteps[ 6 ] == null ) {
