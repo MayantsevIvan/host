@@ -35,7 +35,9 @@
 						//Winds.show( Winds.WIND_ACT_INVITE );
 						//Winds.show( Winds.WIND_FR_INVITED );
 						//Winds.show( Winds.WIND_ACTION0 );
-						Winds.show( Winds.WIND_ACTION1 );
+						//Winds.show( Winds.WIND_ACTION1 );
+						Winds.show( Winds.WIND_FR_INVITED );
+						//Winds.show( Winds.WIND_ACT_INVITE );
 						//Winds.show( Winds.WIND_DAILY_BONUS, { num_day: 1 } );
 						//Winds.show( Winds.WIND_END_LEVEL );
 						//Winds.show( Winds.WIND_PUZZLE );
