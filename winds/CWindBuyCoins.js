@@ -59,7 +59,7 @@
 				BackClient.ask( BackClient.GET_COINS_AND_ENERGY, onBuyEnegyForCoinsAsked, { energy_v: User.energy, coins: User.coins, num: butNumber-4 });
 				//self.shutdown();
 			};
-
+		
 			let yLine = -187;
 			let terminationLineName = isMobile ? "Mob.png" : ".png";
 			let nameBut = isMobile ? "butBuyMob.png" : "butBuy.png";

@@ -167,8 +167,7 @@
 			this.arBackgrName.push( 'mBackgr'+i+'.png' );
 		}*/
 
-		if ( !isMobile )self.bottomPanel = BottomPanel.show();
-//		self.mainGroup.addChild(self.bottomPanel);
+
 		//self.manyLevesGroup = null;
 		
 		 //  array 0; 

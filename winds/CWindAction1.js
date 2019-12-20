@@ -31,7 +31,7 @@
 			let nameTitle = isMobile ? "lableAcSale1Mob.png" : "lableAcSale1.png";
 			let wTitle = isMobile ?  418 :  580; 
 			let hTitle = isMobile ?  132 :   75;
-			let yTitle = isMobile ? -205 : -100;
+			let yTitle = isMobile ? -205 : -110;
 			Handler.showImgRect(self.mainGroup, Consts.DIR_AC_SALE1 + nameTitle,0, yTitle, wTitle, hTitle);
 			//bonus
 			let nameBackgrBon = isMobile ? "backgrAnimAcSale1Mob.png" : "backgrAnimAcSale1.png";

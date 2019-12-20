@@ -42,6 +42,7 @@
 			};
 			let pointerUpButBuy = function( evt ) {
 				let butNumber = parseInt( evt.target.name.substr(3) );
+				console.log(butNumber);
 				if ( butNumber < 1 ) return;	
 				if ( butNumber < 5 ) {
 					SocialClient.callbackPayment = Handler.getCoEnFromServer;
@@ -68,6 +69,7 @@
 			let nameBut = isMobile ? "butBuyMob.png" : "butBuyWindLives.png";
 			let wBut    = isMobile ? 143 : 162;
 			let xBut    = isMobile ? 190 : 218;
+			let butName = [ null,'but4','but3','but2','but1','but5','but6' ]
 			for ( let i = 1; i <= 6; i++ ) {
 				let line = Handler.showImg(self.mainGroup,Consts.DIR_BUY_LIVES+"line"+i+terminationLineName,0,yLine);
 				line.anchor.set(0.5,0);
@@ -78,7 +80,7 @@
 				let yBut = i == 1 ? yLine + line.height/2 : yLine + line.height/2 - 2;
 
 				let butBuy = Handler.showImgRect(self.mainGroup,Consts.DIR_BUY_LIVES+nameBut, xBut, yBut,wBut,48);
-				butBuy.name = "but"+i;
+				butBuy.name = butName[i];
 				butBuy.onEL("pointerdown", pointerDownButBuy);
 				butBuy.onEL("pointerup", pointerUpButBuy);
 				yLine += line.height + 2;

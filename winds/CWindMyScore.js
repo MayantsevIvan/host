@@ -24,42 +24,163 @@
 				loader.add( "r"+i, Consts.URL_FR_USERS[i], optionsAssets );
 			};
 			
-			
-			let backgr = Handler.showImgRect(self.mainGroup,Consts.DIR_MY_SCORE + 'backgrMyScore.png',0,0,662,482);
-			let xCross = isMobile ? 0 : 308;
-			let cross = Handler.showImgRect(self.mainGroup,'cross.png',xCross,-222,36,36);
+			if ( isMobile ) { 
+				Handler.showImgRect( self.mainGroup, "backgrEndLevelWindMMob.png", 0, 0, 450, 714 );
+				Handler.showImgRect( self.mainGroup, Consts.DIR_MY_SCORE + "backgrUserCardsMob.png", 0, 40, 330, 561 );
+			} else {
+				Handler.showImgRect( self.mainGroup, Consts.DIR_MY_SCORE + 'backgrMyScore.png', 0, 0, 662, 482 );
+			};
+			let xCross = isMobile ?  208 :  308;
+			let yCross = isMobile ? -336 : -222;
+			let cross = Handler.showImgRect(self.mainGroup,'cross.png',xCross, yCross,36,36);
 			cross.onEL("pointerdown",function() { self.shutdown(); });
 			if ( isMobile ) {
 				let idImg =  Handler.showImgRect( self.mainGroup, "boxId.png", -295, -205, 31,31 );   
 				idImg.onEL( 'pointerdown', function() { Winds.show( Winds.WIND_MSG, { text: Langs.NUMBER_USER + User.viewer_id } ) } );
 			};
-			Handler.showImgRect(self.mainGroup,Consts.DIR_MY_SCORE + 'lableAllRt.png',-150,-210,167,23);
-			Handler.showImgRect(self.mainGroup,Consts.DIR_MY_SCORE + 'lableVipRt.png',150,-210,129,21);
-			Handler.showImgRect(self.mainGroup,Consts.DIR_MY_SCORE + 'soon.png',150,10,163,417);	
 			
-			self.myRateShowingStarted = false;
-			self._MY_RATE  = 1;
-			self._VIP_RATE = 2;
+			let lableAllRt = null;
+			let lableMyRt = null;
+			let lableFrRt = null;
 			
-			if ( isMobile ) { 
-				//self.mainGroup.x = self.mainGroup.width/2 + visibleWidth/2;
-				self.mainGroup.scale.set(1.2,1.2);
-				self.mainGroup.x = Handler.contentCenterX + visibleWidth/2 + backgr.width/2+100;
-				let shRtX = self.mainGroup.x - 450;
-				TweenMax.to( self.mainGroup, Consts.TIME_WINDOW_MOVE/1000, { x: shRtX } );
+			let callBack = function( fusers, selRate, place ) {
+				self.myScoreStarPlace = place;
+				self.selectedRate = selRate;
+				self.users = fusers;
+				self.showCards();
 			};
-			self.showMyRating();
+			
+			self.selectedRate = Consts.TOP_FRENDS;
+			self.shiftUsers = 0;
+			self.users = null;
+			
+			if ( isMobile ) {
+				lableAllRt = Handler.showImgRect(self.mainGroup,Consts.DIR_MY_SCORE + 'lableAllRtMob.png',    0, -315, 314, 44);
+				lableMyRt  = Handler.showImgRect(self.mainGroup,Consts.DIR_MY_SCORE + 'lableFriendRtMob.png', 0, -315, 313, 45);
+				lableMyRt.visible = false;
+				lableFrRt  = Handler.showImgRect(self.mainGroup,Consts.DIR_MY_SCORE + 'lableMyRtMob.png',     0, -315, 256, 39);
+				lableFrRt.visible = false;
+				
+				let clicked = true;         
+				let clickedDelay = function() {
+					clicked = false;
+					Handler.timer_performWithDelay( 300, function(){ clicked = true; } );
+				};
+				//self.myRateShowingStarted = false;
+				
+				let moveUpOneUserCards = function(){
+					if ( self.shiftUsers > 0 && clicked ) {
+						clickedDelay();
+						self.shiftUsers -= 1;
+						self.showCards();
+					};
+				};
+				let butUp = Handler.showImgRect( self.mainGroup, Consts.DIR_MY_SCORE + "arrowUp.png", 120, -210, 64, 38 );
+				butUp.onEL("pointerdown", moveUpOneUserCards );
+				
+				let moveUpDubleUserCards = function() {
+					if ( self.shiftUsers > 0 && clicked ) {
+						clickedDelay();
+						self.shiftUsers = Math.max( self.shiftUsers-4, 0 );
+						self.showCards();
+					};
+				}
+				let butUpDuble = Handler.showImgRect( self.mainGroup, Consts.DIR_MY_SCORE + "arrowUpDuble.png", 120, -150, 64, 56 );
+				butUpDuble.onEL("pointerdown", moveUpDubleUserCards );
+				
+				let moveDownOneUserCards = function(){
+					if ( self.shiftUsers < self.users.length-4 && clicked ) {
+						clickedDelay();
+						self.shiftUsers += 1;
+						self.showCards();
+					};
+				};
+				let butDown = Handler.showImgRect( self.mainGroup, Consts.DIR_MY_SCORE + "arrowDown.png", 120, 285, 64, 38 );
+				butDown.onEL("pointerdown", moveDownOneUserCards );
+				
+				let moveDownDubleUserCards = function() {
+					if ( self.shiftUsers < self.users.length-4 && clicked ) {
+						clickedDelay();
+						self.shiftUsers = Math.min( self.shiftUsers+4, self.users.length-4 );  
+						self.showCards();
+					};
+				}
+				let butDownDuble = Handler.showImgRect( self.mainGroup, Consts.DIR_MY_SCORE + "arrowDownDuble.png", 120, 225, 64, 56 );
+				butDownDuble.onEL("pointerdown", moveDownDubleUserCards );
+				
+				let onChangeRate = function( evt ) {
+					if ( self.selectedRate != evt.target.pos && clicked && !self.loading ) {
+						clickedDelay();
+
+						self.selectedRate = evt.target.pos;
+						self.shiftUsers = 0;
+						
+						if ( evt.target.pos == Consts.TOP_FRENDS ) {
+							lableAllRt.visible = false;
+							lableMyRt.visible  = false;
+							lableFrRt.visible  = true;
+							FriendRate.showFrRating(callBack);
+						} else if ( evt.target.pos == Consts.TOP_ALL ) {
+							lableAllRt.visible = true;
+							lableMyRt.visible  = false;
+							lableFrRt.visible  = false;
+							Top100.showTop100Rating(callBack);
+						} else if ( evt.target.pos == Consts.MY_SCORE ) {
+							lableAllRt.visible = false;
+							lableMyRt.visible  = true;
+							lableFrRt.visible  = false;
+							MyScore.showMyRating(callBack);
+						};	
+					};
+				};
+				
+				let butShowFrRating = Handler.showImgRect( self.mainGroup, Consts.DIR_MY_SCORE + "butFrMob.png", -140, -265, 128, 41 );
+				butShowFrRating.pos = Consts.TOP_FRENDS;    
+				butShowFrRating.onEL("pointerdown", onChangeRate );
+				
+				let butShowTop100Rating = Handler.showImgRect( self.mainGroup, Consts.DIR_MY_SCORE + "butAllMob.png", 0, -265, 128, 41 );
+				butShowTop100Rating.pos = Consts.TOP_ALL;    
+				butShowTop100Rating.onEL("pointerdown", onChangeRate );
+				
+				let butShowMyScore = Handler.showImgRect( self.mainGroup, Consts.DIR_MY_SCORE + "butMyMob.png", 140, -265, 128, 41 );
+				butShowMyScore.pos = Consts.MY_SCORE;    
+				butShowMyScore.onEL("pointerdown", onChangeRate );
+				Top100.showTop100Rating( callBack );
+				
+			} else {
+				Handler.showImgRect(self.mainGroup,Consts.DIR_MY_SCORE + 'lableAllRt.png', -150,-210,167,23);
+				Handler.showImgRect(self.mainGroup,Consts.DIR_MY_SCORE + 'lableVipRt.png',150,-210,129,21);
+				Handler.showImgRect(self.mainGroup,Consts.DIR_MY_SCORE + 'soon.png',150,10,163,417);
+				MyScore.showMyRating( callBack );
+			};
+			
 		};
 		
 		if ( Handler.windsWithLoadedImages[ Winds.WIND_MY_SCORE ] == null ) {
 			Handler.windsWithLoadedImages[ Winds.WIND_MY_SCORE ] = 1;
-			let listOfImages = [
-				"winds/myScore/backgrMyScore.png",
-				"winds/myScore/backgrUserWindMyScore.png",
-				//"winds/myScore/backgrUserImgWindMyScore.png",
-				"winds/myScore/lableAllRt.png",
-				"winds/myScore/lableVipRt.png",
-				"winds/myScore/soon.png"];
+			let listOfImages = []
+				if ( isMobile ) {
+					listOfImages = [
+					"winds/myScore/backgrUserWindMyScore.png",
+					"winds/myScore/backgrUserCardsMob.png",
+					"winds/myScore/butFrMob.png",
+					"winds/myScore/butAllMob.png",
+					"winds/myScore/butMyMob.png",
+					"winds/myScore/arrowDown.png",
+					"winds/myScore/arrowDownDuble.png",
+					"winds/myScore/arrowUp.png",
+					"winds/myScore/arrowUpDuble.png",
+					'winds/myScore/lableAllRtMob.png',
+					'winds/myScore/lableFriendRtMob.png',
+					'winds/myScore/lableMyRtMob.png',];
+				} else {
+					listOfImages = [
+					"winds/myScore/backgrMyScore.png",
+					"winds/myScore/backgrUserWindMyScore.png",
+					"winds/myScore/lableAllRt.png",
+					"winds/myScore/lableVipRt.png",
+					"winds/myScore/soon.png"];
+				};
 				ImageLoader.loadAssets(showContent, listOfImages);
 		} else {
 			showContent();
@@ -71,87 +192,28 @@
 		self.mainGroup.noTween = true;
 		return self.mainGroup;
 	};
-	
-	CWindMyScore.onGetUsersProfilesForVip = function( ressn ) {
-		this.onGetUsersProfiles( ressn, this._VIP_RATE );
-		this.showMyRating();
-	};
-	
-	CWindMyScore.showMyRating = function() {
+
+	CWindMyScore.showCards = function() {
 		let self = this;
-		if ( self.myRateShowingStarted ) return;
-		self.myRateShowingStarted = true;
-		
-		if ( true ) {//Handler.isDV()
-			self.initMyScore( self.resp2 );
-		} else {
-		    BackClient.ask( BackClient.GET_MY_SCORE, function(r){self.initMyScore(r);}, {oid:User.viewer_id} );
-		}
-	};
+		let x = isMobile ? -30 : -150;         
+        let y = isMobile ? -125 : -148;   
+		if ( self.userCards ) self.userCards.removeSelf();
+		self.userCards = Handler.newGroup(self.mainGroup);
+        for ( let i = this.shiftUsers; i<this.shiftUsers+4; i++ ) {
+			let usr = this.users[i];
+            if ( usr && usr.url ) {
+				let pos =  this.selectedRate == Consts.MY_SCORE ? i + 1 + self.myScoreStarPlace : i+1;
+                this.showUserCard( self.userCards, x, y, usr.uid, usr.url, pos, usr.points, usr.name );              
+            } else {
+                let fonInviteUsers = Handler.showImgRect(self.userCards,"fonInviteUser.png",x,y,82,112);         
+                fonInviteUsers.onEL( "pointerdown", function(){ console.log( "!!!" ); });         
+            };
+			y += 105;
+        };
+		if ( isMobile ) self.userCards.scale.set(1.24);
+    };
 	
-	CWindMyScore.initMyScore = function( resp ) {
-		let self = this;
-		self._topAll = resp['a'];
-		let oids = [];
-		for ( let s in self._topAll ) 
-			oids.push( self._topAll[s]['oid'] );
-		
-		if ( true ) {//Handler.isDV()
-			self.onGetUsersProfilesForMy( self.ressn2 );
-		} else {
-		    SocialClient.userGetProfiles( function(r){self.onGetUsersProfilesForMy(r);}, oids);
-		}
-	};
-	
-	CWindMyScore.onGetUsersProfilesForMy = function( ressn ) {
-		this.onGetUsersProfiles( ressn, this._MY_RATE );
-	};
-	CWindMyScore.onGetUsersProfiles = function( res, typeRate ) {
-		let self = this;
-		//Handler.loadingStart();
-		//Handler.loadingStop();
-		let resp = [];
-		
-		for ( let usr of res ) {
-			if ( usr.pic_2 == null ) usr.pic_2 = usr.pic_big;
-
-			resp[ usr.uid ] = { pic : usr.pic_2 };
-			resp[ usr.uid ].name = usr.first_name+" "+usr.last_name;
-		}
-		
-		let ftop = ( typeRate == self._MY_RATE ) ? self._topAll : self._topVip;
-
-		let places = Object.keys(ftop);
-		//let places = [];
-		//for ( s in ftop ) {
-		//	places.push(s);
-		//}
-
-		let maxPlaces = ( typeRate == self._MY_RATE ) ? 3 : 7;
-		for ( let i=0; i<=maxPlaces; i++ ) {
-            if ( places[i] == null ) continue;
-			
-			let pic  = '', name = '', exp = 0, uid = 0;
-			if ( ftop[places[i]]['oid'] && resp[ftop[places[i]]['oid']] ) {
-			    pic  = resp[ftop[places[i]]['oid']].pic;
-			    name = resp[ftop[places[i]]['oid']].name;
-				uid = ftop[places[i]]['oid'];
-			}
-			if ( ftop[places[i]] )
-			    exp = ftop[places[i]]['exp'];
-			
-			let place = parseInt( places[i] ) + 1;
-			
-			if ( typeRate == self._MY_RATE ) {
-                self.showUserCard( self.mainGroup, -150, -148+i*105, uid, pic, place, exp, name );
-			} else {
-//				self.showUserCard( self.mainGroup, 22+(i % 2)*205, -147+(Math.floor(i / 2))*105, uid, pic, place, exp, name );
-			}
-		}  
-		
-	};
-
-    CWindMyScore.showUserCard = function( fgroup, rx, ry, uid, userPic, userPlace, userScore, userName ) {
+	CWindMyScore.showUserCard = function( fgroup, rx, ry, uid, userPic, userPlace, userScore, userName ) {
 		let imgSize = 98;
         let backroundUser = Handler.showImgRect( fgroup, Consts.DIR_MY_SCORE  + "backgrUserWindMyScore.png", rx, ry, 164,104 );         
 		
@@ -188,6 +250,13 @@
         let textUserNameImg = Handler.newText( ts3 );
 		textUserNameImg.x -= Math.floor(textUserNameImg.width/2);
     };
+
+	/*
+	CWindMyScore.onGetUsersProfilesForVip = function( ressn ) {
+		this.onGetUsersProfiles( ressn, this._VIP_RATE );
+		this.showMyRating();
+	};
+	*/	
 	
 	CWindMyScore.shutdown = function( fastShutdown ){
 		if ( Winds.shutdown( this.windIndex ) ) {
@@ -198,7 +267,8 @@
 			};
   		};
 	};
-	
+		
+	/*
 	CWindMyScore.resp1 = {
 	    v : [
 	        { exp:"454", oid:"568770661682" },
@@ -1096,54 +1166,6 @@
         	uid:	"555041092504",	
         	url_profile:	"https:ok.ru/profile/555041092504",
         }
-    ];
-    CWindMyScore.resp2 = {
-    	a:{
-    		"264346" : { exp:"389468", oid:"129012946464" },
-    		"264347" : { exp:"389462", oid:"555027185260" },
-    		"264348" : { exp:"389456", oid:"579089224503" },
-    		"264349" : { exp:"389453", oid:"514097834586" }
-    	},
-    	d:	null,
-    	m:	null	
-    };
-	CWindMyScore.ressn2 =	[
-    	{
-    		first_name	:"Алина",	
-    		gender	:"female",	
-    		last_name	:"Густав-Дальская",	
-    		photo	:"https://i.mycdn.me/image?id=867913757472&t=2&plc=API&aid=177033216&tkn=*Z_OzkaGTB7SH9l8soCzV2xanyDQ",	
-    		pic_2	:"https://i.mycdn.me/image?id=867913757472&t=2&plc=API&aid=177033216&tkn=*Z_OzkaGTB7SH9l8soCzV2xanyDQ",	
-    		uid	:"129012946464",	
-    		url_profile	:"https://ok.ru/profile/129012946464" 
-        },		
-    	{
-    		first_name	:"Dind",	
-    		gender	:"male",	
-    		last_name	:"Games",	
-    		photo	:"https://i.mycdn.me/res/stub_128x96.gif",	
-    		pic_2	:"https://i.mycdn.me/res/stub_128x96.gif",	
-    		uid	:"514097834586",	
-    		url_profile	:"https://ok.ru/profile/514097834586"
-    	},		
-    	{
-    		first_name	:"ღMiLeNa",	
-    		gender	:"female",	
-    		last_name	:"ღKaLaS",	
-    		photo	:"https://i.mycdn.me/image?id=854589401399&t=2&plc=API&ts=00&aid=177033216&tkn=*CIWMkw7hb1q53dM4F8kOnhVfnxU",	
-    		pic_2	:"https://i.mycdn.me/image?id=854589401399&t=2&plc=API&ts=00&aid=177033216&tkn=*CIWMkw7hb1q53dM4F8kOnhVfnxU",	
-    		uid	:"579089224503",	
-    		url_profile	:"https://ok.ru/profile/579089224503"
-    	},		
-    	{
-    		first_name	:"Вера",	
-    		gender	:"female",	
-    		last_name	:"Вдовина (Капустина)",	
-    		photo	:"https://i.mycdn.me/image?id=886325245548&t=2&plc=API&ts=00&aid=177033216&tkn=*J8t_ukyyRNfpN1RKjBabivesTu0",	
-    		pic_2	:"https://i.mycdn.me/image?id=886325245548&t=2&plc=API&ts=00&aid=177033216&tkn=*J8t_ukyyRNfpN1RKjBabivesTu0",	
-    		uid	:"555027185260",	
-    		url_profile	:"https://ok.ru/profile/555027185260"
-    	}
-    ];
-
+    ];*/
+   
 	//return CWindMyScore;

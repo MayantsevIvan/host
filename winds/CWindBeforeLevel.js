@@ -124,7 +124,7 @@
 		let showRating = function( evt ) {
 			if ( !Handler.visibleRt ) {
 				self.windRating = CWindSmallRating.showWindRating();
-				self.windRating.x = self.windRating.width/2 + visibleWidth/2;
+				self.windRating.x = /*self.windRating.width/2*/ 150 + visibleWidth/2;
 				self.windRating.y += 34;
 				let shRtX = self.windRating.x - 200;
 				Handler.toFront( self.windRating );
