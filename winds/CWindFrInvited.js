@@ -80,7 +80,7 @@
 			let butGetGold = Handler.showImgRect(this.mainGroup, "butGold.png",0,ybutGold,443,60);
 			butGetGold.onEL("pointertap", function(){});
 		};
-		butInvite.onEL( "pointerdown", function(){ SocialClient.invite(); } );
+		butInvite.onEL( "pointertap", function(){ SocialClient.invite(); } );
 		
 		//lableTell
 		let xCheckBox = isMobile ?  30 : 85;
