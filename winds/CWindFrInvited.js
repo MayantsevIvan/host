@@ -68,25 +68,19 @@
 		Handler.showImgRect( this.mainGroup, nameLableMid, 0, yLableMid, wLableMid, hLableMid );
 		
 		//butInv
-		
-		let tapButInv = function( evt ){
-			SocialClient.invite("sykablyat");
-		}
+		let butInvite = null;
 		let yButInv = isMobile ? 174 : 165;
 		if ( isMobile ) {
 			Handler.showImgRect( this.mainGroup, "backgrButAcInviteMob.png", 0, yButInv+6, 285, 60 );
-			let butInvite = Handler.showImgRect( this.mainGroup, "butInviteAcInviteMob.png", -2, yButInv, 284,62);
-			butInvite.onEL( "pointertap", tapButInv );
+			butInvite = Handler.showImgRect( this.mainGroup, "butInviteAcInviteMob.png", -2, yButInv, 284,62);
 		} else {
-			let butInvite = butInvite = Handler.showImgRect( this.mainGroup, "butInviteWindFrInvited.png", 0, yButInv, 443,61);
-			butInvite.onEL( "pointertap", tapButInv );
+			butInvite = Handler.showImgRect( this.mainGroup, "butInviteWindFrInvited.png", 0, yButInv, 443,61);
 			//butGold
 			let ybutGold = isMobile ? 0 : 25;
 			let butGetGold = Handler.showImgRect(this.mainGroup, "butGold.png",0,ybutGold,443,60);
 			butGetGold.onEL("pointertap", function(){});
 		};
-		
-	
+		butInvite.onEL( "pointertap", function( evt ){ SocialClient.invite(); } );
 		
 		//lableTell
 		let xCheckBox = isMobile ?  30 : 85;
