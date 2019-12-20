@@ -9,114 +9,115 @@
     };        
 
     BottomPanel.show = function( name, params ) {
-        let self = this;
-        self.group = Handler.newGroup( Handler.gWinds );
-    
-        self.group.x = Handler.contentCenterX;
-        self.group.y = 608;//-112;
+		let self = this;
+		if( !isMobile ) {
+			self.group = Handler.newGroup( Handler.gWinds );
 		
-        let width  = Handler.contentWidth;
-		
-        let brownStripe = Handler.showRect( self.group, 0, 0, width,  4,  '0x462e06' );         
-        let fonStripe   = Handler.showRect( self.group, 0, 62, width, 120, '0xf4f4b5' );         
+			self.group.x = Handler.contentCenterX;
+			self.group.y = 608;//-112;
+			
+			let width  = Handler.contentWidth;
+			
+			let brownStripe = Handler.showRect( self.group, 0, 0, width,  4,  '0x462e06' );         
+			let fonStripe   = Handler.showRect( self.group, 0, 62, width, 120, '0xf4f4b5' );         
 
-        let tabFriends = Handler.showImgRect( self.group, "tabFriend.png", 18,-14.5,129,35 );         
-        tabFriends.pos = Consts.TOP_FRENDS;    
-		
-        let tabRating = Handler.showImgRect( self.group, "tabRating.png",142,-15.0,129,35 );         
-        tabRating.toBack();         
-        tabRating.pos = Consts.TOP_ALL; 
-        
-        let tabRateMoney = Handler.showImgRect( self.group, "tabRatingMoney.png",292,-15,178,35 );         
-        tabRateMoney.toBack();         
-        tabRateMoney.pos = Consts.TOP_MONEYS;         
+			let tabFriends = Handler.showImgRect( self.group, "tabFriend.png", 18,-14.5,129,35 );         
+			tabFriends.pos = Consts.TOP_FRENDS;    
+			
+			let tabRating = Handler.showImgRect( self.group, "tabRating.png",142,-15.0,129,35 );         
+			tabRating.toBack();         
+			tabRating.pos = Consts.TOP_ALL; 
+			
+			let tabRateMoney = Handler.showImgRect( self.group, "tabRatingMoney.png",292,-15,178,35 );         
+			tabRateMoney.toBack();         
+			tabRateMoney.pos = Consts.TOP_MONEYS;         
 
-        let buttLeft        = Handler.showImgRect( self.group, "buttLeftBottomPanel.png",       -360, 35, 33, 33 );         
-        let buttDoubleLeft  = Handler.showImgRect( self.group, "buttDoubleLeft.png", -360, 95, 33, 33 );         
-        let buttRight       = Handler.showImgRect( self.group, "buttRightBottomPanel.png",       360, 35, 33, 33 );         
-        let buttDoubleRight = Handler.showImgRect( self.group, "buttDoubleRight.png", 360, 95, 33, 33 );         
+			let buttLeft        = Handler.showImgRect( self.group, "buttLeftBottomPanel.png",       -360, 35, 33, 33 );         
+			let buttDoubleLeft  = Handler.showImgRect( self.group, "buttDoubleLeft.png", -360, 95, 33, 33 );         
+			let buttRight       = Handler.showImgRect( self.group, "buttRightBottomPanel.png",       360, 35, 33, 33 );         
+			let buttDoubleRight = Handler.showImgRect( self.group, "buttDoubleRight.png", 360, 95, 33, 33 );         
 
-        self.group.onEL( "mouseover", function(){ TweenMax.to( self.group, 0.5, { y: 608-112 } ); });
-        self.group.onEL( "mouseout",  function(){ TweenMax.to( self.group, 0.5, { y: 608     } ); });
-        self.gRate = Handler.newGroup( self.group );  
-        
-		let clicked = true;         
-        let clickedDelay = function() {
-            clicked = false;
-            Handler.timer_performWithDelay( 300, function(){ clicked = true; } );
-        };
- 
-        let onChangeRate = function( evt ) {
-            if ( self.selectedRate != evt.target.pos && clicked && !self.loading ) {
-				clickedDelay();
-				
-                Handler.removeGroupChilds( self.gRate );
-                tabFriends.toBack();
-                tabRating.toBack();
-                tabRateMoney.toBack();
-                evt.target.toFront();
-				
-				self.selectedRate = evt.target.pos;
-                self.shiftUsers = 0;
-		
-                if ( evt.target.pos == Consts.TOP_FRENDS ) {
-                    self.users = self.users_fr;
-					self.showCards();
-                } else if ( evt.target.pos == Consts.TOP_ALL ) {
-					self.showTop();
-                } else if ( evt.target.pos == Consts.TOP_MONEYS ) {
-					self.showTopCoins();
-                };
-                
-            };
-        };
+			self.group.onEL( "mouseover", function(){ TweenMax.to( self.group, 0.5, { y: 608-112 } ); });
+			self.group.onEL( "mouseout",  function(){ TweenMax.to( self.group, 0.5, { y: 608     } ); });
+			self.gRate = Handler.newGroup( self.group );  
+			
+			let clicked = true;         
+			let clickedDelay = function() {
+				clicked = false;
+				Handler.timer_performWithDelay( 300, function(){ clicked = true; } );
+			};
+	 
+			let onChangeRate = function( evt ) {
+				if ( self.selectedRate != evt.target.pos && clicked && !self.loading ) {
+					clickedDelay();
+					
+					Handler.removeGroupChilds( self.gRate );
+					tabFriends.toBack();
+					tabRating.toBack();
+					tabRateMoney.toBack();
+					evt.target.toFront();
+					
+					self.selectedRate = evt.target.pos;
+					self.shiftUsers = 0;
+			
+					if ( evt.target.pos == Consts.TOP_FRENDS ) {
+						self.users = self.users_fr;
+						self.showCards();
+					} else if ( evt.target.pos == Consts.TOP_ALL ) {
+						self.showTop();
+					} else if ( evt.target.pos == Consts.TOP_MONEYS ) {
+						self.showTopCoins();
+					};
+					
+				};
+			};
 
-        let onButLeftClick = function() {
-            if ( self.shiftUsers > 0 && clicked ) {
-                clickedDelay();         
-                Handler.removeGroupChilds(self.gRate);         
-                self.shiftUsers = self.shiftUsers - 1;         
-                self.showCards();          
-            };         
-        };         
-        let onButRightClick = function() {
-            if ( self.shiftUsers < self.users.length-8 && clicked ) {
-                clickedDelay();         
-                Handler.removeGroupChilds(self.gRate);         
-                self.shiftUsers = self.shiftUsers + 1;         
-                self.showCards();          
-            };         
-        };         
-        let onButDoubleRightClick = function() {
-            if ( self.shiftUsers < self.users.length-8 && clicked ) {
-                clickedDelay();          
-                Handler.removeGroupChilds(self.gRate);         
-                self.shiftUsers = Math.min( self.shiftUsers+8, self.users.length-1 );         
-                self.showCards();         
-            };        
-        };         
-        let onButDoubleLeftClick = function() {
-            if ( self.shiftUsers > 0 && clicked ) {
-                clickedDelay();         
-                Handler.removeGroupChilds(self.gRate);         
-                self.shiftUsers = Math.max( self.shiftUsers-8, 0 );         
-                self.showCards();         
-            };                 
-        };         
+			let onButLeftClick = function() {
+				if ( self.shiftUsers > 0 && clicked ) {
+					clickedDelay();         
+					Handler.removeGroupChilds(self.gRate);         
+					self.shiftUsers = self.shiftUsers - 1;         
+					self.showCards();          
+				};         
+			};         
+			let onButRightClick = function() {
+				if ( self.shiftUsers < self.users.length-8 && clicked ) {
+					clickedDelay();         
+					Handler.removeGroupChilds(self.gRate);         
+					self.shiftUsers = self.shiftUsers + 1;         
+					self.showCards();          
+				};         
+			};         
+			let onButDoubleRightClick = function() {
+				if ( self.shiftUsers < self.users.length-8 && clicked ) {
+					clickedDelay();          
+					Handler.removeGroupChilds(self.gRate);         
+					self.shiftUsers = Math.min( self.shiftUsers+8, self.users.length-1 );         
+					self.showCards();         
+				};        
+			};         
+			let onButDoubleLeftClick = function() {
+				if ( self.shiftUsers > 0 && clicked ) {
+					clickedDelay();         
+					Handler.removeGroupChilds(self.gRate);         
+					self.shiftUsers = Math.max( self.shiftUsers-8, 0 );         
+					self.showCards();         
+				};                 
+			};         
 
-        tabFriends      .onEL( "pointerdown", onChangeRate          );         
-        tabRating       .onEL( "pointerdown", onChangeRate          );         
-        tabRateMoney    .onEL( "pointerdown", onChangeRate          );         
-        buttLeft        .onEL( "pointerdown", onButLeftClick        );         
-        buttDoubleLeft  .onEL( "pointerdown", onButDoubleLeftClick  );         
-        buttRight       .onEL( "pointerdown", onButRightClick       );         
-        buttDoubleRight .onEL( "pointerdown", onButDoubleRightClick );   
-
+			tabFriends      .onEL( "pointerdown", onChangeRate          );         
+			tabRating       .onEL( "pointerdown", onChangeRate          );         
+			tabRateMoney    .onEL( "pointerdown", onChangeRate          );         
+			buttLeft        .onEL( "pointerdown", onButLeftClick        );         
+			buttDoubleLeft  .onEL( "pointerdown", onButDoubleLeftClick  );         
+			buttRight       .onEL( "pointerdown", onButRightClick       );         
+			buttDoubleRight .onEL( "pointerdown", onButDoubleRightClick );   
+		};
         this.loading = true;
         self.users_fr     = [];         
         self.usersTop    = [];         
         self.usersTopCoins = [];         
-
+		
 		if ( true ) {//Handler.isDV()
 			self.onGetFriendsUids( self.resp1 );
 		} else {
@@ -190,8 +191,8 @@
 		this.users = this.users_fr;         
         this.selectedRate = Consts.TOP_FRENDS;    
 		this.shiftUsers = 0;
-        this.showCards();
-		
+        if ( !isMobile ) this.showCards();
+		console.log(this.friendsProfiles);
 		this.loading = false;
 	};
 	BottomPanel.showTop = function() {

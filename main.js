@@ -32,15 +32,17 @@
 						}
 						User.init( response );//User must inited before Winds.WIND_MENU_LEVELS
 						Winds.show( Winds.WIND_MENU_LEVELS );
-						Winds.show( Winds.WIND_ACT_INVITE );
+						//Winds.show( Winds.WIND_ACT_INVITE );
 						//Winds.show( Winds.WIND_FR_INVITED );
 						//Winds.show( Winds.WIND_ACTION0 );
-						//Winds.show( Winds.WIND_ACTION1 );
+						Winds.show( Winds.WIND_ACTION1 );
 						//Winds.show( Winds.WIND_DAILY_BONUS, { num_day: 1 } );
 						//Winds.show( Winds.WIND_END_LEVEL );
 						//Winds.show( Winds.WIND_PUZZLE );
 						//Winds.show( Winds.WIND_MSG, { text: Langs.TRANSITION_TO_LOCATION } );
 						Head.init( response );
+						//BotomPanel.show();
+						BottomPanel.show();
 						if (parseInt(response['db'])>0) Winds.show( Winds.WIND_DAILY_BONUS, { num_day: parseInt(response.num_day) } );			
 					} catch (ex) {
 						Handler.onErrorCatched(ex);

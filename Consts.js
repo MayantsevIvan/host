@@ -97,16 +97,18 @@
 							//"https://i.mycdn.me/image?id=868891975511&t=2&plc=API&ts=00&aid=177033216&tkn=*9LyCC5i48n9B6gXZTxjf_ygcBBs",
 							//"https://i.mycdn.me/image?id=639190266882&t=2&plc=API&aid=177033216&tkn=*WG1jrcgWpTrcWtGAAe2XhUDDSVg"
 						  ];
-	//Array//
+	//puzzleAlf
 	Consts.ALF = ['А','Б','В','Г','Д','Е','Ё','Ж','З','И','Й','К','Л','М','Н','О','П','Р','С','Т','У','Ф','Х','Ц','Ч','Ш','Щ','Ъ','Ы','Ь','Э','Ю','Я'];
 	//timer//
 	Consts.TIME_ROT_START = 7900;
 	Consts.TIME_ADD_ENERGY = 5;
 	Consts.TIME_ROT_LUCH_BUY_BOOSTER = 11000;
-	//Int///
+	
 	Consts.TOP_FRENDS      = 1;
 	Consts.TOP_ALL         = 2;
 	Consts.TOP_MONEYS      = 3;
+	Consts.MY_SCORE        = 4;
+	
 	Consts.numLives        = 3;
 	Consts.coordsWidth    = 50;
 	Consts.coordsHeight   = 50;

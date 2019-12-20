@@ -25,7 +25,7 @@
 		MediaTopicPost: function( txt, imageUrl ) {
 		},
 		Payment: function( pcode, pname, pprice ) {
-			
+			alert( "pcode: "+ pcode + " pname: " + pname + " pprice " + pprice );
 		},
 		suggest: function( txt, targetSocNetId ) {
 		},
