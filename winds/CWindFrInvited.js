@@ -14,31 +14,85 @@
 		this.mainGroup.x = Handler.contentCenterX;
 		this.mainGroup.y = Handler.contentCenterY;
 		
-		this.backgr = Handler.showImgRect(this.mainGroup,"backgrAcInvite.png",0,0,662,521);
-		this.backgrSmoll = Handler.showImgRect(this.mainGroup,"backgrSmoll.png",0,10,599,442);
+		//backgr
+		let nameBackgr = isMobile ? "backgrAcInviteMob.png": "backgrAcInvite.png";
+		let wBackgr = isMobile ? 457 : 662;
+		let hBackgr = isMobile ? 524 : 521;
+		let backgr = Handler.showImgRect(self.mainGroup, nameBackgr, 0,0,wBackgr,hBackgr);
 		
-		this.cross = Handler.showImgRect(this.mainGroup, "cross.png",310,-236,36,36);
+		let nameBackgrSmoll = isMobile ? "backgrSmollMob.png": "backgrSmoll.png";
+		let wBackgrSmoll = isMobile ? 407 : 599;
+		let hBackgrSmoll = isMobile ? 327 : 442;
+		let yBackgrSmoll = isMobile ? -20 :  10;
+		Handler.showImgRect(this.mainGroup, nameBackgrSmoll, 0, yBackgrSmoll, wBackgrSmoll, hBackgrSmoll);
+		
+		let xCross = isMobile ?  210:   310;
+		let yCross = -236;
+		this.cross = Handler.showImgRect(this.mainGroup, "cross.png",xCross, yCross,36,36);
 		let onCross = function(evt){
 			self.shutdown();
 		};
 		this.cross.onEL("pointertap",onCross);
 		
-		this.luch1 = Handler.showImgRect(this.mainGroup, "luch.png",0,0,501,501);
-		this.luch1.alpha = 0.35;
-		this.luch2 = Handler.showImgRect(this.mainGroup, "luch.png",0,0,501,501);
-		this.luch2.alpha = 0.35;
+		//light
+		let wLight = isMobile ? 400 : 501;
+		this.luch1 = Handler.showImgRect( this.mainGroup, "luch.png", 0, 0, wLight, wLight );
+		this.luch1.alpha = 0.15;
+		this.luch2 = Handler.showImgRect( this.mainGroup, "luch.png", 0, 0, wLight, wLight );
+		this.luch2.alpha = 0.15;
 		TweenMax.to( this.luch1, 10, { angle:  360, ease: Power0.easeNone, repeat: -1 } );
 		TweenMax.to( this.luch2, 10, { angle: -360, ease: Power0.easeNone, repeat: -1 } );
 		
-		Handler.showImgRect(this.mainGroup, "lableTitle.png",0,-160,562,78);
-		Handler.showImgRect(self.mainGroup, "bonAcInvite.png",0,-61,270,97);
-		this.butGold = Handler.showImgRect(this.mainGroup, "butGold.png",0,25,443,60);
-		Handler.showImgRect(this.mainGroup, "lableMidline.png",0,100,367,66);
-		Handler.showImgRect(this.mainGroup, "butInviteWindFrInvited.png",0,165,443,61);
-		Handler.showImgRect(this.mainGroup, "lableTellFrInvited.png",195,220,196,17);
-		Handler.showImgRect(this.mainGroup, "checkBoxDailyBonus.png",85,216,19,19);
-		Handler.showImgRect(this.mainGroup, "markerDailyBonus.png",87,216,29,23);
-		this.mainGroup.scale.set(visibleWidth0/this.mainGroup.width);
+		//lableTop
+		if ( isMobile ) Handler.showImgRect( this.mainGroup, "lableTopMob.png", 0, -210, 346, 46 );
+		
+		//title
+		let nameTitle = isMobile ? "lableTitleMob.png" : "lableTitle.png";
+		let wTitle = isMobile ?  378 :  562;
+		let hTitle = isMobile ?  123 :   78;
+		let yTitle = isMobile ? -120 : -160;
+		let title = Handler.showImgRect(this.mainGroup, nameTitle, 0, yTitle, wTitle, hTitle);
+		
+		//bon
+		let nameBon = isMobile ? "bon100IgnotsMob.png" : "bonAcInvite.png";
+		let wBon = isMobile ?  282 : 270;
+		let hBon = isMobile ?  100 :  97;
+		let yBon = isMobile ?    0 : -61;
+		Handler.showImgRect(this.mainGroup, nameBon, 0, yBon, wBon, hBon );
+
+		//lableMid
+		let nameLableMid = isMobile ? "lableMidlineMob.png" : "lableMidline.png";
+		let wLableMid = isMobile ? 388 : 367;
+		let hLableMid = isMobile ?  73 :  66;
+		let yLableMid = isMobile ? 100 : 100;
+		Handler.showImgRect( this.mainGroup, nameLableMid, 0, yLableMid, wLableMid, hLableMid );
+		
+		//butInv
+		let butInvite = null;
+		let yButInv = isMobile ? 174 : 165;
+		if ( isMobile ) {
+			Handler.showImgRect( this.mainGroup, "backgrButAcInviteMob.png", 0, yButInv+6, 285, 60 );
+			butInvite = Handler.showImgRect( this.mainGroup, "butInviteAcInviteMob.png", -2, yButInv, 284,62);
+		} else {
+			butInvite = Handler.showImgRect( this.mainGroup, "butInviteWindFrInvited.png", 0, yButInv, 443,61);
+			//butGold
+			let ybutGold = isMobile ? 0 : 25;
+			let butGetGold = Handler.showImgRect(this.mainGroup, "butGold.png",0,ybutGold,443,60);
+			butGetGold.onEL("pointertap", function(){});
+		};
+		butInvite.onEL( "pointerdown", function(){ SocialClient.invite(); } );
+		
+		//lableTell
+		let xCheckBox = isMobile ?  30 : 85;
+		let yCheckBox = isMobile ? 225 : 216;
+		let lableTellFrName = isMobile ? "lableTellFrEndLevelMob.png" : "lableTellFrInvited.png";
+		let wLableTellFr = isMobile ? 162 : 196;
+		let hLableTellFr = isMobile ?  25 :  17;
+		
+ 		let lableTellFr = Handler.showImgRect(this.mainGroup,lableTellFrName, xCheckBox + wLableTellFr/2 + 15, yCheckBox + 4,wLableTellFr,hLableTellFr);
+		Handler.showImgRect(this.mainGroup, "checkBoxDailyBonus.png", xCheckBox,    yCheckBox,  19,19);
+		Handler.showImgRect(this.mainGroup, "markerDailyBonus.png",   xCheckBox+2,  yCheckBox,  29,23);
+		
 		return self.mainGroup;
 	};
 	
