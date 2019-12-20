@@ -185,17 +185,26 @@
 		//crossTouch
 		
 		
+		
 		let touchButMute = function( ) {
 			if ( Sounds.msOn ) {
 				Sounds.Stop();
 				Sounds.msOn = false;
-				self.butMuneEnWindGame.isVisible = false;
+	
+				self.butMuneEnWindGame.isVisible  = false;
 				self.butMuneDisWindGame.isVisible = true;
+				
+				Head.butEnSound.isVisible  = false;
+				Head.butDisSound.isVisible = true;
 			} else {
 				Sounds.Play();
-				self.butMuneEnWindGame.isVisible = true;
-				self.butMuneDisWindGame.isVisible = false;
 				Sounds.msOn = true;
+				
+				self.butMuneEnWindGame.isVisible  = true;
+				self.butMuneDisWindGame.isVisible = false;
+				
+				Head.butEnSound.isVisible  = true;
+				Head.butDisSound.isVisible = false;
 			};
 		};
 		
@@ -273,7 +282,12 @@
 			};
 			Handler.showText(self.mainGroup,numLevel,-300,-288,  textNumLevelParams);
 		}
-
+		
+		if ( Sounds.msOn == false ){
+			self.butMuneEnWindGame.isVisible = false;
+			self.butMuneDisWindGame.isVisible = true;
+		}
+		
 		self.mainGroup.interactive = true;
 		Handler.winGameGr = self.mainGroup;
 	};
