@@ -80,28 +80,34 @@
 	
 		let xButMute = isMobile ? 205 :  318;
 		let yButMute = isMobile ? 340 : -285;
-		let butMute1 = Handler.showImgRect( this.group, "butMute.png",  xButMute, yButMute, 33,33);
-		if ( isMobile ) butMute1.scale.set(-1);
-		let butMute2 = Handler.showImgRect( this.group, "butMute2.png", xButMute, yButMute, 33,33);
-		if ( isMobile ) butMute2.scale.set(-1);
-		butMute2.isVisible = false;
+		self.butEnSound = Handler.showImgRect( this.group, "butMute.png",  xButMute, yButMute, 33,33);
+		if ( isMobile ) self.butEnSound.scale.set(-1);
+		self.butDisSound = Handler.showImgRect( this.group, "butMute2.png", xButMute, yButMute, 33,33);
+		if ( isMobile ) self.butDisSound.scale.set(-1);
+		self.butDisSound.isVisible = false;
+		
+		if ( Sounds.msOn == false ){
+			self.butEnSound.isVisible = false;
+			self.butDisSound.isVisible = true;
+		}
+		
 		let touchButMute = function( evt ) {
 			if ( Sounds.msOn ) {
 				Sounds.Stop();
 //				this._butMelody.gotoAndStop(2);
 				Sounds.msOn = false;
-				butMute1.isVisible = false;
-				butMute2.isVisible = true;
+				self.butEnSound.isVisible = false;
+				self.butDisSound.isVisible = true;
 			} else {
 				Sounds.Play();
 //				this._butMelody.gotoAndStop(1);
-				butMute1.isVisible = true;
-				butMute2.isVisible = false;
+				self.butEnSound.isVisible = true;
+				self.butDisSound.isVisible = false;
 				Sounds.msOn = true;
 			};
 		};
-		butMute1.onEL("pointerdown",touchButMute);
-		butMute2.onEL("pointerdown",touchButMute);
+		self.butEnSound.onEL("pointerdown",touchButMute);
+		self.butDisSound.onEL("pointerdown",touchButMute);
 		let butFullScrin = Handler.showImgRect( this.group, "butFullScrin.png",355,-285,31,31);
 		butFullScrin.onEL('pointerdown',function(){ Winds.show( Winds.WIND_FULL_SCREEN ) });
         if ( isMobile ) butFullScrin.isVisible = false;
