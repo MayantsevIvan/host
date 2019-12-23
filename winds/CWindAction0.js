@@ -60,7 +60,7 @@
 			};
 			
 			let pointerUpButBuy = function( evt ) {
-				SocialClient.callbackPayment = Handler.getUserSrvData;
+				SocialClient.callbackPayment = function(){ Handler.getUserDataFromServer(); };
 				SocialClient.Payment( 18, Langs.payNameAct90,  90 );
 				self.shutdown();
 			};

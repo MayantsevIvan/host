@@ -89,16 +89,32 @@
 		let wLableTellFr = isMobile ? 162 : 196;
 		let hLableTellFr = isMobile ?  25 :  17;
 		
- 		let lableTellFr = Handler.showImgRect(this.mainGroup,lableTellFrName, xCheckBox + wLableTellFr/2 + 15, yCheckBox + 4,wLableTellFr,hLableTellFr);
-		Handler.showImgRect(this.mainGroup, "checkBoxDailyBonus.png", xCheckBox,    yCheckBox,  19,19);
-		Handler.showImgRect(this.mainGroup, "markerDailyBonus.png",   xCheckBox+2,  yCheckBox,  29,23);
+ 		let lableTellFr = Handler.showImgRect(this.mainGroup, lableTellFrName, xCheckBox + wLableTellFr/2 + 15, yCheckBox + 4,wLableTellFr,hLableTellFr);
+		let checkBox    = Handler.showImgRect(this.mainGroup, "checkBoxDailyBonus.png", xCheckBox,    yCheckBox,  19,19);
+		this.checkMark  = Handler.showImgRect(this.mainGroup, "markerDailyBonus.png",   xCheckBox+2,  yCheckBox,  29,23);
 		
+		let onCheckBox = function( evt ) {
+			if ( self.checkMark.isVisible ) {
+				self.checkMark.isVisible = false;
+			} else {
+				self.checkMark.isVisible = true;
+			};
+		};
+		checkBox.onEL( "pointertap", onCheckBox );
 		return self.mainGroup;
 	};
 	
-	CWindFrInvited.shutdown = function(){
-		if ( this.windIndex != null ) {
-		    Winds.shutdown( this.windIndex )
-		}
-        Handler.removeWindAfterTransition( this.mainGroup );
+	CWindFrInvited.shutdown = function( fastShutdown ){
+		if ( Winds.shutdown( this.windIndex ) ) {
+			if ( this.checkMark.isVisible ) {
+				let txt = "Мне подарили монеты за друзей! Заходи и тебе подарят!";
+				let imgUrl = Config.BASE_URL + "wall492x364.jpg";
+				SocialClient.MediaTopicPost( txt, imgUrl );
+			}
+			if ( fastShutdown ) {
+				Handler.removeImage(this.mainGroup);
+			} else {
+				Handler.removeWindAfterTransition( this.mainGroup );
+			};
+  		};
     };

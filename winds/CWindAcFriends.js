@@ -35,6 +35,7 @@
 				Handler.showImgRect( self.mainGroup, Consts.DIR_AC_FRIEDS + "fraction30.png", -58+imgNumFr.width, -34, 53, 34 );
 				let butGetBon = Handler.showImgRect( self.mainGroup, Consts.DIR_AC_FRIEDS + "butGetBonAcFriends.png", -80, 30, 202, 49 );
 				let butInvF   = Handler.showImgRect( self.mainGroup, Consts.DIR_AC_FRIEDS + "butInvF.png", -80, 100, 279, 67 );
+				butInvF.onEL("pointerdown", function(){ SocialClient.invite(); });
 				Handler.showImgRect( self.mainGroup, Consts.DIR_AC_FRIEDS + "backgrAnimAcFriends.png", 185, 38, 163, 203 );
 				let luch1  = Handler.showImgRect(self.mainGroup, "luch.png", 185, 38, 200, 200);
 				luch1.alpha = 0.35;

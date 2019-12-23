@@ -50,14 +50,7 @@
 				let oks = [ 0, 1000, 500, 250, 100, 50, 20 ];
 				SocialClient.callbackPayment = Handler.getCoEnFromServer;
 				SocialClient.Payment( butNumber, Langs[ "payName" + butNumber ],  oks[ butNumber ] );
-				
-				let onBuyEnegyForCoinsAsked = function(res) {
-					self.shutdown();
-					Head.energy = res['energy_v'];
-					Head.coins  = res['coins'];
-				}
-				BackClient.ask( BackClient.GET_COINS_AND_ENERGY, onBuyEnegyForCoinsAsked, { energy_v: User.energy, coins: User.coins, num: butNumber-4 });
-				//self.shutdown();
+				self.shutdown();
 			};
 		
 			let yLine = -187;

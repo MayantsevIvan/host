@@ -42,13 +42,15 @@
 			
 			let bon = Handler.showImgRect(self.mainGroup,Consts.DIR_STEPS_LEFT + "bonFStepsLeft.png",0,-10,103,103);
 			TweenMax.to( bon, 2, { width: bon.width*1.4, height: bon.height*1.4, repeat: -1, ease: Power0.easeNone, yoyo: true } );
+			
+			let onButBuy = function( evt ) {
+				SocialClient.callbackPayment = function(){ Handler.getUserDataFromServer(5); };
+				SocialClient.Payment( 11, Langs.payNameBuySteps5,  15 );
+				self.shutdown();
+			};
 			let butBuy = Handler.showImgRect(self.mainGroup,Consts.DIR_STEPS_LEFT + "butBuyStepsLeft.png",0,100,364,50);
 			butBuy.name = "butBuy";
-			let onBut = function(evt ) {
-
-			};
-			butBuy.on("pointertap",onBut);
-			self.mainGroup.interactive = true;
+			butBuy.onEL( "pointertap", onButBuy );
 		};
 		
 		if ( Handler.windsWithLoadedImages[ Winds.WIND_STEPS_LEFT ] == null ) {

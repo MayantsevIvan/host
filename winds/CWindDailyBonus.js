@@ -132,14 +132,16 @@
 		let yCheckBox = isMobile ?  320	: 215;
 		let xMark     = isMobile ?  -90 : 100;
 		let yMark     = isMobile ?  317 : 213;
+		
 		let checkBox = Handler.showImgRect(self.mainGroup, "checkBoxDailyBonus.png", xCheckBox, yCheckBox, 19,19);
-		let mark = Handler.showImgRect(self.mainGroup, "markerDailyBonus.png", xMark, yMark, 29,23);
-		mark.isVisible = false;
+		
+		this.checkMark = Handler.showImgRect(self.mainGroup, "markerDailyBonus.png", xMark, yMark, 29,23);
+		this.checkMark.isVisible = false;
 		let onCheckBox = function(evt) {
-			if ( mark.visible == false ) {
-				mark.visible = true;
+			if ( self.checkMark.isVisible ) {
+				self.checkMark.isVisible = false;
 			} else {
-				mark.visible = false;
+				self.checkMark.isVisible = true;
 			};
 		};
 		checkBox.onEL("pointertap", onCheckBox);
@@ -157,6 +159,11 @@
 	
 	CWindDailyBonus.shutdown = function( fastShutdown ){
 		if ( Winds.shutdown( this.windIndex ) ) {
+			if ( this.checkMark.isVisible ) {
+				let txt = "Заходите каждый день в игру и получайте бонусы!";
+				let imgUrl = Config.BASE_URL + "wall492x364.jpg";
+				SocialClient.MediaTopicPost( txt, imgUrl );
+			}
 			if ( fastShutdown ) {
 				Handler.removeImage(this.mainGroup);
 			} else {

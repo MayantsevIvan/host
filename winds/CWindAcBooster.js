@@ -30,7 +30,9 @@
 			Handler.showImgRect( self.mainGroup,Consts.DIR_AC_BOOSTER + "lableRushAcBooster.png", 4, 75, 146, 43 );
 			let butBuy= Handler.showImgRect( self.mainGroup,Consts.DIR_AC_BOOSTER + "butBuyAcBooster.png", 1, 135, 238, 58 );
 			let touchBut = function(evt) {
-
+				SocialClient.callbackPayment = function(){ Handler.getUserDataFromServer(); };
+				SocialClient.Payment( 21, Langs.payAcBooster,  36 );
+				self.shutdown();
 			};
 			butBuy.on("pointertap",touchBut);
 		};

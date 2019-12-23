@@ -29,7 +29,9 @@
 			let cross = Handler.showImgRect( self.mainGroup, "cross.png", xCross, yCross,28,28);
 			cross.onEL("pointertap",function(){ self.shutdown() });
 			let onButBuy = function(evt) {
-
+				SocialClient.callbackPayment = function(){ Handler.getUserDataFromServer(10); };
+				SocialClient.Payment( 25, Langs.payNameBuySteps10,  17 );
+				self.shutdown();
 			};
 			butBuy.onEL( "pointertap", onButBuy);
 			self.mainGroup.interactive = true;

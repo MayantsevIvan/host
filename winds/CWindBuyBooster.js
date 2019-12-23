@@ -46,6 +46,7 @@
 			Handler.transition_to( luch2, { angle: 360*5, time:ltime } );   
 	/////////////////////////////
 			let numBonus = parseInt( Consts.BONUSES_NAMES.indexOf( params.nameBon ) )+1; 
+			console.log(numBonus);
 			//let numBonus = parseInt( params.nameBon.substr(3) ); 
 
 			let wBon = [ 0, 163,139,153,141,139,165 ];         
@@ -54,13 +55,14 @@
 
 			let butBuy = Handler.showImgRect(self.mainGroup,Consts.DIR_BUY_BOOSTER + "but.png", 0, 100, 363, 49 );
 			let onButBuy = function() {
-				//['bGL','bVL','bPL','bMX','bMT','bCH']; 
-				if ( numBonus < 1 || numBonus > 6 ) return;
-				let costs = [31,30,32,35,33,34];
-				let codes = [13,12,14,19,15,16];
+				//['bGL','bVL','bPL','bMX','bMT','bCH']; //old
+				//['bPL','bMX','bMT']; 
+				if ( numBonus < 1 || numBonus > 3 ) return;
+				let costs = [ 32,33,35 ];
+				let codes = [ 14,19,15 ];
 				SocialClient.callbackPayment = function(){ Handler.getUserDataFromServer(); };
 				SocialClient.Payment( codes[numBonus-1], Langs["payNameBon"+numBonus],  costs[numBonus-1] );
-				Handler.addBooster(numBonus-1);
+				//Handler.addBooster( numBonus );/*???????*/
 				self.shutdown();      
 			};        
 			butBuy.onEL( "pointerdown", onButBuy );         

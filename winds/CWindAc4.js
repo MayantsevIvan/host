@@ -29,7 +29,9 @@
 			Handler.showImgRect(self.mainGroup, Consts.DIR_AC4 + "lable5Lives.png",0,47,76,38);
 			let butBuy = Handler.showImgRect(self.mainGroup, Consts.DIR_AC4 + "butBuyAc4.png",0,100,77,66);
 			let onButBuy = function(evt) {
-			
+				SocialClient.callbackPayment = function(){ Handler.getUserDataFromServer(); };
+				SocialClient.Payment( 22, Langs.payAc4,  44 );
+				self.shutdown();
 			};
 			butBuy.onEL("pointertap",onButBuy);
 			Handler.showImgRect(self.mainGroup, Consts.DIR_AC4 + "lableRuchAc4.png",0,140,74,16);

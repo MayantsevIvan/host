@@ -72,6 +72,7 @@
 		
 		*/
 		let butInviteFr = Handler.showImgRect(self.windRGroup,"butInviteFr.png",-35,245,149,46);
+		butInviteFr.onEL("pointerdown", function(){ SocialClient.invite(); } );
 		//self.myRateShowingStarted = false;
 		//self._MY_RATE  = 1;
 		//self._VIP_RATE = 2;
@@ -215,7 +216,7 @@
 		};
 		Handler.newText( textParamsName );
 		let butGivGift = Handler.showImgRect(fgroup, "butGivGift.png", rx - 35, ry + 55,167,33);
-		butGivGift.onEL("pointertap", function() { console.log("!!"); } );
+		butGivGift.onEL("pointertap", function() { SocialClient.invite(); } );
     };
 	
 	CWindSmallRating.shutdown = function( fastShutdown ){

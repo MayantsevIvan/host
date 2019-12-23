@@ -8,9 +8,9 @@
 		return this;
 	};
 	
-	CWindSmallAcInv.startup = function( parent ) {
+	CWindSmallAcInv.startup = function() {
 		let self = this;
-		self.mainGroup = Handler.newGroup( parent );
+		self.mainGroup = Handler.newGroup();
 		
 		if ( isMobile ) {
 			self.mainGroup.x = 335;
@@ -29,10 +29,8 @@
 				self.shutdown();
 			};
 			cross.onEL("pointertap", onCross);
-			let onButInv = function(evt) {
-			
-			};
-			butInv.on( "pointertap", onButInv );
+
+			butInv.on( "pointertap", function(){ SocialClient.invite(); } );
 			self.mainGroup.interactive = true;
 		};
 		if ( Handler.windsWithLoadedImages[ Winds.WIND_SMALL_ACT_INV ] == null ) {

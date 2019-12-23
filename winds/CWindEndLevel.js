@@ -152,17 +152,15 @@
 		let xCheckBox = isMobile ?  30 : -38;
 		let yCheckBox = isMobile ? 315 : 260;
 		let checkBox = Handler.showImgRect(self.mWind,"checkBox.png",xCheckBox,yCheckBox,19,19);
-		checkBox.interactive = true;
-		checkBox.buttonMode = true;
 		let onCheckBox = function() { 
-			if ( marker.visible ){
-				marker.visible = false;
+			if ( self.checkMark.visible ) {
+				self.checkMark.visible = false;
 			}else{
-				marker.visible = true;
+				self.checkMark.visible = true;
 			}
 		}
-		checkBox.on('pointerdown', onCheckBox );
-		let marker = Handler.showImgRect(self.mWind,"marker.png",xCheckBox+3,yCheckBox - 5,30,24);
+		checkBox.onEL('pointerdown', onCheckBox );
+		self.checkMark = Handler.showImgRect(self.mWind,"marker.png",xCheckBox+3,yCheckBox - 5,30,24);
 		
 		let lableTellFrName = isMobile ? "lableTellFrEndLevelMob.png" : "lableTellFrEndLevel.png";
 		let wLableTellFr = isMobile ? 162 : 195;
@@ -265,6 +263,11 @@
 	
 	CWindEndLevel.shutdown = function( fastShutdown ){
 		if ( Winds.shutdown( this.windIndex ) ) {
+			if ( this.checkMark.isVisible ) {
+				let txt = "Ещё одни уровень пройден! А ты сможешь? Заходи в игру и попробуй!";
+				let imgUrl = Config.BASE_URL + "wall492x364.jpg";
+				SocialClient.MediaTopicPost( txt, imgUrl );
+			}
 			if ( fastShutdown ) {
 				Handler.removeImage(this.mainGroup);
 			} else {

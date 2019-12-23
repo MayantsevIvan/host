@@ -75,11 +75,14 @@
 			//butBuy
 			let xBut = isMobile ?    0 : -80;
 			let yBut = isMobile ?  260 : 125;
-			let but = Handler.showImgRect(self.mainGroup, Consts.DIR_AC_SALE1 + "butBuyAcSale1.png",xBut,yBut,281,69);
+			let butBuy = Handler.showImgRect(self.mainGroup, Consts.DIR_AC_SALE1 + "butBuyAcSale1.png",xBut,yBut,281,69);
+			
 			let onBut = function(evt) {
-				console.log("bonBuy");
+				SocialClient.callbackPayment = function(){ Handler.getUserDataFromServer(); };
+				SocialClient.Payment( 23, Langs.payNameAct10,  10 );
+				self.shutdown();
 			};
-			but.on("pointertap", onBut);
+			butBuy.on("pointertap", onBut);
 		};
 		if ( Handler.windsWithLoadedImages[ Winds.WIND_ACTION1 ] == null ) {
 			Handler.windsWithLoadedImages[ Winds.WIND_ACTION1 ] = 1;

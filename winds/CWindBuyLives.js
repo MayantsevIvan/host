@@ -48,8 +48,7 @@
 					SocialClient.callbackPayment = Handler.getCoEnFromServer;
 					let oks = [ 0, 21, 51, 99, 199 ];
 					SocialClient.Payment( butNumber, Langs[ "payName" + (butNumber + 6) ],  oks[ butNumber ] );
-				}			
-				if ( butNumber < 8 ) {
+				} else if ( butNumber < 8 ) {
 					let costs = [ 50, 150, 450 ];
 					if ( Head.coins < costs[butNumber-5] ) {
 						Winds.show( Winds.WIND_BUY_COINS );
