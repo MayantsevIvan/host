@@ -14,7 +14,7 @@
 				Handler.gWinds    = Handler.newGroup();
 				Handler.gLoading  = Handler.newGroup();
 				
-				if ( isMobile != null && isMobile ) {
+				/*if ( isMobile != null && isMobile ) {
 					const graphics = new PIXI.Graphics();
 					graphics.lineStyle(2, 0x0000ff, 1);
 					graphics.beginFill(0xDE3249,0);
@@ -23,7 +23,7 @@
 					console.log('pixiApp.stage.',pixiApp.stage.x,pixiApp.stage.y);
 					console.log('shScreenX',shScreenX*1+(1-pixiAppScaleMobile));
 					pixiApp.stage.addChild(graphics);
-				}
+				}*/
 				
 				let onAuthCallback = function( response ) {
 					try {
