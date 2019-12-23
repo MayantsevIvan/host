@@ -23,6 +23,7 @@
 			return location.href.indexOf( "mob=true" ) >= 0 || location.href.indexOf( "mob=1" ) >= 0 ;
 		},
 		MediaTopicPost: function( txt, imageUrl ) {
+			alert( txt );
 		},
 		Payment: function( pcode, pname, pprice ) {
 			alert( "pcode: "+ pcode + " pname: " + pname + " pprice " + pprice );
@@ -30,6 +31,7 @@
 		suggest: function( txt, targetSocNetId ) {
 		},
 		invite: function( txt ) {
+			alert(txt);
 		},
 		getFriendsOIDs_oldversion: function() {
 		},

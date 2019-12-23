@@ -1,25 +1,23 @@
 
     let BackClient = {};         
 
- 	BackClient.AUTH 						= 'auth';
+ 	BackClient.AUTH 				    = 'auth';
 	BackClient.FRIENDS 		 			= "friends";
 	BackClient.GAME_OVER 				= 'gameOver';
 	BackClient.GAME_Start 				= 'gameStart';
 
-	BackClient.BUY_CONTINUE 				= "buyContinue";
-	BackClient.LOG_STREAM_PUBLISH_OK 	    = "logStreamPublishOK";
+	BackClient.BUY_CONTINUE 			= "buyContinue";
+	BackClient.LOG_STREAM_PUBLISH_OK 	= "logStreamPublishOK";
 	BackClient.DEC_BOOSTER 				= "decBooster";
 	
-	BackClient.GET_COINS_AND_ENERGY 		= "getCoinsAndEnergy";
-	
-	BackClient.USER_GET_TOP 			  	= 'userGetTop';
-	BackClient.USER_GET_TOP_WEEK 	  	    = 'userGetTopWeek';
-	BackClient.USER_GET_TOP_DAY 		  	= 'userGetTopDay';
+	BackClient.USER_GET_TOP 			= 'userGetTop';
+	BackClient.USER_GET_TOP_WEEK 	  	= 'userGetTopWeek';
+	BackClient.USER_GET_TOP_DAY 		= 'userGetTopDay';
 	BackClient.USER_GET_TOP_COINS 	 	= 'userGetTopCoins';
 	
-	BackClient.GET_TUT_PRIZE 	 		    = 'getTutPrize';
+	BackClient.GET_TUT_PRIZE 	 	    = 'getTutPrize';
 	BackClient.GET_ACT_FRIENDS 	 		= 'getActFriends';
-	BackClient.PRESENT_SEND 	      		= 'present.send';		
+	BackClient.PRESENT_SEND 	      	= 'present.send';		
 	
 	BackClient.GET_ACT_INV 	      		= 'getActInvite';	
 	
@@ -28,29 +26,29 @@
 	
 	BackClient.GET_FRIENDS_LEVEL_SCORE 	= 'getFriendsLevelScore';
 
-	BackClient.USER_PAY  			  	    = "user.pay";
-	BackClient.USER_BALANCE  			    = "user.balance";
+	BackClient.USER_PAY  			    = "user.pay";
+	BackClient.USER_BALANCE  		    = "user.balance";
 	BackClient.USER_BOOSTERS  			= "userBoosters";
 	BackClient.USER_FRIENDS_UPDATE 		= 'user.friendsUpdate';
-	BackClient.USER_CHANGE_VOTES 		    = 'user.changeVotes';
+	BackClient.USER_CHANGE_VOTES 	    = 'user.changeVotes';
  
-	BackClient.QUEUE 		 			    = "queue";
+	BackClient.QUEUE 		 			= "queue";
 
-	BackClient.LEVEL_FINISH 				= "levelFinish";
-	BackClient.LEVEL_GET 				    = "levelGet";	
-	BackClient.LEVEL_STARTED 			    = "levelStarted";	
+	BackClient.LEVEL_FINISH 			= "levelFinish";
+	BackClient.LEVEL_GET 				= "levelGet";	
+	BackClient.LEVEL_STARTED 			= "levelStarted";	
 	BackClient.GET_USER_DATA  			= "getUserData";
-	BackClient.ERASE_STEPS  				= "eraseSteps";
+	BackClient.ERASE_STEPS  			= "eraseSteps";
 	BackClient.BUY_LEV_FIN 				= "buyLevFin";	
 	
-	BackClient.GET_BONUS 				    = 'getBonus';
+	BackClient.GET_BONUS 		        = 'getBonus';
 	BackClient.COINS_TO_ENERGY 			= 'coinsToEnergy';
 	BackClient.GET_COINS_AND_ENERGY	    = "getCoinsAndEnergy";
 	
 	BackClient.CHANGE_COL 				= "change.col";
-	BackClient.BUY_ITEM_COL 				= "buy.item.col";
+	BackClient.BUY_ITEM_COL 			= "buy.item.col";
 
-	BackClient.GET_MY_SCORE 				= "getMyScore";
+	BackClient.GET_MY_SCORE 			= "getMyScore";
 	BackClient.GET_PUZ_PRZ 				= 'getPuzPrz';
 	BackClient.LOG_ADD 					= "logAdd";
 	

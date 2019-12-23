@@ -22,4 +22,12 @@
 	Langs.payName9  = "  56 Энергий" ;//energy  56 for  99 Ok
 	Langs.payName10 = " 115 Энергий" ;//energy 115 for 199 Ok
 	Langs.payNameAct90 = "+9 бонусов и +20 жизней";
+	Langs.payNameAct10 = "+1 бонус +10 жизней и +10 монет";
+	Langs.payNameBuySteps5 = "+5 ходов";
+	Langs.payNameBuySteps10 = "+10 ходов";
+	Langs.payNameBon1 = "+1 бонус малый взрыв";
+	Langs.payNameBon2 = "+1 бонус большой взрыв";
+	Langs.payNameBon3 = "+1 бонус молоток";
+	Langs.payAc4 = "+3 молотка +5 жизней";
+	Langs.payAcBooster = "3 бонуса: молоток, малый, большой взрыв";
 	//return Langs;

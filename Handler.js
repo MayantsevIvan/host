@@ -240,16 +240,6 @@
     };
 	
 	Handler.removeAroundStone = function(){};	
-	
-	Handler.getCoEnFromServer = function() {
-		BackClient.ask( BackClient.GET_COINS_AND_ENERGY, Handler.getCoEnAsked );
-	};
-	Handler.getCoEnAsked = function( r ) {
-		Head.energy = r.energy_v;
-		Head.bonus  = r.energy_u;
-		Head.coins  = r.coins;
-	};
-	
 	Handler.loadAndDrawRemoteImage = function( rgroup, url, file_name, ix, iy, iw, ih, fcallback ) {
 		const loader = new PIXI.Loader();
 		loader.add( file_name, url, { crossOrigin: false, loadType: 2 } );
@@ -676,7 +666,6 @@
 		return res;
 	};
 
-	
 	Handler.removeGroupChilds = function( group ){
 		if ( group.children.length < 1 ){
 			return true;
@@ -703,54 +692,7 @@
             Handler.transition_to( img, { time:Consts.TIME_WINDOW_MOVE, x:newx, y:newy, alpha:0.2, onComplete:removeImg } );
         };
     };
-	/*
-	Handler.removeWindAfterTransition = function( img, toRight=false ) {
-		if( img != null ) {
-			let newx = toRight ? pixiApp.width+400 : img.x;
-			let newy = toRight ? img.y : pixiApp.height+200;
- 
-			let removeImg = function(){
-				try {
-					img . removeSelf();
-					img = null;
-				} catch ( ex ) {
-					Handler.onErrorCatched(ex);
-				};
-			}
-			TweenMax.to( img, Consts.TIME_WINDOW_MOVE, { x:newx, y:newy, alpha: 0.2, onComplete: removeImg } );
-			//transition.to( img, { time=Consts.TIME_WINDOW_MOVE, y=newy, alpha=0.3, onComplete=removeImg } );
-			//transition.to( img, { time=300, y=newy, alpha=0.3, onComplete=removeImg } );
-		}
-	}*/
-	
-	/*Handler.setMaskOnPhoto = function( iparent, myImage, photoWidth, photoHeight ) {
-		myImage.x += myImage.width/2;
-		myImage.y += myImage.height/2;
-		let graphics = new PIXI.Graphics();
-		graphics.beginFill(0xDE3249);
-		graphics.drawRect(myImage.x+myImage.width/2-photoWidth/2, myImage.y+myImage.height/2-photoWidth/2, photoWidth, photoWidth );
-		iparent.addChild(graphics);
-		graphics.endFill();
-		//myImage.mask = graphics;
-		
-		let pwidth  = photoWidth  != null && photoWidth || 80;
-		let pheight = photoHeight != null && photoHeight || 80;
 
-		let shifty = 0;
-		if ( myImage.width < myImage.height ) {
-			
-		} else {
-			let sc = pheight / myImage.height;
-			
-			myImage.height = pheight;
-			//myImage.width = myImage.width * sc;
-			//console.log(  " sc, myImage.width ", sc, myImage.width );
-			console.log(  "y", graphics.y );
-			console.log(  "y", myImage.y );
-		}
-		myImage.updateTransform();
-	}*/
-	
 	Handler.setMaskForImg = function ( iparent, myImage, imgW, imgH ) {
 		let graphics = new PIXI.Graphics();
 		graphics.beginFill(0xDE3249);
@@ -814,19 +756,6 @@
 	Handler.cv = function( val ) {
 		return (val>9)?val+'':'0'+val;
 	};
-	Handler._initFlyPointsTable = function() {
-		if ( this.flyPointsTable == null ) {
-			let w = Handler.jlines.cx;
-			let h = Handler.jlines.cy;
-			this.flyPointsTable = [];
-			for (let i=0;i<w;i++) {
-				if (this.flyPointsTable[i] == null) this.flyPointsTable[i]  = [];
-				for (let j=0;j<h;j++) {
-					this.flyPointsTable[i][j] = 0;
-				};
-			};
-		};
-	};
 	
 	Handler.removeImage = function( img ) {
         if ( img != null ) {
@@ -840,51 +769,6 @@
             img = null;         
         };         
     };
-	
-	/*Handler._onFlyPointsTimerTick = function(fi,fj) {
-		let middlex = 0; let middley = 0; let countPC = 0;
-		let fpoints = 0;
-		let w = Handler.jlines.cx;
-		let h = Handler.jlines.cy;
-		if (this.flyPointsTable == null) this.flyPointsTable = [];
-		for ( let i=0; i<w; i++ ) {
-			if ( this.flyPointsTable[i] == null ) this.flyPointsTable[i] = [];
-			for ( let j=0; j<h; j++ ) {
-				if ( this.flyPointsTable[i][j] == null ) this.flyPointsTable[i][j] = 0;
-				if ( this.flyPointsTable[i][j] != 0 ) {
-					countPC++;
-					middlex += i;
-					middley += j;
-					fpoints += this.flyPointsTable[i][j];
-					this.flyPointsTable[i][j] = 0;
-				}
-			}
-		}
-		//let fpoints:int = flyPointsTable[fi][fj];
-		//flyPointsTable[fi][fj] = 0;
-		if (fpoints != 0) {
-			fpoints = Math.floor(fpoints);
-			let px = Math.floor(Handler.indexXToCoords(middlex/countPC));//Handler.indexXToCoords(fi);
-			let py = Math.floor(Handler.indexYToCoords(middley/countPC));//Handler.indexYToCoords(fj);
-			let ps = Handler.jlines.gemsContainer.parent;
-			let fp = new FlyPoints( fpoints, px-20,py, true, ps);
-			Handler.jlines.pointsPanel.countPoints += fpoints;
-		};
-	};
-	
-	Handler.flyPointsStart = function ( fi, fj, fpoints ) {
-		this._initFlyPointsTable();
-		let self = this;
-		if ( this.flyPointsTable == null ) this.flyPointsTable = [];
-		if ( this.flyPointsTable[fi] == null ) this.flyPointsTable[fi] = [];
-		if ( this.flyPointsTable[fi][fj] == null ) this.flyPointsTable[fi][fj] = 0;
-			
-		this.flyPointsTable[fi][fj] += fpoints;
-		
-		setTimeout( function(){ self._onFlyPointsTimerTick( fi, fj ) } , 151);
-
-		//TweenLite.to(new Sprite(),0.3,{onComplete:,onCompleteParams:[fi,fj]});
-	};*/
 
 	Handler.onEndLevel = function() {
 //		alert('Handler.onEndLevel');
@@ -1000,7 +884,7 @@
 		    console.log(err);
 		}
     };
-	
+	/*
 	Handler.transition_to = function( obj, params ) {
 		const time = params.time / 1000;
 		params.delay = params.delay != null ? params.delay / 1000 : 0;
@@ -1008,7 +892,7 @@
 		params.ease = params.ease || Power0.easeNone;
 		TweenMax.to( obj, time, params );
 	};
-	
+	*/
 	Handler.toNumber = function( val ) {
         return Number( val.replace(',', '.') );
     };
@@ -1097,22 +981,44 @@
 	};
 	
 	
-	Handler.getUserSrvData = function () {
-		BackClient.ask(BackClient.GET_USER_DATA,this._getUserDataAsked);
-	}
+	Handler.getCoEnFromServer = function() {
+		BackClient.ask( BackClient.GET_COINS_AND_ENERGY, Handler.getCoEnAsked );
+	};
 	
-	Handler._getUserDataAsked = function (resp) {
-		Head.energy 	= resp['energy_v'];
-		Head.bonus 	    = resp['energy_u'];
-		Head.coins  	= resp['coins'];
+	Handler.getCoEnAsked = function( r ) {
+		Head.energy = r.energy_v;
+		Head.bonus  = r.energy_u;
+		Head.coins  = r.coins;
+	};
+	
+	Handler.getUserDataFromServer = function( countAddSteps=0 ) {
+		BackClient.ask( BackClient.GET_USER_DATA, Handler.getUserDataAsked );
+		if ( countAddSteps > 8 ) {//add 10
+			Handler.jlines.countSteps += 10;
+		} else if ( countAddSteps > 5 ) {//add 8s
+			Handler.jlines.countSteps += 8;
+		} else if ( countAddSteps > 0 ) { //add 5
+			Handler.jlines.countSteps += 5;
+		}
+	};
+	
+	
+	/*Handler.getUserSrvData = function () {
+		BackClient.ask(BackClient.GET_USER_DATA,this.getUserDataAsked);
+	}*/
+	
+	Handler.getUserDataAsked = function (resp) {
+		Head.energy 	= resp.energy_v;
+		Head.bonus 	    = resp.energy_u;
+		Head.coins  	= resp.coins;
 
-		if ( User.bGL < resp.bGL ) addBooster( 1, int(resp.bGL - User.bGL) );
-		if ( User.bVL < resp.bVL ) addBooster( 2, int(resp.bVL - User.bVL) );
-		if ( User.bPL < resp.bPL ) addBooster( 3, int(resp.bPL - User.bPL) );
-		if ( User.bMT < resp.bMT ) addBooster( 4, int(resp.bMT - User.bMT) );
-		if ( User.bCH < resp.bCH ) addBooster( 5, int(resp.bCH - User.bCH) );
-		if ( User.bMX < resp.bMX ) addBooster( 7, int(resp.bMX - User.bMX) );
-
+		//if ( User.bGL < resp.bGL ) Handler.addBooster( 1, int(resp.bGL - User.bGL) );
+		//if ( User.bVL < resp.bVL ) Handler.addBooster( 2, int(resp.bVL - User.bVL) );
+		if ( User.bPL < resp.bPL ) Handler.addBooster( 0, int(resp.bPL - User.bPL) );
+		if ( User.bMT < resp.bMT ) Handler.addBooster( 2, int(resp.bMT - User.bMT) );
+		//if ( User.bCH < resp.bCH ) Handler.addBooster( 5, int(resp.bCH - User.bCH) );
+		if ( User.bMX < resp.bMX ) Handler.addBooster( 1, int(resp.bMX - User.bMX) );
+		/*
 		if ( resp['stepsAdded'] > 0 ) {
 			//if ( resp['stepsAdded'] == 1 ) Detonations.free3DownLines();
 			//if ( resp['stepsAdded'] == 2 ) addBooster(6); //add super gem
@@ -1122,8 +1028,33 @@
 		}
 		if ( resp['levfin'] > 0 ) {
 			this.levelFinish();
-		}
+		}*/
 	}
+	
+	/*Handler.addBooster = function (num,count=1) {
+		if ( num < 0 || num > 2 ) return;
+        let names = ['bPL','bMX','bMT'];
+		User[ names[num] ] += count; 
+		if ( Handler.butBonuses[num] ) {
+			  Handler.butBonuses[num].count = User[ names[num] ];
+	    }
+	}*/
+	
+	Handler.addBooster = function( num, count=1 ) {
+		if ( count < 1 ) return;
+		switch ( num ) { //CHandler.butBonuses[i]//['bGL','bVL','bPL','bMX','bMT','bCH'];
+		//	case 1: User.bGL += count; if ( Handler.butBonuses[num-1] ) Handler.butBonuses[num-1].count = count; break;
+		//	case 2: User.bVL += count; if ( Handler.butBonuses[num-1] ) Handler.butBonuses[num-1].count = count; break;
+		//	case 3: User.bPL += count; if ( Handler.butBonuses[num-1] ) Handler.butBonuses[num-1].count = count; break;
+			case 0: User.bPL += count; if ( Handler.butBonuses[num] ) Handler.butBonuses[num].count += count; break;
+		//	case 7: User.bMX += count; if ( Handler.butBonuses[num-4] ) Handler.butBonuses[num-4].count = count; break;
+			case 1: User.bMX += count; if ( Handler.butBonuses[num] ) Handler.butBonuses[num].count += count; break;
+		//	case 4: User.bMT += count; if ( Handler.butBonuses[num+1] ) Handler.butBonuses[num+1].count = count; break;
+			case 2: User.bMT += count; if ( Handler.butBonuses[num] ) Handler.butBonuses[num].count += count; break;
+		//	case 5: User.bCH += count; if ( Handler.butBonuses[num+1] ) Handler.butBonuses[num+1].count = count; break;
+			case 6: Handler.countbsp += count; break;
+		}
+	};
 	
 	Handler.levelFinish = function () {
 		/*if ( Winds.getUpWindName() == Winds.WINDS_LEV_FINISH) {
@@ -1206,14 +1137,7 @@
 		Handler.jlines.timerHelpColor.start();
 	}
 
-	Handler.addBooster = function (num,count=1) {
-		if ( num < 0 || num > 2 ) return;
-        let names = ['bPL','bMX','bMT'];
-		User[ names[num] ] += count; 
-		if ( Handler.butBonuses[num] ) {
-			  Handler.butBonuses[num].count = User[ names[num] ];
-	    }
-	}
+	
 	
 	Handler.table_indexOf   = function( t, element ) {
         let self = this;
