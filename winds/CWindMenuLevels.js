@@ -148,7 +148,10 @@
 	
 	CWindMenuLevels.startup = function( params ) {
 		let self = this;
-		Sounds.Play();
+		
+		Sounds.init();
+		//Sounds.Play();
+		
 		self.mainGroup = Handler.newGroup( Handler.canvas );
 		self.mainGroup.sortableChildren = true;
 		self.mainGroup.x = Handler.contentCenterX;
