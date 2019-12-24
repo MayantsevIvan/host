@@ -73,14 +73,24 @@
 		let backgrButPlay = null;
 		let truePlay = User.energy > 0;
 		if ( truePlay == false ) {
+			//butContinue
+			let onBuyedNextLevel = function() {
+				Head.energy += 5;
+				askLevelGet();
+			}
+			let onButContinue = function() {
+				SocialClient.callbackPayment = onBuyedNextLevel;
+				SocialClient.Payment( 27, Langs.payBefoLevel,  19 );
+			}
 			let backgrButContinue = Handler.showImgRect(self.windGroup,"backgrButContinue.png",0,195,468,200);
 			if ( isMobile ) backgrButContinue.scale.set(0.96);
 			let butContinue = Handler.showImgRect(self.windGroup,"butContinue.png",2,208,401,76);
+			butContinue.onEL( "pointertap", onButContinue );
 		} else {
 			if ( !isMobile ) backgrButPlay = Handler.showImgRect(self.windGroup,"backgrButPlay.png",0,193,242,68);
 			let nameButPlay = isMobile ? "butPlayMob.png" : "butPlay.png";
-			let wButPlay    = isMobile ? 190 : 242;
-			let hButPlay    = isMobile ?  62 :  65;
+			let wButPlay    = isMobile ? 191 : 242;
+			let hButPlay    = isMobile ?  63 :  65;
 			butPlay = Handler.showImgRect(self.windGroup, nameButPlay,0,185,wButPlay,hButPlay);
 			butPlay.name = 'l'+Handler.cv(levelNumber);
 			butPlay.onEL('pointerdown', pointerDownButPlay);
@@ -136,7 +146,6 @@
 		if ( isMobile ) {
 			if ( truePlay ) {
 				butPlay.y = 165; 
-				//backgrButPlay.y = 173;
 				let butShowRating = Handler.showImgRect(self.windGroup,"butShowRatingEndLevelMob.png",0,250,145,62);
 				butShowRating.onEL("pointertap",showRating);
 			}
