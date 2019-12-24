@@ -10,16 +10,25 @@
 	Sounds.init = function() {
 		
 		let sss = function(evt) {
-			alert( "asd" );
+			alert( "asdfocus" );
+		}
+		let onWindowBlur = function(evt) {
+			alert( "onWindowBlur" );
+		}
+		let onWindowFocus = function(evt) {
+			alert( "onWindowFocus" );
 		}
 		window.addEventListener('resize', sss);
 		window.addEventListener("focusout", sss);
 		window.addEventListener("onfocusout", sss);
 		window.addEventListener("focusin", sss);
 		window.addEventListener("onfocusin", sss);
+		//
+		//window.addEventListener("focus", onWindowFocus);
+		//window.addEventListener("blur", onWindowBlur);
 		
-		document.body.addEventListener("focusout", function(){ if ( Sounds.msOn ) Sounds.Stop(); } );
-		document.body.addEventListener("focusin",  function(){ if ( Sounds.msOn ) Sounds.Play(); } );
+		document.addEventListener("focus", function(){ if ( Sounds.msOn ) alert( evt ); Sounds.Stop(); } );
+		document.addEventListener("visibilitychange",  function(){ if ( Sounds.msOn ) alert( 'asdvis' ); Sounds.Play(); } );
 		//Sounds.Play();
 	};
 	
