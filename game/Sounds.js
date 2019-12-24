@@ -8,9 +8,19 @@
 	Sounds.msOn = true;
 	
 	Sounds.init = function() {
+		
+		let sss = function(evt) {
+			alert( "asd" );
+		}
+		window.addEventListener('resize', sss);
+		window.addEventListener("focusout", sss);
+		window.addEventListener("onfocusout", sss);
+		window.addEventListener("focusin", sss);
+		window.addEventListener("onfocusin", sss);
+		
 		document.body.addEventListener("focusout", function(){ if ( Sounds.msOn ) Sounds.Stop(); } );
-		document.body.addEventListener("focusin",  function(){ if ( !Sounds.msOn ) Sounds.Play(); } );
-		Sounds.Play();
+		document.body.addEventListener("focusin",  function(){ if ( Sounds.msOn ) Sounds.Play(); } );
+		//Sounds.Play();
 	};
 	
 	Sounds.playBody = function( key, fname, loop ) {
