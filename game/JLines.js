@@ -515,6 +515,15 @@
 						//TweenMax.to(new Sprite(),0.5,{ onComplete:
 						};
 					} else {
+						if( isMobile ) {
+							if ( Tutorial.tutStepNum == 1  ) {
+								Tutorial.animGr.isVisible = false;
+							} else if( Tutorial.tutStepNum == 3  ) {
+								Tutorial.animGr.isVisible = false;
+							} else if( Tutorial.tutStepNum == 4  ) {
+								Tutorial.animGr.isVisible = false;
+							}
+						}
 						Handler.gemSel = true;
 						Handler.gemObjectLine = [];
 						Handler.gemLine = [];
@@ -630,6 +639,7 @@
 					//
 					Handler.gemLine.splice( k, 1 );
 					Handler.gemObjectLine.splice( k, 1 );
+					
 				};
 			};
 		} catch ( ex ) {
@@ -644,10 +654,18 @@
 			if ( !Handler.gemSel ) return;
 			Handler.gemSel = false;
 			this._fillZeroAlreadyBreakedStone();
+			if( isMobile ) {
+				if ( Tutorial.tutStepNum == 1  ) {
+					Tutorial.animGr.isVisible = true;
+				} else if( Tutorial.tutStepNum == 3  ) {
+					Tutorial.animGr.isVisible = true;
+				} else if( Tutorial.tutStepNum == 4  ) {
+					Tutorial.animGr.isVisible = true;
+				}
+			}
 			//ACTION
 			for ( let i =0; i<Handler.gemObjectLine.length; i++) {
 				let cbox = Handler.gemObjectLine[i];
-
 				cbox.filters = [];
 				cbox.selected = false;
 				if (Handler.gemLine.length > 4) {
@@ -679,7 +697,7 @@
 							Tutorial.tutStep2Show();
 						}
 						if ( Handler.levelNum == 2 && Tutorial.tutStepNum == 3 ||
-							 Handler.levelNum == 3 && Tutorial.tutStepNum == 4 ) {
+							Handler.levelNum == 3 && Tutorial.tutStepNum == 4 ) {
 							cbox.filters = [];
 							cbox.selected = false;
 						} else {

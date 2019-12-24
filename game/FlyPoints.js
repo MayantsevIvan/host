@@ -78,6 +78,7 @@
 			for ( let i=0; i<txtPoint.length; i++ ) {
 				let fp = parseInt( txtPoint.substr(i,1) );
 				let fs = Embeds.getFontSprite(fp);
+				//if ( isMobile ) fs.scale.set(2);
 				fs.x = i*22-fs.width	;
 				fs.y = -fs.height;
 				this._sprite.addChild(fs);

@@ -35,7 +35,8 @@
 				if ( fcbox.name.indexOf('ya1Part') < 0 ) {
 					//( gcolor );
 				};
-				if ( fcbox ) {
+				//console.log();
+				if ( fcbox.color != null ) {
 					Sounds.playSingleBoom();
 				} else {
 					Sounds.playSingleSteklo();

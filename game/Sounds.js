@@ -7,6 +7,12 @@
 	Sounds.baseURL = 'sounds/';
 	Sounds.msOn = true;
 	
+	Sounds.init = function() {
+		document.body.addEventListener("focusout", function(){ if ( Sounds.msOn ) Sounds.Stop(); } );
+		document.body.addEventListener("focusin",  function(){ if ( !Sounds.msOn ) Sounds.Play(); } );
+		Sounds.Play();
+	};
+	
 	Sounds.playBody = function( key, fname, loop ) {
         let self = this;
 		if ( this.soundsCache[key] ) {
@@ -20,6 +26,13 @@
 					if ( sound ) {
 	            	    self.soundsCache[key] = sound;
                         sound.play();
+						if ( key == 'happyday' ) sound.volume = 0.15;
+						if ( key == 'boom1small' ) sound.singleInstance = true; 
+						if ( key == 'electricity' ) sound.singleInstance = true; 
+						if ( key == 'steklo' ) { 
+							sound.singleInstance = true; 
+							sound.volume = 0.50;
+						};
 					}
                 },
 				loop: loop
