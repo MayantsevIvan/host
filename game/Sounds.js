@@ -8,28 +8,15 @@
 	Sounds.msOn = true;
 	
 	Sounds.init = function() {
-		
-		let sss = function(evt) {
-			alert( "asdfocus" );
+		let soundEnOrDis = function( evt ) {
+			if ( document.hidden ) {
+				Sounds.Pause();
+			} else {
+				Sounds.Resume();
+			};
 		}
-		let onWindowBlur = function(evt) {
-			alert( "onWindowBlur" );
-		}
-		let onWindowFocus = function(evt) {
-			alert( "onWindowFocus" );
-		}
-		window.addEventListener('resize', sss);
-		window.addEventListener("focusout", sss);
-		window.addEventListener("onfocusout", sss);
-		window.addEventListener("focusin", sss);
-		window.addEventListener("onfocusin", sss);
-		//
-		//window.addEventListener("focus", onWindowFocus);
-		//window.addEventListener("blur", onWindowBlur);
-		
-		document.addEventListener("focus", function(){ if ( Sounds.msOn ) alert( evt ); Sounds.Stop(); } );
-		document.addEventListener("visibilitychange",  function(){ if ( Sounds.msOn ) alert( 'asdvis' ); Sounds.Play(); } );
-		//Sounds.Play();
+		document.addEventListener("visibilitychange", soundEnOrDis );
+		Sounds.Play();
 	};
 	
 	Sounds.playBody = function( key, fname, loop ) {
@@ -45,7 +32,11 @@
 					if ( sound ) {
 	            	    self.soundsCache[key] = sound;
                         sound.play();
-						if ( key == 'happyday' ) sound.volume = 0.15;
+						if ( key == 'happyday' ) {
+							sound.volume = 0.15;
+							sound.singleInstance = true;
+							sound.loop = true;
+						};
 						if ( key == 'boom1small' ) sound.singleInstance = true; 
 						if ( key == 'electricity' ) sound.singleInstance = true; 
 						if ( key == 'steklo' ) { 
@@ -54,7 +45,7 @@
 						};
 					}
                 },
-				loop: loop
+				//loop: loop
 			});
 
 		};
@@ -65,6 +56,19 @@
 		Sounds.msOn = true;
 	};//Play
 	
+	Sounds.Pause = function(){
+		if (this.soundsCache['happyday'] != null) {
+			this.soundsCache['happyday'].pause();
+			this.stopElectro();
+		};
+		Sounds.msOn = false;
+	};
+	
+	Sounds.Resume = function(){
+		if (this.soundsCache['happyday'] != null) {
+			this.soundsCache['happyday'].resume();
+		};
+	};
 	
 	Sounds.Stop = function() {
 		if (this.soundsCache['happyday'] != null) {
