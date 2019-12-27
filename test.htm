@@ -3,10 +3,10 @@
 	<head>
 		<title> scroll </title>
 		<meta charset="UTF-8">
-
+		<link rel="manifest" href="/manifest.json">
 	</head>
 	<body>
-		<button id="black" onclick = "document.body.scrollBy(0,100)" >akldbadfkan</button>
+		<button id="black" onclick = "document.documentElement.scrollBy(0,100)" >akldbadfkan</button>
 		<div id="example">
 		  ...Текст...
 		</div>
@@ -30,7 +30,8 @@
             window.addEventListener("load",function() {
                 setTimeout(function(){
                     // This hides the address bar:
-                    window.scrollTo(0, 1000);
+                    //window.scrollTo(0, 1000);
+                    //document.scrollTo(0, 1000);
                 }, 0);
             });
 		</script>
