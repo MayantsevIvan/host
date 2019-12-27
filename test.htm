@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> scroll </title>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<button id="black" onclick = "window.scrollBy(0,100)" >akldbadfkan</button>
+		<div id="example">
+		  ...Текст...
+		</div>
+		<style>
+		  #example {
+			width: 300px;
+
+			height: 1000px;
+
+			border: 25px solid #E8C48F; /* рамка 25px */
+
+			padding: 20px;              /* поля 20px */
+
+			overflow: auto;             /* прокрутка */
+		  }
+		</style>
+		<script>
+			let s = function(){
+				window.scrollBy(0,100);
+				alert(document.documentElement.scrollTop);
+			}
+			window.addEventListener("load", s );
+			
+			
+		</script>
+	</body>
+</html>
