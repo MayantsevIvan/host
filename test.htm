@@ -23,13 +23,12 @@
 		  }
 		</style>
 		<script>
-			let s = function(){
-				window.scrollBy(0,100);
-				alert(document.documentElement.scrollTop);
-			}
-			window.addEventListener("load", s );
-			
-			
+			window.addEventListener("load",function() {
+				setTimeout(function(){
+					// This hides the address bar:
+					window.scrollTo(0, 1);
+				}, 0);
+			});
 		</script>
 	</body>
 </html>
