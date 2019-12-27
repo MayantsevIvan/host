@@ -3,9 +3,10 @@
 	<head>
 		<title> scroll </title>
 		<meta charset="UTF-8">
+
 	</head>
 	<body>
-		<button id="black" onclick = "document.documentElement.scrollBy(0,100)" >akldbadfkan</button>
+		<button id="black" onclick = "document.body.scrollBy(0,100)" >akldbadfkan</button>
 		<div id="example">
 		  ...Текст...
 		</div>
@@ -13,7 +14,7 @@
 		  #example {
 			width: 300px;
 
-			height: 1000px;
+			height: 3000px;
 
 			border: 25px solid #E8C48F; /* рамка 25px */
 
@@ -23,12 +24,15 @@
 		  }
 		</style>
 		<script>
-			window.addEventListener("load",function() {
-				setTimeout(function(){
-					// This hides the address bar:
-					window.scrollTo(0, 1);
-				}, 0);
-			});
+			/*window.addEventListener('load', function(){
+				setTimeout(scrollTo, 0, 100, 1);
+			}, false);*/
+            window.addEventListener("load",function() {
+                setTimeout(function(){
+                    // This hides the address bar:
+                    window.scrollTo(0, 100%);
+                }, 0);
+            });
 		</script>
 	</body>
 </html>
