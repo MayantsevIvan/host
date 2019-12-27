@@ -1,8 +1,8 @@
-	{
-		"lang": "ru",
-		"name": "Супергонщик 3000",
-		"description": "Потрясающая футуристичная гоночная игра из будущего!",
-		"display": "fullscreen",
-		"orientation": "landscape",
-		"background_color": "red"
-	}
+{
+    "lang": "ru",
+    "name": "sup 3000",
+    "description": "good game!",
+    "display": "fullscreen",
+    "orientation": "landscape",
+    "background_color": "yellow"
+}
