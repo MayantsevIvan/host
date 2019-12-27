@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 	<head>
 		<title> scroll </title>
@@ -24,16 +24,33 @@
 		  }
 		</style>
 		<script>
+			window.onload = function () {
+				hideAddressBar();
+				window.addEventListener("orientationchange", function () {
+					hideAddressBar();
+				}, false);
+			}
+
+			function hideAddressBar() {
+				setTimeout(function () {
+					document.body.style.height = window.outerHeight + 'px';
+					setTimeout(function () {
+						window.scrollTo(0, 1);
+					}, 1100);
+				}, 1000);
+				return false;
+			}
+			
 			/*window.addEventListener('load', function(){
 				setTimeout(scrollTo, 0, 100, 1);
-			}, false);*/
+			}, false);
             window.addEventListener("load",function() {
                 setTimeout(function(){
                     // This hides the address bar:
                     //window.scrollTo(0, 1000);
                     //document.scrollTo(0, 1000);
                 }, 0);
-            });
+            });*/
 		</script>
 	</body>
 </html>
